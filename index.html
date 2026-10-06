@@ -2,139 +2,236 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#2563eb">
-<title>Étudiant+</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Étudiant+ 🌍</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:#f4f7fb;
-  color:#172033;
-  line-height:1.5;
+  color:#172033
 }
 header{
-  background:linear-gradient(135deg,#2563eb,#4f46e5);
-  color:white;
-  padding:22px 16px;
-  text-align:center;
-}
-header h1{font-size:30px;margin-bottom:5px}
-header p{opacity:.9}
-.container{max-width:1100px;margin:auto;padding:15px}
-.card{
-  background:white;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 5px 18px rgba(0,0,0,.07);
-}
-h2{margin-bottom:15px}
-h3{margin-bottom:8px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:15px;
-}
-input,select,textarea,button{
-  width:100%;
-  padding:12px;
-  margin:6px 0;
-  border-radius:10px;
-  border:1px solid #d5dbea;
-  font-size:15px;
-}
-button{
-  border:0;
-  background:#2563eb;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-button.secondary{background:#64748b}
-button.danger{background:#dc2626}
-button.success{background:#16a34a}
-button.small{
-  width:auto;
-  padding:8px 12px;
-  font-size:13px;
-}
-nav{
-  display:flex;
-  overflow-x:auto;
-  gap:8px;
-  padding:12px 0;
   position:sticky;
   top:0;
-  z-index:20;
-  background:#f4f7fb;
+  z-index:50;
+  background:#0f172a;
+  color:#fff;
+  padding:12px 15px;
+  box-shadow:0 3px 15px #0003
+}
+.head{
+  max-width:1250px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px
+}
+.logo{font-size:21px;font-weight:900}
+.logo span{color:#38bdf8}
+nav{
+  max-width:1250px;
+  margin:9px auto 0;
+  display:flex;
+  gap:6px;
+  overflow:auto;
+  padding-bottom:2px
 }
 nav button{
-  min-width:max-content;
-  width:auto;
-  padding:10px 14px;
+  border:0;
+  border-radius:11px;
+  padding:10px 12px;
+  background:#1e293b;
+  color:white;
+  font-weight:750;
+  white-space:nowrap;
+  cursor:pointer
 }
-.hidden{display:none!important}
-.filiere{
-  cursor:pointer;
-  transition:.2s;
-  border:2px solid transparent;
+main{max-width:1250px;margin:auto;padding:18px}
+section{display:none}
+.active{display:block}
+.hero,.card{
+  background:#fff;
+  border-radius:18px;
+  padding:19px;
+  margin-bottom:15px;
+  box-shadow:0 5px 22px #0f172a0d
 }
-.filiere:hover{transform:translateY(-3px);border-color:#2563eb}
-.icon{font-size:32px}
-.stat{
-  background:#eef4ff;
-  padding:15px;
-  border-radius:14px;
+.hero{
+  background:linear-gradient(135deg,#0f172a,#1d4ed8);
+  color:#fff
 }
-.stat strong{font-size:24px;display:block}
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
+.hero p{color:#dbeafe}
+h1,h2,h3{margin-top:0}
+.muted{color:#64748b}
+.hero .muted{color:#dbeafe}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px
+}
+.controls{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px
+}
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:11px;
+  background:#fff;
+  font:inherit
+}
+textarea{min-height:90px}
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:11px 14px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer
+}
+.btn.secondary{
   background:#e2e8f0;
-  font-size:12px;
-  margin:3px;
+  color:#172033
 }
-.successBadge{background:#dcfce7;color:#166534}
-.warningBadge{background:#fef3c7;color:#92400e}
-.dangerBadge{background:#fee2e2;color:#991b1b}
+.btn.danger{background:#dc2626}
+.actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:9px
+}
+.field{
+  cursor:pointer;
+  transition:.2s
+}
+.field:hover{transform:translateY(-2px)}
+.emoji{font-size:31px}
+.tag{
+  display:inline-block;
+  background:#e0f2fe;
+  color:#075985;
+  border-radius:999px;
+  padding:4px 9px;
+  margin:2px;
+  font-size:12px;
+  font-weight:800
+}
 table{
   width:100%;
   border-collapse:collapse;
-  margin-top:10px;
+  margin-top:10px
 }
 th,td{
-  padding:10px;
-  border-bottom:1px solid #e5e7eb;
-  text-align:left;
+  padding:9px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left
 }
-.avatar{
+th{background:#f8fafc}
+.small{font-size:13px}
+.big{font-size:30px;font-weight:900}
+.stat{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px
+}
+.stat .card{margin:0}
+.progress{
+  height:10px;
+  background:#e2e8f0;
+  border-radius:99px;
+  overflow:hidden;
+  margin:8px 0
+}
+.progress i{
+  display:block;
+  height:100%;
+  background:#2563eb;
+  width:0
+}
+.photo{
   width:110px;
   height:110px;
   border-radius:50%;
   object-fit:cover;
-  border:4px solid #2563eb;
-  display:block;
-  margin:10px auto;
+  background:#e2e8f0;
+  border:4px solid #fff;
+  box-shadow:0 4px 15px #0002
 }
-.center{text-align:center}
-.note{
-  background:#fff7ed;
+.hidden{display:none!important}
+.notice{
   padding:12px;
-  border-radius:10px;
-  margin-top:10px;
+  border-radius:12px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#9a3412;
+  margin:10px 0
+}
+.success{
+  padding:12px;
+  border-radius:12px;
+  background:#ecfdf5;
+  border:1px solid #a7f3d0;
+  color:#047857;
+  margin:10px 0
+}
+.filiere{
+  cursor:pointer;
+  transition:.2s;
+  border:2px solid transparent
+}
+.filiere:hover{
+  transform:translateY(-3px);
+  border-color:#38bdf8
+}
+.back{
+  margin-bottom:12px
+}
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#dbeafe;
+  color:#1e40af;
+  font-size:12px;
+  font-weight:800
+}
+.schedule-day{
+  border-left:4px solid #2563eb;
+  padding-left:12px;
+  margin:10px 0
+}
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#64748b
 }
 footer{
   text-align:center;
-  padding:30px;
   color:#64748b;
+  padding:25px
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .stat{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:600px){
-  header h1{font-size:25px}
-  .card{padding:15px}
-  th,td{font-size:13px;padding:7px}
+  main{padding:12px}
+  .grid{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr}
+  .stat{grid-template-columns:1fr 1fr}
+  .hero{padding:16px}
+  h1{font-size:25px}
+  nav button{padding:9px 10px}
+  table{font-size:13px}
 }
 </style>
 </head>
@@ -142,1607 +239,2786 @@ footer{
 <body>
 
 <header>
-  <h1>🎓 Étudiant+</h1>
-  <p id="subtitle">Ton assistant étudiant international 🌍</p>
-</header>
+  <div class="head">
+    <div class="logo">🎓 Étudiant<span>+</span></div>
 
-<div class="container">
-
-<nav>
-  <button onclick="showSection('home')">🏠 Accueil</button>
-  <button onclick="showSection('bac')">📊 Résultats</button>
-  <button onclick="showSection('orientation')">🧭 Orientation</button>
-  <button onclick="showSection('studies')">📚 Mes études</button>
-  <button onclick="showSection('schedule')">📅 Emploi</button>
-  <button onclick="showSection('budget')">💰 Budget</button>
-  <button onclick="showSection('profile')">👤 Profil</button>
-</nav>
-
-<!-- ACCUEIL -->
-<section id="home">
-
-<div class="card">
-  <h2>🌍 Bienvenue sur Étudiant+</h2>
-  <p id="welcomeText">
-    Choisis ton pays et ta langue. L'application adaptera progressivement
-    les informations à ton système éducatif et à ton environnement.
-  </p>
-
-  <div class="grid">
-    <div>
-      <label>🌍 Pays</label>
-      <select id="countrySelect" onchange="changeCountry()">
-        <option value="CG">🇨🇬 République du Congo</option>
-        <option value="CD">🇨🇩 République démocratique du Congo</option>
-        <option value="DZ">🇩🇿 Algérie</option>
-        <option value="FR">🇫🇷 France</option>
-        <option value="BE">🇧🇪 Belgique</option>
-        <option value="CA">🇨🇦 Canada</option>
-        <option value="US">🇺🇸 États-Unis</option>
-        <option value="GB">🇬🇧 Royaume-Uni</option>
-        <option value="ES">🇪🇸 Espagne</option>
-        <option value="PT">🇵🇹 Portugal</option>
-        <option value="BR">🇧🇷 Brésil</option>
-        <option value="MA">🇲🇦 Maroc</option>
-        <option value="SN">🇸🇳 Sénégal</option>
-        <option value="CI">🇨🇮 Côte d’Ivoire</option>
-        <option value="CM">🇨🇲 Cameroun</option>
-        <option value="OTHER">🌍 Autre pays</option>
-      </select>
-    </div>
-
-    <div>
-      <label>🗣️ Langue</label>
-      <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="pt">🇵🇹 Português</option>
-      </select>
+    <div style="display:flex;gap:6px">
+      <select id="countrySelect" style="width:auto;min-width:145px"></select>
+      <select id="languageSelect" style="width:auto;min-width:115px"></select>
     </div>
   </div>
-</div>
 
-<div class="grid">
+  <nav>
+    <button onclick="showSection('home')">🏠 <span data-i18n="home">Accueil</span></button>
+    <button onclick="showSection('calculator')">🧮 <span data-i18n="results">Résultats</span></button>
+    <button onclick="showSection('orientation')">🎓 <span data-i18n="orientation">Orientation</span></button>
+    <button onclick="showSection('studies')">📚 <span data-i18n="studies">Mes études</span></button>
+    <button onclick="showSection('schedule')">📅 <span data-i18n="schedule">Emploi du temps</span></button>
+    <button onclick="showSection('budget')">💰 <span data-i18n="budget">Budget</span></button>
+    <button onclick="showSection('profile')">👤 <span data-i18n="profile">Profil</span></button>
+  </nav>
+</header>
 
-<div class="stat">
-<strong id="countryDisplay">🇨🇬 Congo</strong>
-<span>Pays sélectionné</span>
-</div>
+<main>
 
-<div class="stat">
-<strong id="languageDisplay">Français</strong>
-<span>Langue</span>
-</div>
+<section id="home" class="active">
 
-<div class="stat">
-<strong id="averageDisplay">—</strong>
-<span>Moyenne actuelle</span>
-</div>
+  <div class="hero">
+    <h1>🎓 Étudiant+</h1>
+    <p data-i18n="welcome">
+      Ton assistant étudiant pour réussir tes études, calculer tes résultats,
+      choisir une filière et organiser ta vie universitaire.
+    </p>
 
-<div class="stat">
-<strong id="balanceDisplay">0</strong>
-<span>Solde budget</span>
-</div>
+    <div class="actions">
+      <button class="btn" onclick="showSection('calculator')">
+        🧮 Calculer mes résultats
+      </button>
 
-</div>
+      <button class="btn secondary" onclick="showSection('orientation')">
+        🎓 Explorer les filières
+      </button>
+    </div>
+  </div>
 
-<div class="card">
-<h2>🚀 Ton espace étudiant</h2>
-<div class="grid">
+  <div class="card">
+    <h2>🌍 <span data-i18n="countrySystem">Ton pays et ton système scolaire</span></h2>
 
-<div class="card filiere" onclick="showSection('bac')">
-<div class="icon">📊</div>
-<h3>Résultats</h3>
-<p>Calcule et suis tes résultats scolaires.</p>
-</div>
+    <p class="muted">
+      Le pays sélectionné détermine les informations scolaires utilisées
+      par l'application.
+    </p>
 
-<div class="card filiere" onclick="showSection('orientation')">
-<div class="icon">🧭</div>
-<h3>Orientation</h3>
-<p>Découvre les filières et leurs débouchés.</p>
-</div>
+    <div class="stat">
+      <div class="card">
+        <div class="small">🌍 Pays</div>
+        <div class="big" id="homeCountry">—</div>
+      </div>
 
-<div class="card filiere" onclick="showSection('studies')">
-<div class="icon">📚</div>
-<h3>Mes études</h3>
-<p>Fixe tes objectifs et suis ta progression.</p>
-</div>
+      <div class="card">
+        <div class="small">💱 Devise</div>
+        <div class="big" id="homeCurrency">—</div>
+      </div>
 
-<div class="card filiere" onclick="showSection('schedule')">
-<div class="icon">📅</div>
-<h3>Emploi du temps</h3>
-<p>Organise tes cours.</p>
-</div>
+      <div class="card">
+        <div class="small">📚 Système</div>
+        <div class="big" id="homeSystem">—</div>
+      </div>
 
-<div class="card filiere" onclick="showSection('budget')">
-<div class="icon">💰</div>
-<h3>Budget</h3>
-<p>Contrôle tes revenus et dépenses.</p>
-</div>
+      <div class="card">
+        <div class="small">🗣️ Langue</div>
+        <div class="big" id="homeLanguage">—</div>
+      </div>
+    </div>
+  </div>
 
-</div>
-</div>
+  <div class="card">
+    <h2>🔎 Rechercher une filière</h2>
 
-</section>
+    <input
+      id="homeSearch"
+      placeholder="Exemple : informatique, médecine, droit..."
+      oninput="filterHomeFields()"
+    >
 
-
-<!-- BAC -->
-<section id="bac" class="hidden">
-
-<div class="card">
-<h2>📊 Calculateur de résultats</h2>
-
-<div class="note">
-<strong>🌍 Pays :</strong>
-<span id="bacCountry"></span>
-<br>
-Les coefficients doivent correspondre au système officiel du pays sélectionné.
-Les données non vérifiées ne sont pas inventées.
-</div>
-
-<label>🎓 Niveau</label>
-<select id="bacLevel">
-<option value="terminale">Terminale / dernière année secondaire</option>
-</select>
-
-<label>📚 Série</label>
-<select id="series" onchange="loadSubjects()">
-<option value="">Choisir une série</option>
-<option value="A2">A2</option>
-<option value="A4">A4</option>
-<option value="C">C</option>
-<option value="D">D</option>
-</select>
-
-<div id="subjects"></div>
-
-<button onclick="calculateAverage()">📊 Calculer ma moyenne</button>
-
-<div id="averageResult" class="card hidden"></div>
-</div>
+    <div id="homeFields" class="grid" style="margin-top:12px"></div>
+  </div>
 
 </section>
 
 
-<!-- ORIENTATION -->
-<section id="orientation" class="hidden">
+<section id="calculator">
 
-<div class="card">
-<h2>🧭 Orientation</h2>
-<p>
-Les informations générales restent disponibles partout.
-Les avantages, débouchés et données salariales doivent être interprétés
-selon le pays choisi.
-</p>
-</div>
+  <div class="card">
+    <h2>🧮 Calculateur de résultats</h2>
 
-<div id="filiereGrid" class="grid"></div>
+    <div class="controls">
 
-<div id="filiereDetails" class="card hidden"></div>
+      <div>
+        <label>Pays</label>
+        <select id="calcCountry"></select>
+      </div>
 
-</section>
+      <div>
+        <label>Système / examen</label>
+        <select id="examSelect"></select>
+      </div>
 
+      <div>
+        <label>Série / voie</label>
+        <select id="trackSelect"></select>
+      </div>
 
-<!-- MES ÉTUDES -->
-<section id="studies" class="hidden">
+    </div>
 
-<div class="card">
-<h2>📚 Mes études</h2>
+    <div id="calcNotice" class="notice hidden"></div>
 
-<div class="grid">
-<div>
-<label>Matière</label>
-<input id="studySubject" placeholder="Ex : Mathématiques">
-</div>
+    <div id="subjectsContainer"></div>
 
-<div>
-<label>Note actuelle /20</label>
-<input id="studyGrade" type="number" min="0" max="20">
-</div>
+    <div class="actions">
+      <button class="btn" onclick="calculateAverage()">
+        🧮 Calculer
+      </button>
 
-<div>
-<label>Objectif /20</label>
-<input id="studyTarget" type="number" min="0" max="20">
-</div>
+      <button class="btn secondary" onclick="addSubject()">
+        ➕ Ajouter une matière
+      </button>
 
-<div>
-<label>Commentaire</label>
-<input id="studyComment" placeholder="Ex : revoir les dérivées">
-</div>
-</div>
+      <button class="btn secondary" onclick="resetCalculator()">
+        🔄 Réinitialiser
+      </button>
+    </div>
 
-<button onclick="addStudy()">➕ Ajouter</button>
-</div>
-
-<div class="card">
-<h2>📈 Ma progression</h2>
-<div id="studyList"></div>
-</div>
+    <div id="resultBox" style="margin-top:15px"></div>
+  </div>
 
 </section>
 
 
-<!-- EMPLOI DU TEMPS -->
-<section id="schedule" class="hidden">
+<section id="orientation">
 
-<div class="card">
-<h2>📅 Emploi du temps</h2>
+  <div id="orientationList">
 
-<div class="grid">
-<div>
-<label>Jour</label>
-<select id="scheduleDay">
-<option>Lundi</option>
-<option>Mardi</option>
-<option>Mercredi</option>
-<option>Jeudi</option>
-<option>Vendredi</option>
-<option>Samedi</option>
-<option>Dimanche</option>
-</select>
-</div>
+    <div class="hero">
+      <h1>🎓 Orientation</h1>
+      <p>
+        Découvre les principales filières, leurs études, leurs débouchés
+        et leurs possibilités d'évolution.
+      </p>
+    </div>
 
-<div>
-<label>Début</label>
-<input id="scheduleStart" type="time">
-</div>
+    <input
+      id="orientationSearch"
+      placeholder="🔎 Rechercher une filière..."
+      oninput="renderOrientation()"
+      style="margin-bottom:15px"
+    >
 
-<div>
-<label>Fin</label>
-<input id="scheduleEnd" type="time">
-</div>
+    <div id="orientationGrid" class="grid"></div>
 
-<div>
-<label>Matière</label>
-<input id="scheduleSubject" placeholder="Mathématiques">
-</div>
+  </div>
 
-<div>
-<label>Salle</label>
-<input id="scheduleRoom" placeholder="Salle 12">
-</div>
-</div>
-
-<button onclick="addSchedule()">➕ Ajouter au planning</button>
-<button class="secondary" onclick="requestNotifications()">
-🔔 Activer les rappels
-</button>
-</div>
-
-<div class="card">
-<h2>📅 Vue hebdomadaire</h2>
-<div id="scheduleList"></div>
-</div>
+  <div id="orientationDetail" class="hidden"></div>
 
 </section>
 
 
-<!-- BUDGET -->
-<section id="budget" class="hidden">
+<section id="studies">
 
-<div class="card">
-<h2>💰 Mon budget</h2>
+  <div class="hero">
+    <h1>📚 Mes études</h1>
+    <p>
+      Suis tes matières, tes notes, tes objectifs et ta progression.
+    </p>
+  </div>
 
-<div class="grid">
+  <div class="card">
 
-<div>
-<label>Type</label>
-<select id="budgetType">
-<option value="expense">💸 Dépense</option>
-<option value="income">💵 Revenu</option>
-</select>
-</div>
+    <div class="controls">
 
-<div>
-<label>Catégorie</label>
-<select id="budgetCategory">
-<option>🍲 Nourriture</option>
-<option>🚌 Transport</option>
-<option>🏠 Logement</option>
-<option>📶 Internet</option>
-<option>📚 Études</option>
-<option>👕 Vêtements</option>
-<option>🎮 Loisirs</option>
-<option>🏥 Santé</option>
-<option>💼 Travail</option>
-<option>💳 Autres</option>
-</select>
-</div>
+      <div>
+        <label>Matière</label>
+        <input id="studySubject" placeholder="Mathématiques">
+      </div>
 
-<div>
-<label>Montant</label>
-<input id="budgetAmount" type="number" min="0" step="0.01">
-</div>
+      <div>
+        <label>Note actuelle /20</label>
+        <input id="studyGrade" type="number" min="0" max="20" step="0.01">
+      </div>
 
-<div>
-<label>Date</label>
-<input id="budgetDate" type="date">
-</div>
+      <div>
+        <label>Objectif /20</label>
+        <input id="studyTarget" type="number" min="0" max="20" step="0.01">
+      </div>
 
-<div>
-<label>Description</label>
-<input id="budgetDescription" placeholder="Ex : transport université">
-</div>
+      <div>
+        <label>Commentaire</label>
+        <input id="studyComment" placeholder="À revoir...">
+      </div>
 
-</div>
+    </div>
 
-<button onclick="addBudget()">➕ Enregistrer</button>
-</div>
+    <div class="actions">
+      <button class="btn" onclick="addStudy()">➕ Ajouter</button>
+      <button class="btn secondary" onclick="clearStudies()">🗑️ Tout effacer</button>
+    </div>
 
-<div class="grid">
+  </div>
 
-<div class="stat">
-<strong id="totalIncome">0</strong>
-<span>💵 Revenus</span>
-</div>
-
-<div class="stat">
-<strong id="totalExpense">0</strong>
-<span>💸 Dépenses</span>
-</div>
-
-<div class="stat">
-<strong id="totalBalance">0</strong>
-<span>💰 Solde</span>
-</div>
-
-</div>
-
-<div class="card">
-<h2>📋 Historique</h2>
-<div id="budgetList"></div>
-</div>
+  <div class="card">
+    <h2>📊 Progression</h2>
+    <div id="studiesList"></div>
+  </div>
 
 </section>
 
 
-<!-- PROFIL -->
-<section id="profile" class="hidden">
+<section id="schedule">
 
-<div class="card">
-<h2>👤 Mon profil</h2>
+  <div class="hero">
+    <h1>📅 Emploi du temps</h1>
+    <p>
+      Organise tes cours par jour et garde une vision claire de ta semaine.
+    </p>
+  </div>
 
-<div class="center">
-<img id="profilePhoto" class="avatar"
-src="https://via.placeholder.com/110"
-alt="Photo de profil">
+  <div class="card">
 
-<input type="file" id="photoInput" accept="image/*"
-onchange="loadPhoto(event)">
-</div>
+    <div class="controls">
 
-<div class="grid">
+      <div>
+        <label>Jour</label>
+        <select id="scheduleDay">
+          <option>Lundi</option>
+          <option>Mardi</option>
+          <option>Mercredi</option>
+          <option>Jeudi</option>
+          <option>Vendredi</option>
+          <option>Samedi</option>
+          <option>Dimanche</option>
+        </select>
+      </div>
 
-<div>
-<label>Nom</label>
-<input id="lastName">
-</div>
+      <div>
+        <label>Matière</label>
+        <input id="scheduleSubject" placeholder="Programmation">
+      </div>
 
-<div>
-<label>Prénom</label>
-<input id="firstName">
-</div>
+      <div>
+        <label>Heure de début</label>
+        <input id="scheduleStart" type="time">
+      </div>
 
-<div>
-<label>🌍 Pays</label>
-<select id="profileCountry" onchange="syncProfileCountry()">
-<option value="CG">🇨🇬 République du Congo</option>
-<option value="CD">🇨🇩 RDC</option>
-<option value="DZ">🇩🇿 Algérie</option>
-<option value="FR">🇫🇷 France</option>
-<option value="BE">🇧🇪 Belgique</option>
-<option value="CA">🇨🇦 Canada</option>
-<option value="US">🇺🇸 États-Unis</option>
-<option value="GB">🇬🇧 Royaume-Uni</option>
-<option value="ES">🇪🇸 Espagne</option>
-<option value="PT">🇵🇹 Portugal</option>
-<option value="BR">🇧🇷 Brésil</option>
-<option value="MA">🇲🇦 Maroc</option>
-<option value="SN">🇸🇳 Sénégal</option>
-<option value="CI">🇨🇮 Côte d’Ivoire</option>
-<option value="CM">🇨🇲 Cameroun</option>
-<option value="OTHER">🌍 Autre</option>
-</select>
-</div>
+      <div>
+        <label>Heure de fin</label>
+        <input id="scheduleEnd" type="time">
+      </div>
 
-<div>
-<label>🏫 Établissement / Université</label>
-<input id="institution">
-</div>
+      <div>
+        <label>Salle</label>
+        <input id="scheduleRoom" placeholder="Salle 204">
+      </div>
 
-<div>
-<label>🎓 Niveau d'études</label>
-<select id="studyLevel">
-<option>Secondaire</option>
-<option>Terminale</option>
-<option>Licence 1</option>
-<option>Licence 2</option>
-<option>Licence 3</option>
-<option>Master 1</option>
-<option>Master 2</option>
-<option>Doctorat</option>
-<option>Autre</option>
-</select>
-</div>
+    </div>
 
-<div>
-<label>📚 Série</label>
-<input id="profileSeries" placeholder="Ex : D">
-</div>
+    <div class="actions">
+      <button class="btn" onclick="addSchedule()">➕ Ajouter</button>
+      <button class="btn secondary" onclick="requestNotifications()">
+        🔔 Activer les notifications
+      </button>
+    </div>
 
-<div>
-<label>🎯 Filière</label>
-<input id="profileField" placeholder="Ex : Informatique">
-</div>
+  </div>
 
-<div>
-<label>🚀 Objectif professionnel</label>
-<input id="careerGoal" placeholder="Ex : Ingénieur logiciel">
-</div>
-
-</div>
-
-<button onclick="saveProfile()">💾 Enregistrer mon profil</button>
-
-</div>
+  <div class="card">
+    <h2>📆 Ma semaine</h2>
+    <div id="scheduleList"></div>
+  </div>
 
 </section>
 
-</div>
+
+<section id="budget">
+
+  <div class="hero">
+    <h1>💰 Mon budget</h1>
+    <p>
+      Suis tes dépenses et tes revenus pour mieux gérer ton argent.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <div class="controls">
+
+      <div>
+        <label>Type</label>
+        <select id="budgetType">
+          <option value="expense">💸 Dépense</option>
+          <option value="income">💵 Revenu</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Montant</label>
+        <input id="budgetAmount" type="number" min="0" step="0.01">
+      </div>
+
+      <div>
+        <label>Catégorie</label>
+        <select id="budgetCategory">
+          <option>🍲 Nourriture</option>
+          <option>🚌 Transport</option>
+          <option>🏠 Logement</option>
+          <option>📶 Internet</option>
+          <option>📚 Études</option>
+          <option>👕 Vêtements</option>
+          <option>🎮 Loisirs</option>
+          <option>🏥 Santé</option>
+          <option>💳 Autres</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Description</label>
+        <input id="budgetDescription" placeholder="Repas, taxi...">
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="addBudget()">➕ Ajouter</button>
+      <button class="btn secondary" onclick="clearBudget()">🗑️ Effacer</button>
+    </div>
+
+  </div>
+
+  <div class="stat">
+
+    <div class="card">
+      <div class="small">💵 Revenus</div>
+      <div class="big" id="totalIncome">0</div>
+    </div>
+
+    <div class="card">
+      <div class="small">💸 Dépenses</div>
+      <div class="big" id="totalExpense">0</div>
+    </div>
+
+    <div class="card">
+      <div class="small">📊 Solde</div>
+      <div class="big" id="balance">0</div>
+    </div>
+
+    <div class="card">
+      <div class="small">💱 Devise</div>
+      <div class="big" id="budgetCurrency">—</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <h2>📋 Historique</h2>
+    <div id="budgetList"></div>
+  </div>
+
+</section>
+
+
+<section id="profile">
+
+  <div class="hero">
+    <h1>👤 Mon profil</h1>
+    <p>Personnalise ton espace étudiant.</p>
+  </div>
+
+  <div class="card">
+
+    <div style="text-align:center;margin-bottom:18px">
+
+      <img id="profilePhoto" class="photo" alt="Photo de profil">
+
+      <div style="margin-top:10px">
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+          onchange="savePhoto(event)"
+        >
+      </div>
+
+    </div>
+
+    <div class="controls">
+
+      <div>
+        <label>Nom</label>
+        <input id="profileLastName">
+      </div>
+
+      <div>
+        <label>Prénom</label>
+        <input id="profileFirstName">
+      </div>
+
+      <div>
+        <label>Pays</label>
+        <select id="profileCountry"></select>
+      </div>
+
+      <div>
+        <label>Université / Institution</label>
+        <input id="profileInstitution">
+      </div>
+
+      <div>
+        <label>Niveau d'études</label>
+        <select id="profileLevel">
+          <option>Terminale</option>
+          <option>Licence 1</option>
+          <option>Licence 2</option>
+          <option>Licence 3</option>
+          <option>Master 1</option>
+          <option>Master 2</option>
+          <option>Doctorat</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Série</label>
+        <input id="profileSeries" placeholder="D, C, A2...">
+      </div>
+
+      <div>
+        <label>Filière</label>
+        <input id="profileField" placeholder="Informatique">
+      </div>
+
+      <div>
+        <label>Objectif professionnel</label>
+        <input id="profileGoal" placeholder="Ingénieur logiciel">
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="saveProfile()">💾 Enregistrer</button>
+    </div>
+
+    <div id="profileMessage"></div>
+
+  </div>
+
+</section>
+
+</main>
 
 <footer>
-🎓 Étudiant+ — Une application pensée pour les étudiants du monde entier 🌍
+  🎓 Étudiant+ — Ton assistant étudiant 🌍
 </footer>
 
 
 <script>
 
-/* =========================
-   DONNÉES INTERNATIONALES
-========================= */
+/* =========================================================
+   LANGUES
+========================================================= */
 
-const countries={
-CG:{name:"République du Congo",flag:"🇨🇬",currency:"XAF"},
-CD:{name:"RDC",flag:"🇨🇩",currency:"CDF"},
-DZ:{name:"Algérie",flag:"🇩🇿",currency:"DZD"},
-FR:{name:"France",flag:"🇫🇷",currency:"EUR"},
-BE:{name:"Belgique",flag:"🇧🇪",currency:"EUR"},
-CA:{name:"Canada",flag:"🇨🇦",currency:"CAD"},
-US:{name:"États-Unis",flag:"🇺🇸",currency:"USD"},
-GB:{name:"Royaume-Uni",flag:"🇬🇧",currency:"GBP"},
-ES:{name:"Espagne",flag:"🇪🇸",currency:"EUR"},
-PT:{name:"Portugal",flag:"🇵🇹",currency:"EUR"},
-BR:{name:"Brésil",flag:"🇧🇷",currency:"BRL"},
-MA:{name:"Maroc",flag:"🇲🇦",currency:"MAD"},
-SN:{name:"Sénégal",flag:"🇸🇳",currency:"XOF"},
-CI:{name:"Côte d’Ivoire",flag:"🇨🇮",currency:"XOF"},
-CM:{name:"Cameroun",flag:"🇨🇲",currency:"XAF"},
-OTHER:{name:"Autre pays",flag:"🌍",currency:"—"}
+const languages={
+  fr:"Français",
+  en:"English",
+  es:"Español",
+  zh:"中文",
+  hi:"हिन्दी",
+  ar:"العربية",
+  pt:"Português",
+  ru:"Русский",
+  ja:"日本語",
+  de:"Deutsch",
+  it:"Italiano",
+  ko:"한국어"
+};
+
+const translations={
+
+fr:{
+  home:"Accueil",
+  results:"Résultats",
+  orientation:"Orientation",
+  studies:"Mes études",
+  schedule:"Emploi du temps",
+  budget:"Budget",
+  profile:"Profil",
+  welcome:"Ton assistant étudiant pour réussir tes études, calculer tes résultats, choisir une filière et organiser ta vie universitaire.",
+  countrySystem:"Ton pays et ton système scolaire"
+},
+
+en:{
+  home:"Home",
+  results:"Results",
+  orientation:"Orientation",
+  studies:"My studies",
+  schedule:"Schedule",
+  budget:"Budget",
+  profile:"Profile",
+  welcome:"Your student assistant to succeed in your studies, calculate your results, choose a field and organize your student life.",
+  countrySystem:"Your country and education system"
+},
+
+es:{
+  home:"Inicio",
+  results:"Resultados",
+  orientation:"Orientación",
+  studies:"Mis estudios",
+  schedule:"Horario",
+  budget:"Presupuesto",
+  profile:"Perfil",
+  welcome:"Tu asistente estudiantil para tener éxito en tus estudios.",
+  countrySystem:"Tu país y sistema educativo"
+},
+
+pt:{
+  home:"Início",
+  results:"Resultados",
+  orientation:"Orientação",
+  studies:"Meus estudos",
+  schedule:"Horário",
+  budget:"Orçamento",
+  profile:"Perfil",
+  welcome:"O teu assistente estudantil.",
+  countrySystem:"O teu país e sistema educativo"
+},
+
+de:{
+  home:"Start",
+  results:"Ergebnisse",
+  orientation:"Orientierung",
+  studies:"Mein Studium",
+  schedule:"Stundenplan",
+  budget:"Budget",
+  profile:"Profil",
+  welcome:"Dein Studentenassistent.",
+  countrySystem:"Dein Land und Bildungssystem"
+},
+
+it:{
+  home:"Home",
+  results:"Risultati",
+  orientation:"Orientamento",
+  studies:"I miei studi",
+  schedule:"Orario",
+  budget:"Budget",
+  profile:"Profilo",
+  welcome:"Il tuo assistente universitario.",
+  countrySystem:"Il tuo paese e sistema educativo"
+}
+
 };
 
 
-/*
-  Les coefficients sont volontairement séparés
-  par pays afin d'éviter de présenter les coefficients
-  d'un pays comme universels.
-*/
+/* =========================================================
+   PAYS
+========================================================= */
 
-const bacData={
+const countryCodes=[
+"CG","CD","DZ","CM","GA","CI","SN","MA","TN","BJ","BF","NE","TD","CF","GQ",
+"FR","BE","CH","CA","US","GB","DE","ES","IT","PT","NL","SE","NO","DK","FI",
+"RU","UA","TR","EG","ZA","NG","GH","KE","ET","IN","CN","JP","KR","AU","NZ",
+"BR","MX","AR","CL","CO","PE","SA","AE","QA","IL","SG","MY","ID","TH","VN",
+"PH","PK","BD","NP","LK","GR","PL","CZ","AT","RO","HU","IE","IS","LU","MC",
+"ML","MR","GN","SL","LR","TG","GH","GM","GW","CV","KM","MG","MU","SC","MZ",
+"ZW","ZM","NA","BW","SZ","LS","TZ","UG","RW","BI","SO","SD","SS","ER","DJ"
+];
+
+const currencyMap={
+CG:"XAF",CD:"CDF",DZ:"DZD",CM:"XAF",GA:"XAF",CI:"XOF",
+SN:"XOF",MA:"MAD",TN:"TND",BJ:"XOF",BF:"XOF",NE:"XOF",
+TD:"XAF",CF:"XAF",GQ:"XAF",FR:"EUR",BE:"EUR",CH:"CHF",
+CA:"CAD",US:"USD",GB:"GBP",DE:"EUR",ES:"EUR",IT:"EUR",
+PT:"EUR",NL:"EUR",SE:"SEK",NO:"NOK",DK:"DKK",FI:"EUR",
+RU:"RUB",UA:"UAH",TR:"TRY",EG:"EGP",ZA:"ZAR",NG:"NGN",
+GH:"GHS",KE:"KES",ET:"ETB",IN:"INR",CN:"CNY",JP:"JPY",
+KR:"KRW",AU:"AUD",NZ:"NZD",BR:"BRL",MX:"MXN",AR:"ARS",
+CL:"CLP",CO:"COP",PE:"PEN",SA:"SAR",AE:"AED",QA:"QAR",
+IL:"ILS",SG:"SGD",MY:"MYR",ID:"IDR",TH:"THB",VN:"VND",
+PH:"PHP",PK:"PKR",BD:"BDT",NP:"NPR",LK:"LKR",GR:"EUR",
+PL:"PLN",CZ:"CZK",AT:"EUR",RO:"RON",HU:"HUF",IE:"EUR",
+IS:"ISK",LU:"EUR",MC:"EUR"
+};
+
+
+/* =========================================================
+   SYSTEMES SCOLAIRES
+========================================================= */
+
+const systems={
+
 CG:{
-A2:[
-["Philosophie",5],
-["Français",5],
-["Histoire-Géographie",3],
-["Anglais",4],
-["Mathématiques",3],
-["Langue optionnelle",3],
-["EPS",2]
-],
-A4:[
-["Philosophie",5],
-["Français",5],
-["Anglais",4],
-["Histoire-Géographie",3],
-["Mathématiques",3],
-["Langue optionnelle",3],
-["EPS",2]
-],
-C:[
-["Mathématiques",5],
-["Sciences physiques",5],
-["SVT",4],
-["Français ou philosophie",3],
-["Anglais",3],
-["Histoire ou géographie",3],
-["EPS",2]
-],
-D:[
-["SVT",5],
-["Sciences physiques",5],
-["Mathématiques",4],
-["Français ou philosophie",3],
-["Anglais",3],
-["Histoire ou géographie",3],
-["EPS",2]
-]
+ name:"Congo",
+ exams:{
+   BAC:{
+     name:"Baccalauréat",
+     tracks:{
+       A2:{
+         name:"Série A2",
+         subjects:[
+           ["Philosophie",5],
+           ["Français",5],
+           ["Histoire-Géographie",3],
+           ["Anglais",4],
+           ["Mathématiques",3],
+           ["Langue optionnelle",3],
+           ["EPS",2]
+         ]
+       },
+
+       A4:{
+         name:"Série A4",
+         subjects:[
+           ["Philosophie",5],
+           ["Français",5],
+           ["Anglais",4],
+           ["Histoire-Géographie",3],
+           ["Mathématiques",3],
+           ["Langue optionnelle",3],
+           ["EPS",2]
+         ]
+       },
+
+       C:{
+         name:"Série C",
+         subjects:[
+           ["Mathématiques",5],
+           ["Sciences physiques",5],
+           ["SVT",4],
+           ["Français ou philosophie",3],
+           ["Anglais",3],
+           ["Histoire ou géographie",3],
+           ["EPS",2]
+         ]
+       },
+
+       D:{
+         name:"Série D",
+         subjects:[
+           ["SVT",5],
+           ["Sciences physiques",5],
+           ["Mathématiques",4],
+           ["Français ou philosophie",3],
+           ["Anglais",3],
+           ["Histoire ou géographie",3],
+           ["EPS",2]
+         ]
+       }
+     }
+   }
+ }
+},
+
+DZ:{
+ name:"Algérie",
+ exams:{
+   BAC:{
+     name:"Baccalauréat",
+     tracks:{
+       sciences:{
+         name:"Sciences expérimentales",
+         subjects:[]
+       },
+       maths:{
+         name:"Mathématiques",
+         subjects:[]
+       },
+       tech:{
+         name:"Technique mathématique",
+         subjects:[]
+       },
+       gestion:{
+         name:"Gestion et économie",
+         subjects:[]
+       },
+       philosophie:{
+         name:"Arts et philosophie",
+         subjects:[]
+       },
+       langues:{
+         name:"Langues étrangères",
+         subjects:[]
+       }
+     }
+   }
+ }
+},
+
+FR:{
+ name:"France",
+ exams:{
+   BAC2027:{
+     name:"Baccalauréat général — session 2027",
+     tracks:{
+       general:{
+         name:"Voie générale",
+         subjects:[
+           ["Français écrit",5],
+           ["Français oral",5],
+           ["Mathématiques anticipées",2],
+           ["Philosophie",8],
+           ["Grand oral",8],
+           ["Spécialité 1",16],
+           ["Spécialité 2",16],
+           ["Histoire-Géographie contrôle continu",6],
+           ["LVA contrôle continu",6],
+           ["LVB contrôle continu",6],
+           ["Enseignement scientifique contrôle continu",6],
+           ["EPS contrôle continu",6],
+           ["EMC contrôle continu",2],
+           ["Spécialité abandonnée",8]
+         ]
+       }
+     }
+   }
+ }
 }
+
 };
 
 
-/* =========================
-   FILIÈRES
-========================= */
+/* =========================================================
+   FILIERES
+========================================================= */
 
-const filieres=[
+const fields=[
+
 {
-name:"Informatique",
-icon:"💻",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Développeur, administrateur système, support informatique, data analyst, cybersécurité.",
-advantages:"Secteur très large, nombreuses spécialisations, possibilités de travail à distance et entrepreneuriat.",
-international:"Débouchés possibles dans les entreprises technologiques, banques, télécommunications, startups et services numériques.",
-salary:"Les salaires doivent être consultés selon le pays, le métier, l'expérience et la source utilisée."
+ name:"Informatique",
+ icon:"💻",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Nombreuses spécialisations",
+   "Secteur en évolution constante",
+   "Possibilité de travail à distance",
+   "Entrepreneuriat possible",
+   "Compétences utilisables à l'international"
+ ],
+ jobsLicense:[
+   "Développeur junior",
+   "Technicien informatique",
+   "Support informatique",
+   "Administrateur systèmes junior"
+ ],
+ jobsMaster:[
+   "Ingénieur logiciel",
+   "Data analyst",
+   "Ingénieur cybersécurité",
+   "Ingénieur réseaux",
+   "Architecte logiciel"
+ ],
+ jobsDoctorate:[
+   "Enseignant-chercheur",
+   "Chercheur",
+   "Expert spécialisé",
+   "R&D"
+ ],
+ sectors:[
+   "Banques",
+   "Télécommunications",
+   "Entreprises technologiques",
+   "Startups",
+   "Administrations",
+   "Cybersécurité",
+   "Intelligence artificielle"
+ ]
 },
+
 {
-name:"Mathématiques",
-icon:"📐",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Enseignant, statisticien, analyste, data scientist, chercheur.",
-advantages:"Excellente base pour l'informatique, la finance, les statistiques et la recherche.",
-international:"Les compétences mathématiques sont transférables à de nombreux secteurs internationaux.",
-salary:"Variable selon métier, pays, niveau d'études et expérience."
+ name:"Mathématiques",
+ icon:"📐",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Excellente base scientifique",
+   "Très bonne capacité d'analyse",
+   "Accès aux métiers quantitatifs",
+   "Base solide pour l'informatique et l'IA"
+ ],
+ jobsLicense:[
+   "Assistant statistique",
+   "Assistant data",
+   "Enseignement après formation adaptée"
+ ],
+ jobsMaster:[
+   "Statisticien",
+   "Data analyst",
+   "Actuaire",
+   "Quantitative analyst",
+   "Chercheur"
+ ],
+ jobsDoctorate:[
+   "Enseignant-chercheur",
+   "Chercheur",
+   "Expert mathématique"
+ ],
+ sectors:[
+   "Banques",
+   "Assurances",
+   "Recherche",
+   "Data science",
+   "Éducation",
+   "Finance"
+ ]
 },
+
 {
-name:"Médecine",
-icon:"🩺",
-license:"Variable selon pays",
-master:"Variable",
-doctorate:"Variable",
-jobs:"Médecin, recherche médicale, santé publique, spécialités médicales.",
-advantages:"Secteur essentiel avec de nombreuses spécialisations.",
-international:"La reconnaissance du diplôme et l'autorisation d'exercer dépendent du pays.",
-salary:"Données à vérifier selon le pays et la spécialité."
+ name:"Médecine",
+ icon:"🩺",
+ license:6,
+ master:0,
+ doctorate:3,
+ advantages:[
+   "Profession réglementée",
+   "Forte responsabilité professionnelle",
+   "Nombreuses spécialités médicales",
+   "Possibilité de recherche"
+ ],
+ jobsLicense:[
+   "Médecin généraliste après le cursus et les autorisations requises"
+ ],
+ jobsMaster:[
+   "Spécialisation médicale selon le système national"
+ ],
+ jobsDoctorate:[
+   "Recherche médicale",
+   "Enseignement universitaire"
+ ],
+ sectors:[
+   "Hôpitaux",
+   "Cliniques",
+   "Recherche",
+   "Santé publique"
+ ]
 },
+
 {
-name:"Architecture",
-icon:"🏛️",
-license:"Variable selon pays",
-master:"Variable",
-doctorate:"Variable",
-jobs:"Architecte, urbaniste, BIM, conception, construction.",
-advantages:"Mélange de créativité, technique et conception.",
-international:"Possibilités dans l'architecture, l'urbanisme et la construction.",
-salary:"Variable selon pays et expérience."
+ name:"Architecture",
+ icon:"🏛️",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Créativité",
+   "Conception de bâtiments",
+   "Possibilité d'entrepreneuriat",
+   "Travail avec ingénieurs et urbanistes"
+ ],
+ jobsLicense:[
+   "Assistant architecte",
+   "Dessinateur",
+   "Modeleur 3D"
+ ],
+ jobsMaster:[
+   "Architecte",
+   "Urbaniste",
+   "Chef de projet"
+ ],
+ jobsDoctorate:[
+   "Chercheur",
+   "Enseignant-chercheur"
+ ],
+ sectors:[
+   "Cabinets d'architecture",
+   "Construction",
+   "Urbanisme",
+   "Immobilier",
+   "Bureaux d'études"
+ ]
 },
+
 {
-name:"Droit",
-icon:"⚖️",
-license:"Variable selon pays",
-master:"Variable",
-doctorate:"Variable",
-jobs:"Juriste, avocat, magistrat, conseiller juridique.",
-advantages:"Nombreuses spécialisations juridiques.",
-international:"Les règles professionnelles dépendent fortement du droit national.",
-salary:"Variable selon profession et pays."
+ name:"Droit",
+ icon:"⚖️",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Large domaine professionnel",
+   "Nombreuses spécialisations",
+   "Possibilités dans le public et le privé"
+ ],
+ jobsLicense:[
+   "Assistant juridique",
+   "Juriste junior"
+ ],
+ jobsMaster:[
+   "Juriste",
+   "Avocat selon conditions nationales",
+   "Conseiller juridique",
+   "Juriste d'entreprise"
+ ],
+ jobsDoctorate:[
+   "Enseignant-chercheur",
+   "Chercheur"
+ ],
+ sectors:[
+   "Cabinets juridiques",
+   "Entreprises",
+   "Administrations",
+   "Banques",
+   "ONG"
+ ]
 },
+
 {
-name:"Économie",
-icon:"📈",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Économiste, analyste, chargé d'études, consultant.",
-advantages:"Applicable aux banques, entreprises, administrations et organisations.",
-international:"Possibilités dans les institutions économiques et financières.",
-salary:"Variable selon pays et poste."
+ name:"Économie",
+ icon:"📊",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Compréhension des marchés",
+   "Bonne base en analyse",
+   "Débouchés publics et privés"
+ ],
+ jobsLicense:[
+   "Assistant économique",
+   "Assistant administratif"
+ ],
+ jobsMaster:[
+   "Économiste",
+   "Analyste",
+   "Consultant"
+ ],
+ jobsDoctorate:[
+   "Chercheur",
+   "Enseignant-chercheur"
+ ],
+ sectors:[
+   "Banques",
+   "Institutions publiques",
+   "ONG",
+   "Cabinets de conseil"
+ ]
 },
+
 {
-name:"Finance",
-icon:"💳",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Analyste financier, contrôleur, gestionnaire, banque.",
-advantages:"Nombreuses applications dans les entreprises et institutions financières.",
-international:"Compétences utiles dans la banque, assurance et finance internationale.",
-salary:"Variable selon pays et niveau."
+ name:"Finance",
+ icon:"💳",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Secteur financier",
+   "Métiers analytiques",
+   "Possibilités en banque et assurance"
+ ],
+ jobsLicense:[
+   "Assistant financier",
+   "Assistant comptable"
+ ],
+ jobsMaster:[
+   "Analyste financier",
+   "Risk manager",
+   "Contrôleur financier"
+ ],
+ jobsDoctorate:[
+   "Chercheur",
+   "Enseignant-chercheur"
+ ],
+ sectors:[
+   "Banques",
+   "Assurances",
+   "Entreprises",
+   "Marchés financiers"
+ ]
 },
+
 {
-name:"Gestion",
-icon:"📊",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Manager, contrôleur de gestion, ressources humaines, administration.",
-advantages:"Formation polyvalente et applicable à de nombreux secteurs.",
-international:"Débouchés dans les entreprises et organisations.",
-salary:"Variable selon pays."
+ name:"Gestion",
+ icon:"📋",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Formation polyvalente",
+   "Nombreuses entreprises accessibles",
+   "Entrepreneuriat"
+ ],
+ jobsLicense:[
+   "Assistant gestion",
+   "Assistant administratif"
+ ],
+ jobsMaster:[
+   "Manager",
+   "Contrôleur de gestion",
+   "Consultant"
+ ],
+ jobsDoctorate:[
+   "Recherche",
+   "Enseignement supérieur"
+ ],
+ sectors:[
+   "Entreprises",
+   "Administrations",
+   "Banques",
+   "ONG"
+ ]
 },
+
 {
-name:"Ingénierie",
-icon:"⚙️",
-license:"Variable selon spécialité",
-master:"Variable",
-doctorate:"Variable",
-jobs:"Ingénieur industriel, civil, électrique, mécanique, informatique.",
-advantages:"Forte spécialisation technique.",
-international:"Possibilités dans l'industrie, l'énergie, les infrastructures et la technologie.",
-salary:"Variable selon spécialité et pays."
+ name:"Ingénierie",
+ icon:"⚙️",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Formation scientifique",
+   "Résolution de problèmes complexes",
+   "Nombreuses spécialisations"
+ ],
+ jobsLicense:[
+   "Technicien",
+   "Assistant ingénieur"
+ ],
+ jobsMaster:[
+   "Ingénieur",
+   "Chef de projet",
+   "Consultant"
+ ],
+ jobsDoctorate:[
+   "Chercheur",
+   "R&D",
+   "Enseignant-chercheur"
+ ],
+ sectors:[
+   "Industrie",
+   "Énergie",
+   "Télécommunications",
+   "Construction",
+   "Technologies"
+ ]
 },
+
 {
-name:"Sciences",
-icon:"🔬",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Laboratoire, recherche, enseignement, industrie.",
-advantages:"Base solide pour la recherche et les secteurs scientifiques.",
-international:"Possibilités dans les laboratoires et centres de recherche.",
-salary:"Variable selon spécialité."
+ name:"Sciences",
+ icon:"🔬",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Base scientifique solide",
+   "Recherche",
+   "Nombreuses spécialisations"
+ ],
+ jobsLicense:[
+   "Technicien scientifique",
+   "Assistant laboratoire"
+ ],
+ jobsMaster:[
+   "Scientifique",
+   "Analyste",
+   "Ingénieur selon spécialisation"
+ ],
+ jobsDoctorate:[
+   "Chercheur",
+   "Enseignant-chercheur"
+ ],
+ sectors:[
+   "Laboratoires",
+   "Universités",
+   "Industrie",
+   "Recherche"
+ ]
 },
+
 {
-name:"Communication",
-icon:"📣",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Communication, marketing, médias, relations publiques.",
-advantages:"Secteur transversal présent dans de nombreuses organisations.",
-international:"Communication digitale, médias et marketing international.",
-salary:"Variable selon pays et expérience."
+ name:"Communication",
+ icon:"📣",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Créativité",
+   "Communication numérique",
+   "Médias et entreprises"
+ ],
+ jobsLicense:[
+   "Assistant communication",
+   "Community manager"
+ ],
+ jobsMaster:[
+   "Responsable communication",
+   "Consultant",
+   "Chargé de communication"
+ ],
+ jobsDoctorate:[
+   "Recherche",
+   "Enseignement supérieur"
+ ],
+ sectors:[
+   "Médias",
+   "Entreprises",
+   "Agences",
+   "ONG",
+   "Institutions"
+ ]
 },
+
 {
-name:"Lettres",
-icon:"📚",
-license:"3 ans",
-master:"2 ans",
-doctorate:"3 ans minimum",
-jobs:"Enseignement, rédaction, édition, recherche, communication.",
-advantages:"Développement de compétences linguistiques et rédactionnelles.",
-international:"Possibilités dans l'enseignement, la culture et la communication.",
-salary:"Variable selon métier et pays."
+ name:"Lettres",
+ icon:"📚",
+ license:3,
+ master:2,
+ doctorate:3,
+ advantages:[
+   "Maîtrise de la langue",
+   "Culture générale",
+   "Recherche et enseignement"
+ ],
+ jobsLicense:[
+   "Assistant éditorial",
+   "Rédacteur"
+ ],
+ jobsMaster:[
+   "Éditeur",
+   "Enseignant selon conditions",
+   "Rédacteur spécialisé"
+ ],
+ jobsDoctorate:[
+   "Chercheur",
+   "Enseignant-chercheur"
+ ],
+ sectors:[
+   "Édition",
+   "Culture",
+   "Éducation",
+   "Médias"
+ ]
 }
+
 ];
 
 
-/* =========================
-   TRADUCTIONS
-========================= */
+/* =========================================================
+   ETAT
+========================================================= */
 
-const translations={
-fr:{
-subtitle:"Ton assistant étudiant international 🌍",
-home:"Accueil",
-orientation:"Orientation",
-studies:"Mes études",
-budget:"Budget"
-},
-en:{
-subtitle:"Your international student assistant 🌍",
-home:"Home",
-orientation:"Guidance",
-studies:"My studies",
-budget:"Budget"
-},
-es:{
-subtitle:"Tu asistente estudiantil internacional 🌍",
-home:"Inicio",
-orientation:"Orientación",
-studies:"Mis estudios",
-budget:"Presupuesto"
-},
-pt:{
-subtitle:"Seu assistente estudantil internacional 🌍",
-home:"Início",
-orientation:"Orientação",
-studies:"Meus estudos",
-budget:"Orçamento"
-}
-};
-
-
-/* =========================
-   ÉTAT
-========================= */
-
-let currentCountry=
-localStorage.getItem("etudiantplus_country")||"CG";
+let currentCountry=localStorage.getItem("student_country") || "CG";
 
 let currentLanguage=
-localStorage.getItem("etudiantplus_language")||"fr";
+  localStorage.getItem("student_language") ||
+  (navigator.language || "fr").slice(0,2);
 
-let studies=
-JSON.parse(localStorage.getItem("etudiantplus_studies")||"[]");
+if(!languages[currentLanguage]){
+  currentLanguage="en";
+}
 
-let schedule=
-JSON.parse(localStorage.getItem("etudiantplus_schedule")||"[]");
+let studiesData=
+  JSON.parse(localStorage.getItem("student_studies") || "[]");
 
-let budget=
-JSON.parse(localStorage.getItem("etudiantplus_budget")||"[]");
+let scheduleData=
+  JSON.parse(localStorage.getItem("student_schedule") || "[]");
 
-let profile=
-JSON.parse(localStorage.getItem("etudiantplus_profile")||"{}");
+let budgetData=
+  JSON.parse(localStorage.getItem("student_budget") || "[]");
+
+let profileData=
+  JSON.parse(localStorage.getItem("student_profile") || "{}");
 
 
-/* =========================
-   NAVIGATION
-========================= */
+/* =========================================================
+   INITIALISATION
+========================================================= */
 
-function showSection(id){
+function countryName(code){
 
-document.querySelectorAll("section").forEach(s=>{
-s.classList.add("hidden");
-});
+  try{
+    const dn=new Intl.DisplayNames(
+      [currentLanguage],
+      {type:"region"}
+    );
 
-document.getElementById(id).classList.remove("hidden");
+    return dn.of(code) || code;
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+  }catch(e){
+
+    return code;
+
+  }
+
 }
 
 
-/* =========================
-   PAYS
-========================= */
+function populateCountries(){
 
-function changeCountry(){
+  const selectors=[
+    document.getElementById("countrySelect"),
+    document.getElementById("calcCountry"),
+    document.getElementById("profileCountry")
+  ];
 
-currentCountry=document.getElementById("countrySelect").value;
+  selectors.forEach(select=>{
 
-localStorage.setItem(
-"etudiantplus_country",
-currentCountry
-);
+    if(!select)return;
 
-document.getElementById("profileCountry").value=currentCountry;
+    select.innerHTML="";
 
-updateCountryUI();
-loadSubjects();
-renderStudies();
-renderBudget();
+    countryCodes.forEach(code=>{
+
+      const option=document.createElement("option");
+
+      option.value=code;
+      option.textContent=
+        countryName(code)+" ("+
+        code+
+        ")";
+
+      select.appendChild(option);
+
+    });
+
+    select.value=currentCountry;
+
+  });
+
 }
 
 
-function syncProfileCountry(){
+function populateLanguages(){
 
-currentCountry=
-document.getElementById("profileCountry").value;
+  const select=document.getElementById("languageSelect");
 
-document.getElementById("countrySelect").value=currentCountry;
+  select.innerHTML="";
 
-localStorage.setItem(
-"etudiantplus_country",
-currentCountry
-);
+  Object.entries(languages).forEach(([code,name])=>{
 
-updateCountryUI();
+    const option=document.createElement("option");
+
+    option.value=code;
+    option.textContent=name;
+
+    select.appendChild(option);
+
+  });
+
+  select.value=currentLanguage;
+
 }
 
 
-function updateCountryUI(){
+function applyLanguage(){
 
-const c=countries[currentCountry];
+  document.documentElement.lang=currentLanguage;
 
-document.getElementById("countryDisplay").textContent=
-c.flag+" "+c.name;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
 
-document.getElementById("bacCountry").textContent=
-c.flag+" "+c.name;
+    const key=el.dataset.i18n;
 
-document.getElementById("countrySelect").value=
-currentCountry;
+    if(
+      translations[currentLanguage] &&
+      translations[currentLanguage][key]
+    ){
 
-document.getElementById("profileCountry").value=
-currentCountry;
+      el.textContent=
+        translations[currentLanguage][key];
 
-updateBalance();
+    }
+
+  });
+
+  populateCountries();
+
+  populateLanguages();
+
+  updateHome();
+
+  renderOrientation();
+
 }
 
-
-/* =========================
-   LANGUE
-========================= */
 
 function changeLanguage(){
 
-currentLanguage=
-document.getElementById("languageSelect").value;
+  currentLanguage=
+    document.getElementById("languageSelect").value;
 
-localStorage.setItem(
-"etudiantplus_language",
-currentLanguage
-);
+  localStorage.setItem(
+    "student_language",
+    currentLanguage
+  );
 
-const t=translations[currentLanguage];
+  applyLanguage();
 
-document.getElementById("subtitle").textContent=t.subtitle;
-
-document.getElementById("languageDisplay").textContent=
-currentLanguage==="fr"?"Français":
-currentLanguage==="en"?"English":
-currentLanguage==="es"?"Español":"Português";
 }
 
 
-/* =========================
-   BAC
-========================= */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-function loadSubjects(){
+function showSection(id){
 
-const container=
-document.getElementById("subjects");
+  document.querySelectorAll("main section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
 
-container.innerHTML="";
+  const target=document.getElementById(id);
 
-const series=
-document.getElementById("series").value;
+  if(target){
+    target.classList.add("active");
+  }
 
-if(!series)return;
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
-const countryData=
-bacData[currentCountry];
-
-if(!countryData||!countryData[series]){
-
-container.innerHTML=`
-<div class="note">
-⚠️ Les coefficients officiels de ce pays/série
-ne sont pas encore intégrés dans cette version.
-<br><br>
-<strong>Aucun coefficient n'est inventé.</strong>
-</div>
-`;
-
-return;
 }
 
-countryData[series].forEach((subject,index)=>{
 
-container.innerHTML+=`
-<div class="card">
-<strong>${subject[0]}</strong>
-<span class="badge">Coefficient ${subject[1]}</span>
-<input
-type="number"
-min="0"
-max="20"
-step="0.01"
-id="note_${index}"
-placeholder="Note /20">
-</div>
-`;
+/* =========================================================
+   PAYS
+========================================================= */
 
-});
+function changeCountry(code){
+
+  currentCountry=code;
+
+  localStorage.setItem(
+    "student_country",
+    currentCountry
+  );
+
+  document.getElementById("countrySelect").value=currentCountry;
+  document.getElementById("calcCountry").value=currentCountry;
+  document.getElementById("profileCountry").value=currentCountry;
+
+  updateHome();
+
+  renderCalculator();
+
+  renderBudget();
+
+}
+
+
+function updateHome(){
+
+  const name=countryName(currentCountry);
+
+  document.getElementById("homeCountry").textContent=name;
+
+  document.getElementById("homeCurrency").textContent=
+    currencyMap[currentCountry] || "—";
+
+  document.getElementById("homeLanguage").textContent=
+    languages[currentLanguage] || currentLanguage;
+
+  document.getElementById("homeSystem").textContent=
+    systems[currentCountry]
+      ? systems[currentCountry].name
+      : "Système local";
+
+}
+
+
+/* =========================================================
+   FILIERES ACCUEIL
+========================================================= */
+
+function renderHomeFields(list=fields){
+
+  const container=document.getElementById("homeFields");
+
+  container.innerHTML="";
+
+  list.forEach(field=>{
+
+    const div=document.createElement("div");
+
+    div.className="card filiere";
+
+    div.innerHTML=`
+      <div class="emoji">${field.icon}</div>
+      <h3>${field.name}</h3>
+      <p class="muted">
+        Licence ${field.license} ans
+        • Master ${field.master} ans
+      </p>
+      <span class="badge">Voir la fiche</span>
+    `;
+
+    div.onclick=()=>openField(field.name);
+
+    container.appendChild(div);
+
+  });
+
+}
+
+
+function filterHomeFields(){
+
+  const q=
+    document.getElementById("homeSearch")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const filtered=fields.filter(field=>
+    field.name.toLowerCase().includes(q)
+  );
+
+  renderHomeFields(filtered);
+
+}
+
+
+/* =========================================================
+   ORIENTATION
+========================================================= */
+
+function renderOrientation(){
+
+  const q=
+    (document.getElementById("orientationSearch")?.value || "")
+      .toLowerCase()
+      .trim();
+
+  const grid=document.getElementById("orientationGrid");
+
+  if(!grid)return;
+
+  grid.innerHTML="";
+
+  fields
+    .filter(field=>
+      field.name.toLowerCase().includes(q)
+    )
+    .forEach(field=>{
+
+      const card=document.createElement("div");
+
+      card.className="card filiere";
+
+      card.innerHTML=`
+        <div class="emoji">${field.icon}</div>
+        <h3>${field.name}</h3>
+
+        <p>
+          🎓 Licence : ${field.license} ans
+        </p>
+
+        <p>
+          🎓 Master : ${field.master} ans
+        </p>
+
+        <p>
+          🔬 Doctorat : ${field.doctorate} ans
+        </p>
+
+        <span class="badge">
+          Découvrir
+        </span>
+      `;
+
+      card.onclick=()=>openField(field.name);
+
+      grid.appendChild(card);
+
+    });
+
+}
+
+
+function openField(name){
+
+  const field=
+    fields.find(x=>x.name===name);
+
+  if(!field)return;
+
+  document.getElementById("orientationList")
+    .classList.add("hidden");
+
+  const detail=
+    document.getElementById("orientationDetail");
+
+  detail.classList.remove("hidden");
+
+  detail.innerHTML=`
+
+    <button class="btn secondary back"
+      onclick="closeField()">
+      ← Retour aux filières
+    </button>
+
+    <div class="hero">
+      <div class="emoji">${field.icon}</div>
+      <h1>${field.name}</h1>
+      <p>
+        Une présentation générale du parcours et des débouchés.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <h2>🎓 Parcours universitaire</h2>
+
+      <table>
+        <tr>
+          <th>Diplôme</th>
+          <th>Durée</th>
+        </tr>
+
+        <tr>
+          <td>Licence</td>
+          <td>${field.license} ans</td>
+        </tr>
+
+        <tr>
+          <td>Master</td>
+          <td>${field.master} ans</td>
+        </tr>
+
+        <tr>
+          <td>Doctorat</td>
+          <td>${field.doctorate} ans minimum</td>
+        </tr>
+      </table>
+
+      <p>
+        ⏱️ Parcours indicatif jusqu'au doctorat :
+        <strong>
+          ${field.license+field.master+field.doctorate} ans
+        </strong>
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>⭐ Avantages</h2>
+
+      <ul>
+        ${field.advantages
+          .map(x=>`<li>${x}</li>`)
+          .join("")}
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>💼 Débouchés après la Licence</h2>
+
+      <ul>
+        ${field.jobsLicense
+          .map(x=>`<li>${x}</li>`)
+          .join("")}
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>🚀 Débouchés après le Master</h2>
+
+      <ul>
+        ${field.jobsMaster
+          .map(x=>`<li>${x}</li>`)
+          .join("")}
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>🔬 Après le Doctorat</h2>
+
+      <ul>
+        ${field.jobsDoctorate
+          .map(x=>`<li>${x}</li>`)
+          .join("")}
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>🌍 Secteurs professionnels</h2>
+
+      <div>
+        ${field.sectors
+          .map(x=>`<span class="tag">${x}</span>`)
+          .join("")}
+      </div>
+
+    </div>
+
+
+    <div class="notice">
+      💰 <strong>Salaires :</strong>
+      Étudiant+ n'affiche pas de salaire inventé.
+      Les données salariales devront être ajoutées pays par pays
+      avec une source fiable, une période et un métier précis.
+    </div>
+
+  `;
+
+  showSection("orientation");
+
+}
+
+
+function closeField(){
+
+  document.getElementById("orientationDetail")
+    .classList.add("hidden");
+
+  document.getElementById("orientationList")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   CALCULATEUR
+========================================================= */
+
+function renderCalculator(){
+
+  const country=
+    document.getElementById("calcCountry");
+
+  if(!country)return;
+
+  country.value=currentCountry;
+
+  const exam=
+    document.getElementById("examSelect");
+
+  const track=
+    document.getElementById("trackSelect");
+
+  exam.innerHTML="";
+  track.innerHTML="";
+
+  const data=systems[currentCountry];
+
+  if(!data){
+
+    exam.innerHTML=
+      `<option value="custom">
+        Mode personnalisé
+      </option>`;
+
+    track.innerHTML=
+      `<option value="custom">
+        Matières personnalisées
+      </option>`;
+
+    document.getElementById("calcNotice")
+      .classList.remove("hidden");
+
+    document.getElementById("calcNotice").innerHTML=
+      `
+      ⚠️ Les coefficients officiels de ce pays
+      ne sont pas encore intégrés dans cette version.
+      Tu peux néanmoins créer un calcul personnalisé.
+      Ne considère pas les coefficients proposés comme officiels.
+      `;
+
+    renderSubjects([]);
+
+    return;
+
+  }
+
+  document.getElementById("calcNotice")
+    .classList.add("hidden");
+
+  Object.entries(data.exams)
+    .forEach(([key,value])=>{
+
+      const option=
+        document.createElement("option");
+
+      option.value=key;
+      option.textContent=value.name;
+
+      exam.appendChild(option);
+
+    });
+
+  renderTracks();
+
+}
+
+
+function renderTracks(){
+
+  const country=
+    document.getElementById("calcCountry").value;
+
+  const exam=
+    document.getElementById("examSelect").value;
+
+  const track=
+    document.getElementById("trackSelect");
+
+  track.innerHTML="";
+
+  const data=
+    systems[country]?.exams?.[exam];
+
+  if(!data){
+
+    track.innerHTML=
+      `<option value="custom">Personnalisé</option>`;
+
+    renderSubjects([]);
+
+    return;
+
+  }
+
+  Object.entries(data.tracks)
+    .forEach(([key,value])=>{
+
+      const option=
+        document.createElement("option");
+
+      option.value=key;
+      option.textContent=value.name;
+
+      track.appendChild(option);
+
+    });
+
+  renderSubjects();
+
+}
+
+
+function renderSubjects(custom=[]){
+
+  const container=
+    document.getElementById("subjectsContainer");
+
+  container.innerHTML="";
+
+  const country=
+    document.getElementById("calcCountry").value;
+
+  const exam=
+    document.getElementById("examSelect").value;
+
+  const track=
+    document.getElementById("trackSelect").value;
+
+  const data=
+    systems[country]
+      ?.exams?.[exam]
+      ?.tracks?.[track];
+
+  let subjects=
+    data?.subjects?.length
+      ? data.subjects
+      : custom;
+
+  if(!subjects.length){
+
+    subjects=[
+      ["Matière 1",1],
+      ["Matière 2",1],
+      ["Matière 3",1],
+      ["Matière 4",1],
+      ["Matière 5",1]
+    ];
+
+  }
+
+  subjects.forEach((subject,index)=>{
+
+    addSubjectRow(
+      subject[0],
+      subject[1],
+      index
+    );
+
+  });
+
+}
+
+
+function addSubjectRow(name="",coef=1,index=null){
+
+  const container=
+    document.getElementById("subjectsContainer");
+
+  const row=
+    document.createElement("div");
+
+  row.className="card";
+
+  row.innerHTML=`
+
+    <div class="controls">
+
+      <div>
+        <label>Matière</label>
+        <input
+          class="subject-name"
+          value="${escapeHtml(name)}"
+        >
+      </div>
+
+      <div>
+        <label>Coefficient</label>
+        <input
+          class="subject-coef"
+          type="number"
+          min="0"
+          step="0.01"
+          value="${coef}"
+        >
+      </div>
+
+      <div>
+        <label>Note /20</label>
+        <input
+          class="subject-grade"
+          type="number"
+          min="0"
+          max="20"
+          step="0.01"
+          placeholder="Ex : 14"
+        >
+      </div>
+
+    </div>
+
+    <button
+      class="btn danger"
+      style="margin-top:8px"
+      onclick="this.parentElement.remove()">
+      🗑️ Supprimer
+    </button>
+
+  `;
+
+  container.appendChild(row);
+
+}
+
+
+function addSubject(){
+
+  addSubjectRow(
+    "Nouvelle matière",
+    1
+  );
 
 }
 
 
 function calculateAverage(){
 
-const series=
-document.getElementById("series").value;
+  const rows=
+    document.querySelectorAll(
+      "#subjectsContainer .card"
+    );
 
-if(!series)return;
+  let total=0;
+  let coefTotal=0;
+  let valid=true;
 
-const data=
-bacData[currentCountry] &&
-bacData[currentCountry][series];
+  rows.forEach(row=>{
 
-if(!data){
+    const grade=
+      parseFloat(
+        row.querySelector(".subject-grade")?.value
+      );
 
-alert("Les coefficients de ce pays ne sont pas encore disponibles.");
-return;
-}
+    const coef=
+      parseFloat(
+        row.querySelector(".subject-coef")?.value
+      );
 
-let total=0;
-let coeffTotal=0;
+    if(
+      Number.isNaN(grade) ||
+      Number.isNaN(coef) ||
+      grade<0 ||
+      grade>20 ||
+      coef<0
+    ){
 
-for(let i=0;i<data.length;i++){
+      valid=false;
 
-const input=
-document.getElementById("note_"+i);
+      return;
 
-const note=parseFloat(input.value);
+    }
 
-if(isNaN(note)||note<0||note>20){
+    total+=grade*coef;
+    coefTotal+=coef;
 
-alert("Toutes les notes doivent être comprises entre 0 et 20.");
-return;
-}
+  });
 
-const coeff=data[i][1];
+  const result=
+    document.getElementById("resultBox");
 
-total+=note*coeff;
-coeffTotal+=coeff;
-}
+  if(!valid || coefTotal===0){
 
-const average=total/coeffTotal;
+    result.innerHTML=
+      `<div class="notice">
+        ⚠️ Vérifie les notes et les coefficients.
+        Les notes doivent être comprises entre 0 et 20.
+      </div>`;
 
-localStorage.setItem(
-"etudiantplus_average",
-average.toFixed(2)
-);
+    return;
 
-let mention="À améliorer";
+  }
 
-if(average>=16)mention="Très bien 🏆";
-else if(average>=14)mention="Bien 👏";
-else if(average>=12)mention="Assez bien 👍";
-else if(average>=10)mention="Passable";
+  const average=
+    total/coefTotal;
 
-const result=
-document.getElementById("averageResult");
+  let mention="";
 
-result.classList.remove("hidden");
+  if(average>=16){
+    mention="Très bien 🏆";
+  }else if(average>=14){
+    mention="Bien 👏";
+  }else if(average>=12){
+    mention="Assez bien 👍";
+  }else if(average>=10){
+    mention="Passable ✅";
+  }else{
+    mention="À améliorer 📚";
+  }
 
-result.innerHTML=`
-<h2>📊 Résultat</h2>
-<p><strong>Moyenne :</strong> ${average.toFixed(2)}/20</p>
-<p><strong>Mention :</strong> ${mention}</p>
-<p><strong>Pays :</strong> ${countries[currentCountry].flag} ${countries[currentCountry].name}</p>
-<p><strong>Série :</strong> ${series}</p>
-`;
+  result.innerHTML=`
 
-document.getElementById("averageDisplay").textContent=
-average.toFixed(2)+"/20";
-}
+    <div class="success">
 
+      <div class="small">
+        Moyenne pondérée
+      </div>
 
-/* =========================
-   FILIÈRES
-========================= */
+      <div class="big">
+        ${average.toFixed(2)} / 20
+      </div>
 
-function renderFilieres(){
+      <h3>${mention}</h3>
 
-const grid=
-document.getElementById("filiereGrid");
+      <p>
+        Total des coefficients :
+        <strong>${coefTotal}</strong>
+      </p>
 
-grid.innerHTML="";
+    </div>
 
-filieres.forEach((f,index)=>{
-
-grid.innerHTML+=`
-<div class="card filiere" onclick="showFiliere(${index})">
-<div class="icon">${f.icon}</div>
-<h3>${f.name}</h3>
-<p>Voir les détails →</p>
-</div>
-`;
-
-});
-
-}
-
-
-function showFiliere(index){
-
-const f=filieres[index];
-const c=countries[currentCountry];
-
-const details=
-document.getElementById("filiereDetails");
-
-details.classList.remove("hidden");
-
-details.innerHTML=`
-<h2>${f.icon} ${f.name}</h2>
-
-<p>
-<strong>🌍 Pays sélectionné :</strong>
-${c.flag} ${c.name}
-</p>
-
-<hr><br>
-
-<h3>🎓 Parcours académique</h3>
-<p>Licence : ${f.license}</p>
-<p>Master : ${f.master}</p>
-<p>Doctorat : ${f.doctorate}</p>
-
-<br>
-
-<h3>⭐ Avantages</h3>
-<p>${f.advantages}</p>
-
-<br>
-
-<h3>💼 Débouchés</h3>
-<p>${f.jobs}</p>
-
-<br>
-
-<h3>🌍 Opportunités dans le pays</h3>
-<p>${f.international}</p>
-
-<br>
-
-<h3>💰 Salaires</h3>
-<p>${f.salary}</p>
-
-<div class="note">
-<strong>Source salariale :</strong>
-Les chiffres doivent être ajoutés uniquement à partir
-de sources fiables correspondant à ${c.name},
-au métier concerné et à une période donnée.
-</div>
-
-<br>
-
-<h3>🌎 International</h3>
-<p>
-La possibilité de travailler à l'étranger dépend notamment
-de la reconnaissance du diplôme, des compétences,
-de l'expérience et des règles professionnelles du pays d'accueil.
-</p>
-`;
-
-details.scrollIntoView({
-behavior:"smooth"
-});
+  `;
 
 }
 
 
-/* =========================
-   MES ÉTUDES
-========================= */
+function resetCalculator(){
+
+  document.getElementById("resultBox")
+    .innerHTML="";
+
+  renderCalculator();
+
+}
+
+
+/* =========================================================
+   ETUDES
+========================================================= */
 
 function addStudy(){
 
-const subject=
-document.getElementById("studySubject").value.trim();
+  const subject=
+    document.getElementById("studySubject")
+      .value.trim();
 
-const grade=
-parseFloat(document.getElementById("studyGrade").value);
+  const grade=
+    parseFloat(
+      document.getElementById("studyGrade").value
+    );
 
-const target=
-parseFloat(document.getElementById("studyTarget").value);
+  const target=
+    parseFloat(
+      document.getElementById("studyTarget").value
+    );
 
-const comment=
-document.getElementById("studyComment").value.trim();
+  const comment=
+    document.getElementById("studyComment").value;
 
-if(!subject||isNaN(grade)||isNaN(target)){
-alert("Complète les informations.");
-return;
-}
+  if(
+    !subject ||
+    Number.isNaN(grade) ||
+    Number.isNaN(target)
+  ){
 
-let status="🔴 À améliorer";
-let cls="dangerBadge";
+    alert("Remplis la matière, la note et l'objectif.");
 
-if(grade>=target){
-status="🟢 Objectif atteint";
-cls="successBadge";
-}else if(grade>=target-2){
-status="🟡 En progression";
-cls="warningBadge";
-}
+    return;
 
-studies.push({
-subject,
-grade,
-target,
-comment,
-status,
-cls
-});
+  }
 
-saveStudies();
+  studiesData.push({
+    subject,
+    grade,
+    target,
+    comment
+  });
 
-document.getElementById("studySubject").value="";
-document.getElementById("studyGrade").value="";
-document.getElementById("studyTarget").value="";
-document.getElementById("studyComment").value="";
-}
+  localStorage.setItem(
+    "student_studies",
+    JSON.stringify(studiesData)
+  );
 
+  document.getElementById("studySubject").value="";
+  document.getElementById("studyGrade").value="";
+  document.getElementById("studyTarget").value="";
+  document.getElementById("studyComment").value="";
 
-function saveStudies(){
+  renderStudies();
 
-localStorage.setItem(
-"etudiantplus_studies",
-JSON.stringify(studies)
-);
-
-renderStudies();
 }
 
 
 function renderStudies(){
 
-const list=
-document.getElementById("studyList");
+  const container=
+    document.getElementById("studiesList");
 
-if(!list)return;
+  if(!studiesData.length){
 
-if(studies.length===0){
-list.innerHTML="<p>Aucune matière enregistrée.</p>";
-return;
-}
+    container.innerHTML=
+      `<div class="empty">
+        Aucune matière enregistrée.
+      </div>`;
 
-let total=0;
+    return;
 
-list.innerHTML="";
+  }
 
-studies.forEach((s,index)=>{
+  container.innerHTML="";
 
-total+=s.grade;
+  studiesData.forEach((item,index)=>{
 
-list.innerHTML+=`
-<div class="card">
-<h3>📚 ${escapeHTML(s.subject)}</h3>
+    let status="🔴 À améliorer";
 
-<p>Note : <strong>${s.grade}/20</strong></p>
-<p>Objectif : <strong>${s.target}/20</strong></p>
+    if(item.grade>=item.target){
 
-<span class="badge ${s.cls}">
-${s.status}
-</span>
+      status="🟢 Objectif atteint";
 
-<p>${escapeHTML(s.comment||"")}</p>
+    }else if(item.grade>=item.target-2){
 
-<button
-class="danger small"
-onclick="deleteStudy(${index})">
-Supprimer
-</button>
-</div>
-`;
+      status="🟡 En progression";
 
-});
+    }
 
-const average=total/studies.length;
+    const progress=
+      Math.max(
+        0,
+        Math.min(
+          100,
+          item.grade/item.target*100
+        )
+      );
 
-list.innerHTML=
-`<div class="stat">
-<strong>${average.toFixed(2)}/20</strong>
-<span>Moyenne de mes matières</span>
-</div>`+list.innerHTML;
+    const card=
+      document.createElement("div");
+
+    card.className="card";
+
+    card.innerHTML=`
+
+      <h3>${escapeHtml(item.subject)}</h3>
+
+      <p>
+        Note :
+        <strong>${item.grade}/20</strong>
+        |
+        Objectif :
+        <strong>${item.target}/20</strong>
+      </p>
+
+      <div class="progress">
+        <i style="width:${progress}%"></i>
+      </div>
+
+      <p>${status}</p>
+
+      ${
+        item.comment
+          ? `<p class="muted">${escapeHtml(item.comment)}</p>`
+          : ""
+      }
+
+      <button
+        class="btn danger"
+        onclick="deleteStudy(${index})">
+        🗑️ Supprimer
+      </button>
+
+    `;
+
+    container.appendChild(card);
+
+  });
+
 }
 
 
 function deleteStudy(index){
 
-studies.splice(index,1);
-saveStudies();
+  studiesData.splice(index,1);
+
+  localStorage.setItem(
+    "student_studies",
+    JSON.stringify(studiesData)
+  );
+
+  renderStudies();
+
 }
 
 
-/* =========================
+function clearStudies(){
+
+  if(!confirm("Effacer toutes les matières ?"))return;
+
+  studiesData=[];
+
+  localStorage.setItem(
+    "student_studies",
+    "[]"
+  );
+
+  renderStudies();
+
+}
+
+
+/* =========================================================
    EMPLOI DU TEMPS
-========================= */
+========================================================= */
 
 function addSchedule(){
 
-const day=document.getElementById("scheduleDay").value;
-const start=document.getElementById("scheduleStart").value;
-const end=document.getElementById("scheduleEnd").value;
-const subject=document.getElementById("scheduleSubject").value.trim();
-const room=document.getElementById("scheduleRoom").value.trim();
+  const day=
+    document.getElementById("scheduleDay").value;
 
-if(!start||!end||!subject){
+  const subject=
+    document.getElementById("scheduleSubject")
+      .value.trim();
 
-alert("Complète au minimum le jour, les horaires et la matière.");
-return;
-}
+  const start=
+    document.getElementById("scheduleStart").value;
 
-schedule.push({
-day,
-start,
-end,
-subject,
-room
-});
+  const end=
+    document.getElementById("scheduleEnd").value;
 
-localStorage.setItem(
-"etudiantplus_schedule",
-JSON.stringify(schedule)
-);
+  const room=
+    document.getElementById("scheduleRoom").value;
 
-renderSchedule();
+  if(!subject || !start || !end){
 
-document.getElementById("scheduleSubject").value="";
-document.getElementById("scheduleRoom").value="";
+    alert("Indique la matière et les horaires.");
+
+    return;
+
+  }
+
+  scheduleData.push({
+    day,
+    subject,
+    start,
+    end,
+    room
+  });
+
+  localStorage.setItem(
+    "student_schedule",
+    JSON.stringify(scheduleData)
+  );
+
+  document.getElementById("scheduleSubject").value="";
+  document.getElementById("scheduleStart").value="";
+  document.getElementById("scheduleEnd").value="";
+  document.getElementById("scheduleRoom").value="";
+
+  renderSchedule();
+
 }
 
 
 function renderSchedule(){
 
-const list=
-document.getElementById("scheduleList");
+  const container=
+    document.getElementById("scheduleList");
 
-if(!list)return;
+  if(!scheduleData.length){
 
-if(schedule.length===0){
-list.innerHTML="<p>Aucun cours enregistré.</p>";
-return;
-}
+    container.innerHTML=
+      `<div class="empty">
+        Aucun cours enregistré.
+      </div>`;
 
-const days=[
-"Lundi",
-"Mardi",
-"Mercredi",
-"Jeudi",
-"Vendredi",
-"Samedi",
-"Dimanche"
-];
+    return;
 
-schedule.sort((a,b)=>{
+  }
 
-let d=days.indexOf(a.day)-days.indexOf(b.day);
+  const days=[
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+    "Dimanche"
+  ];
 
-if(d!==0)return d;
+  container.innerHTML="";
 
-return a.start.localeCompare(b.start);
+  days.forEach(day=>{
 
-});
+    const entries=
+      scheduleData
+        .filter(x=>x.day===day)
+        .sort((a,b)=>
+          a.start.localeCompare(b.start)
+        );
 
-list.innerHTML="";
+    if(!entries.length)return;
 
-schedule.forEach((s,index)=>{
+    const block=
+      document.createElement("div");
 
-list.innerHTML+=`
-<div class="card">
-<strong>📅 ${s.day}</strong>
-<p>⏰ ${s.start} → ${s.end}</p>
-<p>📚 ${escapeHTML(s.subject)}</p>
-<p>🏫 ${escapeHTML(s.room||"Salle non précisée")}</p>
+    block.className="schedule-day";
 
-<button
-class="danger small"
-onclick="deleteSchedule(${index})">
-Supprimer
-</button>
-</div>
-`;
+    block.innerHTML=
+      `<h3>${day}</h3>`;
 
-});
+    entries.forEach(item=>{
+
+      const index=
+        scheduleData.indexOf(item);
+
+      const div=
+        document.createElement("div");
+
+      div.className="card";
+
+      div.innerHTML=`
+
+        <strong>
+          ${escapeHtml(item.subject)}
+        </strong>
+
+        <p>
+          ⏰ ${item.start} → ${item.end}
+        </p>
+
+        ${
+          item.room
+            ? `<p>🚪 ${escapeHtml(item.room)}</p>`
+            : ""
+        }
+
+        <button
+          class="btn danger"
+          onclick="deleteSchedule(${index})">
+          🗑️ Supprimer
+        </button>
+
+      `;
+
+      block.appendChild(div);
+
+    });
+
+    container.appendChild(block);
+
+  });
 
 }
 
 
 function deleteSchedule(index){
 
-schedule.splice(index,1);
+  scheduleData.splice(index,1);
 
-localStorage.setItem(
-"etudiantplus_schedule",
-JSON.stringify(schedule)
-);
+  localStorage.setItem(
+    "student_schedule",
+    JSON.stringify(scheduleData)
+  );
 
-renderSchedule();
+  renderSchedule();
+
 }
 
 
 function requestNotifications(){
 
-if(!("Notification" in window)){
+  if(!("Notification" in window)){
 
-alert("Les notifications ne sont pas supportées par ce navigateur.");
-return;
+    alert(
+      "Les notifications ne sont pas prises en charge par ce navigateur."
+    );
+
+    return;
+
+  }
+
+  Notification.requestPermission()
+    .then(permission=>{
+
+      if(permission==="granted"){
+
+        alert(
+          "🔔 Autorisation des notifications accordée."
+        );
+
+      }else{
+
+        alert(
+          "Les notifications n'ont pas été autorisées."
+        );
+
+      }
+
+    });
+
 }
 
-Notification.requestPermission().then(permission=>{
 
-if(permission==="granted"){
-
-new Notification("🎓 Étudiant+",{
-body:"Les notifications sont activées."
-});
-
-}else{
-
-alert("Permission de notification refusée.");
-}
-
-});
-
-}
-
-
-/* =========================
+/* =========================================================
    BUDGET
-========================= */
+========================================================= */
 
 function addBudget(){
 
-const type=
-document.getElementById("budgetType").value;
+  const type=
+    document.getElementById("budgetType").value;
 
-const category=
-document.getElementById("budgetCategory").value;
+  const amount=
+    parseFloat(
+      document.getElementById("budgetAmount").value
+    );
 
-const amount=
-parseFloat(document.getElementById("budgetAmount").value);
+  const category=
+    document.getElementById("budgetCategory").value;
 
-const date=
-document.getElementById("budgetDate").value;
+  const description=
+    document.getElementById("budgetDescription")
+      .value.trim();
 
-const description=
-document.getElementById("budgetDescription").value.trim();
+  if(
+    Number.isNaN(amount) ||
+    amount<=0
+  ){
 
-if(isNaN(amount)||amount<=0){
+    alert("Indique un montant valide.");
 
-alert("Entre un montant valide.");
-return;
-}
+    return;
 
-budget.push({
-type,
-category,
-amount,
-date:date||new Date().toISOString().slice(0,10),
-description
-});
+  }
 
-localStorage.setItem(
-"etudiantplus_budget",
-JSON.stringify(budget)
-);
+  budgetData.push({
+    type,
+    amount,
+    category,
+    description,
+    date:new Date().toLocaleDateString()
+  });
 
-renderBudget();
+  localStorage.setItem(
+    "student_budget",
+    JSON.stringify(budgetData)
+  );
 
-document.getElementById("budgetAmount").value="";
-document.getElementById("budgetDescription").value="";
+  document.getElementById("budgetAmount").value="";
+  document.getElementById("budgetDescription").value="";
+
+  renderBudget();
+
 }
 
 
 function renderBudget(){
 
-const list=
-document.getElementById("budgetList");
+  let income=0;
+  let expense=0;
 
-if(!list)return;
+  budgetData.forEach(item=>{
 
-let income=0;
-let expense=0;
+    if(item.type==="income"){
+      income+=item.amount;
+    }else{
+      expense+=item.amount;
+    }
 
-budget.forEach(b=>{
+  });
 
-if(b.type==="income")income+=b.amount;
-else expense+=b.amount;
+  document.getElementById("totalIncome")
+    .textContent=
+    formatMoney(income);
 
-});
+  document.getElementById("totalExpense")
+    .textContent=
+    formatMoney(expense);
 
-const balance=income-expense;
+  document.getElementById("balance")
+    .textContent=
+    formatMoney(income-expense);
 
-document.getElementById("totalIncome").textContent=
-formatMoney(income);
+  document.getElementById("budgetCurrency")
+    .textContent=
+    currencyMap[currentCountry] || "—";
 
-document.getElementById("totalExpense").textContent=
-formatMoney(expense);
+  const container=
+    document.getElementById("budgetList");
 
-document.getElementById("totalBalance").textContent=
-formatMoney(balance);
+  if(!budgetData.length){
 
-document.getElementById("balanceDisplay").textContent=
-formatMoney(balance);
+    container.innerHTML=
+      `<div class="empty">
+        Aucun mouvement enregistré.
+      </div>`;
 
-if(budget.length===0){
+    return;
 
-list.innerHTML="<p>Aucune opération enregistrée.</p>";
-return;
+  }
+
+  container.innerHTML="";
+
+  [...budgetData]
+    .reverse()
+    .forEach((item,reverseIndex)=>{
+
+      const index=
+        budgetData.length-1-reverseIndex;
+
+      const card=
+        document.createElement("div");
+
+      card.className="card";
+
+      const sign=
+        item.type==="income"
+          ? "+"
+          : "-";
+
+      card.innerHTML=`
+
+        <h3>
+          ${sign}${formatMoney(item.amount)}
+        </h3>
+
+        <p>
+          ${escapeHtml(item.category)}
+        </p>
+
+        ${
+          item.description
+            ? `<p class="muted">
+                ${escapeHtml(item.description)}
+              </p>`
+            : ""
+        }
+
+        <p class="small">
+          ${item.date}
+        </p>
+
+        <button
+          class="btn danger"
+          onclick="deleteBudget(${index})">
+          🗑️ Supprimer
+        </button>
+
+      `;
+
+      container.appendChild(card);
+
+    });
 
 }
 
-list.innerHTML="";
 
-budget.slice().reverse().forEach((b,index)=>{
+function formatMoney(value){
 
-const realIndex=
-budget.length-1-index;
+  const currency=
+    currencyMap[currentCountry] || "";
 
-list.innerHTML+=`
-<div class="card">
-<strong>
-${b.type==="income"?"💵":"💸"}
-${formatMoney(b.amount)}
-</strong>
-
-<p>${escapeHTML(b.category)}</p>
-<p>${escapeHTML(b.description||"")}</p>
-<p>📅 ${b.date}</p>
-
-<button
-class="danger small"
-onclick="deleteBudget(${realIndex})">
-Supprimer
-</button>
-</div>
-`;
-
-});
+  return value.toLocaleString(
+    currentLanguage,
+    {
+      maximumFractionDigits:2
+    }
+  )+" "+currency;
 
 }
 
 
 function deleteBudget(index){
 
-budget.splice(index,1);
+  budgetData.splice(index,1);
 
-localStorage.setItem(
-"etudiantplus_budget",
-JSON.stringify(budget)
-);
+  localStorage.setItem(
+    "student_budget",
+    JSON.stringify(budgetData)
+  );
 
-renderBudget();
-}
-
-
-function updateBalance(){
-
-renderBudget();
+  renderBudget();
 
 }
 
 
-function formatMoney(amount){
+function clearBudget(){
 
-const currency=
-countries[currentCountry]?.currency||"";
+  if(!confirm("Effacer tout l'historique du budget ?"))
+    return;
 
-return amount.toLocaleString(
-"fr-FR",
-{
-maximumFractionDigits:2
+  budgetData=[];
+
+  localStorage.setItem(
+    "student_budget",
+    "[]"
+  );
+
+  renderBudget();
+
 }
-)+" "+currency;
-}
 
 
-/* =========================
+/* =========================================================
    PROFIL
-========================= */
-
-function saveProfile(){
-
-profile={
-lastName:document.getElementById("lastName").value.trim(),
-firstName:document.getElementById("firstName").value.trim(),
-country:document.getElementById("profileCountry").value,
-institution:document.getElementById("institution").value.trim(),
-level:document.getElementById("studyLevel").value,
-series:document.getElementById("profileSeries").value.trim(),
-field:document.getElementById("profileField").value.trim(),
-careerGoal:document.getElementById("careerGoal").value.trim(),
-photo:profile.photo||""
-};
-
-localStorage.setItem(
-"etudiantplus_profile",
-JSON.stringify(profile)
-);
-
-alert("✅ Profil enregistré !");
-}
-
+========================================================= */
 
 function loadProfile(){
 
-if(!profile)return;
+  document.getElementById("profileLastName").value=
+    profileData.lastName || "";
 
-document.getElementById("lastName").value=
-profile.lastName||"";
+  document.getElementById("profileFirstName").value=
+    profileData.firstName || "";
 
-document.getElementById("firstName").value=
-profile.firstName||"";
+  document.getElementById("profileInstitution").value=
+    profileData.institution || "";
 
-document.getElementById("profileCountry").value=
-profile.country||currentCountry;
+  document.getElementById("profileLevel").value=
+    profileData.level || "Terminale";
 
-document.getElementById("institution").value=
-profile.institution||"";
+  document.getElementById("profileSeries").value=
+    profileData.series || "";
 
-document.getElementById("studyLevel").value=
-profile.level||"Secondaire";
+  document.getElementById("profileField").value=
+    profileData.field || "";
 
-document.getElementById("profileSeries").value=
-profile.series||"";
+  document.getElementById("profileGoal").value=
+    profileData.goal || "";
 
-document.getElementById("profileField").value=
-profile.field||"";
+  document.getElementById("profileCountry").value=
+    profileData.country || currentCountry;
 
-document.getElementById("careerGoal").value=
-profile.careerGoal||"";
+  if(profileData.photo){
 
-if(profile.photo){
+    document.getElementById("profilePhoto")
+      .src=profileData.photo;
 
-document.getElementById("profilePhoto").src=
-profile.photo;
+  }else{
 
-}
+    document.getElementById("profilePhoto")
+      .removeAttribute("src");
 
-}
-
-
-function loadPhoto(event){
-
-const file=event.target.files[0];
-
-if(!file)return;
-
-if(file.size>4*1024*1024){
-
-alert("Photo trop lourde. Choisis une image de moins de 4 Mo.");
-return;
-}
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-profile.photo=e.target.result;
-
-document.getElementById("profilePhoto").src=
-e.target.result;
-
-localStorage.setItem(
-"etudiantplus_profile",
-JSON.stringify(profile)
-);
-
-};
-
-reader.readAsDataURL(file);
-}
-
-
-/* =========================
-   SÉCURITÉ AFFICHAGE
-========================= */
-
-function escapeHTML(value){
-
-return String(value)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+  }
 
 }
 
 
-/* =========================
-   INITIALISATION
-========================= */
+function saveProfile(){
+
+  profileData={
+    lastName:
+      document.getElementById("profileLastName").value,
+
+    firstName:
+      document.getElementById("profileFirstName").value,
+
+    country:
+      document.getElementById("profileCountry").value,
+
+    institution:
+      document.getElementById("profileInstitution").value,
+
+    level:
+      document.getElementById("profileLevel").value,
+
+    series:
+      document.getElementById("profileSeries").value,
+
+    field:
+      document.getElementById("profileField").value,
+
+    goal:
+      document.getElementById("profileGoal").value,
+
+    photo:
+      profileData.photo || ""
+  };
+
+  localStorage.setItem(
+    "student_profile",
+    JSON.stringify(profileData)
+  );
+
+  currentCountry=profileData.country;
+
+  localStorage.setItem(
+    "student_country",
+    currentCountry
+  );
+
+  updateHome();
+
+  document.getElementById("profileMessage")
+    .innerHTML=
+    `<div class="success">
+      ✅ Profil enregistré avec succès.
+    </div>`;
+
+}
+
+
+function savePhoto(event){
+
+  const file=
+    event.target.files[0];
+
+  if(!file)return;
+
+  if(file.size>4*1024*1024){
+
+    alert(
+      "La photo est trop lourde. Choisis une image de moins de 4 Mo."
+    );
+
+    return;
+
+  }
+
+  const reader=
+    new FileReader();
+
+  reader.onload=function(){
+
+    profileData.photo=
+      reader.result;
+
+    localStorage.setItem(
+      "student_profile",
+      JSON.stringify(profileData)
+    );
+
+    document.getElementById("profilePhoto")
+      .src=reader.result;
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   UTILITAIRE
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   EVENEMENTS
+========================================================= */
+
+document.getElementById("countrySelect")
+  .addEventListener("change",function(){
+
+    changeCountry(this.value);
+
+  });
+
+document.getElementById("calcCountry")
+  .addEventListener("change",function(){
+
+    changeCountry(this.value);
+
+  });
+
+document.getElementById("profileCountry")
+  .addEventListener("change",function(){
+
+    changeCountry(this.value);
+
+  });
+
+document.getElementById("languageSelect")
+  .addEventListener("change",function(){
+
+    changeLanguage();
+
+  });
+
+document.getElementById("examSelect")
+  .addEventListener("change",function(){
+
+    renderTracks();
+
+  });
+
+document.getElementById("trackSelect")
+  .addEventListener("change",function(){
+
+    renderSubjects();
+
+  });
+
+
+/* =========================================================
+   LANCEMENT
+========================================================= */
 
 function init(){
 
-document.getElementById("countrySelect").value=
-currentCountry;
+  populateCountries();
 
-document.getElementById("profileCountry").value=
-currentCountry;
+  populateLanguages();
 
-document.getElementById("languageSelect").value=
-currentLanguage;
+  document.getElementById("countrySelect")
+    .value=currentCountry;
 
-updateCountryUI();
-changeLanguage();
+  document.getElementById("calcCountry")
+    .value=currentCountry;
 
-renderFilieres();
-renderStudies();
-renderSchedule();
-renderBudget();
-loadProfile();
+  document.getElementById("profileCountry")
+    .value=currentCountry;
 
-const savedAverage=
-localStorage.getItem("etudiantplus_average");
+  applyLanguage();
 
-if(savedAverage){
+  renderHomeFields();
 
-document.getElementById("averageDisplay").textContent=
-savedAverage+"/20";
+  renderCalculator();
 
-}
+  renderStudies();
+
+  renderSchedule();
+
+  renderBudget();
+
+  loadProfile();
 
 }
 
