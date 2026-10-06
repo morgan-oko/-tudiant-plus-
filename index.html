@@ -40,37 +40,50 @@
 
     .container {
       width: 92%;
-      max-width: 900px;
+      max-width: 950px;
       margin: 25px auto;
     }
 
-    .welcome {
+    .welcome,
+    .section {
       background: white;
-      padding: 20px;
       border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    }
+
+    .welcome {
+      padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
     }
 
     .welcome h2 {
-      margin-bottom: 8px;
       color: #2563eb;
+      margin-bottom: 8px;
     }
 
     .search-box {
       margin: 20px 0;
     }
 
-    .search-box input {
+    .search-box input,
+    .form-group input,
+    .form-group select,
+    .level-select,
+    .series-select {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       border: 1px solid #d7dce5;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 10px;
+      font-size: 15px;
+      background: white;
       outline: none;
     }
 
-    .search-box input:focus {
+    .search-box input:focus,
+    .form-group input:focus,
+    .form-group select:focus,
+    .level-select:focus,
+    .series-select:focus {
       border-color: #2563eb;
     }
 
@@ -89,14 +102,13 @@
       background: white;
       padding: 20px;
       border-radius: 18px;
-      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 5px 18px rgba(0,0,0,0.06);
       cursor: pointer;
       transition: 0.2s;
     }
 
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     }
 
     .card .icon {
@@ -114,15 +126,12 @@
       color: #667085;
     }
 
-    .form-section {
-      background: white;
+    .section {
       margin-top: 25px;
       padding: 22px;
-      border-radius: 18px;
-      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
     }
 
-    .form-section h2 {
+    .section h2 {
       margin-bottom: 18px;
       color: #2563eb;
     }
@@ -136,16 +145,6 @@
       margin-bottom: 7px;
       font-weight: bold;
       font-size: 14px;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d7dce5;
-      border-radius: 10px;
-      font-size: 15px;
-      background: white;
     }
 
     .btn {
@@ -164,6 +163,137 @@
       background: #1d4ed8;
     }
 
+    .btn-secondary {
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .average-info {
+      background: #eff6ff;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .calculator-choice {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .choice-box label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .choice-box select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7dce5;
+      border-radius: 10px;
+      background: white;
+      font-size: 15px;
+    }
+
+    .subjects-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .table-header,
+    .subject-row {
+      display: grid;
+      grid-template-columns: 1fr 110px 110px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .table-header {
+      background: #172033;
+      color: white;
+      padding: 13px;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .subject-row {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+      background: white;
+    }
+
+    .subject-row:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .subject-name {
+      font-weight: 600;
+    }
+
+    .coefficient {
+      text-align: center;
+      font-weight: bold;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 9px;
+      border-radius: 8px;
+    }
+
+    .grade-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d7dce5;
+      border-radius: 8px;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .grade-input:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .total-coef {
+      margin: 15px 0;
+      padding: 13px;
+      background: #f8fafc;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .average-result {
+      display: none;
+      margin-top: 20px;
+      padding: 22px;
+      background: linear-gradient(135deg, #eff6ff, #eef2ff);
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .average-result .number {
+      font-size: 44px;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 10px 0;
+    }
+
+    .mention {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .source-note {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #667085;
+      line-height: 1.5;
+    }
+
     .result {
       display: none;
       margin-top: 18px;
@@ -180,7 +310,8 @@
       font-size: 13px;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
+
       header h1 {
         font-size: 28px;
       }
@@ -189,8 +320,32 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .card {
-        padding: 16px;
+      .calculator-choice {
+        grid-template-columns: 1fr;
+      }
+
+      .table-header,
+      .subject-row {
+        grid-template-columns: 1fr 75px 70px;
+      }
+
+      .table-header {
+        font-size: 12px;
+      }
+
+      .subject-row {
+        font-size: 13px;
+      }
+
+      .grade-input {
+        padding: 9px 5px;
+      }
+    }
+
+    @media (max-width: 380px) {
+
+      .grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -198,234 +353,1036 @@
 
 <body>
 
-  <header>
-    <h1>🎓 Étudiant+</h1>
-    <p>Ton espace pour mieux préparer ton avenir</p>
-  </header>
+<header>
 
-  <main class="container">
+  <h1>🎓 Étudiant+</h1>
 
-    <section class="welcome">
-      <h2>Bienvenue sur Étudiant+ 👋</h2>
-      <p>
-        Découvre les filières, prépare ton orientation
-        et construis ton projet universitaire.
-      </p>
-    </section>
+  <p>
+    Ton espace pour mieux préparer ton avenir
+  </p>
 
-    <div class="search-box">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="🔎 Rechercher une filière..."
-        onkeyup="searchFiliere()"
-      >
+</header>
+
+<main class="container">
+
+  <section class="welcome">
+
+    <h2>
+      Bienvenue sur Étudiant+ 👋
+    </h2>
+
+    <p>
+      Découvre les filières, calcule ta moyenne,
+      prépare ton orientation et construis ton projet universitaire.
+    </p>
+
+  </section>
+
+
+  <!-- RECHERCHE -->
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="🔎 Rechercher une filière..."
+      onkeyup="searchFiliere()"
+    >
+
+  </div>
+
+
+  <!-- FILIERES -->
+
+  <h2 class="section-title">
+    📚 Filières disponibles
+  </h2>
+
+  <section class="grid" id="filieres">
+
+    <div class="card" data-name="informatique">
+      <div class="icon">💻</div>
+      <h3>Informatique</h3>
+      <p>Programmation, logiciels et technologies.</p>
     </div>
 
-    <h2 class="section-title">📚 Filières disponibles</h2>
+    <div class="card" data-name="mathematiques">
+      <div class="icon">📐</div>
+      <h3>Mathématiques</h3>
+      <p>Analyse, algèbre et raisonnement.</p>
+    </div>
 
-    <section class="grid" id="filieres">
+    <div class="card" data-name="medecine">
+      <div class="icon">🩺</div>
+      <h3>Médecine</h3>
+      <p>Sciences médicales et santé.</p>
+    </div>
 
-      <div class="card" data-name="informatique">
-        <div class="icon">💻</div>
-        <h3>Informatique</h3>
-        <p>Programmation, logiciels et technologies.</p>
-      </div>
+    <div class="card" data-name="architecture">
+      <div class="icon">🏛️</div>
+      <h3>Architecture</h3>
+      <p>Conception, bâtiments et urbanisme.</p>
+    </div>
 
-      <div class="card" data-name="mathematiques">
-        <div class="icon">📐</div>
-        <h3>Mathématiques</h3>
-        <p>Analyse, algèbre et raisonnement.</p>
-      </div>
+    <div class="card" data-name="droit">
+      <div class="icon">⚖️</div>
+      <h3>Droit</h3>
+      <p>Lois, justice et institutions.</p>
+    </div>
 
-      <div class="card" data-name="medecine">
-        <div class="icon">🩺</div>
-        <h3>Médecine</h3>
-        <p>Sciences médicales et santé.</p>
-      </div>
+    <div class="card" data-name="economie">
+      <div class="icon">📊</div>
+      <h3>Économie</h3>
+      <p>Économie, marchés et gestion.</p>
+    </div>
 
-      <div class="card" data-name="architecture">
-        <div class="icon">🏛️</div>
-        <h3>Architecture</h3>
-        <p>Conception, bâtiments et urbanisme.</p>
-      </div>
+    <div class="card" data-name="finance">
+      <div class="icon">💰</div>
+      <h3>Finance</h3>
+      <p>Finance, comptabilité et fiscalité.</p>
+    </div>
 
-      <div class="card" data-name="droit">
-        <div class="icon">⚖️</div>
-        <h3>Droit</h3>
-        <p>Lois, justice et institutions.</p>
-      </div>
+    <div class="card" data-name="gestion">
+      <div class="icon">📈</div>
+      <h3>Gestion</h3>
+      <p>Management et administration.</p>
+    </div>
 
-      <div class="card" data-name="economie">
-        <div class="icon">📊</div>
-        <h3>Économie</h3>
-        <p>Économie, marchés et gestion.</p>
-      </div>
+    <div class="card" data-name="ingenierie">
+      <div class="icon">⚙️</div>
+      <h3>Ingénierie</h3>
+      <p>Sciences, techniques et innovation.</p>
+    </div>
 
-      <div class="card" data-name="finance">
-        <div class="icon">💰</div>
-        <h3>Finance</h3>
-        <p>Finance, comptabilité et fiscalité.</p>
-      </div>
+    <div class="card" data-name="sciences">
+      <div class="icon">🔬</div>
+      <h3>Sciences</h3>
+      <p>Physique, chimie et sciences naturelles.</p>
+    </div>
 
-      <div class="card" data-name="gestion">
-        <div class="icon">📈</div>
-        <h3>Gestion</h3>
-        <p>Management et administration.</p>
-      </div>
+    <div class="card" data-name="communication">
+      <div class="icon">📢</div>
+      <h3>Communication</h3>
+      <p>Médias, communication et marketing.</p>
+    </div>
 
-      <div class="card" data-name="ingenierie">
-        <div class="icon">⚙️</div>
-        <h3>Ingénierie</h3>
-        <p>Sciences, techniques et innovation.</p>
-      </div>
+    <div class="card" data-name="lettres">
+      <div class="icon">📖</div>
+      <h3>Lettres</h3>
+      <p>Langues, littérature et culture.</p>
+    </div>
 
-      <div class="card" data-name="sciences">
-        <div class="icon">🔬</div>
-        <h3>Sciences</h3>
-        <p>Physique, chimie et sciences naturelles.</p>
-      </div>
+  </section>
 
-      <div class="card" data-name="communication">
-        <div class="icon">📢</div>
-        <h3>Communication</h3>
-        <p>Médias, communication et marketing.</p>
-      </div>
 
-      <div class="card" data-name="lettres">
-        <div class="icon">📖</div>
-        <h3>Lettres</h3>
-        <p>Langues, littérature et culture.</p>
-      </div>
+  <!-- CALCULATEUR -->
 
-    </section>
+  <section class="section">
 
-    <section class="form-section">
+    <h2>
+      🧮 Calculateur de moyenne
+    </h2>
 
-      <h2>👤 Profil étudiant</h2>
+    <div class="average-info">
 
-      <div class="form-group">
-        <label for="nom">Nom</label>
-        <input
-          type="text"
-          id="nom"
-          placeholder="Entrez votre nom"
+      <strong>
+        📌 Comment ça marche ?
+      </strong>
+
+      <br>
+
+      1️⃣ Choisis ton niveau.
+
+      <br>
+
+      2️⃣ Choisis ta série.
+
+      <br>
+
+      3️⃣ Les matières et coefficients apparaissent automatiquement.
+
+      <br>
+
+      4️⃣ Tu entres uniquement tes notes.
+
+      <br>
+
+      5️⃣ Étudiant+ calcule ta moyenne automatiquement.
+
+      <br><br>
+
+      🔒 <strong>
+        Les coefficients sont visibles et ne peuvent pas être modifiés.
+      </strong>
+
+    </div>
+
+
+    <div class="calculator-choice">
+
+      <div class="choice-box">
+
+        <label for="niveau">
+          🎓 Niveau
+        </label>
+
+        <select
+          id="niveau"
+          onchange="updateSeries()"
         >
-      </div>
 
-      <div class="form-group">
-        <label for="prenom">Prénom</label>
-        <input
-          type="text"
-          id="prenom"
-          placeholder="Entrez votre prénom"
-        >
-      </div>
+          <option value="">
+            Choisir ton niveau
+          </option>
 
-      <div class="form-group">
-        <label for="filiere">Filière souhaitée</label>
+          <option value="seconde">
+            Seconde
+          </option>
 
-        <select id="filiere">
-          <option value="">Choisir une filière</option>
-          <option>Informatique</option>
-          <option>Mathématiques</option>
-          <option>Médecine</option>
-          <option>Architecture</option>
-          <option>Droit</option>
-          <option>Économie</option>
-          <option>Finance</option>
-          <option>Gestion</option>
-          <option>Ingénierie</option>
-          <option>Sciences</option>
-          <option>Communication</option>
-          <option>Lettres</option>
+          <option value="premiere">
+            Première
+          </option>
+
+          <option value="terminale">
+            Terminale
+          </option>
+
+          <option value="bac">
+            Baccalauréat
+          </option>
+
         </select>
+
       </div>
 
-      <button class="btn" onclick="enregistrerProfil()">
-        Enregistrer mon profil
+
+      <div class="choice-box">
+
+        <label for="serie">
+          📚 Série
+        </label>
+
+        <select
+          id="serie"
+          onchange="loadSubjects()"
+          disabled
+        >
+
+          <option value="">
+            Choisir d'abord ton niveau
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="subjects-container"
+      id="subjectsContainer"
+    >
+
+      <div
+        class="table-header"
+      >
+
+        <div>
+          Matière
+        </div>
+
+        <div style="text-align:center;">
+          Ta note
+        </div>
+
+        <div style="text-align:center;">
+          Coef.
+        </div>
+
+      </div>
+
+
+      <div id="subjects">
+      </div>
+
+
+      <div
+        class="total-coef"
+        id="totalCoef"
+      >
+      </div>
+
+
+      <button
+        class="btn"
+        onclick="calculateAverage()"
+      >
+        🧮 Calculer ma moyenne
       </button>
 
-      <div class="result" id="result"></div>
 
-    </section>
+      <div
+        class="average-result"
+        id="averageResult"
+      >
 
-  </main>
+        <div>
+          Ta moyenne
+        </div>
 
-  <footer>
-    © 2026 Étudiant+ — Tous droits réservés.
-  </footer>
+        <div
+          class="number"
+          id="averageNumber"
+        >
+          0 / 20
+        </div>
 
-  <script>
+        <div
+          class="mention"
+          id="mention"
+        >
+        </div>
 
-    function searchFiliere() {
+      </div>
 
-      const input =
-        document.getElementById("searchInput")
-        .value
+
+      <div class="source-note">
+
+        ℹ️ Les coefficients affichés sont intégrés dans
+        Étudiant+ selon la grille utilisée pour le
+        baccalauréat général au Congo-Brazzaville.
+        Ils sont affichés à titre informatif et ne sont pas modifiables.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROFIL -->
+
+  <section class="section">
+
+    <h2>
+      👤 Profil étudiant
+    </h2>
+
+
+    <div class="form-group">
+
+      <label for="nom">
+        Nom
+      </label>
+
+      <input
+        type="text"
+        id="nom"
+        placeholder="Entrez votre nom"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="prenom">
+        Prénom
+      </label>
+
+      <input
+        type="text"
+        id="prenom"
+        placeholder="Entrez votre prénom"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label for="filiere">
+        Filière souhaitée
+      </label>
+
+      <select id="filiere">
+
+        <option value="">
+          Choisir une filière
+        </option>
+
+        <option>Informatique</option>
+        <option>Mathématiques</option>
+        <option>Médecine</option>
+        <option>Architecture</option>
+        <option>Droit</option>
+        <option>Économie</option>
+        <option>Finance</option>
+        <option>Gestion</option>
+        <option>Ingénierie</option>
+        <option>Sciences</option>
+        <option>Communication</option>
+        <option>Lettres</option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="enregistrerProfil()"
+    >
+      Enregistrer mon profil
+    </button>
+
+
+    <div
+      class="result"
+      id="result"
+    >
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  © 2026 Étudiant+ — Tous droits réservés.
+
+</footer>
+
+
+<script>
+
+/* =========================
+   DONNÉES DES COEFFICIENTS
+   ========================= */
+
+const bacData = {
+
+  A2: [
+
+    {
+      name: "Philosophie",
+      coef: 5
+    },
+
+    {
+      name: "Français",
+      coef: 5
+    },
+
+    {
+      name: "Histoire-Géographie",
+      coef: 3
+    },
+
+    {
+      name: "Anglais",
+      coef: 4
+    },
+
+    {
+      name: "Mathématiques",
+      coef: 3
+    },
+
+    {
+      name: "Langue optionnelle",
+      coef: 3
+    },
+
+    {
+      name: "Éducation physique et sportive",
+      coef: 2
+    }
+
+  ],
+
+
+  A4: [
+
+    {
+      name: "Philosophie",
+      coef: 5
+    },
+
+    {
+      name: "Français",
+      coef: 5
+    },
+
+    {
+      name: "Anglais",
+      coef: 4
+    },
+
+    {
+      name: "Histoire-Géographie",
+      coef: 3
+    },
+
+    {
+      name: "Mathématiques",
+      coef: 3
+    },
+
+    {
+      name: "Langue optionnelle",
+      coef: 3
+    },
+
+    {
+      name: "Éducation physique et sportive",
+      coef: 2
+    }
+
+  ],
+
+
+  C: [
+
+    {
+      name: "Mathématiques",
+      coef: 5
+    },
+
+    {
+      name: "Sciences physiques",
+      coef: 5
+    },
+
+    {
+      name: "Sciences de la vie et de la terre",
+      coef: 4
+    },
+
+    {
+      name: "Français ou philosophie",
+      coef: 3
+    },
+
+    {
+      name: "Anglais",
+      coef: 3
+    },
+
+    {
+      name: "Histoire ou géographie",
+      coef: 3
+    },
+
+    {
+      name: "Éducation physique et sportive",
+      coef: 2
+    }
+
+  ],
+
+
+  D: [
+
+    {
+      name: "Sciences de la vie et de la terre",
+      coef: 5
+    },
+
+    {
+      name: "Sciences physiques",
+      coef: 5
+    },
+
+    {
+      name: "Mathématiques",
+      coef: 4
+    },
+
+    {
+      name: "Français ou philosophie",
+      coef: 3
+    },
+
+    {
+      name: "Anglais",
+      coef: 3
+    },
+
+    {
+      name: "Histoire ou géographie",
+      coef: 3
+    },
+
+    {
+      name: "Éducation physique et sportive",
+      coef: 2
+    }
+
+  ]
+
+};
+
+
+/* =========================
+   NIVEAUX ET SÉRIES
+   ========================= */
+
+function updateSeries() {
+
+  const niveau =
+    document.getElementById("niveau").value;
+
+  const serie =
+    document.getElementById("serie");
+
+  serie.innerHTML = "";
+
+  serie.disabled = true;
+
+  document.getElementById(
+    "subjectsContainer"
+  ).style.display = "none";
+
+
+  if (niveau === "") {
+
+    serie.innerHTML =
+      '<option value="">Choisir d’abord ton niveau</option>';
+
+    return;
+
+  }
+
+
+  /*
+    Les coefficients officiellement intégrés
+    dans cette version concernent le BAC.
+    Pour Seconde/Première, on prépare la structure
+    mais on évite de présenter des coefficients
+    non vérifiés comme officiels.
+  */
+
+  if (
+    niveau === "seconde" ||
+    niveau === "premiere"
+  ) {
+
+    serie.innerHTML = `
+      <option value="">
+        Données de coefficients à confirmer
+      </option>
+    `;
+
+    return;
+
+  }
+
+
+  serie.disabled = false;
+
+
+  serie.innerHTML = `
+
+    <option value="">
+      Choisir une série
+    </option>
+
+    <option value="A2">
+      Série A2
+    </option>
+
+    <option value="A4">
+      Série A4
+    </option>
+
+    <option value="C">
+      Série C
+    </option>
+
+    <option value="D">
+      Série D
+    </option>
+
+  `;
+
+}
+
+
+/* =========================
+   AFFICHER LES MATIÈRES
+   ========================= */
+
+function loadSubjects() {
+
+  const serie =
+    document.getElementById("serie").value;
+
+  const subjects =
+    document.getElementById("subjects");
+
+  const container =
+    document.getElementById("subjectsContainer");
+
+  subjects.innerHTML = "";
+
+
+  if (
+    serie === "" ||
+    !bacData[serie]
+  ) {
+
+    container.style.display = "none";
+
+    return;
+
+  }
+
+
+  bacData[serie].forEach(function(subject) {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "subject-row";
+
+
+    row.innerHTML = `
+
+      <div class="subject-name">
+        ${subject.name}
+      </div>
+
+      <div>
+        <input
+          type="number"
+          class="grade-input"
+          min="0"
+          max="20"
+          step="0.01"
+          placeholder="/20"
+          data-coef="${subject.coef}"
+        >
+      </div>
+
+      <div class="coefficient">
+        ${subject.coef}
+      </div>
+
+    `;
+
+
+    subjects.appendChild(row);
+
+  });
+
+
+  let total = 0;
+
+  bacData[serie].forEach(function(subject) {
+
+    total += subject.coef;
+
+  });
+
+
+  document.getElementById(
+    "totalCoef"
+  ).innerHTML =
+    "🔢 Total des coefficients : <strong>" +
+    total +
+    "</strong>";
+
+
+  container.style.display = "block";
+
+
+  document.getElementById(
+    "averageResult"
+  ).style.display = "none";
+
+}
+
+
+/* =========================
+   CALCUL DE LA MOYENNE
+   ========================= */
+
+function calculateAverage() {
+
+  const inputs =
+    document.querySelectorAll(
+      ".grade-input"
+    );
+
+
+  let totalPoints = 0;
+
+  let totalCoef = 0;
+
+  let numberOfNotes = 0;
+
+
+  for (
+    const input of inputs
+  ) {
+
+    const value =
+      input.value.trim();
+
+
+    /*
+      Une matière sans note est ignorée.
+    */
+
+    if (value === "") {
+      continue;
+    }
+
+
+    const note =
+      parseFloat(value);
+
+
+    const coef =
+      parseFloat(
+        input.dataset.coef
+      );
+
+
+    if (
+      isNaN(note) ||
+      note < 0 ||
+      note > 20
+    ) {
+
+      alert(
+        "⚠️ Une note doit être comprise entre 0 et 20."
+      );
+
+      input.focus();
+
+      return;
+
+    }
+
+
+    totalPoints +=
+      note * coef;
+
+
+    totalCoef +=
+      coef;
+
+
+    numberOfNotes++;
+
+  }
+
+
+  if (
+    numberOfNotes === 0
+  ) {
+
+    alert(
+      "⚠️ Entre au moins une note."
+    );
+
+    return;
+
+  }
+
+
+  const average =
+    totalPoints / totalCoef;
+
+
+  document.getElementById(
+    "averageNumber"
+  ).textContent =
+    average.toFixed(2) +
+    " / 20";
+
+
+  const mention =
+    document.getElementById(
+      "mention"
+    );
+
+
+  if (average >= 16) {
+
+    mention.textContent =
+      "🏆 Excellent";
+
+  }
+
+  else if (average >= 14) {
+
+    mention.textContent =
+      "🌟 Très bien";
+
+  }
+
+  else if (average >= 12) {
+
+    mention.textContent =
+      "👏 Bien";
+
+  }
+
+  else if (average >= 10) {
+
+    mention.textContent =
+      "✅ Passable";
+
+  }
+
+  else {
+
+    mention.textContent =
+      "📚 À améliorer";
+
+  }
+
+
+  document.getElementById(
+    "averageResult"
+  ).style.display =
+    "block";
+
+}
+
+
+/* =========================
+   RECHERCHE FILIÈRES
+   ========================= */
+
+function searchFiliere() {
+
+  const input =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const cards =
+    document.querySelectorAll(
+      ".card"
+    );
+
+
+  cards.forEach(function(card) {
+
+    const name =
+      card
+        .getAttribute("data-name")
         .toLowerCase();
 
-      const cards =
-        document.querySelectorAll(".card");
 
-      cards.forEach(function(card) {
+    if (
+      name.includes(input)
+    ) {
 
-        const name =
-          card.getAttribute("data-name");
-
-        if (name.includes(input)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-
-      });
+      card.style.display =
+        "block";
 
     }
 
+    else {
 
-    function enregistrerProfil() {
-
-      const nom =
-        document.getElementById("nom").value.trim();
-
-      const prenom =
-        document.getElementById("prenom").value.trim();
-
-      const filiere =
-        document.getElementById("filiere").value;
-
-      const result =
-        document.getElementById("result");
-
-
-      if (nom === "" || prenom === "" || filiere === "") {
-
-        result.style.display = "block";
-
-        result.innerHTML =
-          "⚠️ Veuillez remplir tous les champs.";
-
-        return;
-      }
-
-
-      result.style.display = "block";
-
-      result.innerHTML =
-        "✅ Profil enregistré !<br><br>" +
-        "Bienvenue <strong>" +
-        prenom +
-        " " +
-        nom +
-        "</strong>.<br>" +
-        "Filière choisie : <strong>" +
-        filiere +
-        "</strong>.";
+      card.style.display =
+        "none";
 
     }
 
-  </script>
+  });
+
+}
+
+
+/* =========================
+   PROFIL ÉTUDIANT
+   ========================= */
+
+function enregistrerProfil() {
+
+  const nom =
+    document
+      .getElementById("nom")
+      .value
+      .trim();
+
+
+  const prenom =
+    document
+      .getElementById("prenom")
+      .value
+      .trim();
+
+
+  const filiere =
+    document
+      .getElementById("filiere")
+      .value;
+
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+
+  if (
+    nom === "" ||
+    prenom === "" ||
+    filiere === ""
+  ) {
+
+    result.style.display =
+      "block";
+
+
+    result.innerHTML =
+      "⚠️ Veuillez remplir tous les champs.";
+
+
+    return;
+
+  }
+
+
+  result.style.display =
+    "block";
+
+
+  result.innerHTML =
+    "✅ Profil enregistré !<br><br>" +
+
+    "Bienvenue <strong>" +
+
+    prenom +
+
+    " " +
+
+    nom +
+
+    "</strong>.<br>" +
+
+    "Filière choisie : <strong>" +
+
+    filiere +
+
+    "</strong>.";
+
+}
+
+</script>
 
 </body>
 </html>
