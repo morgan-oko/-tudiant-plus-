@@ -7,111 +7,169 @@
 <title>Étudiant+ | Assistant étudiant international</title>
 
 <style>
-*{box-sizing:border-box}
-body{
+*{
+  box-sizing:border-box;
   margin:0;
+  padding:0;
+}
+
+body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f4f7fb;
   color:#172033;
 }
+
 header{
   background:linear-gradient(135deg,#2563eb,#4f46e5);
   color:white;
-  padding:20px;
+  padding:18px;
   position:sticky;
   top:0;
   z-index:100;
-  box-shadow:0 4px 15px rgba(0,0,0,.15);
+  box-shadow:0 3px 15px rgba(0,0,0,.15);
 }
+
 .header-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  flex-wrap:wrap;
 }
+
 .logo{
-  font-size:25px;
+  font-size:24px;
   font-weight:800;
 }
-.logo span{color:#fde047}
-select,input,textarea,button{
+
+.subtitle{
+  font-size:12px;
+  opacity:.9;
+  margin-top:3px;
+}
+
+select,
+input,
+textarea,
+button{
   font:inherit;
 }
-.header-controls{
-  display:flex;
-  gap:8px;
-}
-.header-controls select{
+
+.header-select{
   border:0;
   border-radius:10px;
-  padding:9px;
+  padding:8px;
+  background:white;
+  color:#172033;
 }
+
 nav{
   display:flex;
   gap:8px;
   overflow-x:auto;
-  margin-top:15px;
-  padding-bottom:3px;
+  padding-top:15px;
 }
+
 nav button{
   border:0;
-  background:rgba(255,255,255,.16);
+  background:rgba(255,255,255,.15);
   color:white;
-  padding:10px 13px;
-  border-radius:10px;
+  padding:9px 12px;
+  border-radius:20px;
   white-space:nowrap;
   cursor:pointer;
 }
-nav button.active{
+
+nav button.active,
+nav button:hover{
   background:white;
   color:#2563eb;
-  font-weight:bold;
 }
-.container{
+
+main{
   max-width:1100px;
   margin:auto;
   padding:20px;
 }
-section{display:none}
-section.active{display:block}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+h1{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+h2{
+  margin-bottom:15px;
+}
+
+h3{
+  margin-bottom:8px;
+}
+
+p{
+  line-height:1.6;
+}
+
 .hero{
-  background:linear-gradient(135deg,#dbeafe,#eef2ff);
-  border-radius:20px;
+  background:white;
   padding:25px;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
   margin-bottom:20px;
 }
-.hero h1{margin-top:0}
+
+.hero h1{
+  color:#2563eb;
+}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:15px;
 }
+
 .card{
   background:white;
-  border-radius:17px;
+  border-radius:18px;
   padding:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,.07);
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
   margin-bottom:15px;
 }
+
 .stat{
   font-size:28px;
   font-weight:800;
   color:#2563eb;
+  margin-top:8px;
 }
+
 label{
   display:block;
-  font-weight:bold;
+  font-weight:700;
   margin:12px 0 6px;
 }
-input,select,textarea{
+
+input,
+select,
+textarea{
   width:100%;
-  padding:11px;
-  border:1px solid #d5dbea;
+  border:1px solid #d8deea;
   border-radius:10px;
+  padding:11px;
   background:white;
 }
-textarea{min-height:90px;resize:vertical}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
 button.primary{
   background:#2563eb;
   color:white;
@@ -119,91 +177,142 @@ button.primary{
   padding:11px 16px;
   border-radius:10px;
   cursor:pointer;
-  font-weight:bold;
+  font-weight:700;
 }
+
 button.secondary{
-  background:#e8eefc;
-  color:#2563eb;
+  background:#eef2ff;
+  color:#3730a3;
   border:0;
   padding:10px 14px;
   border-radius:10px;
   cursor:pointer;
+  font-weight:700;
 }
+
 button.danger{
   background:#fee2e2;
-  color:#dc2626;
+  color:#b91c1c;
   border:0;
   padding:9px 12px;
   border-radius:9px;
   cursor:pointer;
 }
-.field-card{
-  cursor:pointer;
-  transition:.2s;
+
+button:hover{
+  opacity:.9;
 }
-.field-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
 }
-.field-icon{
+
+.result{
+  padding:20px;
+  border-radius:15px;
+  background:#eef6ff;
+  margin-top:15px;
+}
+
+.big-result{
   font-size:35px;
+  font-weight:800;
+  color:#2563eb;
 }
+
+.subject-row{
+  display:grid;
+  grid-template-columns:1.5fr .7fr .7fr auto;
+  gap:8px;
+  align-items:end;
+  margin-bottom:10px;
+}
+
+.subject-row .remove{
+  height:42px;
+}
+
+.coeff-box{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  padding:15px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
 .badge{
   display:inline-block;
-  background:#e0e7ff;
-  color:#3730a3;
   padding:5px 9px;
   border-radius:20px;
+  background:#e0e7ff;
+  color:#3730a3;
   font-size:12px;
-  margin:3px;
+  font-weight:700;
 }
-.details{
-  border-top:1px solid #e5e7eb;
-  margin-top:15px;
-  padding-top:15px;
+
+.list-item{
+  border-bottom:1px solid #edf0f5;
+  padding:12px 0;
 }
-.details h3{
-  color:#2563eb;
-  margin-bottom:6px;
+
+.list-item:last-child{
+  border-bottom:0;
 }
-.salary{
-  font-size:18px;
-  font-weight:bold;
+
+.small{
+  font-size:13px;
+  color:#64748b;
 }
+
+.field-card{
+  transition:.2s;
+}
+
+.field-card:hover{
+  transform:translateY(-2px);
+}
+
 .progress{
-  background:#e5e7eb;
   height:10px;
+  background:#e5e7eb;
   border-radius:10px;
   overflow:hidden;
+  margin-top:8px;
 }
+
 .progress-bar{
   height:100%;
   background:#2563eb;
 }
-.operation{
-  border-left:4px solid #2563eb;
-  padding:10px 12px;
-  background:#f8fafc;
-  margin:8px 0;
-  border-radius:8px;
-}
-.positive{color:#16a34a}
-.negative{color:#dc2626}
-.empty{
-  text-align:center;
-  color:#64748b;
-  padding:20px;
-}
+
 footer{
   text-align:center;
-  padding:30px;
+  padding:30px 15px;
   color:#64748b;
 }
+
 @media(max-width:600px){
-  .container{padding:13px}
-  .hero{padding:18px}
-  .grid{grid-template-columns:1fr}
-  .logo{font-size:21px}
+  main{
+    padding:14px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+
+  .subject-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .subject-row input:first-child{
+    grid-column:1 / -1;
+  }
+
+  .subject-row .remove{
+    grid-column:1 / -1;
+  }
 }
 </style>
 </head>
@@ -212,341 +321,447 @@ footer{
 
 <header>
   <div class="header-top">
-    <div class="logo">🎓 Étudiant<span>+</span></div>
+    <div>
+      <div class="logo">🎓 Étudiant+</div>
+      <div class="subtitle">Assistant étudiant international</div>
+    </div>
 
-    <div class="header-controls">
-      <select id="countrySelect" onchange="changeCountry()">
+    <div style="display:flex;gap:6px;">
+      <select id="countrySelect" class="header-select">
         <option value="CG">🇨🇬 Congo</option>
-        <option value="DZ">🇩🇿 Algérie</option>
         <option value="CM">🇨🇲 Cameroun</option>
+        <option value="FR">🇫🇷 France</option>
         <option value="CI">🇨🇮 Côte d’Ivoire</option>
         <option value="SN">🇸🇳 Sénégal</option>
         <option value="CD">🇨🇩 RDC</option>
         <option value="GA">🇬🇦 Gabon</option>
         <option value="MA">🇲🇦 Maroc</option>
-        <option value="FR">🇫🇷 France</option>
-        <option value="CA">🇨🇦 Canada</option>
-        <option value="US">🇺🇸 USA</option>
+        <option value="DZ">🇩🇿 Algérie</option>
       </select>
 
-      <select id="languageSelect" onchange="changeLanguage()">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="pt">🇵🇹 Português</option>
-        <option value="de">🇩🇪 Deutsch</option>
-        <option value="it">🇮🇹 Italiano</option>
-        <option value="zh">🇨🇳 中文</option>
-        <option value="ru">🇷🇺 Русский</option>
+      <select id="languageSelect" class="header-select">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="pt">PT</option>
+        <option value="de">DE</option>
+        <option value="it">IT</option>
+        <option value="zh">中文</option>
+        <option value="ru">RU</option>
       </select>
     </div>
   </div>
 
   <nav>
     <button class="active" onclick="showSection('home',this)">🏠 Accueil</button>
-    <button onclick="showSection('bac',this)">📊 BAC / Moyenne</button>
-    <button onclick="showSection('filieres',this)">🎓 Filières</button>
-    <button onclick="showSection('cours',this)">📄 Cours PDF</button>
-    <button onclick="showSection('etudes',this)">📚 Études</button>
+    <button onclick="showSection('bac',this)">🧮 BAC / Moyenne</button>
+    <button onclick="showSection('fields',this)">🎓 Filières</button>
+    <button onclick="showSection('courses',this)">📚 Cours PDF</button>
+    <button onclick="showSection('study',this)">📈 Études</button>
     <button onclick="showSection('planning',this)">📅 Planning</button>
     <button onclick="showSection('budget',this)">💰 Budget</button>
-    <button onclick="showSection('profil',this)">👤 Profil</button>
+    <button onclick="showSection('profile',this)">👤 Profil</button>
   </nav>
 </header>
 
-<main class="container">
+<main>
 
 <!-- ACCUEIL -->
-<section id="home" class="active">
+<section id="home" class="section active">
+
   <div class="hero">
-    <h1>Bienvenue sur Étudiant+ 🎓</h1>
-    <p>Ton assistant personnel pour réussir tes études et préparer ton avenir.</p>
+    <h1>Bienvenue sur Étudiant+ 🚀</h1>
+    <p>
+      Ton assistant pour organiser tes études, calculer tes moyennes,
+      gérer ton budget, suivre tes cours et préparer ton avenir.
+    </p>
   </div>
 
   <div class="grid">
+
     <div class="card">
-      <h3>📊 Moyenne actuelle</h3>
-      <div class="stat" id="homeAverage">—</div>
-      <p>Objectif : <strong>16/20</strong></p>
+      <h3>🧮 Moyenne</h3>
+      <div class="stat" id="homeAverage">--</div>
+      <p class="small">Dernière moyenne calculée</p>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Objectif</h3>
+      <div class="stat">16/20</div>
+      <p class="small">Objectif académique</p>
     </div>
 
     <div class="card">
       <h3>💰 Solde</h3>
       <div class="stat" id="homeBalance">0</div>
-      <p>Budget du mois</p>
+      <p class="small">Budget actuel</p>
     </div>
 
     <div class="card">
-      <h3>📄 Cours terminés</h3>
+      <h3>📚 Cours terminés</h3>
       <div class="stat" id="homeCourses">0</div>
-      <p>cours complétés</p>
+      <p class="small">Cours complétés</p>
     </div>
 
-    <div class="card">
-      <h3>📈 Progression</h3>
-      <div class="stat" id="homeProgress">0%</div>
-      <p>dans tes études</p>
-    </div>
   </div>
 
-  <div class="card">
-    <h2>🚀 Étudiant+ en quelques mots</h2>
-    <p>
-      Une plateforme destinée aux étudiants pour gérer leurs études,
-      leurs filières, leurs cours, leur planning, leurs objectifs et leur budget.
-    </p>
-  </div>
 </section>
+
 
 <!-- BAC -->
-<section id="bac">
-  <div class="hero">
-    <h1>📊 Calculateur BAC / Moyenne</h1>
-    <p>Calcule ta moyenne à partir des notes et coefficients.</p>
-  </div>
+<section id="bac" class="section">
 
   <div class="card">
-    <label>Pays</label>
-    <select id="bacCountry">
-      <option value="CG">Congo</option>
-      <option value="DZ">Algérie</option>
-      <option value="FR">France</option>
-      <option value="CM">Cameroun</option>
-      <option value="CI">Côte d’Ivoire</option>
-      <option value="SN">Sénégal</option>
-      <option value="CD">RDC</option>
-      <option value="GA">Gabon</option>
-      <option value="MA">Maroc</option>
-      <option value="CA">Canada</option>
-      <option value="US">USA</option>
-    </select>
 
-    <label>Série / filière</label>
-    <input id="bacSeries" placeholder="Exemple : Série D">
+    <h1>🧮 Calculateur BAC</h1>
 
-    <div id="subjects"></div>
+    <p>
+      Choisis ton pays et ta série. Les coefficients sont automatiquement
+      chargés. Tu peux ensuite saisir uniquement tes notes.
+    </p>
 
-    <button class="primary" onclick="addSubject()">➕ Ajouter une matière</button>
-    <button class="primary" onclick="calculateAverage()">Calculer la moyenne</button>
+    <div class="form-grid">
 
-    <h2 id="averageResult">Moyenne : —</h2>
+      <div>
+        <label>Pays</label>
+        <select id="bacCountry" onchange="loadSeries()">
+          <option value="CG">🇨🇬 Congo-Brazzaville</option>
+          <option value="CM">🇨🇲 Cameroun</option>
+          <option value="FR">🇫🇷 France</option>
+          <option value="CI">🇨🇮 Côte d’Ivoire</option>
+          <option value="SN">🇸🇳 Sénégal</option>
+          <option value="CD">🇨🇩 RDC</option>
+          <option value="GA">🇬🇦 Gabon</option>
+          <option value="MA">🇲🇦 Maroc</option>
+          <option value="DZ">🇩🇿 Algérie</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Série / parcours</label>
+        <select id="bacSeries" onchange="loadCoefficients()"></select>
+      </div>
+
+    </div>
+
+    <div class="coeff-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div>
+          <h3>📋 Matières et coefficients</h3>
+          <p class="small">
+            Les coefficients sont préremplis automatiquement.
+          </p>
+        </div>
+
+        <button class="secondary" onclick="toggleCoefficientEdit()">
+          ✏️ Modifier les coefficients
+        </button>
+      </div>
+
+      <div id="coefficientEditor" style="margin-top:15px;"></div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h3>📝 Tes notes</h3>
+      <p class="small">
+        Entre tes notes sur 20.
+      </p>
+
+      <div id="subjectInputs" style="margin-top:15px;"></div>
+
+      <button class="primary" onclick="addCustomSubject()">
+        ➕ Ajouter une matière
+      </button>
+
+      <button class="primary" onclick="calculateAverage()" style="margin-left:6px;">
+        🧮 Calculer ma moyenne
+      </button>
+    </div>
+
+    <div id="bacResult"></div>
+
   </div>
+
 </section>
 
+
 <!-- FILIERES -->
-<section id="filieres">
-  <div class="hero">
+<section id="fields" class="section">
+
+  <div class="card">
     <h1>🎓 Explorer les filières</h1>
     <p>
-      Découvre les formations, matières, métiers, débouchés,
-      salaires indicatifs et possibilités internationales.
+      Découvre différentes filières, leurs matières, débouchés et compétences.
     </p>
   </div>
 
-  <div class="card">
-    <input id="fieldSearch"
-           placeholder="🔎 Rechercher une filière..."
-           oninput="renderFields()">
-  </div>
+  <div class="grid" id="fieldsContainer"></div>
 
-  <div id="fieldList" class="grid"></div>
 </section>
 
+
 <!-- COURS -->
-<section id="cours">
-  <div class="hero">
-    <h1>📄 Mes cours PDF</h1>
-    <p>Ajoute et organise tes supports de cours.</p>
-  </div>
+<section id="courses" class="section">
 
   <div class="card">
+
+    <h1>📚 Mes cours PDF</h1>
+
     <label>Titre du cours</label>
-    <input id="courseTitle" placeholder="Exemple : Algèbre linéaire">
+    <input id="courseTitle" placeholder="Exemple : Algèbre 1">
 
     <label>Matière</label>
     <input id="courseSubject" placeholder="Exemple : Mathématiques">
 
     <label>Description</label>
-    <textarea id="courseDescription"></textarea>
+    <textarea id="courseDescription" placeholder="Description du cours"></textarea>
 
     <label>Fichier PDF</label>
-    <input type="file" id="courseFile" accept="application/pdf">
+    <input id="courseFile" type="file" accept="application/pdf">
 
-    <button class="primary" onclick="addCourse()">➕ Ajouter le cours</button>
+    <button class="primary" onclick="addCourse()" style="margin-top:12px;">
+      ➕ Ajouter le cours
+    </button>
+
   </div>
 
   <div class="card">
-    <input id="courseSearch"
-           placeholder="🔎 Rechercher un cours..."
-           oninput="renderCourses()">
+    <h2>🔎 Rechercher</h2>
+    <input id="courseSearch" oninput="renderCourses()" placeholder="Rechercher un cours...">
   </div>
 
-  <div id="courseList"></div>
+  <div id="coursesContainer"></div>
+
 </section>
+
 
 <!-- ETUDES -->
-<section id="etudes">
-  <div class="hero">
-    <h1>📚 Suivi des études</h1>
-    <p>Définis tes objectifs et suis tes progrès.</p>
-  </div>
+<section id="study" class="section">
 
   <div class="card">
-    <label>Matière</label>
-    <input id="studySubject">
 
-    <label>Note actuelle</label>
-    <input id="studyGrade" type="number" min="0" max="20">
+    <h1>📈 Suivi de mes études</h1>
 
-    <label>Objectif</label>
-    <input id="studyTarget" type="number" min="0" max="20">
+    <div class="form-grid">
+
+      <div>
+        <label>Matière</label>
+        <input id="studySubject" placeholder="Mathématiques">
+      </div>
+
+      <div>
+        <label>Note actuelle</label>
+        <input id="studyGrade" type="number" min="0" max="20" step="0.01">
+      </div>
+
+      <div>
+        <label>Objectif</label>
+        <input id="studyTarget" type="number" min="0" max="20" step="0.01" value="16">
+      </div>
+
+    </div>
 
     <label>Commentaire</label>
-    <textarea id="studyComment"></textarea>
+    <textarea id="studyComment" placeholder="Ce que tu dois améliorer..."></textarea>
 
-    <button class="primary" onclick="addStudy()">Ajouter</button>
+    <button class="primary" onclick="addStudy()">
+      ➕ Ajouter
+    </button>
+
   </div>
 
-  <div id="studyList"></div>
+  <div id="studyContainer"></div>
+
 </section>
 
+
 <!-- PLANNING -->
-<section id="planning">
-  <div class="hero">
-    <h1>📅 Planning</h1>
-    <p>Organise tes journées et tes séances de travail.</p>
-  </div>
+<section id="planning" class="section">
 
   <div class="card">
+
+    <h1>📅 Mon planning</h1>
+
     <label>Date</label>
     <input id="planDate" type="date">
 
     <label>Activité</label>
-    <input id="planActivity" placeholder="Exemple : Réviser Python">
+    <input id="planActivity" placeholder="Exemple : Réviser les mathématiques">
 
-    <button class="primary" onclick="addPlanning()">Ajouter</button>
+    <button class="primary" onclick="addPlanning()">
+      ➕ Ajouter au planning
+    </button>
+
   </div>
 
-  <div id="planningList"></div>
+  <div class="card">
+    <div id="planningContainer"></div>
+  </div>
+
 </section>
+
 
 <!-- BUDGET -->
-<section id="budget">
-  <div class="hero">
-    <h1>💰 Budget & Comptabilité</h1>
-    <p>Contrôle tes revenus, tes dépenses et ton solde.</p>
-  </div>
+<section id="budget" class="section">
 
   <div class="card">
+
+    <h1>💰 Mon budget</h1>
+
     <label>Mois</label>
     <input id="budgetMonth" type="month" onchange="renderBudget()">
-  </div>
 
-  <div class="grid">
-    <div class="card">
-      <h3>💵 Revenus</h3>
-      <div class="stat" id="totalIncome">0</div>
+    <div class="grid" style="margin-top:15px;">
+
+      <div class="card">
+        <h3>💵 Revenus</h3>
+        <div class="stat" id="totalIncome">0</div>
+      </div>
+
+      <div class="card">
+        <h3>💸 Dépenses</h3>
+        <div class="stat" id="totalExpense">0</div>
+      </div>
+
+      <div class="card">
+        <h3>💰 Solde</h3>
+        <div class="stat" id="totalBalance">0</div>
+      </div>
+
     </div>
 
-    <div class="card">
-      <h3>💸 Dépenses</h3>
-      <div class="stat" id="totalExpense">0</div>
-    </div>
-
-    <div class="card">
-      <h3>💰 Solde</h3>
-      <div class="stat" id="totalBalance">0</div>
-    </div>
   </div>
 
   <div class="card">
+
     <h2>➕ Ajouter une opération</h2>
 
-    <label>Type</label>
-    <select id="operationType">
-      <option value="income">Revenu</option>
-      <option value="expense">Dépense</option>
-    </select>
+    <div class="form-grid">
 
-    <label>Montant</label>
-    <input id="operationAmount" type="number" min="0">
+      <div>
+        <label>Type</label>
+        <select id="budgetType">
+          <option value="income">Revenu</option>
+          <option value="expense">Dépense</option>
+        </select>
+      </div>
 
-    <label>Catégorie</label>
-    <select id="operationCategory">
-      <option>Nourriture</option>
-      <option>Transport</option>
-      <option>Logement</option>
-      <option>Internet</option>
-      <option>Études</option>
-      <option>Vêtements</option>
-      <option>Loisirs</option>
-      <option>Santé</option>
-      <option>Autres</option>
-    </select>
+      <div>
+        <label>Montant</label>
+        <input id="budgetAmount" type="number" min="0" step="0.01">
+      </div>
 
-    <label>Date</label>
-    <input id="operationDate" type="date">
+      <div>
+        <label>Catégorie</label>
+        <select id="budgetCategory">
+          <option>Nourriture</option>
+          <option>Transport</option>
+          <option>Logement</option>
+          <option>Internet</option>
+          <option>Études</option>
+          <option>Vêtements</option>
+          <option>Loisirs</option>
+          <option>Santé</option>
+          <option>Autres</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Date</label>
+        <input id="budgetDate" type="date">
+      </div>
+
+    </div>
 
     <label>Description</label>
-    <input id="operationDescription">
+    <input id="budgetDescription" placeholder="Exemple : Transport du mois">
 
-    <button class="primary" onclick="addOperation()">Ajouter</button>
+    <button class="primary" onclick="addBudget()">
+      Ajouter
+    </button>
+
   </div>
 
   <div class="card">
-    <h2>📊 Répartition des dépenses</h2>
-    <div id="categoryBreakdown"></div>
+
+    <h2>📊 Répartition</h2>
+    <div id="budgetCategories"></div>
+
   </div>
 
   <div class="card">
+
     <h2>📜 Historique</h2>
-    <div id="operationHistory"></div>
+    <div id="budgetHistory"></div>
+
   </div>
+
 </section>
 
+
 <!-- PROFIL -->
-<section id="profil">
-  <div class="hero">
-    <h1>👤 Mon profil étudiant</h1>
-    <p>Personnalise ton espace Étudiant+.</p>
-  </div>
+<section id="profile" class="section">
 
   <div class="card">
-    <label>Nom</label>
-    <input id="profileLastName">
 
-    <label>Prénom</label>
-    <input id="profileFirstName">
+    <h1>👤 Mon profil étudiant</h1>
 
-    <label>Pays</label>
-    <input id="profileCountry">
+    <div class="form-grid">
 
-    <label>Université / établissement</label>
-    <input id="profileUniversity">
+      <div>
+        <label>Nom</label>
+        <input id="profileLastName">
+      </div>
 
-    <label>Niveau</label>
-    <input id="profileLevel" placeholder="Licence 1, Licence 2, Master...">
+      <div>
+        <label>Prénom</label>
+        <input id="profileFirstName">
+      </div>
 
-    <label>Filière</label>
-    <input id="profileField">
+      <div>
+        <label>Pays</label>
+        <input id="profileCountry">
+      </div>
+
+      <div>
+        <label>Université / établissement</label>
+        <input id="profileUniversity">
+      </div>
+
+      <div>
+        <label>Niveau</label>
+        <input id="profileLevel" placeholder="Licence 1">
+      </div>
+
+      <div>
+        <label>Filière</label>
+        <input id="profileField">
+      </div>
+
+    </div>
 
     <label>Objectif académique</label>
-    <textarea id="profileAcademicGoal"></textarea>
+    <textarea id="profileAcademic"></textarea>
 
     <label>Objectif professionnel</label>
-    <textarea id="profileCareerGoal"></textarea>
+    <textarea id="profileProfessional"></textarea>
 
-    <button class="primary" onclick="saveProfile()">💾 Enregistrer</button>
+    <button class="primary" onclick="saveProfile()">
+      💾 Enregistrer mon profil
+    </button>
+
   </div>
 
-  <div id="profileResult"></div>
 </section>
 
 </main>
 
 <footer>
   🎓 Étudiant+ — Assistant étudiant international
+  <br>
+  <span class="small">Version web</span>
 </footer>
+
 
 <script>
 
@@ -554,448 +769,255 @@ footer{
    DONNÉES
 ========================= */
 
-let currentLanguage =
-  localStorage.getItem("studentPlusLanguage") || "fr";
+const bacData = {
 
-let courses =
-  JSON.parse(localStorage.getItem("studentPlusCourses") || "[]");
+  CG: {
 
-let studies =
-  JSON.parse(localStorage.getItem("studentPlusStudies") || "[]");
+    A2: [
+      ["Philosophie",5],
+      ["Français / Littérature",5],
+      ["Histoire-Géographie",3],
+      ["Anglais",4],
+      ["Mathématiques",3],
+      ["Langue vivante II / optionnelle",3],
+      ["EPS",2]
+    ],
 
-let planning =
-  JSON.parse(localStorage.getItem("studentPlusPlanning") || "[]");
+    A4: [
+      ["Philosophie",5],
+      ["Français / Littérature",5],
+      ["Histoire-Géographie",4],
+      ["Anglais",3],
+      ["Langue vivante II",2],
+      ["Mathématiques",3],
+      ["EPS",2]
+    ],
 
-let operations =
-  JSON.parse(localStorage.getItem("studentPlusOperations") || "[]");
+    C: [
+      ["Mathématiques",5],
+      ["Sciences physiques",5],
+      ["SVT",4],
+      ["Français / Philosophie",3],
+      ["Anglais",3],
+      ["Histoire-Géographie",3],
+      ["EPS",2]
+    ],
 
-let profile =
-  JSON.parse(localStorage.getItem("studentPlusProfile") || "{}");
+    D: [
+      ["SVT",5],
+      ["Sciences physiques",5],
+      ["Mathématiques",4],
+      ["Français / Philosophie",3],
+      ["Anglais",3],
+      ["Histoire-Géographie",3],
+      ["EPS",2]
+    ]
 
+  },
 
-/* =========================
-   FILIÈRES DÉTAILLÉES
-========================= */
+  CM: {
 
-const fields = [
+    A1: [
+      ["Français",4],
+      ["Anglais",3],
+      ["Mathématiques",2],
+      ["Philosophie",2],
+      ["Histoire",2],
+      ["Géographie",2],
+      ["Langue vivante II",2]
+    ],
 
-{
-name:"Informatique",
-icon:"💻",
-description:"Formation consacrée à la conception, au développement et à l'utilisation des systèmes informatiques.",
-subjects:"Programmation, algorithmique, bases de données, systèmes, réseaux, génie logiciel.",
-duration:"3 ans pour une Licence, puis Master possible.",
-establishments:"Universités, instituts technologiques, écoles d'ingénieurs.",
-jobs:"Développeur logiciel, développeur web, ingénieur logiciel, administrateur systèmes, analyste informatique.",
-salary:"Variable selon le pays, l'expérience et la spécialisation.",
-opportunities:"Très bonnes possibilités dans le numérique et les services informatiques.",
-international:"Très forte mobilité internationale, notamment avec des compétences techniques et un bon anglais.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Logique, curiosité, patience et intérêt pour la technologie.",
-advice:"Commence tôt la programmation et construis des projets personnels."
-},
+    A2: [
+      ["Français",4],
+      ["Anglais",3],
+      ["Mathématiques",2],
+      ["Philosophie",2],
+      ["Histoire",2],
+      ["Géographie",2],
+      ["Langue vivante II",2]
+    ],
 
-{
-name:"Génie informatique",
-icon:"🖥️",
-description:"Formation combinant informatique, électronique, systèmes et ingénierie.",
-subjects:"Programmation, architecture des ordinateurs, réseaux, systèmes embarqués, électronique.",
-duration:"3 à 5 ans selon le diplôme.",
-establishments:"Universités, écoles d'ingénieurs et instituts technologiques.",
-jobs:"Ingénieur informatique, ingénieur systèmes, ingénieur réseaux, ingénieur logiciel.",
-salary:"Potentiel élevé après spécialisation et expérience.",
-opportunities:"Nombreux secteurs : industrie, télécommunications, banques et entreprises technologiques.",
-international:"Très bonnes possibilités.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Solide niveau scientifique et intérêt pour les systèmes techniques.",
-advice:"Travaille particulièrement les mathématiques, l'algorithmique et l'anglais."
-},
+    A3: [
+      ["Français",4],
+      ["Anglais",3],
+      ["Mathématiques",2],
+      ["Philosophie",2],
+      ["Histoire",2],
+      ["Géographie",2],
+      ["Langue vivante II",2]
+    ],
 
-{
-name:"Intelligence artificielle",
-icon:"🤖",
-description:"Domaine consacré à la création de systèmes capables d'analyser des données et d'effectuer des tâches intelligentes.",
-subjects:"Mathématiques, statistiques, Python, machine learning, deep learning, traitement des données.",
-duration:"Licence puis spécialisation en Master recommandée.",
-establishments:"Universités, écoles d'ingénieurs et centres spécialisés.",
-jobs:"Ingénieur IA, data scientist, machine learning engineer, chercheur.",
-salary:"Potentiel très élevé avec une bonne spécialisation.",
-opportunities:"Secteur en forte croissance.",
-international:"Excellentes possibilités internationales.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Très bon raisonnement logique et goût pour les mathématiques.",
-advice:"Apprends Python, les statistiques et les bases du machine learning."
-},
+    A4: [
+      ["Français",4],
+      ["Anglais",3],
+      ["Mathématiques",2],
+      ["Philosophie",2],
+      ["Histoire",2],
+      ["Géographie",2],
+      ["Langue vivante II",2]
+    ],
 
-{
-name:"Data Science",
-icon:"📊",
-description:"Formation centrée sur l'analyse des données pour produire des informations utiles à la décision.",
-subjects:"Statistiques, probabilités, Python, SQL, visualisation, machine learning.",
-duration:"3 à 5 ans selon le parcours.",
-establishments:"Universités et écoles spécialisées.",
-jobs:"Data analyst, data scientist, BI analyst, data engineer.",
-salary:"Potentiel élevé dans les entreprises utilisant beaucoup de données.",
-opportunities:"Banques, télécommunications, commerce, industrie et technologie.",
-international:"Très bonnes possibilités.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Aimer les mathématiques, les données et l'informatique.",
-advice:"Maîtrise Python, SQL, Excel et les statistiques."
-},
+    A5: [
+      ["Français",4],
+      ["Anglais",3],
+      ["Mathématiques",2],
+      ["Philosophie",2],
+      ["Histoire",2],
+      ["Géographie",2],
+      ["Langue vivante II",2]
+    ],
 
-{
-name:"Cybersécurité",
-icon:"🔐",
-description:"Protection des systèmes informatiques, réseaux, applications et données contre les cyberattaques.",
-subjects:"Réseaux, systèmes, cryptographie, sécurité informatique, Linux, analyse des attaques.",
-duration:"Licence puis spécialisation recommandée.",
-establishments:"Universités, écoles d'ingénieurs et instituts spécialisés.",
-jobs:"Analyste SOC, ingénieur sécurité, pentester, consultant cybersécurité.",
-salary:"Potentiel élevé avec expérience et certifications.",
-opportunities:"Très fortes dans les banques, entreprises et administrations.",
-international:"Excellentes possibilités.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Curiosité, rigueur, logique et intérêt pour la sécurité.",
-advice:"Apprends Linux, réseaux, Python et les fondamentaux de sécurité."
-},
+    C: [
+      ["Mathématiques",5],
+      ["Physique",4],
+      ["Chimie",4],
+      ["Français",2],
+      ["Anglais",2],
+      ["Philosophie",2],
+      ["Histoire-Géographie",2],
+      ["Informatique",2]
+    ],
 
-{
-name:"Réseaux & télécommunications",
-icon:"🌐",
-description:"Étude des réseaux informatiques, télécommunications et infrastructures numériques.",
-subjects:"Réseaux, protocoles, télécommunications, systèmes, administration réseau.",
-duration:"3 ans ou plus selon le parcours.",
-establishments:"Universités, instituts technologiques et écoles d'ingénieurs.",
-jobs:"Administrateur réseau, ingénieur réseau, technicien télécom, ingénieur télécom.",
-salary:"Variable selon la spécialisation et l'expérience.",
-opportunities:"Télécommunications, banques, entreprises et fournisseurs Internet.",
-international:"Bonnes possibilités.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Aimer les systèmes techniques et la résolution de problèmes.",
-advice:"Travaille Cisco, Linux, réseaux IP et virtualisation."
-},
+    D: [
+      ["SVT",6],
+      ["Mathématiques",4],
+      ["Physique-Chimie",4],
+      ["Informatique",2],
+      ["Français",2],
+      ["Anglais",2],
+      ["Philosophie",2],
+      ["Histoire-Géographie",2],
+      ["ECM",2]
+    ]
 
-{
-name:"Développement logiciel",
-icon:"👨‍💻",
-description:"Conception et développement d'applications, logiciels et services numériques.",
-subjects:"Programmation, algorithmique, bases de données, développement web et mobile.",
-duration:"3 ans pour une Licence.",
-establishments:"Universités, écoles informatiques et instituts.",
-jobs:"Développeur web, mobile, backend, frontend, full-stack.",
-salary:"Peut devenir élevé avec expérience et spécialisation.",
-opportunities:"Très nombreuses.",
-international:"Excellentes possibilités, notamment en télétravail.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Créativité, logique et patience.",
-advice:"Construis un portfolio GitHub avec plusieurs projets."
-},
+  },
 
-{
-name:"Mathématiques",
-icon:"📐",
-description:"Formation approfondie en raisonnement mathématique, analyse et modélisation.",
-subjects:"Algèbre, analyse, probabilités, statistiques, géométrie, équations différentielles.",
-duration:"3 ans pour une Licence.",
-establishments:"Universités et facultés scientifiques.",
-jobs:"Enseignant, statisticien, analyste, actuaire après spécialisation, data scientist après formation complémentaire.",
-salary:"Très variable selon la spécialisation.",
-opportunities:"Bonnes possibilités en enseignement, finance, data et recherche.",
-international:"Bonne mobilité avec une spécialisation recherchée.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Aimer la logique, l'abstraction et les problèmes.",
-advice:"Associe les mathématiques à l'informatique ou aux statistiques."
-},
+  FR: {
+    "Baccalauréat général": [
+      ["Évaluation / enseignements",1]
+    ]
+  },
 
-{
-name:"Médecine",
-icon:"🩺",
-description:"Formation médicale destinée à comprendre, prévenir, diagnostiquer et traiter les maladies.",
-subjects:"Anatomie, physiologie, biochimie, pharmacologie, pathologie, clinique.",
-duration:"Longue formation, souvent 6 ans ou davantage selon le pays.",
-establishments:"Facultés de médecine et centres hospitalo-universitaires.",
-jobs:"Médecin généraliste puis spécialisation possible.",
-salary:"Variable selon pays, spécialité et expérience.",
-opportunities:"Secteur essentiel avec forte demande dans de nombreux pays.",
-international:"Possible mais l'exercice nécessite généralement reconnaissance du diplôme et autorisation professionnelle.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Discipline, mémoire, endurance et intérêt pour les sciences médicales.",
-advice:"Prépare-toi à un volume de travail important et régulier."
-},
+  CI: {
+    "Série A": [
+      ["Français",4],
+      ["Philosophie",4],
+      ["Histoire-Géographie",3],
+      ["Anglais",3],
+      ["Mathématiques",2]
+    ],
 
-{
-name:"Pharmacie",
-icon:"💊",
-description:"Étude des médicaments, de leur préparation, de leur utilisation et de leur sécurité.",
-subjects:"Chimie, biologie, pharmacologie, toxicologie, physiologie.",
-duration:"Plusieurs années selon le pays.",
-establishments:"Facultés de pharmacie et universités.",
-jobs:"Pharmacien, industrie pharmaceutique, recherche, contrôle qualité.",
-salary:"Variable selon secteur et pays.",
-opportunities:"Industrie, hôpitaux, officines et recherche.",
-international:"Possible avec reconnaissance professionnelle.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Aimer la chimie, la biologie et la précision.",
-advice:"Travaille sérieusement la chimie et la biologie."
-},
+    "Série C": [
+      ["Mathématiques",5],
+      ["Physique-Chimie",4],
+      ["SVT",3],
+      ["Français",2],
+      ["Anglais",2]
+    ],
 
-{
-name:"Finance",
-icon:"💹",
-description:"Étude des marchés, investissements, gestion financière et analyse des risques.",
-subjects:"Mathématiques financières, économie, comptabilité, statistiques, gestion.",
-duration:"3 ans pour une Licence.",
-establishments:"Universités, écoles de commerce et instituts.",
-jobs:"Analyste financier, contrôleur financier, gestionnaire, conseiller financier.",
-salary:"Potentiel élevé selon secteur et expérience.",
-opportunities:"Banques, assurances, entreprises et cabinets.",
-international:"Bonnes possibilités avec anglais et compétences quantitatives.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Aimer les chiffres, l'analyse et la prise de décision.",
-advice:"Maîtrise Excel, statistiques et analyse financière."
-},
+    "Série D": [
+      ["SVT",5],
+      ["Mathématiques",4],
+      ["Physique-Chimie",4],
+      ["Français",2],
+      ["Anglais",2]
+    ]
+  },
 
-{
-name:"Comptabilité",
-icon:"🧾",
-description:"Gestion, enregistrement et analyse des opérations financières d'une organisation.",
-subjects:"Comptabilité générale, fiscalité, contrôle de gestion, droit, finance.",
-duration:"3 ans pour une Licence.",
-establishments:"Universités, écoles de gestion et instituts.",
-jobs:"Comptable, auditeur, contrôleur de gestion, responsable comptable.",
-salary:"Variable selon qualification et expérience.",
-opportunities:"Très présentes dans les entreprises.",
-international:"Bonnes possibilités avec certifications et maîtrise des normes internationales.",
-difficulty:"⭐⭐⭐",
-profile:"Organisation, précision et goût des chiffres.",
-advice:"Apprends Excel et les logiciels comptables."
-},
+  SN: {
+    "Série L": [
+      ["Français",5],
+      ["Philosophie",5],
+      ["Histoire-Géographie",4],
+      ["Anglais",3],
+      ["Mathématiques",2]
+    ],
 
-{
-name:"Gestion",
-icon:"📋",
-description:"Formation polyvalente sur le fonctionnement et le pilotage des organisations.",
-subjects:"Management, comptabilité, finance, marketing, ressources humaines.",
-duration:"3 ans.",
-establishments:"Universités et écoles de commerce.",
-jobs:"Assistant manager, gestionnaire, responsable administratif, chargé de projet.",
-salary:"Variable selon poste et expérience.",
-opportunities:"Très larges.",
-international:"Bonnes possibilités.",
-difficulty:"⭐⭐⭐",
-profile:"Organisation, communication et esprit d'équipe.",
-advice:"Développe aussi tes compétences numériques."
-},
+    "Série S": [
+      ["Mathématiques",5],
+      ["Sciences physiques",5],
+      ["SVT",4],
+      ["Français",2],
+      ["Anglais",2]
+    ]
+  },
 
-{
-name:"Marketing",
-icon:"📣",
-description:"Étude des besoins des consommateurs et création de stratégies commerciales.",
-subjects:"Marketing, communication, comportement du consommateur, digital marketing.",
-duration:"3 ans puis spécialisation possible.",
-establishments:"Universités et écoles de commerce.",
-jobs:"Marketing manager, community manager, chargé de communication, commercial.",
-salary:"Variable selon secteur.",
-opportunities:"Nombreuses dans le digital et les entreprises.",
-international:"Bonnes possibilités.",
-difficulty:"⭐⭐⭐",
-profile:"Créativité, communication et compréhension du marché.",
-advice:"Apprends le marketing digital et les réseaux sociaux professionnels."
-},
+  CD: {
+    "EXETAT": [
+      ["Français",1],
+      ["Mathématiques",1],
+      ["Anglais",1],
+      ["Sciences",1],
+      ["Culture générale",1]
+    ]
+  },
 
-{
-name:"Génie civil",
-icon:"🏗️",
-description:"Conception et construction des infrastructures et bâtiments.",
-subjects:"Mathématiques, mécanique, résistance des matériaux, topographie, construction.",
-duration:"3 à 5 ans.",
-establishments:"Universités, écoles d'ingénieurs et instituts.",
-jobs:"Ingénieur civil, conducteur de travaux, ingénieur structures, chef de chantier.",
-salary:"Variable selon expérience et projets.",
-opportunities:"Construction, travaux publics et infrastructures.",
-international:"Bonnes possibilités pour les ingénieurs qualifiés.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Aimer les mathématiques, la physique et les projets techniques.",
-advice:"Maîtrise les logiciels de conception et de calcul."
-},
+  GA: {
+    "Série A": [
+      ["Français",4],
+      ["Philosophie",4],
+      ["Histoire-Géographie",3],
+      ["Anglais",3],
+      ["Mathématiques",2]
+    ],
 
-{
-name:"Génie électrique",
-icon:"⚡",
-description:"Étude de la production, distribution et utilisation de l'énergie électrique.",
-subjects:"Électricité, électronique, automatique, électrotechnique, mathématiques.",
-duration:"3 à 5 ans.",
-establishments:"Universités et écoles d'ingénieurs.",
-jobs:"Ingénieur électrique, automaticien, technicien, ingénieur maintenance.",
-salary:"Variable selon spécialisation.",
-opportunities:"Industrie, énergie, construction et télécommunications.",
-international:"Bonnes possibilités.",
-difficulty:"⭐⭐⭐⭐⭐",
-profile:"Aimer la physique, les mathématiques et les systèmes techniques.",
-advice:"Travaille les circuits, l'automatique et la programmation."
-},
+    "Série C": [
+      ["Mathématiques",5],
+      ["Sciences physiques",5],
+      ["SVT",4],
+      ["Français",2],
+      ["Anglais",2]
+    ],
 
-{
-name:"Architecture",
-icon:"🏛️",
-description:"Conception des bâtiments, espaces et environnements construits.",
-subjects:"Dessin, conception architecturale, histoire de l'architecture, structures, urbanisme.",
-duration:"Variable selon le pays.",
-establishments:"Écoles d'architecture et universités.",
-jobs:"Architecte après qualification, dessinateur, urbaniste, BIM modeleur.",
-salary:"Variable selon expérience et statut.",
-opportunities:"Construction, architecture, immobilier et urbanisme.",
-international:"Possible avec reconnaissance du diplôme.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Créativité, précision et intérêt pour l'espace.",
-advice:"Construis progressivement un portfolio de projets."
-},
+    "Série D": [
+      ["SVT",5],
+      ["Sciences physiques",5],
+      ["Mathématiques",4],
+      ["Français",2],
+      ["Anglais",2]
+    ]
+  },
 
-{
-name:"Agronomie",
-icon:"🌱",
-description:"Sciences liées à l'agriculture, aux cultures, aux sols et à la production alimentaire.",
-subjects:"Biologie, agronomie, pédologie, irrigation, production végétale et animale.",
-duration:"3 à 5 ans.",
-establishments:"Universités et instituts agronomiques.",
-jobs:"Agronome, ingénieur agricole, conseiller agricole, technicien.",
-salary:"Variable selon secteur.",
-opportunities:"Agriculture, agro-industrie, recherche et développement.",
-international:"Bonnes possibilités selon spécialisation.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Intérêt pour les sciences naturelles et l'agriculture.",
-advice:"Combine agronomie et technologies modernes."
-},
+  MA: {
+    "Sciences physiques": [
+      ["Mathématiques",7],
+      ["Physique-Chimie",7],
+      ["Philosophie",2],
+      ["Français",2],
+      ["Anglais",2]
+    ],
 
-{
-name:"Droit",
-icon:"⚖️",
-description:"Étude des règles juridiques et du fonctionnement des institutions.",
-subjects:"Droit civil, droit pénal, droit administratif, droit des affaires, droit international.",
-duration:"3 ans puis Master selon objectif.",
-establishments:"Universités et facultés de droit.",
-jobs:"Juriste, avocat après formation requise, notaire selon réglementation, magistrat selon parcours.",
-salary:"Très variable.",
-opportunities:"Entreprises, administrations, cabinets et organisations.",
-international:"Dépend fortement de la reconnaissance du droit et du pays.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Bonne mémoire, analyse, rédaction et argumentation.",
-advice:"Travaille ta capacité à lire et analyser des textes juridiques."
-},
+    "Sciences de la vie et de la terre": [
+      ["SVT",7],
+      ["Mathématiques",5],
+      ["Physique-Chimie",5],
+      ["Philosophie",2],
+      ["Français",2]
+    ]
+  },
 
-{
-name:"Relations internationales",
-icon:"🌍",
-description:"Étude des relations entre États, organisations internationales et acteurs mondiaux.",
-subjects:"Géopolitique, droit international, économie, diplomatie, langues.",
-duration:"3 ans puis spécialisation recommandée.",
-establishments:"Universités et instituts spécialisés.",
-jobs:"Chargé de coopération, analyste, diplomate selon concours, consultant.",
-salary:"Variable.",
-opportunities:"ONG, organisations internationales, administrations et entreprises.",
-international:"Très forte dimension internationale.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Curiosité, langues, analyse et communication.",
-advice:"Développe particulièrement ton anglais."
-},
+  DZ: {
+    "Sciences expérimentales": [
+      ["Sciences naturelles",6],
+      ["Mathématiques",5],
+      ["Physique",5],
+      ["Arabe",3],
+      ["Français",2],
+      ["Anglais",2],
+      ["Philosophie",2]
+    ],
 
-{
-name:"Communication",
-icon:"📢",
-description:"Formation consacrée aux stratégies de communication et à la transmission de l'information.",
-subjects:"Communication, médias, marketing, relations publiques, communication digitale.",
-duration:"3 ans.",
-establishments:"Universités et écoles spécialisées.",
-jobs:"Chargé de communication, community manager, attaché de presse, responsable communication.",
-salary:"Variable.",
-opportunities:"Très présentes dans les entreprises et organisations.",
-international:"Bonnes possibilités dans le digital.",
-difficulty:"⭐⭐⭐",
-profile:"Créativité, aisance relationnelle et rédaction.",
-advice:"Développe un portfolio de créations et campagnes."
-},
+    "Mathématiques": [
+      ["Mathématiques",7],
+      ["Physique",6],
+      ["Arabe",3],
+      ["Français",2],
+      ["Anglais",2],
+      ["Philosophie",2]
+    ]
+  }
 
-{
-name:"Sciences de l'éducation",
-icon:"👨‍🏫",
-description:"Étude de l'éducation, de l'apprentissage et des méthodes pédagogiques.",
-subjects:"Psychologie, pédagogie, didactique, sociologie de l'éducation.",
-duration:"3 ans puis spécialisation possible.",
-establishments:"Universités et écoles normales.",
-jobs:"Enseignant selon qualification, conseiller pédagogique, formateur, chercheur.",
-salary:"Variable selon statut et pays.",
-opportunities:"Éducation, formation et recherche.",
-international:"Possible mais dépend des qualifications locales.",
-difficulty:"⭐⭐⭐",
-profile:"Patience, communication et intérêt pour l'apprentissage.",
-advice:"Développe tes compétences pédagogiques et numériques."
-},
-
-{
-name:"Tourisme & hôtellerie",
-icon:"🏨",
-description:"Formation liée à l'accueil, au voyage, à l'hébergement et à la gestion touristique.",
-subjects:"Gestion hôtelière, tourisme, marketing, langues, événementiel.",
-duration:"2 à 3 ans ou plus selon le parcours.",
-establishments:"Écoles hôtelières, instituts et universités.",
-jobs:"Manager hôtelier, agent de voyage, responsable touristique, événementiel.",
-salary:"Variable selon pays et établissement.",
-opportunities:"Tourisme, hôtels, agences et événements.",
-international:"Bonne mobilité internationale.",
-difficulty:"⭐⭐⭐",
-profile:"Sens du service, communication et langues.",
-advice:"Les langues étrangères sont un gros avantage."
-},
-
-{
-name:"Logistique",
-icon:"🚚",
-description:"Gestion des flux de marchandises, transport, stocks et chaînes d'approvisionnement.",
-subjects:"Gestion des stocks, transport, achats, supply chain, gestion.",
-duration:"3 ans.",
-establishments:"Universités, écoles de commerce et instituts.",
-jobs:"Logisticien, supply chain manager, responsable transport, acheteur.",
-salary:"Variable selon expérience.",
-opportunities:"Très nombreuses dans le commerce et l'industrie.",
-international:"Bonnes possibilités.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Organisation, analyse et capacité à résoudre des problèmes.",
-advice:"Apprends Excel et les outils de gestion logistique."
-},
-
-{
-name:"Design graphique",
-icon:"🎨",
-description:"Création visuelle destinée à communiquer une idée, une marque ou un message.",
-subjects:"Dessin, typographie, identité visuelle, design numérique, communication.",
-duration:"2 à 3 ans ou plus.",
-establishments:"Écoles d'art, design et universités.",
-jobs:"Graphiste, UI designer, directeur artistique, designer freelance.",
-salary:"Très variable selon portfolio et clientèle.",
-opportunities:"Digital, publicité, médias et entrepreneuriat.",
-international:"Très bonnes possibilités en freelance.",
-difficulty:"⭐⭐⭐⭐",
-profile:"Créativité, sens visuel et maîtrise des outils numériques.",
-advice:"Construis un portfolio professionnel."
-},
-
-{
-name:"Sciences du sport",
-icon:"🏃",
-description:"Étude du sport, de la performance physique et de l'activité corporelle.",
-subjects:"Anatomie, physiologie, entraînement, biomécanique, psychologie du sport.",
-duration:"3 ans ou plus.",
-establishments:"Universités et instituts sportifs.",
-jobs:"Coach, préparateur physique, enseignant selon qualification, manager sportif.",
-salary:"Variable.",
-opportunities:"Sport, fitness, éducation et santé.",
-international:"Possible selon qualification.",
-difficulty:"⭐⭐⭐",
-profile:"Intérêt pour le sport, discipline et communication.",
-advice:"Associe sport et compétences en gestion ou numérique."
-}
-
-];
+};
 
 
 /* =========================
@@ -1004,107 +1026,40 @@ advice:"Associe sport et compétences en gestion ou numérique."
 
 function showSection(id,button){
 
-  document.querySelectorAll("section")
-    .forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
+  });
 
-  document.getElementById(id)
-    .classList.add("active");
+  document.getElementById(id).classList.add("active");
 
-  document.querySelectorAll("nav button")
-    .forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll("nav button").forEach(btn=>{
+    btn.classList.remove("active");
+  });
 
-  if(button) button.classList.add("active");
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-
-/* =========================
-   FILIERES
-========================= */
-
-function renderFields(){
-
-  const list=document.getElementById("fieldList");
-
-  const search=
-    document.getElementById("fieldSearch").value
-    .toLowerCase();
-
-  const filtered=fields.filter(f=>
-    f.name.toLowerCase().includes(search) ||
-    f.description.toLowerCase().includes(search)
-  );
-
-  list.innerHTML="";
-
-  if(filtered.length===0){
-    list.innerHTML='<div class="card empty">Aucune filière trouvée.</div>';
-    return;
+  if(button){
+    button.classList.add("active");
   }
 
-  filtered.forEach((f,index)=>{
+  if(id==="home"){
+    updateHome();
+  }
 
-    const card=document.createElement("div");
+  if(id==="courses"){
+    renderCourses();
+  }
 
-    card.className="card field-card";
+  if(id==="study"){
+    renderStudy();
+  }
 
-    card.innerHTML=`
-      <div class="field-icon">${f.icon}</div>
-      <h2>${f.name}</h2>
-      <p>${f.description}</p>
+  if(id==="planning"){
+    renderPlanning();
+  }
 
-      <span class="badge">⏳ ${f.duration}</span>
-      <span class="badge">🧠 ${f.difficulty}</span>
+  if(id==="budget"){
+    renderBudget();
+  }
 
-      <div id="details-${index}" class="details" style="display:none">
-
-        <h3>📚 Matières principales</h3>
-        <p>${f.subjects}</p>
-
-        <h3>⏳ Durée des études</h3>
-        <p>${f.duration}</p>
-
-        <h3>🏫 Types d'établissements</h3>
-        <p>${f.establishments}</p>
-
-        <h3>💼 Métiers possibles</h3>
-        <p>${f.jobs}</p>
-
-        <h3>💰 Salaire potentiel</h3>
-        <p class="salary">${f.salary}</p>
-
-        <h3>📈 Débouchés</h3>
-        <p>${f.opportunities}</p>
-
-        <h3>🌍 Possibilités internationales</h3>
-        <p>${f.international}</p>
-
-        <h3>🧠 Niveau de difficulté</h3>
-        <p>${f.difficulty}</p>
-
-        <h3>✅ Profil recommandé</h3>
-        <p>${f.profile}</p>
-
-        <h3>📌 Conseil</h3>
-        <p>${f.advice}</p>
-
-      </div>
-    `;
-
-    card.onclick=()=>{
-
-      const details=
-        document.getElementById(`details-${index}`);
-
-      details.style.display =
-        details.style.display==="none"
-        ? "block"
-        : "none";
-    };
-
-    list.appendChild(card);
-  });
 }
 
 
@@ -1112,68 +1067,412 @@ function renderFields(){
    BAC
 ========================= */
 
-function addSubject(){
+let coefficientEditing=false;
 
-  const container=
-    document.getElementById("subjects");
+function loadSeries(){
 
-  const div=document.createElement("div");
+  const country=document.getElementById("bacCountry").value;
+  const seriesSelect=document.getElementById("bacSeries");
 
-  div.className="card";
+  seriesSelect.innerHTML="";
 
-  div.innerHTML=`
-    <label>Matière</label>
-    <input class="subjectName" placeholder="Mathématiques">
+  const data=bacData[country];
 
-    <label>Note /20</label>
-    <input class="subjectGrade" type="number" min="0" max="20">
+  if(!data){
+    const option=document.createElement("option");
+    option.value="";
+    option.textContent="Barème à configurer";
+    seriesSelect.appendChild(option);
+    loadCoefficients();
+    return;
+  }
 
-    <label>Coefficient</label>
-    <input class="subjectCoef" type="number" min="1" value="1">
+  Object.keys(data).forEach(series=>{
+    const option=document.createElement("option");
+    option.value=series;
+    option.textContent=series;
+    seriesSelect.appendChild(option);
+  });
 
-    <button class="danger" onclick="this.parentElement.remove()">
-      Supprimer
-    </button>
-  `;
-
-  container.appendChild(div);
+  loadCoefficients();
 }
+
+
+function loadCoefficients(){
+
+  const country=document.getElementById("bacCountry").value;
+  const series=document.getElementById("bacSeries").value;
+
+  const subjects=bacData[country]?.[series] || [];
+
+  renderCoefficientEditor(subjects);
+
+  renderSubjectInputs(subjects);
+}
+
+
+function renderCoefficientEditor(subjects){
+
+  const container=document.getElementById("coefficientEditor");
+
+  container.innerHTML="";
+
+  if(!subjects.length){
+    container.innerHTML="<p class='small'>Aucun barème disponible pour cette sélection.</p>";
+    return;
+  }
+
+  subjects.forEach((item,index)=>{
+
+    const div=document.createElement("div");
+
+    div.style.display="grid";
+    div.style.gridTemplateColumns="1fr 100px";
+    div.style.gap="10px";
+    div.style.marginBottom="8px";
+
+    div.innerHTML=`
+      <input
+        id="coeffName${index}"
+        value="${item[0]}"
+        ${coefficientEditing ? "" : "disabled"}
+      >
+
+      <input
+        id="coeffValue${index}"
+        type="number"
+        min="0"
+        step="1"
+        value="${item[1]}"
+        ${coefficientEditing ? "" : "disabled"}
+      >
+    `;
+
+    container.appendChild(div);
+  });
+
+}
+
+
+function toggleCoefficientEdit(){
+
+  coefficientEditing=!coefficientEditing;
+
+  const button=document.querySelector(".coeff-box button");
+
+  button.textContent=coefficientEditing
+    ? "💾 Enregistrer les coefficients"
+    : "✏️ Modifier les coefficients";
+
+  const country=document.getElementById("bacCountry").value;
+  const series=document.getElementById("bacSeries").value;
+
+  const data=bacData[country]?.[series];
+
+  if(!data) return;
+
+  if(!coefficientEditing){
+
+    data.forEach((item,index)=>{
+
+      const name=document.getElementById("coeffName"+index)?.value;
+
+      const coeff=parseFloat(
+        document.getElementById("coeffValue"+index)?.value
+      );
+
+      if(name){
+        item[0]=name;
+      }
+
+      if(!isNaN(coeff)){
+        item[1]=coeff;
+      }
+
+    });
+
+    renderSubjectInputs(data);
+
+  }else{
+
+    renderCoefficientEditor(data);
+
+  }
+
+}
+
+
+function renderSubjectInputs(subjects){
+
+  const container=document.getElementById("subjectInputs");
+
+  container.innerHTML="";
+
+  subjects.forEach((item,index)=>{
+
+    const row=document.createElement("div");
+
+    row.className="subject-row";
+
+    row.innerHTML=`
+      <div>
+        <label>Matière</label>
+        <input
+          id="subjectName${index}"
+          value="${item[0]}"
+          readonly
+        >
+      </div>
+
+      <div>
+        <label>Coef.</label>
+        <input
+          id="subjectCoeff${index}"
+          value="${item[1]}"
+          readonly
+        >
+      </div>
+
+      <div>
+        <label>Note /20</label>
+        <input
+          id="subjectGrade${index}"
+          type="number"
+          min="0"
+          max="20"
+          step="0.01"
+          placeholder="0-20"
+        >
+      </div>
+
+      <button
+        class="danger remove"
+        onclick="removeSubject(${index})"
+      >
+        ✕
+      </button>
+    `;
+
+    container.appendChild(row);
+
+  });
+
+}
+
+
+function removeSubject(index){
+
+  const country=document.getElementById("bacCountry").value;
+  const series=document.getElementById("bacSeries").value;
+
+  if(!bacData[country]?.[series]) return;
+
+  bacData[country][series].splice(index,1);
+
+  loadCoefficients();
+}
+
+
+function addCustomSubject(){
+
+  const country=document.getElementById("bacCountry").value;
+  const series=document.getElementById("bacSeries").value;
+
+  if(!bacData[country]) bacData[country]={};
+
+  if(!bacData[country][series]){
+    bacData[country][series]=[];
+  }
+
+  bacData[country][series].push([
+    "Nouvelle matière",
+    1
+  ]);
+
+  loadCoefficients();
+
+}
+
 
 function calculateAverage(){
 
-  const grades=
-    document.querySelectorAll(".subjectGrade");
+  const country=document.getElementById("bacCountry").value;
+  const series=document.getElementById("bacSeries").value;
 
-  const coefs=
-    document.querySelectorAll(".subjectCoef");
+  const subjects=bacData[country]?.[series] || [];
 
-  let total=0;
-  let totalCoef=0;
+  let totalPoints=0;
+  let totalCoeff=0;
+  let missing=0;
 
-  for(let i=0;i<grades.length;i++){
+  subjects.forEach((subject,index)=>{
 
-    const grade=parseFloat(grades[i].value);
-    const coef=parseFloat(coefs[i].value);
+    const grade=parseFloat(
+      document.getElementById("subjectGrade"+index)?.value
+    );
 
-    if(!isNaN(grade) && !isNaN(coef)){
-      total += grade*coef;
-      totalCoef += coef;
+    const coeff=parseFloat(subject[1]);
+
+    if(!isNaN(grade) && grade>=0 && grade<=20 && coeff>0){
+
+      totalPoints += grade * coeff;
+      totalCoeff += coeff;
+
+    }else{
+
+      missing++;
+
     }
+
+  });
+
+  const result=document.getElementById("bacResult");
+
+  if(totalCoeff===0){
+
+    result.innerHTML=`
+      <div class="result">
+        ⚠️ Entre au moins une note valide.
+      </div>
+    `;
+
+    return;
   }
 
-  const result=
-    totalCoef ? total/totalCoef : 0;
+  const average=totalPoints/totalCoeff;
 
-  document.getElementById("averageResult")
-    .textContent=
-      `Moyenne : ${result.toFixed(2)}/20`;
+  let mention="";
+
+  if(average>=16){
+    mention="Très bien 🏆";
+  }else if(average>=14){
+    mention="Bien 👏";
+  }else if(average>=12){
+    mention="Assez bien 👍";
+  }else if(average>=10){
+    mention="Passable ✅";
+  }else{
+    mention="Insuffisant ❌";
+  }
 
   localStorage.setItem(
     "studentPlusAverage",
-    result.toFixed(2)
+    average.toFixed(2)
   );
 
-  updateDashboard();
+  result.innerHTML=`
+    <div class="result">
+      <p>Moyenne calculée</p>
+      <div class="big-result">${average.toFixed(2)}/20</div>
+
+      <h3 style="margin-top:10px;">${mention}</h3>
+
+      <p class="small" style="margin-top:8px;">
+        Coefficients pris en compte : ${totalCoeff}
+        ${missing ? " • "+missing+" matière(s) sans note" : ""}
+      </p>
+    </div>
+  `;
+
+  updateHome();
+
+}
+
+
+/* =========================
+   FILIERES
+========================= */
+
+const fields=[
+
+  ["💻","Informatique","Développement logiciel, systèmes et technologies numériques.","Python, algorithmique, bases de données","3 à 5 ans","Universités, écoles d'ingénieurs","Développeur, ingénieur logiciel, administrateur","Très bonnes opportunités internationales."],
+
+  ["🤖","Intelligence artificielle","Création de systèmes capables d'analyser des données et d'apprendre.","Mathématiques, Python, statistiques","3 à 5 ans","Universités, écoles d'ingénieurs","Ingénieur IA, ML Engineer, Data Scientist","Domaine en forte croissance."],
+
+  ["📊","Data Science","Analyse et exploitation des données pour aider à la décision.","Statistiques, Python, SQL","3 à 5 ans","Universités, écoles spécialisées","Data Analyst, Data Scientist","Très recherchée dans de nombreux pays."],
+
+  ["🔐","Cybersécurité","Protection des systèmes informatiques et des données.","Réseaux, Linux, sécurité","3 à 5 ans","Universités, écoles d'ingénieurs","Analyste sécurité, pentester, ingénieur sécurité","Forte demande internationale."],
+
+  ["🌐","Réseaux & télécommunications","Conception et administration des infrastructures réseau.","Réseaux, systèmes, télécoms","2 à 5 ans","Instituts et universités","Administrateur réseau, ingénieur réseau","Débouchés dans les entreprises et opérateurs."],
+
+  ["🧮","Mathématiques","Étude des structures, modèles et raisonnements mathématiques.","Algèbre, analyse, probabilités","3 à 5 ans","Universités","Enseignant, statisticien, analyste","Excellent complément à l'informatique."],
+
+  ["🩺","Médecine","Formation aux sciences médicales et aux soins.","Biologie, anatomie, physiologie","6 à 10 ans","Facultés de médecine","Médecin, spécialiste","Parcours long mais très valorisé."],
+
+  ["💊","Pharmacie","Sciences du médicament et produits de santé.","Chimie, biologie, pharmacologie","5 à 6 ans","Facultés de pharmacie","Pharmacien, industrie pharmaceutique","Débouchés dans la santé et l'industrie."],
+
+  ["💰","Finance","Gestion financière, marchés et analyse économique.","Mathématiques, économie, finance","3 à 5 ans","Universités et écoles","Analyste financier, contrôleur","Possibilités internationales."],
+
+  ["🧾","Comptabilité","Gestion et analyse des opérations comptables.","Comptabilité, fiscalité, droit","3 à 5 ans","Universités et écoles","Comptable, auditeur","Très présente dans les entreprises."],
+
+  ["📈","Gestion","Management et administration des organisations.","Économie, gestion, management","3 à 5 ans","Universités et écoles","Manager, gestionnaire","Nombreux secteurs d'activité."],
+
+  ["📣","Marketing","Stratégie commerciale, communication et comportement du consommateur.","Marketing, communication, statistiques","3 à 5 ans","Universités et écoles","Marketeur, responsable communication","Très adaptée au numérique."],
+
+  ["🏗️","Génie civil","Conception et réalisation des infrastructures.","Mathématiques, physique, mécanique","3 à 5 ans","Écoles d'ingénieurs","Ingénieur civil, conducteur de travaux","Forte utilité dans les infrastructures."],
+
+  ["⚡","Génie électrique","Production, transport et utilisation de l'énergie électrique.","Mathématiques, physique, électronique","3 à 5 ans","Écoles d'ingénieurs","Ingénieur électrique, automaticien","Nombreux secteurs industriels."],
+
+  ["🏛️","Architecture","Conception des bâtiments et espaces.","Dessin, mathématiques, conception","5 ans et plus","Écoles d'architecture","Architecte, urbaniste","Possibilités internationales avec équivalences."],
+
+  ["🌱","Agronomie","Sciences de la production agricole et gestion des ressources.","Biologie, chimie, environnement","3 à 5 ans","Universités et instituts","Agronome, technicien agricole","Important pour le développement agricole."],
+
+  ["⚖️","Droit","Étude des règles juridiques et des institutions.","Droit civil, droit public, droit international","3 à 5 ans","Facultés de droit","Juriste, avocat, magistrat","Les règles professionnelles varient selon les pays."],
+
+  ["🌍","Relations internationales","Analyse des relations entre États et organisations.","Politique, droit, économie, langues","3 à 5 ans","Universités","Diplomatie, ONG, analyste","Intéressant pour les carrières internationales."],
+
+  ["🎙️","Communication","Création et gestion de contenus et stratégies de communication.","Communication, médias, marketing","3 à 5 ans","Universités et écoles","Chargé de communication, journaliste","Débouchés dans les médias et entreprises."],
+
+  ["👨‍🏫","Sciences de l'éducation","Étude de l'enseignement et des systèmes éducatifs.","Pédagogie, psychologie, didactique","3 à 5 ans","Universités","Enseignant, conseiller pédagogique","Utile dans l'éducation et la formation."],
+
+  ["✈️","Tourisme & hôtellerie","Gestion des activités touristiques et hôtelières.","Gestion, langues, tourisme","2 à 5 ans","Instituts et écoles","Hôtelier, agent touristique","Secteur international."],
+
+  ["🚚","Logistique","Gestion des flux de marchandises et transports.","Gestion, transport, statistiques","3 à 5 ans","Universités et écoles","Logisticien, supply chain manager","Très utile dans le commerce international."],
+
+  ["🎨","Design graphique","Création visuelle et communication graphique.","Design, logiciels créatifs, communication","2 à 4 ans","Écoles et instituts","Designer, graphiste, UI designer","Possibilité de travailler à distance."],
+
+  ["🏃","Sciences du sport","Étude de l'activité physique et de la performance.","Biologie, physiologie, entraînement","3 à 5 ans","Universités","Coach, préparateur physique, enseignant","Débouchés dans le sport et la santé."]
+];
+
+
+function renderFields(){
+
+  const container=document.getElementById("fieldsContainer");
+
+  container.innerHTML="";
+
+  fields.forEach(field=>{
+
+    const card=document.createElement("div");
+
+    card.className="card field-card";
+
+    card.innerHTML=`
+      <div style="font-size:30px;">${field[0]}</div>
+      <h3>${field[1]}</h3>
+      <p>${field[2]}</p>
+
+      <p class="small" style="margin-top:8px;">
+        <strong>Matières :</strong> ${field[3]}
+      </p>
+
+      <p class="small">
+        <strong>Durée :</strong> ${field[4]}
+      </p>
+
+      <p class="small">
+        <strong>Débouchés :</strong> ${field[6]}
+      </p>
+
+      <p class="small">
+        <strong>International :</strong> ${field[7]}
+      </p>
+    `;
+
+    container.appendChild(card);
+
+  });
+
 }
 
 
@@ -1181,42 +1480,39 @@ function calculateAverage(){
    COURS
 ========================= */
 
+let courses=JSON.parse(
+  localStorage.getItem("studentPlusCourses") || "[]"
+);
+
 function addCourse(){
 
-  const title=
-    document.getElementById("courseTitle").value.trim();
-
-  const subject=
-    document.getElementById("courseSubject").value.trim();
-
-  const description=
-    document.getElementById("courseDescription").value.trim();
-
-  const file=
-    document.getElementById("courseFile").files[0];
+  const title=document.getElementById("courseTitle").value.trim();
+  const subject=document.getElementById("courseSubject").value.trim();
+  const description=document.getElementById("courseDescription").value.trim();
+  const file=document.getElementById("courseFile").files[0];
 
   if(!title){
     alert("Ajoute un titre au cours.");
     return;
   }
 
-  let pdfUrl="";
-
-  if(file){
-    pdfUrl=URL.createObjectURL(file);
-  }
-
-  courses.push({
+  const course={
     id:Date.now(),
     title,
     subject,
     description,
-    pdfUrl,
+    fileName:file ? file.name : "",
+    pdf:file ? URL.createObjectURL(file) : "",
     completed:false,
     favorite:false
-  });
+  };
 
-  saveCourses();
+  courses.push(course);
+
+  localStorage.setItem(
+    "studentPlusCourses",
+    JSON.stringify(courses)
+  );
 
   document.getElementById("courseTitle").value="";
   document.getElementById("courseSubject").value="";
@@ -1224,97 +1520,104 @@ function addCourse(){
   document.getElementById("courseFile").value="";
 
   renderCourses();
-  updateDashboard();
+  updateHome();
+
 }
 
-function saveCourses(){
-  localStorage.setItem(
-    "studentPlusCourses",
-    JSON.stringify(courses)
-  );
-}
 
 function renderCourses(){
 
-  const list=document.getElementById("courseList");
+  const container=document.getElementById("coursesContainer");
 
-  const search=
-    document.getElementById("courseSearch").value.toLowerCase();
+  const search=document.getElementById("courseSearch")?.value.toLowerCase() || "";
 
-  const filtered=courses.filter(c=>
-    c.title.toLowerCase().includes(search) ||
-    c.subject.toLowerCase().includes(search)
-  );
+  container.innerHTML="";
 
-  list.innerHTML="";
+  courses
+    .filter(course=>
+      course.title.toLowerCase().includes(search) ||
+      course.subject.toLowerCase().includes(search)
+    )
+    .forEach(course=>{
 
-  if(!filtered.length){
-    list.innerHTML=
-      '<div class="card empty">Aucun cours enregistré.</div>';
-    return;
-  }
+      const card=document.createElement("div");
 
-  filtered.forEach(c=>{
+      card.className="card";
 
-    const div=document.createElement("div");
+      card.innerHTML=`
+        <span class="badge">${course.subject || "Cours"}</span>
 
-    div.className="card";
+        <h3 style="margin-top:8px;">
+          ${course.favorite ? "⭐ " : ""}
+          ${course.title}
+        </h3>
 
-    div.innerHTML=`
-      <h2>${c.favorite?"⭐ ":""}${c.title}</h2>
-      <p><strong>Matière :</strong> ${c.subject}</p>
-      <p>${c.description}</p>
+        <p>${course.description || ""}</p>
 
-      <button class="secondary"
-        onclick="toggleFavorite(${c.id})">
-        ${c.favorite?"★ Favori":"☆ Ajouter aux favoris"}
-      </button>
+        <p class="small">
+          ${course.fileName || "Aucun PDF"}
+        </p>
 
-      <button class="secondary"
-        onclick="toggleCourse(${c.id})">
-        ${c.completed?"✅ Terminé":"☐ Marquer terminé"}
-      </button>
+        <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;">
 
-      ${
-        c.pdfUrl
-        ? `<a href="${c.pdfUrl}" target="_blank">
-             <button class="primary">📄 Ouvrir PDF</button>
-           </a>`
-        : ""
-      }
+          ${
+            course.pdf
+            ? `<a href="${course.pdf}" target="_blank">
+                <button class="primary">📖 Ouvrir PDF</button>
+              </a>`
+            : ""
+          }
 
-      <button class="danger"
-        onclick="deleteCourse(${c.id})">
-        Supprimer
-      </button>
-    `;
+          <button class="secondary" onclick="toggleCourseFavorite(${course.id})">
+            ⭐ Favori
+          </button>
 
-    list.appendChild(div);
-  });
+          <button class="secondary" onclick="toggleCourseComplete(${course.id})">
+            ${course.completed ? "✅ Terminé" : "☑️ Terminer"}
+          </button>
+
+          <button class="danger" onclick="deleteCourse(${course.id})">
+            🗑️ Supprimer
+          </button>
+
+        </div>
+      `;
+
+      container.appendChild(card);
+
+    });
+
 }
 
-function toggleFavorite(id){
 
-  const c=courses.find(x=>x.id===id);
+function toggleCourseFavorite(id){
 
-  if(c){
-    c.favorite=!c.favorite;
-    saveCourses();
-    renderCourses();
+  const course=courses.find(c=>c.id===id);
+
+  if(course){
+    course.favorite=!course.favorite;
   }
+
+  saveCourses();
+  renderCourses();
+
 }
 
-function toggleCourse(id){
 
-  const c=courses.find(x=>x.id===id);
+function toggleCourseComplete(id){
 
-  if(c){
-    c.completed=!c.completed;
-    saveCourses();
-    renderCourses();
-    updateDashboard();
+  const course=courses.find(c=>c.id===id);
+
+  if(course){
+    course.completed=!course.completed;
   }
+
+  saveCourses();
+  renderCourses();
+  updateHome();
+
 }
+
 
 function deleteCourse(id){
 
@@ -1322,7 +1625,18 @@ function deleteCourse(id){
 
   saveCourses();
   renderCourses();
-  updateDashboard();
+  updateHome();
+
+}
+
+
+function saveCourses(){
+
+  localStorage.setItem(
+    "studentPlusCourses",
+    JSON.stringify(courses)
+  );
+
 }
 
 
@@ -1330,30 +1644,28 @@ function deleteCourse(id){
    ETUDES
 ========================= */
 
+let studies=JSON.parse(
+  localStorage.getItem("studentPlusStudies") || "[]"
+);
+
+
 function addStudy(){
 
-  const subject=
-    document.getElementById("studySubject").value.trim();
+  const subject=document.getElementById("studySubject").value.trim();
+  const grade=parseFloat(document.getElementById("studyGrade").value);
+  const target=parseFloat(document.getElementById("studyTarget").value);
+  const comment=document.getElementById("studyComment").value.trim();
 
-  const grade=
-    parseFloat(document.getElementById("studyGrade").value);
-
-  const target=
-    parseFloat(document.getElementById("studyTarget").value);
-
-  const comment=
-    document.getElementById("studyComment").value.trim();
-
-  if(!subject){
-    alert("Indique la matière.");
+  if(!subject || isNaN(grade)){
+    alert("Remplis la matière et la note.");
     return;
   }
 
   studies.push({
     id:Date.now(),
     subject,
-    grade:isNaN(grade)?0:grade,
-    target:isNaN(target)?20:target,
+    grade,
+    target:isNaN(target) ? 16 : target,
     comment
   });
 
@@ -1364,72 +1676,69 @@ function addStudy(){
 
   document.getElementById("studySubject").value="";
   document.getElementById("studyGrade").value="";
-  document.getElementById("studyTarget").value="";
   document.getElementById("studyComment").value="";
 
-  renderStudies();
-  updateDashboard();
+  renderStudy();
+
 }
 
-function renderStudies(){
 
-  const list=document.getElementById("studyList");
+function renderStudy(){
 
-  list.innerHTML="";
+  const container=document.getElementById("studyContainer");
 
-  if(!studies.length){
-    list.innerHTML=
-      '<div class="card empty">Aucun objectif enregistré.</div>';
-    return;
-  }
+  container.innerHTML="";
 
-  studies.forEach(s=>{
+  studies.forEach(item=>{
 
-    const percentage=
-      Math.min(100,Math.max(0,(s.grade/s.target)*100));
+    const progress=Math.min(
+      100,
+      Math.max(0,(item.grade/item.target)*100)
+    );
 
-    const div=document.createElement("div");
+    const card=document.createElement("div");
 
-    div.className="card";
+    card.className="card";
 
-    div.innerHTML=`
-      <h2>${s.subject}</h2>
+    card.innerHTML=`
+      <h3>${item.subject}</h3>
 
       <p>
-        Note : <strong>${s.grade}/20</strong>
-        — Objectif : <strong>${s.target}/20</strong>
+        Note : <strong>${item.grade}/20</strong>
+        • Objectif : <strong>${item.target}/20</strong>
       </p>
 
       <div class="progress">
-        <div class="progress-bar"
-             style="width:${percentage}%"></div>
+        <div class="progress-bar" style="width:${progress}%"></div>
       </div>
 
-      <p>${percentage.toFixed(0)}% de l'objectif</p>
+      <p class="small" style="margin-top:8px;">
+        ${item.comment || ""}
+      </p>
 
-      <p>${s.comment}</p>
-
-      <button class="danger"
-        onclick="deleteStudy(${s.id})">
-        Supprimer
+      <button class="danger" onclick="deleteStudy(${item.id})">
+        🗑️ Supprimer
       </button>
     `;
 
-    list.appendChild(div);
+    container.appendChild(card);
+
   });
+
 }
+
 
 function deleteStudy(id){
 
-  studies=studies.filter(s=>s.id!==id);
+  studies=studies.filter(item=>item.id!==id);
 
   localStorage.setItem(
     "studentPlusStudies",
     JSON.stringify(studies)
   );
 
-  renderStudies();
-  updateDashboard();
+  renderStudy();
+
 }
 
 
@@ -1437,13 +1746,15 @@ function deleteStudy(id){
    PLANNING
 ========================= */
 
+let planning=JSON.parse(
+  localStorage.getItem("studentPlusPlanning") || "[]"
+);
+
+
 function addPlanning(){
 
-  const date=
-    document.getElementById("planDate").value;
-
-  const activity=
-    document.getElementById("planActivity").value.trim();
+  const date=document.getElementById("planDate").value;
+  const activity=document.getElementById("planActivity").value.trim();
 
   if(!date || !activity){
     alert("Remplis la date et l'activité.");
@@ -1462,65 +1773,73 @@ function addPlanning(){
     JSON.stringify(planning)
   );
 
-  document.getElementById("planDate").value="";
   document.getElementById("planActivity").value="";
 
   renderPlanning();
+
 }
+
 
 function renderPlanning(){
 
-  const list=document.getElementById("planningList");
+  const container=document.getElementById("planningContainer");
 
-  list.innerHTML="";
+  container.innerHTML="";
 
   planning
     .sort((a,b)=>a.date.localeCompare(b.date))
-    .forEach(p=>{
+    .forEach(item=>{
 
       const div=document.createElement("div");
 
-      div.className="card";
+      div.className="list-item";
 
       div.innerHTML=`
-        <h3>${p.done?"✅":"📅"} ${p.activity}</h3>
-        <p>${p.date}</p>
+        <strong>
+          ${item.done ? "✅" : "⬜"} ${item.activity}
+        </strong>
 
-        <button class="secondary"
-          onclick="togglePlanning(${p.id})">
-          ${p.done?"À refaire":"Terminé"}
+        <p class="small">${item.date}</p>
+
+        <button
+          class="secondary"
+          onclick="togglePlanning(${item.id})"
+        >
+          ${item.done ? "Marquer non terminé" : "Terminer"}
         </button>
 
-        <button class="danger"
-          onclick="deletePlanning(${p.id})">
-          Supprimer
+        <button
+          class="danger"
+          onclick="deletePlanning(${item.id})"
+        >
+          🗑️
         </button>
       `;
 
-      list.appendChild(div);
+      container.appendChild(div);
+
     });
 
-  if(!planning.length){
-    list.innerHTML=
-      '<div class="card empty">Aucune activité planifiée.</div>';
-  }
 }
+
 
 function togglePlanning(id){
 
-  const p=planning.find(x=>x.id===id);
+  const item=planning.find(p=>p.id===id);
 
-  if(p){
-    p.done=!p.done;
-
-    localStorage.setItem(
-      "studentPlusPlanning",
-      JSON.stringify(planning)
-    );
-
-    renderPlanning();
+  if(item){
+    item.done=!item.done;
   }
+
+  localStorage.setItem(
+    "studentPlusPlanning",
+    JSON.stringify(planning)
+  );
+
+  renderPlanning();
+
 }
+
 
 function deletePlanning(id){
 
@@ -1532,6 +1851,7 @@ function deletePlanning(id){
   );
 
   renderPlanning();
+
 }
 
 
@@ -1539,169 +1859,188 @@ function deletePlanning(id){
    BUDGET
 ========================= */
 
-function getSelectedMonth(){
+let budget=JSON.parse(
+  localStorage.getItem("studentPlusBudget") || "[]"
+);
 
-  const input=document.getElementById("budgetMonth");
 
-  if(input.value) return input.value;
+function addBudget(){
 
-  const now=new Date();
+  const type=document.getElementById("budgetType").value;
+  const amount=parseFloat(document.getElementById("budgetAmount").value);
+  const category=document.getElementById("budgetCategory").value;
+  const date=document.getElementById("budgetDate").value;
+  const description=document.getElementById("budgetDescription").value.trim();
 
-  return `${now.getFullYear()}-${String(
-    now.getMonth()+1
-  ).padStart(2,"0")}`;
-}
-
-function addOperation(){
-
-  const type=
-    document.getElementById("operationType").value;
-
-  const amount=
-    parseFloat(document.getElementById("operationAmount").value);
-
-  const category=
-    document.getElementById("operationCategory").value;
-
-  const date=
-    document.getElementById("operationDate").value;
-
-  const description=
-    document.getElementById("operationDescription").value.trim();
-
-  if(!amount || amount<=0){
+  if(isNaN(amount) || amount<=0){
     alert("Entre un montant valide.");
     return;
   }
 
-  const finalDate=
-    date || new Date().toISOString().slice(0,10);
+  if(!date){
+    alert("Choisis une date.");
+    return;
+  }
 
-  operations.push({
+  budget.push({
     id:Date.now(),
     type,
     amount,
     category,
-    date:finalDate,
+    date,
     description
   });
 
   localStorage.setItem(
-    "studentPlusOperations",
-    JSON.stringify(operations)
+    "studentPlusBudget",
+    JSON.stringify(budget)
   );
 
-  document.getElementById("operationAmount").value="";
-  document.getElementById("operationDescription").value="";
+  document.getElementById("budgetAmount").value="";
+  document.getElementById("budgetDescription").value="";
 
   renderBudget();
-  updateDashboard();
+
 }
+
 
 function renderBudget(){
 
-  const month=getSelectedMonth();
+  const month=
+    document.getElementById("budgetMonth").value ||
+    new Date().toISOString().slice(0,7);
 
-  const filtered=operations.filter(o=>
-    o.date.startsWith(month)
+  document.getElementById("budgetMonth").value=month;
+
+  const monthData=budget.filter(item=>
+    item.date.startsWith(month)
   );
 
   let income=0;
   let expense=0;
 
-  filtered.forEach(o=>{
-    if(o.type==="income"){
-      income+=o.amount;
+  monthData.forEach(item=>{
+
+    if(item.type==="income"){
+      income+=item.amount;
     }else{
-      expense+=o.amount;
+      expense+=item.amount;
     }
+
   });
 
-  document.getElementById("totalIncome")
-    .textContent=income.toFixed(2);
+  document.getElementById("totalIncome").textContent=
+    income.toFixed(2);
 
-  document.getElementById("totalExpense")
-    .textContent=expense.toFixed(2);
+  document.getElementById("totalExpense").textContent=
+    expense.toFixed(2);
 
-  document.getElementById("totalBalance")
-    .textContent=(income-expense).toFixed(2);
+  document.getElementById("totalBalance").textContent=
+    (income-expense).toFixed(2);
+
+  document.getElementById("homeBalance").textContent=
+    (income-expense).toFixed(2);
+
+  renderBudgetCategories(monthData);
+  renderBudgetHistory(monthData);
+
+}
+
+
+function renderBudgetCategories(data){
+
+  const container=document.getElementById("budgetCategories");
 
   const categories={};
 
-  filtered
-    .filter(o=>o.type==="expense")
-    .forEach(o=>{
-      categories[o.category]=
-        (categories[o.category]||0)+o.amount;
+  data
+    .filter(item=>item.type==="expense")
+    .forEach(item=>{
+
+      categories[item.category]=
+        (categories[item.category] || 0)+item.amount;
+
     });
 
-  const breakdown=
-    document.getElementById("categoryBreakdown");
+  container.innerHTML="";
 
-  breakdown.innerHTML="";
+  Object.entries(categories).forEach(([category,total])=>{
 
-  Object.entries(categories).forEach(([cat,value])=>{
+    const div=document.createElement("div");
 
-    breakdown.innerHTML+=`
-      <div class="operation">
-        <strong>${cat}</strong>
-        <span style="float:right">${value.toFixed(2)}</span>
-      </div>
+    div.className="list-item";
+
+    div.innerHTML=`
+      <strong>${category}</strong>
+      <span style="float:right;">
+        ${total.toFixed(2)}
+      </span>
     `;
+
+    container.appendChild(div);
+
   });
 
   if(!Object.keys(categories).length){
-    breakdown.innerHTML=
-      '<div class="empty">Aucune dépense ce mois.</div>';
+    container.innerHTML="<p class='small'>Aucune dépense pour ce mois.</p>";
   }
 
-  const history=
-    document.getElementById("operationHistory");
-
-  history.innerHTML="";
-
-  [...filtered]
-    .reverse()
-    .forEach(o=>{
-
-      history.innerHTML+=`
-        <div class="operation">
-          <strong class="${o.type==="income"?"positive":"negative"}">
-            ${o.type==="income"?"+":"-"}${o.amount.toFixed(2)}
-          </strong>
-
-          — ${o.category}
-          — ${o.date}
-
-          ${o.description ? `<br>${o.description}` : ""}
-
-          <br>
-          <button class="danger"
-            onclick="deleteOperation(${o.id})">
-            Supprimer
-          </button>
-        </div>
-      `;
-    });
-
-  if(!filtered.length){
-    history.innerHTML=
-      '<div class="empty">Aucune opération ce mois.</div>';
-  }
 }
 
-function deleteOperation(id){
 
-  operations=
-    operations.filter(o=>o.id!==id);
+function renderBudgetHistory(data){
+
+  const container=document.getElementById("budgetHistory");
+
+  container.innerHTML="";
+
+  data
+    .slice()
+    .reverse()
+    .forEach(item=>{
+
+      const div=document.createElement("div");
+
+      div.className="list-item";
+
+      div.innerHTML=`
+        <strong>
+          ${item.type==="income" ? "💵" : "💸"}
+          ${item.amount.toFixed(2)}
+        </strong>
+
+        <p class="small">
+          ${item.category} • ${item.date}
+        </p>
+
+        <p>${item.description || ""}</p>
+
+        <button
+          class="danger"
+          onclick="deleteBudget(${item.id})"
+        >
+          🗑️ Supprimer
+        </button>
+      `;
+
+      container.appendChild(div);
+
+    });
+
+}
+
+
+function deleteBudget(id){
+
+  budget=budget.filter(item=>item.id!==id);
 
   localStorage.setItem(
-    "studentPlusOperations",
-    JSON.stringify(operations)
+    "studentPlusBudget",
+    JSON.stringify(budget)
   );
 
   renderBudget();
-  updateDashboard();
+
 }
 
 
@@ -1711,30 +2050,17 @@ function deleteOperation(id){
 
 function saveProfile(){
 
-  profile={
-    lastName:
-      document.getElementById("profileLastName").value,
+  const profile={
 
-    firstName:
-      document.getElementById("profileFirstName").value,
+    lastName:document.getElementById("profileLastName").value,
+    firstName:document.getElementById("profileFirstName").value,
+    country:document.getElementById("profileCountry").value,
+    university:document.getElementById("profileUniversity").value,
+    level:document.getElementById("profileLevel").value,
+    field:document.getElementById("profileField").value,
+    academic:document.getElementById("profileAcademic").value,
+    professional:document.getElementById("profileProfessional").value
 
-    country:
-      document.getElementById("profileCountry").value,
-
-    university:
-      document.getElementById("profileUniversity").value,
-
-    level:
-      document.getElementById("profileLevel").value,
-
-    field:
-      document.getElementById("profileField").value,
-
-    academicGoal:
-      document.getElementById("profileAcademicGoal").value,
-
-    careerGoal:
-      document.getElementById("profileCareerGoal").value
   };
 
   localStorage.setItem(
@@ -1742,107 +2068,67 @@ function saveProfile(){
     JSON.stringify(profile)
   );
 
-  renderProfile();
+  alert("✅ Profil enregistré !");
 
-  alert("Profil enregistré avec succès.");
 }
 
-function renderProfile(){
+
+function loadProfile(){
+
+  const profile=JSON.parse(
+    localStorage.getItem("studentPlusProfile") || "null"
+  );
+
+  if(!profile) return;
 
   document.getElementById("profileLastName").value=
-    profile.lastName||"";
+    profile.lastName || "";
 
   document.getElementById("profileFirstName").value=
-    profile.firstName||"";
+    profile.firstName || "";
 
   document.getElementById("profileCountry").value=
-    profile.country||"";
+    profile.country || "";
 
   document.getElementById("profileUniversity").value=
-    profile.university||"";
+    profile.university || "";
 
   document.getElementById("profileLevel").value=
-    profile.level||"";
+    profile.level || "";
 
   document.getElementById("profileField").value=
-    profile.field||"";
+    profile.field || "";
 
-  document.getElementById("profileAcademicGoal").value=
-    profile.academicGoal||"";
+  document.getElementById("profileAcademic").value=
+    profile.academic || "";
 
-  document.getElementById("profileCareerGoal").value=
-    profile.careerGoal||"";
+  document.getElementById("profileProfessional").value=
+    profile.professional || "";
 
-  const result=
-    document.getElementById("profileResult");
-
-  if(profile.firstName || profile.lastName){
-
-    result.innerHTML=`
-      <div class="card">
-        <h2>👋 Bonjour ${profile.firstName||""} ${profile.lastName||""}</h2>
-        <p><strong>Filière :</strong> ${profile.field||"—"}</p>
-        <p><strong>Établissement :</strong> ${profile.university||"—"}</p>
-        <p><strong>Niveau :</strong> ${profile.level||"—"}</p>
-      </div>
-    `;
-  }
 }
 
 
 /* =========================
-   DASHBOARD
+   ACCUEIL
 ========================= */
 
-function updateDashboard(){
+function updateHome(){
 
   const average=
     localStorage.getItem("studentPlusAverage");
 
-  document.getElementById("homeAverage")
-    .textContent=
-      average ? `${average}/20` : "—";
+  document.getElementById("homeAverage").textContent=
+    average ? average+"/20" : "--";
 
-  const month=getSelectedMonth();
+  const completed=courses.filter(
+    course=>course.completed
+  ).length;
 
-  const monthly=
-    operations.filter(o=>o.date.startsWith(month));
+  document.getElementById("homeCourses").textContent=
+    completed;
 
-  let income=0;
-  let expense=0;
+  renderBudget();
 
-  monthly.forEach(o=>{
-    if(o.type==="income"){
-      income+=o.amount;
-    }else{
-      expense+=o.amount;
-    }
-  });
-
-  document.getElementById("homeBalance")
-    .textContent=
-      (income-expense).toFixed(2);
-
-  const completed=
-    courses.filter(c=>c.completed).length;
-
-  document.getElementById("homeCourses")
-    .textContent=completed;
-
-  let progress=0;
-
-  if(studies.length){
-
-    progress=
-      studies.reduce((sum,s)=>{
-        return sum+
-          Math.min(100,(s.grade/s.target)*100);
-      },0)/studies.length;
-  }
-
-  document.getElementById("homeProgress")
-    .textContent=
-      `${progress.toFixed(0)}%`;
 }
 
 
@@ -1852,139 +2138,57 @@ function updateDashboard(){
 
 const translations={
 
-fr:{
-home:"🏠 Accueil",
-bac:"📊 BAC / Moyenne",
-fields:"🎓 Filières",
-courses:"📄 Cours PDF",
-studies:"📚 Études",
-planning:"📅 Planning",
-budget:"💰 Budget",
-profile:"👤 Profil"
-},
+  fr:{
+    title:"Assistant étudiant international"
+  },
 
-en:{
-home:"🏠 Home",
-bac:"📊 Grades",
-fields:"🎓 Fields",
-courses:"📄 PDF Courses",
-studies:"📚 Studies",
-planning:"📅 Planning",
-budget:"💰 Budget",
-profile:"👤 Profile"
-},
+  en:{
+    title:"International Student Assistant"
+  },
 
-es:{
-home:"🏠 Inicio",
-bac:"📊 Notas",
-fields:"🎓 Carreras",
-courses:"📄 Cursos PDF",
-studies:"📚 Estudios",
-planning:"📅 Planificación",
-budget:"💰 Presupuesto",
-profile:"👤 Perfil"
-},
+  es:{
+    title:"Asistente de estudiante internacional"
+  },
 
-pt:{
-home:"🏠 Início",
-bac:"📊 Notas",
-fields:"🎓 Cursos",
-courses:"📄 Cursos PDF",
-studies:"📚 Estudos",
-planning:"📅 Planejamento",
-budget:"💰 Orçamento",
-profile:"👤 Perfil"
-},
+  pt:{
+    title:"Assistente de estudante internacional"
+  },
 
-de:{
-home:"🏠 Startseite",
-bac:"📊 Noten",
-fields:"🎓 Studiengänge",
-courses:"📄 PDF-Kurse",
-studies:"📚 Studium",
-planning:"📅 Planung",
-budget:"💰 Budget",
-profile:"👤 Profil"
-},
+  de:{
+    title:"Internationaler Studentenassistent"
+  },
 
-it:{
-home:"🏠 Home",
-bac:"📊 Voti",
-fields:"🎓 Corsi",
-courses:"📄 Corsi PDF",
-studies:"📚 Studi",
-planning:"📅 Pianificazione",
-budget:"💰 Budget",
-profile:"👤 Profilo"
-},
+  it:{
+    title:"Assistente studente internazionale"
+  },
 
-zh:{
-home:"🏠 首页",
-bac:"📊 成绩",
-fields:"🎓 专业",
-courses:"📄 PDF课程",
-studies:"📚 学习",
-planning:"📅 计划",
-budget:"💰 预算",
-profile:"👤 个人资料"
-},
+  zh:{
+    title:"国际学生助手"
+  },
 
-ru:{
-home:"🏠 Главная",
-bac:"📊 Оценки",
-fields:"🎓 Специальности",
-courses:"📄 PDF-курсы",
-studies:"📚 Учёба",
-planning:"📅 План",
-budget:"💰 Бюджет",
-profile:"👤 Профиль"
-}
+  ru:{
+    title:"Помощник иностранного студента"
+  }
 
 };
 
+
 function changeLanguage(){
 
-  currentLanguage=
-    document.getElementById("languageSelect").value;
+  const lang=document.getElementById("languageSelect").value;
 
   localStorage.setItem(
     "studentPlusLanguage",
-    currentLanguage
+    lang
   );
 
-  const t=
-    translations[currentLanguage];
+  const subtitle=document.querySelector(".subtitle");
 
-  const buttons=
-    document.querySelectorAll("nav button");
-
-  if(buttons.length>=8){
-
-    buttons[0].textContent=t.home;
-    buttons[1].textContent=t.bac;
-    buttons[2].textContent=t.fields;
-    buttons[3].textContent=t.courses;
-    buttons[4].textContent=t.studies;
-    buttons[5].textContent=t.planning;
-    buttons[6].textContent=t.budget;
-    buttons[7].textContent=t.profile;
+  if(translations[lang]){
+    subtitle.textContent=
+      translations[lang].title;
   }
-}
 
-
-/* =========================
-   PAYS
-========================= */
-
-function changeCountry(){
-
-  const country=
-    document.getElementById("countrySelect").value;
-
-  localStorage.setItem(
-    "studentPlusCountry",
-    country
-  );
 }
 
 
@@ -1992,40 +2196,48 @@ function changeCountry(){
    INITIALISATION
 ========================= */
 
-function init(){
+document.getElementById("languageSelect")
+  .addEventListener("change",changeLanguage);
+
+document.getElementById("countrySelect")
+  .addEventListener("change",function(){
+
+    document.getElementById("bacCountry").value=this.value;
+
+    loadSeries();
+
+  });
+
+
+document.getElementById("budgetMonth").value=
+  new Date().toISOString().slice(0,7);
+
+document.getElementById("budgetDate").value=
+  new Date().toISOString().slice(0,10);
+
+document.getElementById("planDate").value=
+  new Date().toISOString().slice(0,10);
+
+const savedLanguage=
+  localStorage.getItem("studentPlusLanguage");
+
+if(savedLanguage){
 
   document.getElementById("languageSelect").value=
-    currentLanguage;
+    savedLanguage;
 
-  const savedCountry=
-    localStorage.getItem("studentPlusCountry");
-
-  if(savedCountry){
-    document.getElementById("countrySelect").value=
-      savedCountry;
-  }
-
-  const now=new Date();
-
-  document.getElementById("budgetMonth").value=
-    `${now.getFullYear()}-${String(
-      now.getMonth()+1
-    ).padStart(2,"0")}`;
-
-  document.getElementById("operationDate").value=
-    now.toISOString().slice(0,10);
-
-  renderFields();
-  renderCourses();
-  renderStudies();
-  renderPlanning();
-  renderBudget();
-  renderProfile();
-  updateDashboard();
   changeLanguage();
+
 }
 
-init();
+renderFields();
+loadProfile();
+loadSeries();
+renderCourses();
+renderStudy();
+renderPlanning();
+renderBudget();
+updateHome();
 
 </script>
 
