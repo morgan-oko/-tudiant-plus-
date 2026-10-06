@@ -3,22 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#2563eb">
 <title>Étudiant+ — Assistant étudiant</title>
 
 <style>
 :root{
   --primary:#2563eb;
   --primary-dark:#1d4ed8;
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --text:#172033;
-  --muted:#64748b;
-  --border:#e5e7eb;
+  --secondary:#7c3aed;
   --success:#16a34a;
   --warning:#f59e0b;
   --danger:#dc2626;
-  --shadow:0 8px 25px rgba(15,23,42,.07);
+  --dark:#0f172a;
+  --text:#334155;
+  --muted:#64748b;
+  --light:#f8fafc;
+  --border:#e2e8f0;
+  --white:#fff;
+  --shadow:0 10px 30px rgba(15,23,42,.08);
+  --radius:20px;
 }
 
 *{
@@ -27,17 +30,18 @@
   padding:0;
 }
 
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.5;
+html{
+  scroll-behavior:smooth;
 }
 
-button,
-input,
-select,
-textarea{
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f1f5f9;
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input,select,textarea{
   font:inherit;
 }
 
@@ -45,172 +49,183 @@ button{
   cursor:pointer;
 }
 
-header{
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* ================= HEADER ================= */
+
+.header{
   position:sticky;
   top:0;
-  z-index:100;
-  background:#fff;
+  z-index:1000;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
 }
 
 .header-inner{
-  max-width:1200px;
+  max-width:1400px;
   margin:auto;
   padding:14px 20px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:15px;
+  gap:20px;
 }
 
 .logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
   font-size:22px;
-  font-weight:800;
+  font-weight:900;
+  color:var(--dark);
+  white-space:nowrap;
+}
+
+.logo span{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+}
+
+.nav{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  flex:1;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  padding:10px 13px;
+  border-radius:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  font-weight:700;
+}
+
+.nav button:hover,
+.nav button.active{
+  background:#eff6ff;
   color:var(--primary);
 }
 
-.header-controls{
+.header-actions{
   display:flex;
   gap:8px;
 }
 
-select{
+.select{
   border:1px solid var(--border);
-  background:#fff;
-  padding:9px 11px;
+  background:white;
+  padding:9px 10px;
   border-radius:10px;
 }
 
-nav{
-  max-width:1200px;
+/* ================= MAIN ================= */
+
+.container{
+  max-width:1400px;
   margin:auto;
-  padding:0 20px 12px;
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-}
-
-nav button{
-  border:0;
-  background:#f1f5f9;
-  padding:9px 13px;
-  border-radius:10px;
-  white-space:nowrap;
-  color:#334155;
-}
-
-nav button.active,
-nav button:hover{
-  background:var(--primary);
-  color:#fff;
-}
-
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:25px 20px 90px;
+  padding:28px 20px 60px;
 }
 
 .section{
   display:none;
+  animation:fade .25s ease;
 }
 
 .section.active{
   display:block;
 }
 
+@keyframes fade{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ================= HERO ================= */
+
 .hero{
-  background:linear-gradient(135deg,#2563eb,#4f46e5);
-  color:#fff;
-  border-radius:22px;
-  padding:28px;
-  margin-bottom:22px;
+  background:linear-gradient(135deg,#1d4ed8,#7c3aed);
+  color:white;
+  padding:35px;
+  border-radius:28px;
   box-shadow:var(--shadow);
+  margin-bottom:25px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  right:-80px;
+  top:-100px;
 }
 
 .hero h1{
-  font-size:30px;
-  margin-bottom:8px;
+  font-size:clamp(28px,5vw,46px);
+  line-height:1.1;
+  margin-bottom:10px;
+  position:relative;
+  z-index:1;
 }
 
 .hero p{
+  max-width:700px;
   opacity:.92;
+  position:relative;
+  z-index:1;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:22px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-
-.card h3{
-  margin-bottom:8px;
-}
-
-.stat{
-  font-size:28px;
-  font-weight:800;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.progress{
-  height:10px;
-  background:#e2e8f0;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:12px;
-}
-
-.progress-bar{
-  height:100%;
-  background:var(--primary);
-  width:0%;
-  transition:.3s;
-}
-
-.section-title{
+.hero-actions{
+  margin-top:22px;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  flex-wrap:wrap;
   gap:10px;
-  margin-bottom:15px;
+  position:relative;
+  z-index:1;
 }
 
-.section-title h2{
-  font-size:22px;
-}
+/* ================= BUTTONS ================= */
 
 .btn{
   border:0;
-  border-radius:11px;
-  padding:10px 15px;
-  font-weight:700;
+  border-radius:12px;
+  padding:11px 16px;
+  font-weight:800;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
 }
 
 .btn-primary{
   background:var(--primary);
-  color:#fff;
-}
-
-.btn-primary:hover{
-  background:var(--primary-dark);
+  color:white;
 }
 
 .btn-secondary{
-  background:#e2e8f0;
-  color:#334155;
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+.btn-success{
+  background:#dcfce7;
+  color:#166534;
 }
 
 .btn-danger{
@@ -218,256 +233,469 @@ main{
   color:#991b1b;
 }
 
-.form{
-  display:grid;
-  gap:12px;
+.btn-light{
+  background:white;
+  color:var(--dark);
 }
 
-.form input,
-.form select,
-.form textarea{
+.btn-outline{
+  background:white;
+  color:var(--primary);
+  border:1px solid #bfdbfe;
+}
+
+/* ================= CARDS ================= */
+
+.grid{
+  display:grid;
+  gap:18px;
+}
+
+.grid-2{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid-3{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.grid-4{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:0 5px 20px rgba(15,23,42,.04);
+}
+
+.card h3{
+  color:var(--dark);
+  margin-bottom:8px;
+}
+
+.card-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.stat{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.stat-icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:#eff6ff;
+  font-size:25px;
+}
+
+.stat strong{
+  display:block;
+  color:var(--dark);
+  font-size:25px;
+}
+
+.stat small{
+  color:var(--muted);
+}
+
+/* ================= FORMS ================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+label{
+  font-weight:800;
+  font-size:14px;
+  color:var(--dark);
+}
+
+input,
+select,
+textarea{
   width:100%;
   border:1px solid var(--border);
-  border-radius:11px;
-  padding:11px 12px;
-  background:#fff;
+  border-radius:12px;
+  padding:11px 13px;
+  outline:none;
+  background:white;
 }
 
-.form textarea{
-  min-height:90px;
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#93c5fd;
+  box-shadow:0 0 0 3px #dbeafe;
+}
+
+textarea{
+  min-height:100px;
   resize:vertical;
 }
 
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+/* ================= PROGRESS ================= */
+
+.progress{
+  width:100%;
+  height:10px;
+  background:#e2e8f0;
+  border-radius:999px;
+  overflow:hidden;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+.progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  border-radius:999px;
+  transition:.3s;
 }
 
-.empty{
-  text-align:center;
-  padding:35px 20px;
-  color:var(--muted);
+/* ================= TABLE ================= */
+
+.table-wrap{
+  overflow-x:auto;
 }
 
-.lesson-toolbar{
-  display:grid;
-  grid-template-columns:1fr 180px;
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.lesson-toolbar input{
-  border:1px solid var(--border);
-  padding:12px;
-  border-radius:11px;
-}
-
-.lesson-list{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.lesson-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:18px;
-  box-shadow:var(--shadow);
-  position:relative;
-}
-
-.lesson-icon{
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:#eff6ff;
-  font-size:25px;
-  margin-bottom:12px;
-}
-
-.lesson-card h3{
-  margin-bottom:5px;
-}
-
-.lesson-meta{
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:12px;
-}
-
-.lesson-status{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:12px;
-}
-
-.status-done{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.status-todo{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.favorite{
-  position:absolute;
-  right:15px;
-  top:15px;
-  border:0;
-  background:none;
-  font-size:21px;
-}
-
-.table{
+table{
   width:100%;
   border-collapse:collapse;
+  min-width:650px;
 }
 
-.table th,
-.table td{
-  padding:12px 8px;
+th,td{
+  padding:12px;
   border-bottom:1px solid var(--border);
   text-align:left;
 }
 
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:700;
+th{
+  color:var(--dark);
+  background:#f8fafc;
 }
 
-.badge-green{
-  background:#dcfce7;
-  color:#166534;
+/* ================= FILIERES ================= */
+
+.section-heading{
+  margin-bottom:22px;
 }
 
-.badge-yellow{
-  background:#fef3c7;
-  color:#92400e;
+.section-heading h2{
+  color:var(--dark);
+  font-size:30px;
 }
 
-.badge-red{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-footer{
-  text-align:center;
-  padding:30px 20px;
+.section-heading p{
   color:var(--muted);
 }
 
-.mobile-nav{
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.toolbar input{
+  flex:1;
+  min-width:230px;
+}
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.filter-btn{
+  border:1px solid var(--border);
+  background:white;
+  color:var(--muted);
+  padding:9px 13px;
+  border-radius:999px;
+  font-weight:700;
+}
+
+.filter-btn.active{
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.field-card{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  height:100%;
+}
+
+.field-icon{
+  font-size:35px;
+}
+
+.field-card h3{
+  font-size:19px;
+}
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.badge{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#475569;
+  font-size:12px;
+  font-weight:800;
+}
+
+.stars{
+  color:#f59e0b;
+  letter-spacing:1px;
+}
+
+.field-actions{
+  display:flex;
+  gap:8px;
+  margin-top:auto;
+  flex-wrap:wrap;
+}
+
+.compare-box{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--dark);
+  color:white;
+  padding:12px 16px;
+  border-radius:16px;
   display:none;
+  align-items:center;
+  gap:12px;
+  z-index:1500;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
-@media(max-width:900px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
+.compare-box.show{
+  display:flex;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:2000;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-content{
+  background:white;
+  width:min(1000px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:24px;
+  padding:25px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:16px;
+  top:16px;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:#f1f5f9;
+  font-size:20px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.detail{
+  background:#f8fafc;
+  border-radius:16px;
+  padding:16px;
+}
+
+.detail h4{
+  color:var(--dark);
+  margin-bottom:6px;
+}
+
+.detail ul{
+  padding-left:18px;
+}
+
+.modal-header{
+  padding-right:45px;
+}
+
+.modal-header h2{
+  color:var(--dark);
+  font-size:30px;
+}
+
+.modal-header p{
+  color:var(--muted);
+}
+
+/* ================= PDF ================= */
+
+.pdf-card{
+  position:relative;
+}
+
+.pdf-icon{
+  font-size:40px;
+  margin-bottom:8px;
+}
+
+.pdf-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.favorite{
+  color:#f59e0b;
+}
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+}
+
+/* ================= BUDGET ================= */
+
+.money{
+  font-size:30px;
+  font-weight:900;
+  color:var(--dark);
+}
+
+.positive{
+  color:var(--success);
+}
+
+.negative{
+  color:var(--danger);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  max-width:1400px;
+  margin:auto;
+  padding:25px 20px 40px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1000px){
+  .grid-4{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
-  .lesson-list{
-    grid-template-columns:repeat(2,1fr);
+  .grid-3{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
 
-@media(max-width:650px){
+@media(max-width:700px){
   .header-inner{
-    padding:12px 14px;
+    flex-wrap:wrap;
+    padding:10px 12px;
+  }
+
+  .nav{
+    order:3;
+    flex-basis:100%;
+    padding-bottom:3px;
+  }
+
+  .header-actions{
+    margin-left:auto;
+  }
+
+  .container{
+    padding:18px 12px 40px;
+  }
+
+  .hero{
+    padding:25px 20px;
+    border-radius:22px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .form-grid,
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .section-heading h2{
+    font-size:25px;
   }
 
   .logo{
     font-size:19px;
   }
 
-  .header-controls select{
-    max-width:95px;
-  }
-
-  nav{
-    padding:0 14px 10px;
-  }
-
-  main{
-    padding:18px 14px 90px;
-  }
-
-  .hero{
-    padding:22px;
-    border-radius:18px;
-  }
-
-  .hero h1{
-    font-size:25px;
-  }
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .card{
-    padding:15px;
-  }
-
-  .stat{
-    font-size:23px;
-  }
-
-  .row,
-  .lesson-toolbar{
-    grid-template-columns:1fr;
-  }
-
-  .lesson-list{
-    grid-template-columns:1fr;
-  }
-
-  .table{
-    font-size:13px;
-  }
-
-  .mobile-nav{
-    position:fixed;
-    display:flex;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:100;
-    background:#fff;
-    border-top:1px solid var(--border);
-    justify-content:space-around;
-    padding:8px 4px;
-  }
-
-  .mobile-nav button{
-    border:0;
-    background:none;
-    color:#64748b;
-    font-size:11px;
-  }
-
-  .mobile-nav button span{
-    display:block;
-    font-size:19px;
+  .logo span{
+    width:38px;
+    height:38px;
   }
 }
 </style>
@@ -475,485 +703,464 @@ footer{
 
 <body>
 
-<header>
+<header class="header">
   <div class="header-inner">
 
-    <div class="logo">🎓 Étudiant+</div>
+    <a class="logo" href="#" onclick="showSection('home')">
+      <span>🎓</span>
+      Étudiant+
+    </a>
 
-    <div class="header-controls">
-      <select id="country">
-        <option>Congo</option>
-        <option>Algérie</option>
-        <option>France</option>
-        <option>Cameroun</option>
-        <option>Côte d'Ivoire</option>
-        <option>Sénégal</option>
-        <option>RDC</option>
-        <option>Gabon</option>
-        <option>Maroc</option>
-        <option>Canada</option>
-        <option>États-Unis</option>
-        <option>Royaume-Uni</option>
-        <option>Allemagne</option>
-        <option>Espagne</option>
-        <option>Italie</option>
-        <option>Portugal</option>
-        <option>Chine</option>
-        <option>Inde</option>
-        <option>Japon</option>
-        <option>Russie</option>
-      </select>
+    <nav class="nav">
+      <button class="active" data-section="home">🏠 Accueil</button>
+      <button data-section="average">🧮 Moyenne</button>
+      <button data-section="fields">🎓 Filières</button>
+      <button data-section="lessons">📚 Études</button>
+      <button data-section="planning">📅 Planning</button>
+      <button data-section="budget">💰 Budget</button>
+      <button data-section="profile">👤 Profil</button>
+    </nav>
 
-      <select id="language">
-        <option>Français</option>
-        <option>English</option>
-        <option>Español</option>
-        <option>Português</option>
-        <option>Deutsch</option>
-        <option>Italiano</option>
-        <option>العربية</option>
-        <option>中文</option>
-        <option>Русский</option>
-        <option>日本語</option>
+    <div class="header-actions">
+      <select id="countrySelect" class="select" title="Pays">
+        <option value="CG">🇨🇬 Congo</option>
+        <option value="DZ">🇩🇿 Algérie</option>
+        <option value="FR">🇫🇷 France</option>
+        <option value="CM">🇨🇲 Cameroun</option>
+        <option value="CI">🇨🇮 Côte d’Ivoire</option>
+        <option value="SN">🇸🇳 Sénégal</option>
+        <option value="CD">🇨🇩 RD Congo</option>
+        <option value="GA">🇬🇦 Gabon</option>
+        <option value="MA">🇲🇦 Maroc</option>
+        <option value="CA">🇨🇦 Canada</option>
       </select>
     </div>
 
   </div>
-
-  <nav>
-    <button class="active" onclick="showSection('home',this)">🏠 Accueil</button>
-    <button onclick="showSection('average',this)">🧮 Moyenne</button>
-    <button onclick="showSection('fields',this)">🎓 Filières</button>
-    <button onclick="showSection('lessons',this)">📚 Mes leçons</button>
-    <button onclick="showSection('studies',this)">📖 Études</button>
-    <button onclick="showSection('planning',this)">📅 Planning</button>
-    <button onclick="showSection('budget',this)">💰 Budget</button>
-    <button onclick="showSection('profile',this)">👤 Profil</button>
-  </nav>
 </header>
 
-<main>
+<main class="container">
 
-<!-- ACCUEIL -->
+<!-- ================= ACCUEIL ================= -->
+
 <section id="home" class="section active">
 
   <div class="hero">
-    <h1 id="welcome">Bienvenue sur Étudiant+ 👋</h1>
+    <h1 id="welcomeTitle">Bienvenue sur Étudiant+ 👋</h1>
     <p>
-      Ton assistant étudiant international pour apprendre,
-      t'organiser et préparer ton avenir.
+      Ton assistant étudiant pour organiser tes études, calculer tes moyennes,
+      découvrir les filières, suivre tes leçons, gérer ton budget et préparer ton avenir.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-light" onclick="showSection('average')">
+        🧮 Calculer ma moyenne
+      </button>
+
+      <button class="btn btn-light" onclick="showSection('fields')">
+        🎓 Explorer les filières
+      </button>
+
+      <button class="btn btn-light" onclick="showSection('lessons')">
+        📚 Mes leçons
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-4">
+
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon">🧮</div>
+        <div>
+          <strong id="dashAverage">—</strong>
+          <small>Moyenne actuelle</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon">🎯</div>
+        <div>
+          <strong id="dashObjective">—</strong>
+          <small>Objectif</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon">📚</div>
+        <div>
+          <strong id="dashLessons">0</strong>
+          <small>Leçons</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat">
+        <div class="stat-icon">💰</div>
+        <div>
+          <strong id="dashBalance">0</strong>
+          <small>Solde</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="grid grid-2">
+
+    <div class="card">
+      <div class="card-title">
+        <h3>📈 Progression scolaire</h3>
+        <span id="globalProgressText">0%</span>
+      </div>
+
+      <div class="progress">
+        <div id="globalProgress" class="progress-bar" style="width:0%"></div>
+      </div>
+
+      <p style="margin-top:10px;color:var(--muted)">
+        Ajoute tes matières dans la section Études pour suivre automatiquement ta progression.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <h3>📅 Prochaine activité</h3>
+      </div>
+
+      <div id="nextActivity">
+        <div class="empty">Aucune activité programmée.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="card">
+    <div class="card-title">
+      <h3>⚡ Actions rapides</h3>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="showSection('average')">🧮 Moyenne</button>
+      <button class="btn btn-secondary" onclick="showSection('fields')">🎓 Filières</button>
+      <button class="btn btn-outline" onclick="showSection('lessons')">📄 Ajouter un PDF</button>
+      <button class="btn btn-success" onclick="showSection('planning')">📅 Planning</button>
+      <button class="btn btn-outline" onclick="showSection('budget')">💰 Budget</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= MOYENNE ================= -->
+
+<section id="average" class="section">
+
+  <div class="section-heading">
+    <h2>🧮 Calculateur de moyenne</h2>
+    <p>Ajoute tes matières, notes et coefficients.</p>
+  </div>
+
+  <div class="card">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Matière</label>
+        <input id="subjectName" placeholder="Ex : Mathématiques">
+      </div>
+
+      <div class="form-group">
+        <label>Note / 20</label>
+        <input id="subjectGrade" type="number" min="0" max="20" step="0.01" placeholder="Ex : 14">
+      </div>
+
+      <div class="form-group">
+        <label>Coefficient</label>
+        <input id="subjectCoeff" type="number" min="0.1" step="0.1" value="1">
+      </div>
+
+      <div class="form-group" style="justify-content:end">
+        <label>&nbsp;</label>
+        <button class="btn btn-primary" onclick="addSubject()">➕ Ajouter</button>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Matière</th>
+            <th>Note</th>
+            <th>Coefficient</th>
+            <th>Points</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="subjectsTable"></tbody>
+      </table>
+    </div>
+
+    <br>
+
+    <div class="grid grid-3">
+
+      <div class="card">
+        <small>Moyenne</small>
+        <div id="averageResult" class="money">—</div>
+      </div>
+
+      <div class="card">
+        <small>Total coefficients</small>
+        <div id="totalCoeff" class="money">0</div>
+      </div>
+
+      <div class="card">
+        <small>Objectif</small>
+        <input id="averageObjective" type="number" min="0" max="20" step="0.1" value="12">
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= FILIERES ================= -->
+
+<section id="fields" class="section">
+
+  <div class="section-heading">
+    <h2>🎓 Explorer les filières</h2>
+    <p>
+      Compare les domaines, découvre les matières, débouchés, compétences,
+      niveau en mathématiques et perspectives internationales.
     </p>
   </div>
 
-  <div class="grid">
-
-    <div class="card">
-      <div class="muted">📊 Moyenne actuelle</div>
-      <div class="stat" id="dashboardAverage">—</div>
-    </div>
-
-    <div class="card">
-      <div class="muted">🎯 Objectif</div>
-      <div class="stat" id="dashboardTarget">—</div>
-    </div>
-
-    <div class="card">
-      <div class="muted">📚 Leçons</div>
-      <div class="stat" id="dashboardLessons">0</div>
-    </div>
-
-    <div class="card">
-      <div class="muted">💰 Solde</div>
-      <div class="stat" id="dashboardBalance">0</div>
-    </div>
-
+  <div class="toolbar">
+    <input id="fieldSearch" placeholder="🔎 Rechercher une filière..." oninput="renderFields()">
   </div>
 
-  <div class="card" style="margin-bottom:20px">
-    <div class="section-title">
-      <h2>📈 Progression des leçons</h2>
-      <strong id="lessonProgressText">0%</strong>
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar" id="lessonProgressBar"></div>
-    </div>
+  <div class="filters">
+    <button class="filter-btn active" data-cat="all" onclick="setFieldCategory('all',this)">Toutes</button>
+    <button class="filter-btn" data-cat="informatique" onclick="setFieldCategory('informatique',this)">💻 Informatique</button>
+    <button class="filter-btn" data-cat="ingenierie" onclick="setFieldCategory('ingenierie',this)">⚙️ Ingénierie</button>
+    <button class="filter-btn" data-cat="sciences" onclick="setFieldCategory('sciences',this)">🔬 Sciences</button>
+    <button class="filter-btn" data-cat="sante" onclick="setFieldCategory('sante',this)">🩺 Santé</button>
+    <button class="filter-btn" data-cat="economie" onclick="setFieldCategory('economie',this)">💼 Économie</button>
+    <button class="filter-btn" data-cat="droit" onclick="setFieldCategory('droit',this)">⚖️ Droit</button>
+    <button class="filter-btn" data-cat="lettres" onclick="setFieldCategory('lettres',this)">📚 Lettres</button>
   </div>
 
-  <div class="grid">
+  <br>
 
-    <div class="card">
-      <h3>📚 Mes cours</h3>
-      <p class="muted">Retrouve toutes tes leçons et PDF au même endroit.</p>
-      <br>
-      <button class="btn btn-primary" onclick="openLessons()">
-        Ouvrir mes leçons
-      </button>
-    </div>
-
-    <div class="card">
-      <h3>🧮 Calculer ma moyenne</h3>
-      <p class="muted">Calcule rapidement ta moyenne pondérée.</p>
-      <br>
-      <button class="btn btn-primary" onclick="showSection('average')">
-        Calculer
-      </button>
-    </div>
-
-    <div class="card">
-      <h3>📅 Organiser ma semaine</h3>
-      <p class="muted">Ajoute tes activités et tes cours.</p>
-      <br>
-      <button class="btn btn-primary" onclick="showSection('planning')">
-        Planning
-      </button>
-    </div>
-
-    <div class="card">
-      <h3>🎓 Trouver ma filière</h3>
-      <p class="muted">Explore plus de 50 filières.</p>
-      <br>
-      <button class="btn btn-primary" onclick="showSection('fields')">
-        Explorer
-      </button>
-    </div>
-
-  </div>
+  <div id="fieldsGrid" class="grid grid-3"></div>
 
 </section>
 
+<!-- ================= LEÇONS PDF ================= -->
 
-<!-- MOYENNE -->
-<section id="average" class="section">
-
-  <div class="section-title">
-    <h2>🧮 Calculateur de moyenne</h2>
-  </div>
-
-  <div class="card">
-
-    <div class="form" id="gradeForm">
-
-      <div class="row">
-        <input id="subject1" placeholder="Matière">
-        <input id="grade1" type="number" min="0" max="20" placeholder="Note /20">
-      </div>
-
-      <div class="row">
-        <input id="subject2" placeholder="Matière">
-        <input id="grade2" type="number" min="0" max="20" placeholder="Note /20">
-      </div>
-
-      <div class="row">
-        <input id="subject3" placeholder="Matière">
-        <input id="grade3" type="number" min="0" max="20" placeholder="Note /20">
-      </div>
-
-      <div class="row">
-        <input id="subject4" placeholder="Matière">
-        <input id="grade4" type="number" min="0" max="20" placeholder="Note /20">
-      </div>
-
-      <div class="row">
-        <input id="subject5" placeholder="Matière">
-        <input id="grade5" type="number" min="0" max="20" placeholder="Note /20">
-      </div>
-
-      <button class="btn btn-primary" onclick="calculateAverage()">
-        Calculer ma moyenne
-      </button>
-
-    </div>
-
-    <br>
-
-    <div id="averageResult"></div>
-
-  </div>
-
-</section>
-
-
-<!-- FILIERES -->
-<section id="fields" class="section">
-
-  <div class="section-title">
-    <h2>🎓 Filières</h2>
-  </div>
-
-  <div class="card">
-
-    <input
-      id="fieldSearch"
-      placeholder="🔎 Rechercher une filière..."
-      style="width:100%;padding:12px;border:1px solid var(--border);border-radius:11px;margin-bottom:15px"
-      oninput="renderFields()"
-    >
-
-    <div id="fieldList"></div>
-
-  </div>
-
-</section>
-
-
-<!-- LEÇONS -->
 <section id="lessons" class="section">
 
-  <div class="section-title">
-
-    <div>
-      <h2>📚 Mes leçons</h2>
-      <p class="muted">
-        Organise tes cours, PDF et documents pédagogiques.
-      </p>
-    </div>
-
-    <button class="btn btn-primary" onclick="openLessonForm()">
-      ➕ Ajouter une leçon
-    </button>
-
+  <div class="section-heading">
+    <h2>📚 Bibliothèque de leçons</h2>
+    <p>
+      Ajoute tes cours PDF et organise ta bibliothèque personnelle.
+    </p>
   </div>
 
+  <div class="card">
 
-  <!-- FORMULAIRE AJOUT -->
-  <div class="card" id="lessonFormCard" style="display:none;margin-bottom:20px">
+    <div class="form-grid">
 
-    <h3>📄 Ajouter une nouvelle leçon</h3>
+      <div class="form-group">
+        <label>Titre de la leçon</label>
+        <input id="lessonTitle" placeholder="Ex : Algèbre — Fonctions">
+      </div>
+
+      <div class="form-group">
+        <label>Matière</label>
+        <input id="lessonSubject" placeholder="Ex : Mathématiques">
+      </div>
+
+      <div class="form-group full">
+        <label>Description</label>
+        <textarea id="lessonDescription" placeholder="Décris brièvement la leçon..."></textarea>
+      </div>
+
+      <div class="form-group full">
+        <label>Fichier PDF</label>
+        <input id="lessonFile" type="file" accept="application/pdf">
+      </div>
+
+    </div>
 
     <br>
 
-    <div class="form">
+    <button class="btn btn-primary" onclick="addLesson()">
+      📄 Ajouter la leçon
+    </button>
 
-      <input
-        id="lessonTitle"
-        placeholder="Titre de la leçon"
-      >
-
-      <div class="row">
-
-        <select id="lessonSubject">
-          <option value="">Choisir une matière</option>
-          <option>Mathématiques</option>
-          <option>Informatique</option>
-          <option>Physique</option>
-          <option>Chimie</option>
-          <option>Biologie</option>
-          <option>Français</option>
-          <option>Anglais</option>
-          <option>Économie</option>
-          <option>Droit</option>
-          <option>Autre</option>
-        </select>
-
-        <input
-          id="lessonDescription"
-          placeholder="Description courte"
-        >
-
-      </div>
-
-      <label>
-        📎 Sélectionner le PDF
-      </label>
-
-      <input
-        id="lessonFile"
-        type="file"
-        accept="application/pdf"
-      >
-
-      <div class="actions">
-
-        <button class="btn btn-primary" onclick="saveLesson()">
-          💾 Enregistrer
-        </button>
-
-        <button class="btn btn-secondary" onclick="closeLessonForm()">
-          Annuler
-        </button>
-
-      </div>
-
-      <p class="muted" style="font-size:13px">
-        Le PDF est conservé localement dans cette session/appareil.
-      </p>
-
-    </div>
+    <p style="margin-top:10px;color:var(--muted);font-size:13px">
+      ⚠️ Les PDF ajoutés depuis ton appareil utilisent une URL temporaire.
+      Pour une bibliothèque permanente accessible sur plusieurs appareils,
+      il faudra ensuite connecter un stockage cloud.
+    </p>
 
   </div>
 
+  <br>
 
-  <!-- RECHERCHE -->
-  <div class="lesson-toolbar">
-
-    <input
-      id="lessonSearch"
-      placeholder="🔎 Rechercher une leçon..."
-      oninput="renderLessons()"
-    >
-
+  <div class="toolbar">
+    <input id="lessonSearch" placeholder="🔎 Rechercher une leçon..." oninput="renderLessons()">
     <select id="lessonFilter" onchange="renderLessons()">
       <option value="all">Toutes les matières</option>
-      <option>Mathématiques</option>
-      <option>Informatique</option>
-      <option>Physique</option>
-      <option>Chimie</option>
-      <option>Biologie</option>
-      <option>Français</option>
-      <option>Anglais</option>
-      <option>Économie</option>
-      <option>Droit</option>
-      <option>Autre</option>
     </select>
-
   </div>
 
-
-  <div id="lessonList" class="lesson-list"></div>
+  <div id="lessonsGrid" class="grid grid-3"></div>
 
 </section>
 
+<!-- ================= ETUDES ================= -->
 
-<!-- ETUDES -->
 <section id="studies" class="section">
 
-  <div class="section-title">
+  <div class="section-heading">
     <h2>📖 Suivi des études</h2>
-
-    <button class="btn btn-primary" onclick="addStudy()">
-      ➕ Ajouter
-    </button>
+    <p>Observe tes matières, tes objectifs et les domaines à améliorer.</p>
   </div>
 
   <div class="card">
 
-    <div class="form">
+    <div class="form-grid">
 
-      <input id="studySubject" placeholder="Matière">
-
-      <div class="row">
-        <input id="studyGrade" type="number" min="0" max="20" placeholder="Note actuelle">
-        <input id="studyTarget" type="number" min="0" max="20" placeholder="Objectif">
+      <div class="form-group">
+        <label>Matière</label>
+        <input id="studySubject" placeholder="Ex : Python">
       </div>
 
-      <textarea id="studyComment" placeholder="Commentaire"></textarea>
+      <div class="form-group">
+        <label>Note actuelle</label>
+        <input id="studyGrade" type="number" min="0" max="20" step=".1">
+      </div>
 
-      <button class="btn btn-primary" onclick="addStudy()">
-        Ajouter la matière
-      </button>
+      <div class="form-group">
+        <label>Objectif</label>
+        <input id="studyTarget" type="number" min="0" max="20" step=".1" value="14">
+      </div>
+
+      <div class="form-group">
+        <label>Statut</label>
+        <select id="studyStatus">
+          <option value="green">🟢 Objectif atteint</option>
+          <option value="yellow">🟡 En progression</option>
+          <option value="red">🔴 À améliorer</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label>Commentaire</label>
+        <textarea id="studyComment" placeholder="Ex : Je dois travailler davantage les fonctions..."></textarea>
+      </div>
 
     </div>
+
+    <br>
+
+    <button class="btn btn-primary" onclick="addStudy()">
+      ➕ Ajouter la matière
+    </button>
 
   </div>
 
   <br>
 
-  <div class="card">
-    <div id="studyList"></div>
-  </div>
+  <div id="studiesGrid" class="grid grid-3"></div>
 
 </section>
 
+<!-- ================= PLANNING ================= -->
 
-<!-- PLANNING -->
 <section id="planning" class="section">
 
-  <div class="section-title">
-    <h2>📅 Planning</h2>
+  <div class="section-heading">
+    <h2>📅 Mon planning</h2>
+    <p>Organise tes cours, révisions, examens et activités.</p>
   </div>
 
   <div class="card">
 
-    <div class="form">
+    <div class="form-grid">
 
-      <input id="planDate" type="date">
+      <div class="form-group">
+        <label>Date</label>
+        <input id="planDate" type="date">
+      </div>
 
-      <input
-        id="planActivity"
-        placeholder="Exemple : Mathématiques — 14h — Salle 3"
-      >
+      <div class="form-group">
+        <label>Heure</label>
+        <input id="planTime" type="time">
+      </div>
 
-      <button class="btn btn-primary" onclick="addPlanning()">
-        ➕ Ajouter
-      </button>
+      <div class="form-group full">
+        <label>Activité</label>
+        <input id="planActivity" placeholder="Ex : Révision mathématiques">
+      </div>
 
     </div>
+
+    <br>
+
+    <button class="btn btn-primary" onclick="addPlanning()">
+      ➕ Ajouter
+    </button>
 
   </div>
 
   <br>
 
-  <div class="card">
-    <div id="planningList"></div>
-  </div>
+  <div id="planningList"></div>
 
 </section>
 
+<!-- ================= BUDGET ================= -->
 
-<!-- BUDGET -->
 <section id="budget" class="section">
 
-  <div class="section-title">
-    <h2>💰 Mon budget</h2>
+  <div class="section-heading">
+    <h2>💰 Gestion du budget</h2>
+    <p>Garde le contrôle de tes revenus et dépenses.</p>
   </div>
 
-  <div class="grid">
+  <div class="grid grid-3">
 
     <div class="card">
-      <div class="muted">Revenus</div>
-      <div class="stat" id="incomeTotal">0</div>
+      <small>Revenus</small>
+      <div id="incomeTotal" class="money positive">0</div>
     </div>
 
     <div class="card">
-      <div class="muted">Dépenses</div>
-      <div class="stat" id="expenseTotal">0</div>
+      <small>Dépenses</small>
+      <div id="expenseTotal" class="money negative">0</div>
     </div>
 
     <div class="card">
-      <div class="muted">Solde</div>
-      <div class="stat" id="balanceTotal">0</div>
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="form">
-
-      <select id="budgetType">
-        <option value="income">Revenu</option>
-        <option value="expense">Dépense</option>
-      </select>
-
-      <select id="budgetCategory">
-        <option>Nourriture</option>
-        <option>Transport</option>
-        <option>Logement</option>
-        <option>Internet</option>
-        <option>Études</option>
-        <option>Vêtements</option>
-        <option>Loisirs</option>
-        <option>Santé</option>
-        <option>Autres</option>
-      </select>
-
-      <input
-        id="budgetAmount"
-        type="number"
-        min="0"
-        placeholder="Montant"
-      >
-
-      <input
-        id="budgetDescription"
-        placeholder="Description"
-      >
-
-      <button class="btn btn-primary" onclick="addBudget()">
-        Ajouter
-      </button>
-
+      <small>Solde</small>
+      <div id="balanceTotal" class="money">0</div>
     </div>
 
   </div>
@@ -961,350 +1168,1424 @@ footer{
   <br>
 
   <div class="card">
-    <div id="budgetList"></div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Type</label>
+        <select id="budgetType">
+          <option value="income">💰 Revenu</option>
+          <option value="expense">💸 Dépense</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Montant</label>
+        <input id="budgetAmount" type="number" min="0" step=".01">
+      </div>
+
+      <div class="form-group">
+        <label>Catégorie</label>
+        <select id="budgetCategory">
+          <option>Nourriture</option>
+          <option>Transport</option>
+          <option>Logement</option>
+          <option>Internet</option>
+          <option>Études</option>
+          <option>Vêtements</option>
+          <option>Loisirs</option>
+          <option>Santé</option>
+          <option>Autres</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input id="budgetDate" type="date">
+      </div>
+
+      <div class="form-group full">
+        <label>Description</label>
+        <input id="budgetDescription" placeholder="Ex : Achat de cahiers">
+      </div>
+
+    </div>
+
+    <br>
+
+    <button class="btn btn-primary" onclick="addBudget()">
+      ➕ Enregistrer
+    </button>
+
   </div>
+
+  <br>
+
+  <div id="budgetList"></div>
 
 </section>
 
+<!-- ================= PROFIL ================= -->
 
-<!-- PROFIL -->
 <section id="profile" class="section">
 
-  <div class="section-title">
-    <h2>👤 Mon profil</h2>
+  <div class="section-heading">
+    <h2>👤 Mon profil étudiant</h2>
+    <p>Personnalise ton espace Étudiant+.</p>
   </div>
 
   <div class="card">
 
-    <div class="form">
+    <div class="form-grid">
 
-      <input id="profileName" placeholder="Nom">
+      <div class="form-group">
+        <label>Nom</label>
+        <input id="profileName">
+      </div>
 
-      <input id="profileFirstName" placeholder="Prénom">
+      <div class="form-group">
+        <label>Prénom</label>
+        <input id="profileFirstName">
+      </div>
 
-      <input id="profileSchool" placeholder="Université / établissement">
+      <div class="form-group">
+        <label>Université / Institut</label>
+        <input id="profileUniversity">
+      </div>
 
-      <select id="profileLevel">
-        <option value="">Niveau d'études</option>
-        <option>Secondaire</option>
-        <option>Licence 1</option>
-        <option>Licence 2</option>
-        <option>Licence 3</option>
-        <option>Master 1</option>
-        <option>Master 2</option>
-        <option>Doctorat</option>
-      </select>
+      <div class="form-group">
+        <label>Niveau</label>
+        <select id="profileLevel">
+          <option>Terminale</option>
+          <option>Licence 1</option>
+          <option>Licence 2</option>
+          <option>Licence 3</option>
+          <option>Master 1</option>
+          <option>Master 2</option>
+          <option>Doctorat</option>
+          <option>Autre</option>
+        </select>
+      </div>
 
-      <input id="profileField" placeholder="Filière">
+      <div class="form-group">
+        <label>Série</label>
+        <input id="profileSeries" placeholder="Ex : D">
+      </div>
 
-      <textarea
-        id="profileObjective"
-        placeholder="Mon objectif professionnel"
-      ></textarea>
+      <div class="form-group">
+        <label>Filière</label>
+        <input id="profileField" placeholder="Ex : Informatique">
+      </div>
 
-      <button class="btn btn-primary" onclick="saveProfile()">
-        💾 Enregistrer mon profil
-      </button>
-
-      <div id="profileMessage"></div>
+      <div class="form-group full">
+        <label>Objectif professionnel</label>
+        <textarea id="profileObjective" placeholder="Ex : Devenir ingénieur logiciel..."></textarea>
+      </div>
 
     </div>
 
+    <br>
+
+    <button class="btn btn-primary" onclick="saveProfile()">
+      💾 Enregistrer mon profil
+    </button>
+
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h3>👋 Aperçu</h3>
+    <p id="profilePreview" style="margin-top:8px;color:var(--muted)">
+      Ton profil apparaîtra ici.
+    </p>
   </div>
 
 </section>
 
 </main>
 
-
 <footer>
-  🎓 Étudiant+ — Ton assistant étudiant international
+  <strong>🎓 Étudiant+</strong> — Ton assistant étudiant international.
+  <br>
+  <small>Version évolutive • Données normales sauvegardées localement sur cet appareil.</small>
 </footer>
 
+<!-- ================= MODAL FILIERE ================= -->
 
-<!-- NAV MOBILE -->
-<div class="mobile-nav">
-
-  <button onclick="showSection('home')">
-    <span>🏠</span>
-    Accueil
-  </button>
-
-  <button onclick="showSection('lessons')">
-    <span>📚</span>
-    Leçons
-  </button>
-
-  <button onclick="showSection('studies')">
-    <span>📖</span>
-    Études
-  </button>
-
-  <button onclick="showSection('planning')">
-    <span>📅</span>
-    Planning
-  </button>
-
-  <button onclick="showSection('profile')">
-    <span>👤</span>
-    Profil
-  </button>
-
+<div id="fieldModal" class="modal" onclick="closeModalOutside(event,'fieldModal')">
+  <div class="modal-content">
+    <button class="close" onclick="closeFieldModal()">✕</button>
+    <div id="fieldModalContent"></div>
+  </div>
 </div>
 
+<!-- ================= MODAL COMPARAISON ================= -->
+
+<div id="compareModal" class="modal" onclick="closeModalOutside(event,'compareModal')">
+  <div class="modal-content">
+    <button class="close" onclick="closeComparison()">✕</button>
+    <div id="comparisonContent"></div>
+  </div>
+</div>
+
+<div id="compareBox" class="compare-box">
+  <span id="compareCount">0 filière</span>
+  <button class="btn btn-light" onclick="openComparison()">⚖️ Comparer</button>
+  <button class="btn btn-secondary" onclick="clearComparison()">Effacer</button>
+</div>
 
 <script>
 
-/* ==============================
-   DONNÉES
-============================== */
+/* =========================================================
+   DONNEES GENERALES
+========================================================= */
 
-const STORAGE_KEY = "etudiant_plus_pdf_v1";
+const fields = [
 
-let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
-  lessons: [],
-  studies: [],
-  planning: [],
-  budget: [],
-  profile: {},
-  average: null,
-  target: 14
+{
+id:"informatique",
+name:"Informatique",
+category:"informatique",
+icon:"💻",
+description:"Formation polyvalente consacrée à la programmation, aux systèmes, aux bases de données et au développement logiciel.",
+duration:"Licence : 3 ans",
+subjects:["Algorithmique","Programmation","Bases de données","Systèmes","Réseaux"],
+maths:4,
+computer:5,
+profile:"Logique, curiosité, goût pour la technologie et résolution de problèmes.",
+careers:["Développeur logiciel","Ingénieur logiciel","Administrateur systèmes","Analyste informatique"],
+sectors:["Technologie","Banque","Télécoms","Startups","Administration"],
+studyAfter:"Master informatique, cybersécurité, IA, data science ou systèmes d'information.",
+employment:"Très bon potentiel si tu développes de vraies compétences pratiques.",
+international:"Très forte mobilité internationale avec portfolio, anglais et expérience.",
+salaryPotential:"Variable selon pays, spécialisation, expérience et employeur.",
+advantages:["Nombreux métiers","Possibilité de freelance","Compétences internationales","Évolution rapide"],
+disadvantages:["Formation continue nécessaire","Forte concurrence","Travail parfois exigeant"],
+mathsLevel:"Moyen à élevé",
+internationalScore:5
+},
+
+{
+id:"genie-informatique",
+name:"Génie informatique",
+category:"informatique",
+icon:"🖥️",
+description:"Combine informatique, ingénierie et conception de systèmes techniques.",
+duration:"Licence : 3 ans",
+subjects:["Programmation","Architecture ordinateur","Réseaux","Électronique","Systèmes"],
+maths:4,
+computer:5,
+profile:"Profil technique, logique et intéressé par les systèmes.",
+careers:["Ingénieur informatique","Développeur","Ingénieur systèmes","DevOps"],
+sectors:["Industrie","Télécoms","Banque","Technologie"],
+studyAfter:"Master génie informatique, systèmes ou cybersécurité.",
+employment:"Bon potentiel avec compétences pratiques.",
+international:"Très bonne mobilité internationale.",
+salaryPotential:"Variable selon pays et expérience.",
+advantages:["Très polyvalent","Profil technique","Nombreux débouchés"],
+disadvantages:["Charge de travail","Mathématiques et technique"],
+mathsLevel:"Élevé",
+internationalScore:5
+},
+
+{
+id:"ia",
+name:"Intelligence artificielle",
+category:"informatique",
+icon:"🤖",
+description:"Domaine centré sur l'apprentissage automatique, les modèles statistiques, la vision et les systèmes intelligents.",
+duration:"Licence : 3 ans puis spécialisation recommandée",
+subjects:["Python","Algorithmes","Statistiques","Machine Learning","Algèbre linéaire"],
+maths:5,
+computer:5,
+profile:"Très bon raisonnement logique et goût prononcé pour les mathématiques.",
+careers:["Ingénieur IA","Machine Learning Engineer","Data Scientist","Research Engineer"],
+sectors:["Tech","Finance","Santé","Industrie","Recherche"],
+studyAfter:"Master IA, Data Science ou Machine Learning.",
+employment:"Très forte croissance, mais les postes avancés demandent souvent un niveau Master.",
+international:"Excellente.",
+salaryPotential:"Potentiel élevé dans les marchés technologiques.",
+advantages:["Secteur en croissance","Technologies avancées","International"],
+disadvantages:["Mathématiques exigeantes","Apprentissage continu"],
+mathsLevel:"Très élevé",
+internationalScore:5
+},
+
+{
+id:"data",
+name:"Data Science",
+category:"informatique",
+icon:"📊",
+description:"Analyse et exploite les données pour produire des informations utiles à la décision.",
+duration:"Licence : 3 ans puis spécialisation",
+subjects:["Statistiques","Python","SQL","Algorithmes","Visualisation"],
+maths:5,
+computer:5,
+profile:"Aime les chiffres, les statistiques et l'analyse.",
+careers:["Data Analyst","Data Scientist","BI Analyst","Data Engineer"],
+sectors:["Finance","Banque","Marketing","Tech","Santé"],
+studyAfter:"Master Data Science, statistiques ou IA.",
+employment:"Bon potentiel avec SQL, Python, statistiques et projets.",
+international:"Très bonne.",
+salaryPotential:"Potentiel élevé selon spécialisation et pays.",
+advantages:["Très recherché","Applications nombreuses","International"],
+disadvantages:["Statistiques importantes","Compétences techniques nécessaires"],
+mathsLevel:"Très élevé",
+internationalScore:5
+},
+
+{
+id:"cyber",
+name:"Cybersécurité",
+category:"informatique",
+icon:"🔐",
+description:"Protection des systèmes, réseaux, données et infrastructures numériques.",
+duration:"Licence : 3 ans",
+subjects:["Réseaux","Linux","Cryptographie","Sécurité","Systèmes"],
+maths:4,
+computer:5,
+profile:"Rigoureux, curieux, passionné par la sécurité et les systèmes.",
+careers:["Analyste SOC","Pentester","Ingénieur sécurité","Consultant cybersécurité"],
+sectors:["Banque","Télécoms","Gouvernement","Tech","Défense"],
+studyAfter:"Master cybersécurité ou sécurité informatique.",
+employment:"Bon potentiel avec certifications et expérience.",
+international:"Très bonne.",
+salaryPotential:"Potentiel élevé selon expérience et certification.",
+advantages:["Domaine stratégique","Demande croissante","International"],
+disadvantages:["Veille permanente","Responsabilité élevée"],
+mathsLevel:"Moyen à élevé",
+internationalScore:5
+},
+
+{
+id:"reseaux",
+name:"Réseaux & télécommunications",
+category:"informatique",
+icon:"🌐",
+description:"Conception, administration et sécurisation des réseaux informatiques et télécoms.",
+duration:"Licence : 3 ans",
+subjects:["Réseaux","TCP/IP","Linux","Télécommunications","Sécurité"],
+maths:3,
+computer:5,
+profile:"Aime comprendre comment les systèmes communiquent.",
+careers:["Administrateur réseau","Ingénieur réseau","Technicien télécom","Cloud Engineer"],
+sectors:["Télécoms","Internet","Entreprises","Cloud"],
+studyAfter:"Master réseaux, cloud ou cybersécurité.",
+employment:"Bon potentiel avec certifications.",
+international:"Très bonne.",
+salaryPotential:"Variable selon niveau et pays.",
+advantages:["Compétence pratique","Télécoms","Cloud"],
+disadvantages:["Astreintes possibles","Veille technique"],
+mathsLevel:"Moyen",
+internationalScore:5
+},
+
+{
+id:"genie-civil",
+name:"Génie civil",
+category:"ingenierie",
+icon:"🏗️",
+description:"Conception et réalisation des infrastructures : bâtiments, routes, ponts et ouvrages.",
+duration:"Licence : 3 ans",
+subjects:["Résistance des matériaux","Mécanique","Topographie","Béton armé","Mathématiques"],
+maths:5,
+computer:3,
+profile:"Profil scientifique, précis et intéressé par la construction.",
+careers:["Ingénieur civil","Conducteur de travaux","Bureau d'études","Chef de projet"],
+sectors:["Construction","BTP","Infrastructures","Immobilier"],
+studyAfter:"Master structures, géotechnique, hydraulique ou management de projet.",
+employment:"Dépend fortement de l'activité du secteur de construction.",
+international:"Bonne avec diplôme et expérience.",
+salaryPotential:"Variable selon pays, spécialité et expérience.",
+advantages:["Métier concret","Projets importants","Diversité des spécialités"],
+disadvantages:["Mathématiques et physique","Responsabilités techniques"],
+mathsLevel:"Très élevé",
+internationalScore:4
+},
+
+{
+id:"electrique",
+name:"Génie électrique",
+category:"ingenierie",
+icon:"⚡",
+description:"Étude des systèmes électriques, électroniques, automatismes et installations.",
+duration:"Licence : 3 ans",
+subjects:["Électricité","Électronique","Automatique","Physique","Mathématiques"],
+maths:5,
+computer:4,
+profile:"Profil scientifique et technique.",
+careers:["Ingénieur électrique","Automaticien","Électrotechnicien","Ingénieur maintenance"],
+sectors:["Énergie","Industrie","BTP","Télécoms"],
+studyAfter:"Master énergie, automatisme ou électronique.",
+employment:"Bon selon spécialisation.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Industrie","Énergie","Automatisation"],
+disadvantages:["Technique exigeante","Physique importante"],
+mathsLevel:"Élevé",
+internationalScore:4
+},
+
+{
+id:"mecanique",
+name:"Génie mécanique",
+category:"ingenierie",
+icon:"⚙️",
+description:"Conception et fonctionnement des machines et systèmes mécaniques.",
+duration:"Licence : 3 ans",
+subjects:["Mécanique","Thermodynamique","CAO","Matériaux","Mathématiques"],
+maths:5,
+computer:3,
+profile:"Aime les machines et les systèmes physiques.",
+careers:["Ingénieur mécanique","Concepteur CAO","Ingénieur production","Maintenance"],
+sectors:["Industrie","Automobile","Énergie","Aéronautique"],
+studyAfter:"Master mécanique, énergie ou matériaux.",
+employment:"Variable selon industrie.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Industrie","Conception","Technologie"],
+disadvantages:["Mathématiques et physique"],
+mathsLevel:"Élevé",
+internationalScore:4
+},
+
+{
+id:"mathematiques",
+name:"Mathématiques",
+category:"sciences",
+icon:"📐",
+description:"Formation approfondie en raisonnement mathématique, analyse, algèbre, probabilités et statistiques.",
+duration:"Licence : 3 ans",
+subjects:["Analyse","Algèbre","Probabilités","Statistiques","Géométrie"],
+maths:5,
+computer:3,
+profile:"Très bon raisonnement abstrait et goût pour les problèmes.",
+careers:["Enseignant","Statisticien","Actuaire","Data Analyst","Chercheur"],
+sectors:["Éducation","Finance","Data","Recherche"],
+studyAfter:"Master mathématiques, statistiques, data ou finance quantitative.",
+employment:"Très intéressant lorsqu'elle est combinée avec informatique ou statistiques.",
+international:"Bonne.",
+salaryPotential:"Dépend fortement de la spécialisation.",
+advantages:["Base scientifique forte","Excellente base pour l'IA/Data"],
+disadvantages:["Abstraction élevée","Spécialisation souvent nécessaire"],
+mathsLevel:"Très élevé",
+internationalScore:5
+},
+
+{
+id:"physique",
+name:"Physique",
+category:"sciences",
+icon:"🔬",
+description:"Étude des lois fondamentales de la matière, de l'énergie et des phénomènes physiques.",
+duration:"Licence : 3 ans",
+subjects:["Mécanique","Électricité","Optique","Thermodynamique","Mathématiques"],
+maths:5,
+computer:3,
+profile:"Curieux et à l'aise avec les mathématiques.",
+careers:["Physicien","Enseignant","Ingénieur R&D","Analyste"],
+sectors:["Recherche","Énergie","Industrie","Éducation"],
+studyAfter:"Master puis doctorat selon objectif.",
+employment:"Souvent meilleur avec spécialisation.",
+international:"Bonne dans la recherche.",
+salaryPotential:"Variable.",
+advantages:["Base scientifique forte","Recherche"],
+disadvantages:["Poursuite d'études fréquente"],
+mathsLevel:"Très élevé",
+internationalScore:4
+},
+
+{
+id:"chimie",
+name:"Chimie",
+category:"sciences",
+icon:"🧪",
+description:"Étude de la matière, des réactions chimiques et de leurs applications.",
+duration:"Licence : 3 ans",
+subjects:["Chimie organique","Chimie minérale","Physico-chimie","Analytique"],
+maths:4,
+computer:2,
+profile:"Précis, patient et intéressé par les sciences expérimentales.",
+careers:["Chimiste","Contrôle qualité","Laboratoire","Industrie"],
+sectors:["Pharmacie","Industrie","Agroalimentaire","Laboratoires"],
+studyAfter:"Master chimie, matériaux ou industrie.",
+employment:"Variable selon spécialité.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Applications industrielles","Laboratoire"],
+disadvantages:["Travail expérimental"],
+mathsLevel:"Moyen à élevé",
+internationalScore:3
+},
+
+{
+id:"biologie",
+name:"Biologie",
+category:"sciences",
+icon:"🧬",
+description:"Étude des êtres vivants, de leurs mécanismes et de leur environnement.",
+duration:"Licence : 3 ans",
+subjects:["Biologie cellulaire","Génétique","Microbiologie","Écologie"],
+maths:3,
+computer:2,
+profile:"Intérêt pour le vivant et les sciences.",
+careers:["Laborantin","Biologiste","Technicien","Recherche"],
+sectors:["Santé","Agriculture","Laboratoires","Environnement"],
+studyAfter:"Master spécialisé.",
+employment:"Variable et souvent dépendant de la spécialisation.",
+international:"Bonne avec spécialisation.",
+salaryPotential:"Variable.",
+advantages:["Santé","Recherche","Environnement"],
+disadvantages:["Spécialisation souvent nécessaire"],
+mathsLevel:"Moyen",
+internationalScore:3
+},
+
+{
+id:"medecine",
+name:"Médecine",
+category:"sante",
+icon:"🩺",
+description:"Formation médicale destinée au diagnostic, au traitement et à la prévention des maladies.",
+duration:"Longue formation médicale, selon le pays",
+subjects:["Anatomie","Physiologie","Biochimie","Pathologie","Pharmacologie"],
+maths:2,
+computer:2,
+profile:"Rigoureux, patient, résistant au travail et motivé par la santé.",
+careers:["Médecin généraliste","Médecin spécialiste","Recherche médicale"],
+sectors:["Hôpitaux","Cliniques","Santé publique","Recherche"],
+studyAfter:"Spécialisation médicale selon le pays.",
+employment:"Forte utilité sociale, mais parcours long et réglementé.",
+international:"Possible mais reconnaissance du diplôme et autorisation d'exercer sont essentielles.",
+salaryPotential:"Très variable selon pays et spécialité.",
+advantages:["Métier à forte responsabilité","Nombreuses spécialités"],
+disadvantages:["Études longues","Sélection","Responsabilité élevée"],
+mathsLevel:"Faible à moyen",
+internationalScore:3
+},
+
+{
+id:"pharmacie",
+name:"Pharmacie",
+category:"sante",
+icon:"💊",
+description:"Sciences du médicament, de sa préparation, son utilisation et sa sécurité.",
+duration:"Selon le système universitaire du pays",
+subjects:["Pharmacologie","Chimie","Biologie","Toxicologie"],
+maths:3,
+computer:2,
+profile:"Rigoureux et intéressé par les sciences de la santé.",
+careers:["Pharmacien","Industrie pharmaceutique","Contrôle qualité"],
+sectors:["Pharmacies","Hôpitaux","Industrie"],
+studyAfter:"Spécialisation ou Master selon pays.",
+employment:"Réglementé dans de nombreux pays.",
+international:"Reconnaissance du diplôme à vérifier.",
+salaryPotential:"Variable.",
+advantages:["Santé","Industrie"],
+disadvantages:["Réglementation","Formation exigeante"],
+mathsLevel:"Moyen",
+internationalScore:3
+},
+
+{
+id:"economie",
+name:"Économie",
+category:"economie",
+icon:"📈",
+description:"Analyse des marchés, des politiques économiques et du fonctionnement des économies.",
+duration:"Licence : 3 ans",
+subjects:["Microéconomie","Macroéconomie","Statistiques","Économétrie"],
+maths:4,
+computer:3,
+profile:"Aime analyser les chiffres et les phénomènes économiques.",
+careers:["Économiste","Analyste","Chargé d'études","Consultant"],
+sectors:["Banque","Administration","Cabinets","Entreprises"],
+studyAfter:"Master économie, finance ou data.",
+employment:"Bon avec spécialisation quantitative.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Nombreux secteurs","Finance et data"],
+disadvantages:["Concurrence","Spécialisation utile"],
+mathsLevel:"Moyen à élevé",
+internationalScore:4
+},
+
+{
+id:"finance",
+name:"Finance",
+category:"economie",
+icon:"💳",
+description:"Gestion des capitaux, analyse financière, investissement, risques et marchés.",
+duration:"Licence : 3 ans",
+subjects:["Comptabilité","Finance","Statistiques","Économie","Gestion"],
+maths:4,
+computer:4,
+profile:"Rigoureux, analytique et à l'aise avec les chiffres.",
+careers:["Analyste financier","Contrôleur financier","Risk Analyst","Banquier"],
+sectors:["Banques","Assurances","Entreprises","Cabinets"],
+studyAfter:"Master finance, audit, banque ou finance quantitative.",
+employment:"Bon potentiel selon compétences et marché.",
+international:"Bonne.",
+salaryPotential:"Potentiel élevé dans certains marchés et spécialisations.",
+advantages:["Secteur financier","Évolution professionnelle"],
+disadvantages:["Concurrence","Pression possible"],
+mathsLevel:"Moyen à élevé",
+internationalScore:4
+},
+
+{
+id:"comptabilite",
+name:"Comptabilité",
+category:"economie",
+icon:"🧾",
+description:"Enregistrement, analyse et contrôle des opérations financières des organisations.",
+duration:"Licence : 3 ans",
+subjects:["Comptabilité","Fiscalité","Audit","Gestion","Droit"],
+maths:3,
+computer:3,
+profile:"Organisé, précis et méthodique.",
+careers:["Comptable","Auditeur","Contrôleur de gestion","Fiscaliste"],
+sectors:["Entreprises","Cabinets","Banques","Administration"],
+studyAfter:"Master comptabilité, audit ou finance.",
+employment:"Besoin régulier dans les organisations.",
+international:"Bonne, mais normes comptables différentes.",
+salaryPotential:"Variable.",
+advantages:["Débouchés variés","Compétence professionnelle"],
+disadvantages:["Rigueur importante","Normes à maîtriser"],
+mathsLevel:"Moyen",
+internationalScore:3
+},
+
+{
+id:"gestion",
+name:"Gestion",
+category:"economie",
+icon:"📋",
+description:"Formation polyvalente en management, finance, ressources humaines et organisation.",
+duration:"Licence : 3 ans",
+subjects:["Gestion","Comptabilité","Marketing","Management","Économie"],
+maths:3,
+computer:3,
+profile:"Organisé et intéressé par l'entreprise.",
+careers:["Assistant manager","Gestionnaire","Chargé administratif","Entrepreneur"],
+sectors:["Entreprises","Administration","ONG"],
+studyAfter:"Master management, finance, RH ou marketing.",
+employment:"Variable selon spécialisation.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Polyvalente","Entrepreneuriat"],
+disadvantages:["Profil généraliste"],
+mathsLevel:"Moyen",
+internationalScore:3
+},
+
+{
+id:"droit",
+name:"Droit",
+category:"droit",
+icon:"⚖️",
+description:"Étude des règles juridiques, institutions, contrats et mécanismes de justice.",
+duration:"Licence : 3 ans",
+subjects:["Droit civil","Droit constitutionnel","Droit administratif","Droit pénal"],
+maths:1,
+computer:2,
+profile:"Bonne expression, mémoire, analyse et argumentation.",
+careers:["Juriste","Avocat*","Assistant juridique","Administration"],
+sectors:["Cabinets","Entreprises","Administration","ONG"],
+studyAfter:"Master et formation professionnelle selon métier.",
+employment:"Dépend du pays et de la réglementation.",
+international:"Mobilité plus complexe car le droit varie selon les pays.",
+salaryPotential:"Variable.",
+advantages:["Nombreux domaines juridiques","Administration"],
+disadvantages:["Forte importance du droit national","Concours possibles"],
+mathsLevel:"Faible",
+internationalScore:2
+},
+
+{
+id:"relations",
+name:"Relations internationales",
+category:"lettres",
+icon:"🌍",
+description:"Analyse des relations entre États, organisations internationales et acteurs mondiaux.",
+duration:"Licence : 3 ans",
+subjects:["Géopolitique","Droit international","Économie","Histoire"],
+maths:2,
+computer:2,
+profile:"Curieux, bon communicant et intéressé par l'actualité internationale.",
+careers:["Chargé de mission","Diplomatie","ONG","Analyste"],
+sectors:["ONG","Organisations internationales","Administration"],
+studyAfter:"Master relations internationales, diplomatie ou géopolitique.",
+employment:"Sélectif.",
+international:"Très bonne par nature du domaine.",
+salaryPotential:"Variable.",
+advantages:["International","Géopolitique"],
+disadvantages:["Sélectivité"],
+mathsLevel:"Faible",
+internationalScore:5
+},
+
+{
+id:"communication",
+name:"Communication",
+category:"lettres",
+icon:"📣",
+description:"Création et gestion de stratégies de communication pour organisations et marques.",
+duration:"Licence : 3 ans",
+subjects:["Communication","Marketing","Médias","Relations publiques"],
+maths:2,
+computer:4,
+profile:"Créatif, communicatif et à l'aise avec le numérique.",
+careers:["Chargé de communication","Community manager","Content manager","RP"],
+sectors:["Entreprises","Médias","Agences","ONG"],
+studyAfter:"Master communication, marketing ou médias.",
+employment:"Bon avec portfolio et compétences numériques.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Créativité","Digital","Freelance possible"],
+disadvantages:["Concurrence","Portfolio important"],
+mathsLevel:"Faible",
+internationalScore:4
+},
+
+{
+id:"design",
+name:"Design graphique",
+category:"lettres",
+icon:"🎨",
+description:"Création visuelle, identité de marque, interfaces et contenus numériques.",
+duration:"Licence : 3 ans",
+subjects:["Design","Typographie","UI/UX","Illustration","Communication"],
+maths:1,
+computer:4,
+profile:"Créatif et intéressé par le visuel.",
+careers:["Designer graphique","UI Designer","UX Designer","Directeur artistique"],
+sectors:["Agences","Tech","Marketing","Freelance"],
+studyAfter:"Master design ou spécialisation UI/UX.",
+employment:"Très dépendant du portfolio.",
+international:"Bonne pour les métiers numériques.",
+salaryPotential:"Variable.",
+advantages:["Freelance","International","Créativité"],
+disadvantages:["Portfolio indispensable","Concurrence"],
+mathsLevel:"Faible",
+internationalScore:4
+},
+
+{
+id:"agronomie",
+name:"Agronomie",
+category:"sciences",
+icon:"🌱",
+description:"Sciences et techniques de la production agricole, des sols et des systèmes alimentaires.",
+duration:"Licence : 3 ans",
+subjects:["Agronomie","Biologie","Sols","Économie agricole"],
+maths:3,
+computer:2,
+profile:"Intérêt pour agriculture, environnement et sciences.",
+careers:["Ingénieur agronome","Conseiller agricole","Technicien","Gestion de projet"],
+sectors:["Agriculture","Agroalimentaire","ONG","Environnement"],
+studyAfter:"Master agronomie, environnement ou développement rural.",
+employment:"Dépend du secteur agricole.",
+international:"Bonne.",
+salaryPotential:"Variable.",
+advantages:["Agriculture","Développement"],
+disadvantages:["Terrain possible","Marché variable"],
+mathsLevel:"Moyen",
+internationalScore:3
+}
+
+];
+
+/* =========================================================
+   AJOUT AUTOMATIQUE DE FILIERES
+========================================================= */
+
+const extraFields = [
+["Pétrole & gaz","ingenierie","🛢️"],
+["Génie chimique","ingenierie","⚗️"],
+["Génie industriel","ingenierie","🏭"],
+["Génie énergétique","ingenierie","🔋"],
+["Génie des matériaux","ingenierie","🧱"],
+["Génie minier","ingenierie","⛏️"],
+["Géologie","sciences","🌋"],
+["Biochimie","sciences","🧬"],
+["Odontologie","sante","🦷"],
+["Sciences infirmières","sante","👩‍⚕️"],
+["Santé publique","sante","🏥"],
+["Marketing","economie","📣"],
+["Management","economie","👔"],
+["Banque & assurance","economie","🏦"],
+["Ressources humaines","economie","👥"],
+["Logistique & transport","economie","🚚"],
+["Sciences politiques","droit","🏛️"],
+["Administration publique","droit","🏢"],
+["Sociologie","lettres","👥"],
+["Psychologie","lettres","🧠"],
+["Sciences environnementales","sciences","🌍"],
+["Aménagement du territoire","ingenierie","🗺️"],
+["Urbanisme","ingenierie","🏙️"],
+["Journalisme","lettres","📰"],
+["Tourisme & hôtellerie","lettres","🏨"],
+["Lettres","lettres","📚"],
+["Sciences de l'éducation","lettres","🎓"],
+["Enseignement","lettres","👨‍🏫"],
+["Sciences du sport","sciences","🏃"],
+["Développement logiciel","informatique","👨‍💻"],
+["Systèmes d'information","informatique","🗄️"]
+];
+
+extraFields.forEach((f,index)=>{
+  const name=f[0];
+
+  if(!fields.some(x=>x.name.toLowerCase()===name.toLowerCase())){
+    fields.push({
+      id:"extra-"+index,
+      name,
+      category:f[1],
+      icon:f[2],
+      description:`Formation spécialisée en ${name.toLowerCase()}, avec des applications professionnelles dans plusieurs secteurs.`,
+      duration:"Licence : 3 ans",
+      subjects:["Cours fondamentaux","Méthodes professionnelles","Projets","Travaux pratiques"],
+      maths:3,
+      computer:3,
+      profile:"Profil motivé, sérieux et intéressé par ce domaine.",
+      careers:["Technicien","Chargé de mission","Assistant spécialisé","Consultant"],
+      sectors:["Entreprises","Administration","Organisations","Secteur privé"],
+      studyAfter:"Master ou spécialisation selon le métier visé.",
+      employment:"Variable selon le pays, la spécialisation et l'expérience.",
+      international:"Dépend de la reconnaissance du diplôme et des compétences.",
+      salaryPotential:"À comparer selon le pays et le niveau d'expérience.",
+      advantages:["Diversité des secteurs","Possibilité de spécialisation"],
+      disadvantages:["Spécialisation parfois nécessaire"],
+      mathsLevel:"Moyen",
+      internationalScore:3
+    });
+  }
+});
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const storage = {
+  get(key,fallback=[]){
+    try{
+      return JSON.parse(localStorage.getItem(key)) ?? fallback;
+    }catch{
+      return fallback;
+    }
+  },
+
+  set(key,value){
+    localStorage.setItem(key,JSON.stringify(value));
+  }
 };
 
+let subjects = storage.get("ep_subjects",[]);
+let studies = storage.get("ep_studies",[]);
+let planning = storage.get("ep_planning",[]);
+let budget = storage.get("ep_budget",[]);
+let lessons = storage.get("ep_lessons",[]);
+let profile = storage.get("ep_profile",{});
+let comparison = [];
 
-/* ==============================
-   SAUVEGARDE
-============================== */
+let fieldCategory="all";
 
-function saveData(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
-
-
-/* ==============================
+/* =========================================================
    NAVIGATION
-============================== */
+========================================================= */
 
-function showSection(id, button){
+document.querySelectorAll(".nav button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    showSection(btn.dataset.section);
+  });
+});
 
-  document.querySelectorAll(".section")
-    .forEach(section => section.classList.remove("active"));
+function showSection(id){
 
-  const section = document.getElementById(id);
-
-  if(section){
-    section.classList.add("active");
-  }
-
-  document.querySelectorAll("nav button")
-    .forEach(btn => btn.classList.remove("active"));
-
-  if(button){
-    button.classList.add("active");
-  }
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
   });
 
-  updateDashboard();
+  const target=document.getElementById(id);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav button").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.section===id);
+  });
+
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function openLessons(){
-  showSection("lessons");
+function closeModalOutside(event,id){
+  if(event.target.id===id){
+    document.getElementById(id).classList.remove("show");
+  }
 }
 
+/* =========================================================
+   MOYENNE
+========================================================= */
 
-/* ==============================
-   LEÇONS
-============================== */
+function addSubject(){
 
-function openLessonForm(){
+  const name=document.getElementById("subjectName").value.trim();
+  const grade=Number(document.getElementById("subjectGrade").value);
+  const coeff=Number(document.getElementById("subjectCoeff").value);
 
-  document.getElementById("lessonFormCard").style.display="block";
-
-  document.getElementById("lessonTitle").focus();
-}
-
-function closeLessonForm(){
-
-  document.getElementById("lessonFormCard").style.display="none";
-
-  document.getElementById("lessonTitle").value="";
-  document.getElementById("lessonDescription").value="";
-  document.getElementById("lessonFile").value="";
-}
-
-
-function saveLesson(){
-
-  const title =
-    document.getElementById("lessonTitle").value.trim();
-
-  const subject =
-    document.getElementById("lessonSubject").value;
-
-  const description =
-    document.getElementById("lessonDescription").value.trim();
-
-  const file =
-    document.getElementById("lessonFile").files[0];
-
-  if(!title){
-    alert("Veuillez entrer le titre de la leçon.");
+  if(!name || isNaN(grade) || isNaN(coeff)){
+    alert("Remplis tous les champs.");
     return;
   }
 
-  if(!subject){
-    alert("Veuillez choisir une matière.");
+  if(grade<0 || grade>20){
+    alert("La note doit être comprise entre 0 et 20.");
     return;
   }
 
-  if(!file){
-    alert("Veuillez sélectionner un fichier PDF.");
-    return;
-  }
-
-  if(file.type !== "application/pdf"){
-    alert("Le fichier doit être un PDF.");
-    return;
-  }
-
-  const url = URL.createObjectURL(file);
-
-  const lesson = {
+  subjects.push({
     id:Date.now(),
-    title:title,
-    subject:subject,
-    description:description,
-    fileName:file.name,
-    url:url,
-    done:false,
-    favorite:false,
-    createdAt:new Date().toLocaleDateString("fr-FR")
-  };
-
-  data.lessons.push(lesson);
-
-  /*
-    On ne stocke pas le fichier PDF lui-même dans localStorage.
-    L'URL temporaire permet de l'ouvrir pendant la session.
-  */
-
-  saveData();
-
-  renderLessons();
-  updateDashboard();
-
-  closeLessonForm();
-
-  alert("✅ Leçon ajoutée avec succès !");
-}
-
-
-function renderLessons(){
-
-  const container =
-    document.getElementById("lessonList");
-
-  const search =
-    document.getElementById("lessonSearch")
-      .value
-      .toLowerCase();
-
-  const filter =
-    document.getElementById("lessonFilter").value;
-
-  let lessons = data.lessons.filter(lesson => {
-
-    const matchesSearch =
-      lesson.title.toLowerCase().includes(search) ||
-      lesson.subject.toLowerCase().includes(search);
-
-    const matchesFilter =
-      filter === "all" ||
-      lesson.subject === filter;
-
-    return matchesSearch && matchesFilter;
-
+    name,
+    grade,
+    coeff
   });
 
-  if(lessons.length === 0){
+  storage.set("ep_subjects",subjects);
 
-    container.innerHTML = `
+  document.getElementById("subjectName").value="";
+  document.getElementById("subjectGrade").value="";
+
+  renderSubjects();
+}
+
+function deleteSubject(id){
+
+  subjects=subjects.filter(x=>x.id!==id);
+
+  storage.set("ep_subjects",subjects);
+
+  renderSubjects();
+}
+
+function renderSubjects(){
+
+  const tbody=document.getElementById("subjectsTable");
+
+  tbody.innerHTML="";
+
+  let points=0;
+  let coeff=0;
+
+  subjects.forEach(s=>{
+
+    points+=s.grade*s.coeff;
+    coeff+=s.coeff;
+
+    const tr=document.createElement("tr");
+
+    tr.innerHTML=`
+      <td>${escapeHtml(s.name)}</td>
+      <td>${s.grade}/20</td>
+      <td>${s.coeff}</td>
+      <td>${(s.grade*s.coeff).toFixed(2)}</td>
+      <td>
+        <button class="btn btn-danger" onclick="deleteSubject(${s.id})">🗑️</button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+
+  const average=coeff?points/coeff:0;
+
+  document.getElementById("averageResult").textContent=
+    coeff?average.toFixed(2)+"/20":"—";
+
+  document.getElementById("totalCoeff").textContent=coeff.toFixed(1);
+
+  document.getElementById("dashAverage").textContent=
+    coeff?average.toFixed(2)+"/20":"—";
+
+  const objective=Number(document.getElementById("averageObjective").value)||12;
+
+  document.getElementById("dashObjective").textContent=objective+"/20";
+
+  updateGlobalProgress();
+}
+
+document.getElementById("averageObjective").addEventListener("input",()=>{
+  renderSubjects();
+});
+
+/* =========================================================
+   FILIERES
+========================================================= */
+
+function setFieldCategory(category,button){
+
+  fieldCategory=category;
+
+  document.querySelectorAll(".filter-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  renderFields();
+}
+
+function renderFields(){
+
+  const grid=document.getElementById("fieldsGrid");
+
+  const search=document.getElementById("fieldSearch").value.toLowerCase().trim();
+
+  let list=fields.filter(field=>{
+
+    const categoryOk=
+      fieldCategory==="all" ||
+      field.category===fieldCategory;
+
+    const searchOk=
+      !search ||
+      field.name.toLowerCase().includes(search) ||
+      field.description.toLowerCase().includes(search);
+
+    return categoryOk && searchOk;
+  });
+
+  if(!list.length){
+
+    grid.innerHTML=`
       <div class="card empty">
-        <div style="font-size:40px">📚</div>
-        <h3>Aucune leçon trouvée</h3>
-        <p>Ajoute ton premier cours PDF.</p>
-        <br>
-        <button class="btn btn-primary" onclick="openLessonForm()">
-          ➕ Ajouter une leçon
-        </button>
+        Aucune filière trouvée.
       </div>
     `;
 
     return;
   }
 
-  container.innerHTML = lessons.map(lesson => `
+  grid.innerHTML=list.map(field=>{
 
-    <div class="lesson-card">
+    const selected=comparison.includes(field.id);
 
-      <button
-        class="favorite"
-        onclick="toggleFavorite(${lesson.id})"
-        title="Favori"
-      >
-        ${lesson.favorite ? "⭐" : "☆"}
-      </button>
+    return`
+      <div class="card field-card">
 
-      <div class="lesson-icon">📄</div>
+        <div class="field-icon">${field.icon}</div>
 
-      <span class="lesson-status ${
-        lesson.done ? "status-done" : "status-todo"
-      }">
-        ${lesson.done ? "✓ Terminée" : "À étudier"}
-      </span>
+        <div>
+          <h3>${escapeHtml(field.name)}</h3>
+          <p style="color:var(--muted)">
+            ${escapeHtml(field.description)}
+          </p>
+        </div>
 
-      <h3>${escapeHTML(lesson.title)}</h3>
+        <div class="badges">
+          <span class="badge">⏳ ${escapeHtml(field.duration)}</span>
+          <span class="badge">📐 Maths ${stars(field.maths)}</span>
+          <span class="badge">💻 IT ${stars(field.computer)}</span>
+        </div>
 
-      <div class="lesson-meta">
-        📚 ${escapeHTML(lesson.subject)}
+        <div>
+          <strong>Débouchés</strong>
+          <p style="color:var(--muted)">
+            ${field.careers.slice(0,3).map(escapeHtml).join(" • ")}
+          </p>
+        </div>
+
+        <div class="field-actions">
+
+          <button class="btn btn-primary"
+            onclick="openField('${field.id}')">
+            📖 Voir la fiche
+          </button>
+
+          <button class="btn ${selected?'btn-success':'btn-outline'}"
+            onclick="toggleComparison('${field.id}')">
+            ${selected?"✓ Comparée":"⚖️ Comparer"}
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  }).join("");
+}
+
+function stars(value){
+
+  return "★".repeat(Math.min(5,value))+
+         "☆".repeat(Math.max(0,5-value));
+}
+
+function openField(id){
+
+  const field=fields.find(x=>x.id===id);
+
+  if(!field)return;
+
+  document.getElementById("fieldModalContent").innerHTML=`
+
+    <div class="modal-header">
+
+      <div class="field-icon">${field.icon}</div>
+
+      <h2>${escapeHtml(field.name)}</h2>
+
+      <p>${escapeHtml(field.description)}</p>
+
+    </div>
+
+    <div class="detail-grid">
+
+      <div class="detail">
+        <h4>📖 Présentation</h4>
+        <p>${escapeHtml(field.description)}</p>
       </div>
 
-      ${
-        lesson.description
-        ? `<p class="muted" style="margin-bottom:12px">
-            ${escapeHTML(lesson.description)}
-          </p>`
-        : ""
-      }
+      <div class="detail">
+        <h4>⏳ Durée</h4>
+        <p>${escapeHtml(field.duration)}</p>
+      </div>
 
-      <p class="muted" style="font-size:12px;margin-bottom:14px">
-        📄 ${escapeHTML(lesson.fileName)}
+      <div class="detail">
+        <h4>🧠 Matières principales</h4>
+        <ul>
+          ${field.subjects.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="detail">
+        <h4>📐 Niveau en mathématiques</h4>
+        <p>${escapeHtml(field.mathsLevel)}</p>
+        <div class="stars">${stars(field.maths)}</div>
+      </div>
+
+      <div class="detail">
+        <h4>💻 Niveau informatique</h4>
+        <div class="stars">${stars(field.computer)}</div>
+      </div>
+
+      <div class="detail">
+        <h4>🎯 Profil recommandé</h4>
+        <p>${escapeHtml(field.profile)}</p>
+      </div>
+
+      <div class="detail">
+        <h4>💼 Débouchés</h4>
+        <ul>
+          ${field.careers.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="detail">
+        <h4>🏢 Secteurs</h4>
+        <ul>
+          ${field.sectors.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="detail">
+        <h4>📈 Emploi</h4>
+        <p>${escapeHtml(field.employment)}</p>
+      </div>
+
+      <div class="detail">
+        <h4>🌍 International</h4>
+        <p>${escapeHtml(field.international)}</p>
+        <div class="stars">${stars(field.internationalScore)}</div>
+      </div>
+
+      <div class="detail">
+        <h4>💰 Potentiel salarial</h4>
+        <p>${escapeHtml(field.salaryPotential)}</p>
+      </div>
+
+      <div class="detail">
+        <h4>🎓 Après la licence</h4>
+        <p>${escapeHtml(field.studyAfter)}</p>
+      </div>
+
+      <div class="detail">
+        <h4>⭐ Avantages</h4>
+        <ul>
+          ${field.advantages.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="detail">
+        <h4>⚠️ Difficultés</h4>
+        <ul>
+          ${field.disadvantages.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+    </div>
+
+  `;
+
+  document.getElementById("fieldModal").classList.add("show");
+}
+
+function closeFieldModal(){
+  document.getElementById("fieldModal").classList.remove("show");
+}
+
+/* =========================================================
+   COMPARAISON
+========================================================= */
+
+function toggleComparison(id){
+
+  if(comparison.includes(id)){
+    comparison=comparison.filter(x=>x!==id);
+  }else{
+
+    if(comparison.length>=3){
+      alert("Tu peux comparer au maximum 3 filières.");
+      return;
+    }
+
+    comparison.push(id);
+  }
+
+  updateCompareBox();
+  renderFields();
+}
+
+function updateCompareBox(){
+
+  const box=document.getElementById("compareBox");
+
+  document.getElementById("compareCount").textContent=
+    `${comparison.length} filière${comparison.length>1?"s":""}`;
+
+  box.classList.toggle("show",comparison.length>0);
+}
+
+function clearComparison(){
+
+  comparison=[];
+
+  updateCompareBox();
+  renderFields();
+}
+
+function openComparison(){
+
+  if(comparison.length<2){
+    alert("Sélectionne au moins 2 filières.");
+    return;
+  }
+
+  const selected=comparison
+    .map(id=>fields.find(f=>f.id===id))
+    .filter(Boolean);
+
+  const rows=[
+    ["Durée",f=>f.duration],
+    ["Mathématiques",f=>f.mathsLevel],
+    ["Informatique",f=>stars(f.computer)],
+    ["Emploi",f=>f.employment],
+    ["International",f=>f.international],
+    ["Salaire",f=>f.salaryPotential],
+    ["Après la licence",f=>f.studyAfter]
+  ];
+
+  let html=`
+    <div class="modal-header">
+      <h2>⚖️ Comparaison des filières</h2>
+      <p>Compare les caractéristiques principales.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Critère</th>
+            ${selected.map(f=>`
+              <th>${f.icon} ${escapeHtml(f.name)}</th>
+            `).join("")}
+          </tr>
+        </thead>
+
+        <tbody>
+          ${rows.map(row=>`
+            <tr>
+              <th>${row[0]}</th>
+              ${selected.map(f=>`
+                <td>${escapeHtml(String(row[1](f)))}</td>
+              `).join("")}
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  document.getElementById("comparisonContent").innerHTML=html;
+
+  document.getElementById("compareModal").classList.add("show");
+}
+
+function closeComparison(){
+  document.getElementById("compareModal").classList.remove("show");
+}
+
+/* =========================================================
+   LEÇONS
+========================================================= */
+
+function addLesson(){
+
+  const title=document.getElementById("lessonTitle").value.trim();
+  const subject=document.getElementById("lessonSubject").value.trim();
+  const description=document.getElementById("lessonDescription").value.trim();
+  const file=document.getElementById("lessonFile").files[0];
+
+  if(!title || !subject || !file){
+    alert("Ajoute au minimum un titre, une matière et un PDF.");
+    return;
+  }
+
+  if(file.type!=="application/pdf"){
+    alert("Le fichier doit être un PDF.");
+    return;
+  }
+
+  const url=URL.createObjectURL(file);
+
+  lessons.push({
+    id:Date.now(),
+    title,
+    subject,
+    description,
+    url,
+    fileName:file.name,
+    complete:false,
+    favorite:false
+  });
+
+  /*
+    ATTENTION :
+    Une URL Blob n'est pas permanente après rechargement.
+    On sauvegarde uniquement les informations textuelles.
+  */
+
+  storage.set(
+    "ep_lessons",
+    lessons.map(x=>({
+      ...x,
+      url:""
+    }))
+  );
+
+  document.getElementById("lessonTitle").value="";
+  document.getElementById("lessonSubject").value="";
+  document.getElementById("lessonDescription").value="";
+  document.getElementById("lessonFile").value="";
+
+  renderLessons();
+
+  alert("Leçon ajoutée pour cette session. Pour conserver le PDF après fermeture, il faudra ajouter un stockage cloud.");
+}
+
+function renderLessons(){
+
+  const grid=document.getElementById("lessonsGrid");
+
+  const search=document.getElementById("lessonSearch").value.toLowerCase().trim();
+  const filter=document.getElementById("lessonFilter").value;
+
+  const list=lessons.filter(l=>{
+
+    const searchOk=
+      !search ||
+      l.title.toLowerCase().includes(search) ||
+      l.subject.toLowerCase().includes(search);
+
+    const filterOk=
+      filter==="all" ||
+      l.subject===filter;
+
+    return searchOk && filterOk;
+  });
+
+  const subjectsList=[
+    ...new Set(lessons.map(l=>l.subject))
+  ];
+
+  const select=document.getElementById("lessonFilter");
+
+  const current=select.value;
+
+  select.innerHTML=
+    `<option value="all">Toutes les matières</option>`+
+    subjectsList.map(s=>`
+      <option value="${escapeAttribute(s)}">
+        ${escapeHtml(s)}
+      </option>
+    `).join("");
+
+  if(subjectsList.includes(current)){
+    select.value=current;
+  }
+
+  if(!list.length){
+
+    grid.innerHTML=`
+      <div class="card empty">
+        📚 Aucune leçon trouvée.<br>
+        Ajoute ton premier cours PDF ci-dessus.
+      </div>
+    `;
+
+    updateDashboard();
+    return;
+  }
+
+  grid.innerHTML=list.map(l=>`
+
+    <div class="card pdf-card">
+
+      <div class="pdf-icon">📄</div>
+
+      <h3>${escapeHtml(l.title)}</h3>
+
+      <span class="badge">${escapeHtml(l.subject)}</span>
+
+      <p style="color:var(--muted);margin-top:8px">
+        ${escapeHtml(l.description || "Aucune description.")}
       </p>
 
-      <div class="actions">
+      <small style="color:var(--muted)">
+        ${escapeHtml(l.fileName || "Document PDF")}
+      </small>
 
-        <button
-          class="btn btn-primary"
-          onclick="openPDF(${lesson.id})"
-        >
-          👁️ Ouvrir
+      <div class="pdf-actions">
+
+        <button class="btn btn-primary"
+          onclick="openLesson(${l.id})">
+          📖 Ouvrir
         </button>
 
-        <button
-          class="btn btn-secondary"
-          onclick="toggleDone(${lesson.id})"
-        >
-          ${lesson.done ? "↩️ À revoir" : "✅ Terminer"}
+        <button class="btn ${l.complete?'btn-success':'btn-outline'}"
+          onclick="toggleLessonComplete(${l.id})">
+          ${l.complete?"✓ Terminée":"○ Terminer"}
         </button>
 
-        <button
-          class="btn btn-danger"
-          onclick="deleteLesson(${lesson.id})"
-        >
+        <button class="btn btn-outline"
+          onclick="toggleLessonFavorite(${l.id})">
+          ${l.favorite?"⭐":"☆"}
+        </button>
+
+        <button class="btn btn-danger"
+          onclick="deleteLesson(${l.id})">
           🗑️
         </button>
 
@@ -1313,23 +2594,22 @@ function renderLessons(){
     </div>
 
   `).join("");
+
+  updateDashboard();
 }
 
+function openLesson(id){
 
-function openPDF(id){
+  const lesson=lessons.find(x=>x.id===id);
 
-  const lesson =
-    data.lessons.find(item => item.id === id);
-
-  if(!lesson){
-    return;
-  }
+  if(!lesson)return;
 
   if(!lesson.url){
 
     alert(
-      "Ce PDF n'est plus disponible dans cette session. " +
-      "Il faudra le sélectionner à nouveau."
+      "Le PDF n'est plus disponible après rechargement. " +
+      "Il faudra le sélectionner à nouveau. " +
+      "Une future version avec stockage cloud permettra de conserver les fichiers."
     );
 
     return;
@@ -1338,823 +2618,649 @@ function openPDF(id){
   window.open(lesson.url,"_blank");
 }
 
+function toggleLessonComplete(id){
 
-function toggleDone(id){
+  const lesson=lessons.find(x=>x.id===id);
 
-  const lesson =
-    data.lessons.find(item => item.id === id);
+  if(!lesson)return;
 
-  if(!lesson){
-    return;
-  }
+  lesson.complete=!lesson.complete;
 
-  lesson.done = !lesson.done;
-
-  saveData();
-
-  renderLessons();
-  updateDashboard();
-}
-
-
-function toggleFavorite(id){
-
-  const lesson =
-    data.lessons.find(item => item.id === id);
-
-  if(!lesson){
-    return;
-  }
-
-  lesson.favorite = !lesson.favorite;
-
-  saveData();
+  saveLessonsTextOnly();
 
   renderLessons();
 }
 
+function toggleLessonFavorite(id){
+
+  const lesson=lessons.find(x=>x.id===id);
+
+  if(!lesson)return;
+
+  lesson.favorite=!lesson.favorite;
+
+  saveLessonsTextOnly();
+
+  renderLessons();
+}
 
 function deleteLesson(id){
 
-  if(!confirm("Supprimer cette leçon ?")){
-    return;
-  }
+  const lesson=lessons.find(x=>x.id===id);
 
-  const lesson =
-    data.lessons.find(item => item.id === id);
-
-  if(lesson && lesson.url){
+  if(lesson?.url){
     try{
       URL.revokeObjectURL(lesson.url);
-    }catch(e){}
+    }catch{}
   }
 
-  data.lessons =
-    data.lessons.filter(item => item.id !== id);
+  lessons=lessons.filter(x=>x.id!==id);
 
-  saveData();
+  saveLessonsTextOnly();
 
   renderLessons();
-  updateDashboard();
 }
 
+function saveLessonsTextOnly(){
 
-/* ==============================
-   MOYENNE
-============================== */
-
-function calculateAverage(){
-
-  let total = 0;
-  let count = 0;
-
-  for(let i=1;i<=5;i++){
-
-    const value =
-      parseFloat(
-        document.getElementById("grade"+i).value
-      );
-
-    if(!isNaN(value)){
-
-      if(value < 0 || value > 20){
-        alert("Les notes doivent être entre 0 et 20.");
-        return;
-      }
-
-      total += value;
-      count++;
-    }
-  }
-
-  if(count === 0){
-
-    document.getElementById("averageResult").innerHTML =
-      `<p class="muted">Entre au moins une note.</p>`;
-
-    return;
-  }
-
-  const average = total / count;
-
-  data.average = average;
-  saveData();
-
-  let mention = "À améliorer";
-
-  if(average >= 16){
-    mention = "Très bien 🎉";
-  }
-  else if(average >= 14){
-    mention = "Bien 👍";
-  }
-  else if(average >= 12){
-    mention = "Assez bien 👏";
-  }
-  else if(average >= 10){
-    mention = "Passable";
-  }
-
-  document.getElementById("averageResult").innerHTML = `
-    <div class="card" style="background:#eff6ff">
-      <h3>📊 Résultat</h3>
-      <div style="font-size:40px;font-weight:800;color:var(--primary)">
-        ${average.toFixed(2)}/20
-      </div>
-      <p>${mention}</p>
-    </div>
-  `;
-
-  updateDashboard();
-}
-
-
-/* ==============================
-   FILIÈRES
-============================== */
-
-const fields = [
-
-"Informatique",
-"Génie informatique",
-"Intelligence artificielle",
-"Data Science",
-"Cybersécurité",
-"Réseaux & télécommunications",
-"Développement logiciel",
-"Systèmes d'information",
-"Génie civil",
-"Génie électrique",
-"Génie mécanique",
-"Génie industriel",
-"Génie chimique",
-"Génie énergétique",
-"Génie des matériaux",
-"Génie minier",
-"Géologie",
-"Pétrole & gaz",
-"Mathématiques",
-"Physique",
-"Chimie",
-"Biologie",
-"Biochimie",
-"Médecine",
-"Pharmacie",
-"Odontologie",
-"Sciences infirmières",
-"Santé publique",
-"Économie",
-"Finance",
-"Comptabilité",
-"Gestion",
-"Marketing",
-"Management",
-"Banque & assurance",
-"Ressources humaines",
-"Logistique & transport",
-"Droit",
-"Relations internationales",
-"Sciences politiques",
-"Administration publique",
-"Sociologie",
-"Psychologie",
-"Agronomie",
-"Sciences environnementales",
-"Aménagement du territoire",
-"Urbanisme",
-"Communication",
-"Journalisme",
-"Design graphique",
-"Tourisme & hôtellerie",
-"Lettres",
-"Sciences de l'éducation",
-"Enseignement",
-"Sciences du sport"
-
-];
-
-
-function renderFields(){
-
-  const container =
-    document.getElementById("fieldList");
-
-  const search =
-    document.getElementById("fieldSearch")
-      .value
-      .toLowerCase();
-
-  const filtered =
-    fields.filter(field =>
-      field.toLowerCase().includes(search)
-    );
-
-  if(filtered.length === 0){
-
-    container.innerHTML =
-      `<div class="empty">Aucune filière trouvée.</div>`;
-
-    return;
-  }
-
-  container.innerHTML = filtered.map((field,index)=>`
-
-    <div
-      class="card"
-      style="margin-bottom:10px;cursor:pointer"
-      onclick="showField('${escapeHTML(field)}')"
-    >
-
-      <strong>
-        🎓 ${escapeHTML(field)}
-      </strong>
-
-      <p class="muted">
-        Licence • Master • Débouchés professionnels
-      </p>
-
-    </div>
-
-  `).join("");
-}
-
-
-function showField(field){
-
-  alert(
-    "🎓 " + field +
-    "\\n\\nLicence : environ 3 ans" +
-    "\\nMaster : environ 2 ans supplémentaires" +
-    "\\n\\nLes débouchés et salaires dépendent du pays, " +
-    "du métier et de l'expérience."
+  storage.set(
+    "ep_lessons",
+    lessons.map(x=>({
+      ...x,
+      url:""
+    }))
   );
 }
 
-
-/* ==============================
+/* =========================================================
    ETUDES
-============================== */
+========================================================= */
 
 function addStudy(){
 
-  const subject =
-    document.getElementById("studySubject").value.trim();
+  const subject=document.getElementById("studySubject").value.trim();
+  const grade=Number(document.getElementById("studyGrade").value);
+  const target=Number(document.getElementById("studyTarget").value);
+  const status=document.getElementById("studyStatus").value;
+  const comment=document.getElementById("studyComment").value.trim();
 
-  const grade =
-    parseFloat(document.getElementById("studyGrade").value);
-
-  const target =
-    parseFloat(document.getElementById("studyTarget").value);
-
-  const comment =
-    document.getElementById("studyComment").value.trim();
-
-  if(!subject){
-    alert("Indique la matière.");
+  if(!subject || isNaN(grade) || isNaN(target)){
+    alert("Remplis les informations demandées.");
     return;
   }
 
-  data.studies.push({
+  studies.push({
     id:Date.now(),
     subject,
-    grade:isNaN(grade) ? null : grade,
-    target:isNaN(target) ? null : target,
+    grade,
+    target,
+    status,
     comment
   });
 
-  saveData();
+  storage.set("ep_studies",studies);
 
   document.getElementById("studySubject").value="";
   document.getElementById("studyGrade").value="";
-  document.getElementById("studyTarget").value="";
   document.getElementById("studyComment").value="";
 
   renderStudies();
 }
 
-
-function renderStudies(){
-
-  const container =
-    document.getElementById("studyList");
-
-  if(data.studies.length === 0){
-
-    container.innerHTML =
-      `<div class="empty">Aucune matière enregistrée.</div>`;
-
-    return;
-  }
-
-  container.innerHTML = `
-
-    <table class="table">
-
-      <thead>
-        <tr>
-          <th>Matière</th>
-          <th>Note</th>
-          <th>Objectif</th>
-          <th>Statut</th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-        ${data.studies.map(study=>{
-
-          let status = "À améliorer";
-          let className = "badge-red";
-
-          if(
-            study.grade !== null &&
-            study.target !== null &&
-            study.grade >= study.target
-          ){
-            status = "Objectif atteint";
-            className = "badge-green";
-          }
-          else if(study.grade !== null){
-            status = "En progression";
-            className = "badge-yellow";
-          }
-
-          return `
-
-            <tr>
-
-              <td>${escapeHTML(study.subject)}</td>
-
-              <td>
-                ${study.grade ?? "—"}/20
-              </td>
-
-              <td>
-                ${study.target ?? "—"}/20
-              </td>
-
-              <td>
-                <span class="badge ${className}">
-                  ${status}
-                </span>
-              </td>
-
-              <td>
-                <button
-                  class="btn btn-danger"
-                  onclick="deleteStudy(${study.id})"
-                >
-                  🗑️
-                </button>
-              </td>
-
-            </tr>
-
-          `;
-
-        }).join("")}
-
-      </tbody>
-
-    </table>
-
-  `;
-}
-
-
 function deleteStudy(id){
 
-  data.studies =
-    data.studies.filter(item => item.id !== id);
+  studies=studies.filter(x=>x.id!==id);
 
-  saveData();
+  storage.set("ep_studies",studies);
 
   renderStudies();
 }
 
+function renderStudies(){
 
-/* ==============================
-   PLANNING
-============================== */
+  const grid=document.getElementById("studiesGrid");
 
-function addPlanning(){
+  if(!studies.length){
 
-  const date =
-    document.getElementById("planDate").value;
+    grid.innerHTML=`
+      <div class="card empty">
+        📖 Ajoute tes matières pour commencer le suivi.
+      </div>
+    `;
 
-  const activity =
-    document.getElementById("planActivity").value.trim();
-
-  if(!date || !activity){
-
-    alert("Indique la date et l'activité.");
+    updateGlobalProgress();
 
     return;
   }
 
-  data.planning.push({
+  grid.innerHTML=studies.map(s=>{
+
+    const progress=Math.max(
+      0,
+      Math.min(100,(s.grade/s.target)*100)
+    );
+
+    let label="🟡 En progression";
+
+    if(s.status==="green")label="🟢 Objectif atteint";
+    if(s.status==="red")label="🔴 À améliorer";
+
+    return`
+
+      <div class="card">
+
+        <div class="card-title">
+          <h3>${escapeHtml(s.subject)}</h3>
+
+          <button class="btn btn-danger"
+            onclick="deleteStudy(${s.id})">
+            🗑️
+          </button>
+        </div>
+
+        <p>
+          <strong>${s.grade}/20</strong>
+          objectif ${s.target}/20
+        </p>
+
+        <br>
+
+        <div class="progress">
+          <div class="progress-bar" style="width:${progress}%"></div>
+        </div>
+
+        <p style="margin-top:10px">
+          ${label}
+        </p>
+
+        <p style="color:var(--muted);margin-top:8px">
+          ${escapeHtml(s.comment || "")}
+        </p>
+
+      </div>
+
+    `;
+  }).join("");
+
+  updateGlobalProgress();
+}
+
+/* =========================================================
+   PLANNING
+========================================================= */
+
+function addPlanning(){
+
+  const date=document.getElementById("planDate").value;
+  const time=document.getElementById("planTime").value;
+  const activity=document.getElementById("planActivity").value.trim();
+
+  if(!date || !activity){
+    alert("Ajoute une date et une activité.");
+    return;
+  }
+
+  planning.push({
     id:Date.now(),
     date,
+    time,
     activity
   });
 
-  saveData();
+  planning.sort((a,b)=>
+    (`${a.date} ${a.time}`).localeCompare(`${b.date} ${b.time}`)
+  );
 
-  document.getElementById("planDate").value="";
+  storage.set("ep_planning",planning);
+
   document.getElementById("planActivity").value="";
 
   renderPlanning();
 }
 
+function deletePlanning(id){
+
+  planning=planning.filter(x=>x.id!==id);
+
+  storage.set("ep_planning",planning);
+
+  renderPlanning();
+}
 
 function renderPlanning(){
 
-  const container =
-    document.getElementById("planningList");
+  const container=document.getElementById("planningList");
 
-  if(data.planning.length === 0){
+  if(!planning.length){
 
-    container.innerHTML =
-      `<div class="empty">Aucune activité programmée.</div>`;
+    container.innerHTML=`
+      <div class="card empty">
+        📅 Ton planning est vide.
+      </div>
+    `;
+
+    updateDashboard();
+    return;
+  }
+
+  container.innerHTML=planning.map(p=>`
+
+    <div class="card" style="margin-bottom:10px">
+
+      <div class="card-title">
+
+        <div>
+          <h3>📅 ${escapeHtml(formatDate(p.date))}</h3>
+          <p style="color:var(--muted)">
+            ${escapeHtml(p.time || "Heure non précisée")}
+            — ${escapeHtml(p.activity)}
+          </p>
+        </div>
+
+        <button class="btn btn-danger"
+          onclick="deletePlanning(${p.id})">
+          🗑️
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+  updateDashboard();
+}
+
+/* =========================================================
+   BUDGET
+========================================================= */
+
+function addBudget(){
+
+  const type=document.getElementById("budgetType").value;
+  const amount=Number(document.getElementById("budgetAmount").value);
+  const category=document.getElementById("budgetCategory").value;
+  const date=document.getElementById("budgetDate").value;
+  const description=document.getElementById("budgetDescription").value.trim();
+
+  if(!amount || amount<=0 || !date){
+    alert("Ajoute un montant et une date.");
+    return;
+  }
+
+  budget.push({
+    id:Date.now(),
+    type,
+    amount,
+    category,
+    date,
+    description
+  });
+
+  storage.set("ep_budget",budget);
+
+  document.getElementById("budgetAmount").value="";
+  document.getElementById("budgetDescription").value="";
+
+  renderBudget();
+}
+
+function deleteBudget(id){
+
+  budget=budget.filter(x=>x.id!==id);
+
+  storage.set("ep_budget",budget);
+
+  renderBudget();
+}
+
+function renderBudget(){
+
+  let income=0;
+  let expense=0;
+
+  budget.forEach(b=>{
+
+    if(b.type==="income"){
+      income+=b.amount;
+    }else{
+      expense+=b.amount;
+    }
+  });
+
+  const balance=income-expense;
+
+  document.getElementById("incomeTotal").textContent=
+    formatMoney(income);
+
+  document.getElementById("expenseTotal").textContent=
+    formatMoney(expense);
+
+  document.getElementById("balanceTotal").textContent=
+    formatMoney(balance);
+
+  document.getElementById("dashBalance").textContent=
+    formatMoney(balance);
+
+  const container=document.getElementById("budgetList");
+
+  if(!budget.length){
+
+    container.innerHTML=`
+      <div class="card empty">
+        💰 Aucune opération enregistrée.
+      </div>
+    `;
 
     return;
   }
 
-  const sorted =
-    [...data.planning]
-      .sort((a,b)=>a.date.localeCompare(b.date));
+  const sorted=[...budget].sort((a,b)=>
+    b.date.localeCompare(a.date)
+  );
 
-  container.innerHTML = sorted.map(item=>`
+  container.innerHTML=sorted.map(b=>`
 
-    <div
-      class="card"
-      style="margin-bottom:10px"
-    >
+    <div class="card" style="margin-bottom:10px">
 
-      <strong>📅 ${formatDate(item.date)}</strong>
+      <div class="card-title">
 
-      <p>${escapeHTML(item.activity)}</p>
+        <div>
 
-      <br>
+          <span class="badge">
+            ${b.type==="income"?"💰 Revenu":"💸 Dépense"}
+          </span>
 
-      <button
-        class="btn btn-danger"
-        onclick="deletePlanning(${item.id})"
-      >
-        🗑️ Supprimer
-      </button>
+          <h3 style="margin-top:7px">
+            ${escapeHtml(b.category)}
+          </h3>
+
+          <p style="color:var(--muted)">
+            ${escapeHtml(b.description || "")}
+            • ${escapeHtml(formatDate(b.date))}
+          </p>
+
+        </div>
+
+        <div style="text-align:right">
+
+          <strong class="${b.type==="income"?"positive":"negative"}">
+            ${b.type==="income"?"+":"-"}${formatMoney(b.amount)}
+          </strong>
+
+          <br>
+
+          <button class="btn btn-danger"
+            onclick="deleteBudget(${b.id})">
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
 
     </div>
 
   `).join("");
 }
 
+/* =========================================================
+   PROFIL
+========================================================= */
 
-function deletePlanning(id){
+function saveProfile(){
 
-  data.planning =
-    data.planning.filter(item=>item.id !== id);
+  profile={
+    name:document.getElementById("profileName").value.trim(),
+    firstName:document.getElementById("profileFirstName").value.trim(),
+    university:document.getElementById("profileUniversity").value.trim(),
+    level:document.getElementById("profileLevel").value,
+    series:document.getElementById("profileSeries").value.trim(),
+    field:document.getElementById("profileField").value.trim(),
+    objective:document.getElementById("profileObjective").value.trim()
+  };
 
-  saveData();
+  storage.set("ep_profile",profile);
 
-  renderPlanning();
+  renderProfile();
+
+  alert("Profil enregistré ✅");
 }
 
+function loadProfile(){
 
-/* ==============================
-   BUDGET
-============================== */
+  document.getElementById("profileName").value=profile.name||"";
+  document.getElementById("profileFirstName").value=profile.firstName||"";
+  document.getElementById("profileUniversity").value=profile.university||"";
+  document.getElementById("profileLevel").value=profile.level||"Licence 1";
+  document.getElementById("profileSeries").value=profile.series||"";
+  document.getElementById("profileField").value=profile.field||"";
+  document.getElementById("profileObjective").value=profile.objective||"";
 
-function addBudget(){
+  renderProfile();
+}
 
-  const type =
-    document.getElementById("budgetType").value;
+function renderProfile(){
 
-  const category =
-    document.getElementById("budgetCategory").value;
+  const first=profile.firstName||"";
+  const name=profile.name||"";
 
-  const amount =
-    parseFloat(document.getElementById("budgetAmount").value);
+  const full=[first,name].filter(Boolean).join(" ");
 
-  const description =
-    document.getElementById("budgetDescription").value.trim();
+  if(!full && !profile.field){
 
-  if(isNaN(amount) || amount <= 0){
-
-    alert("Entre un montant valide.");
+    document.getElementById("profilePreview").textContent=
+      "Ton profil apparaîtra ici.";
 
     return;
   }
 
-  data.budget.push({
-    id:Date.now(),
-    type,
-    category,
-    amount,
-    description,
-    date:new Date().toISOString().split("T")[0]
-  });
+  document.getElementById("profilePreview").innerHTML=`
 
-  saveData();
+    <strong style="font-size:22px;color:var(--dark)">
+      ${escapeHtml(full || "Étudiant")}
+    </strong>
 
-  document.getElementById("budgetAmount").value="";
-  document.getElementById("budgetDescription").value="";
+    <br>
 
-  renderBudget();
+    ${escapeHtml(profile.field || "Filière non renseignée")}
+
+    <br>
+
+    ${escapeHtml(profile.university || "Université non renseignée")}
+
+    <br>
+
+    <small>
+      ${escapeHtml(profile.level || "")}
+      ${profile.series?` • Série ${escapeHtml(profile.series)}`:""}
+    </small>
+
+    ${
+      profile.objective
+      ?`<br><br>🎯 ${escapeHtml(profile.objective)}`
+      :""
+    }
+
+  `;
+
+  document.getElementById("welcomeTitle").textContent=
+    `Bienvenue ${first || "sur Étudiant+"} 👋`;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function updateGlobalProgress(){
+
+  let progress=0;
+
+  if(studies.length){
+
+    progress=
+      studies.reduce((sum,s)=>{
+
+        const value=Math.min(
+          100,
+          Math.max(0,(s.grade/s.target)*100)
+        );
+
+        return sum+value;
+
+      },0)/studies.length;
+
+  }else{
+
+    progress=0;
+  }
+
+  document.getElementById("globalProgress").style.width=
+    progress+"%";
+
+  document.getElementById("globalProgressText").textContent=
+    Math.round(progress)+"%";
+
   updateDashboard();
 }
 
+function updateDashboard(){
 
-function renderBudget(){
+  document.getElementById("dashLessons").textContent=
+    lessons.length;
 
-  let income = 0;
-  let expense = 0;
+  const next=document.getElementById("nextActivity");
 
-  data.budget.forEach(item=>{
+  const upcoming=[...planning]
+    .filter(p=>p.date)
+    .sort((a,b)=>
+      (`${a.date} ${a.time}`).localeCompare(`${b.date} ${b.time}`)
+    );
 
-    if(item.type === "income"){
-      income += item.amount;
-    }
-    else{
-      expense += item.amount;
-    }
+  if(!upcoming.length){
 
-  });
-
-  const balance = income - expense;
-
-  document.getElementById("incomeTotal").textContent =
-    formatMoney(income);
-
-  document.getElementById("expenseTotal").textContent =
-    formatMoney(expense);
-
-  document.getElementById("balanceTotal").textContent =
-    formatMoney(balance);
-
-
-  const container =
-    document.getElementById("budgetList");
-
-  if(data.budget.length === 0){
-
-    container.innerHTML =
-      `<div class="empty">Aucune opération.</div>`;
+    next.innerHTML=`
+      <div class="empty">
+        Aucune activité programmée.
+      </div>
+    `;
 
     return;
   }
 
-  container.innerHTML = `
+  const p=upcoming[0];
 
-    <table class="table">
+  next.innerHTML=`
 
-      <thead>
+    <strong>${escapeHtml(p.activity)}</strong>
 
-        <tr>
-          <th>Date</th>
-          <th>Type</th>
-          <th>Catégorie</th>
-          <th>Montant</th>
-          <th></th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        ${data.budget.map(item=>`
-
-          <tr>
-
-            <td>${formatDate(item.date)}</td>
-
-            <td>
-              ${item.type === "income" ? "💵 Revenu" : "💸 Dépense"}
-            </td>
-
-            <td>${escapeHTML(item.category)}</td>
-
-            <td>
-              ${formatMoney(item.amount)}
-            </td>
-
-            <td>
-
-              <button
-                class="btn btn-danger"
-                onclick="deleteBudget(${item.id})"
-              >
-                🗑️
-              </button>
-
-            </td>
-
-          </tr>
-
-        `).join("")}
-
-      </tbody>
-
-    </table>
+    <p style="color:var(--muted);margin-top:5px">
+      📅 ${escapeHtml(formatDate(p.date))}
+      ${p.time?` • ⏰ ${escapeHtml(p.time)}`:""}
+    </p>
 
   `;
 }
 
+/* =========================================================
+   PAYS
+========================================================= */
 
-function deleteBudget(id){
+document.getElementById("countrySelect").addEventListener("change",event=>{
 
-  data.budget =
-    data.budget.filter(item=>item.id !== id);
+  const country=event.target.value;
 
-  saveData();
+  localStorage.setItem("ep_country",country);
 
-  renderBudget();
-  updateDashboard();
-}
+  /*
+    Le sélecteur est déjà prêt pour intégrer
+    plus tard les coefficients spécifiques de chaque pays.
+  */
 
+});
 
-/* ==============================
-   PROFIL
-============================== */
-
-function saveProfile(){
-
-  data.profile = {
-
-    name:
-      document.getElementById("profileName").value.trim(),
-
-    firstName:
-      document.getElementById("profileFirstName").value.trim(),
-
-    school:
-      document.getElementById("profileSchool").value.trim(),
-
-    level:
-      document.getElementById("profileLevel").value,
-
-    field:
-      document.getElementById("profileField").value.trim(),
-
-    objective:
-      document.getElementById("profileObjective").value.trim()
-
-  };
-
-  saveData();
-
-  document.getElementById("profileMessage").innerHTML =
-    `<p style="color:var(--success);margin-top:12px">
-      ✅ Profil enregistré.
-    </p>`;
-
-  updateDashboard();
-}
-
-
-function loadProfile(){
-
-  const profile = data.profile || {};
-
-  document.getElementById("profileName").value =
-    profile.name || "";
-
-  document.getElementById("profileFirstName").value =
-    profile.firstName || "";
-
-  document.getElementById("profileSchool").value =
-    profile.school || "";
-
-  document.getElementById("profileLevel").value =
-    profile.level || "";
-
-  document.getElementById("profileField").value =
-    profile.field || "";
-
-  document.getElementById("profileObjective").value =
-    profile.objective || "";
-}
-
-
-/* ==============================
-   DASHBOARD
-============================== */
-
-function updateDashboard(){
-
-  document.getElementById("dashboardAverage").textContent =
-    data.average !== null
-      ? data.average.toFixed(2) + "/20"
-      : "—";
-
-  document.getElementById("dashboardTarget").textContent =
-    data.target + "/20";
-
-  document.getElementById("dashboardLessons").textContent =
-    data.lessons.length;
-
-
-  let income = 0;
-  let expense = 0;
-
-  data.budget.forEach(item=>{
-
-    if(item.type === "income"){
-      income += item.amount;
-    }
-    else{
-      expense += item.amount;
-    }
-
-  });
-
-  document.getElementById("dashboardBalance").textContent =
-    formatMoney(income-expense);
-
-
-  const totalLessons =
-    data.lessons.length;
-
-  const completedLessons =
-    data.lessons.filter(item=>item.done).length;
-
-  const progress =
-    totalLessons === 0
-      ? 0
-      : Math.round(
-          completedLessons / totalLessons * 100
-        );
-
-  document.getElementById("lessonProgressText").textContent =
-    progress + "%";
-
-  document.getElementById("lessonProgressBar").style.width =
-    progress + "%";
-
-
-  const firstName =
-    data.profile?.firstName || "";
-
-  document.getElementById("welcome").textContent =
-    firstName
-      ? `Bienvenue ${firstName} 👋`
-      : "Bienvenue sur Étudiant+ 👋";
-}
-
-
-/* ==============================
+/* =========================================================
    UTILITAIRES
-============================== */
+========================================================= */
 
 function formatMoney(value){
 
-  return new Intl.NumberFormat(
-    "fr-FR",
-    {
-      maximumFractionDigits:0
-    }
-  ).format(value);
+  return new Intl.NumberFormat("fr-FR",{
+    maximumFractionDigits:0
+  }).format(value);
 }
-
 
 function formatDate(date){
 
-  if(!date){
-    return "";
+  if(!date)return"";
+
+  try{
+
+    return new Intl.DateTimeFormat("fr-FR",{
+      day:"2-digit",
+      month:"long",
+      year:"numeric"
+    }).format(new Date(date+"T00:00:00"));
+
+  }catch{
+    return date;
   }
-
-  const d = new Date(date + "T00:00:00");
-
-  return d.toLocaleDateString("fr-FR");
 }
 
-
-function escapeHTML(value){
+function escapeHtml(value){
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
+function escapeAttribute(value){
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
 
-/* ==============================
+/* =========================================================
    INITIALISATION
-============================== */
+========================================================= */
 
 function init(){
 
+  const savedCountry=
+    localStorage.getItem("ep_country");
+
+  if(savedCountry){
+    document.getElementById("countrySelect").value=savedCountry;
+  }
+
+  /*
+    Les anciens PDF sauvegardés sans URL ne peuvent pas être
+    rouverts après rechargement.
+  */
+  lessons=lessons.map(l=>({
+    ...l,
+    url:l.url||""
+  }));
+
+  renderSubjects();
+  renderFields();
   renderLessons();
   renderStudies();
   renderPlanning();
   renderBudget();
-  renderFields();
   loadProfile();
-  updateDashboard();
+  updateCompareBox();
 
+  const today=
+    new Date().toISOString().split("T")[0];
+
+  document.getElementById("planDate").value=today;
+  document.getElementById("budgetDate").value=today;
 }
 
 init();
