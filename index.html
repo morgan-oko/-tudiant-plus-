@@ -1,1386 +1,1835 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Étudiant+</title>
+<title>Étudiant+</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+    line-height:1.5;
+}
+
+header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:28px 18px;
+    text-align:center;
+    border-radius:0 0 28px 28px;
+}
+
+header h1{
+    font-size:32px;
+    margin-bottom:6px;
+}
+
+header p{
+    opacity:.9;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:25px auto;
+}
+
+.section{
+    background:white;
+    padding:22px;
+    margin-bottom:25px;
+    border-radius:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.07);
+}
+
+.section h2{
+    margin-bottom:16px;
+    color:#1d4ed8;
+}
+
+.section-title{
+    margin-bottom:18px;
+}
+
+input,
+select,
+button{
+    width:100%;
+    padding:13px;
+    border-radius:10px;
+    border:1px solid #d5dbea;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+button:hover{
+    opacity:.92;
+}
+
+button.secondary{
+    background:#64748b;
+}
+
+button.danger{
+    background:#dc2626;
+}
+
+button.success{
+    background:#16a34a;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.dashboard-card{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+    text-align:center;
+}
+
+.dashboard-card .icon{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.dashboard-card h3{
+    font-size:16px;
+}
+
+.dashboard-card p{
+    color:#64748b;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* SEARCH */
+
+.search-box{
+    margin-bottom:20px;
+}
+
+.search-box input{
+    font-size:16px;
+}
+
+/* FILIERES */
+
+.filieres{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.filiere-card{
+    border:1px solid #e1e6ef;
+    border-radius:17px;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+    background:#fff;
+}
+
+.filiere-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.filiere-card h3{
+    color:#1d4ed8;
+    margin-bottom:7px;
+}
+
+.filiere-card p{
+    font-size:13px;
+    color:#64748b;
+}
+
+/* FILIERE DETAILS */
+
+.details-box{
+    display:none;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    padding:20px;
+    border-radius:17px;
+    margin-top:20px;
+}
+
+.details-box h3{
+    color:#1d4ed8;
+    margin-bottom:10px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:15px 0;
+}
+
+.info-card{
+    background:white;
+    padding:15px;
+    border-radius:13px;
+    text-align:center;
+}
+
+.info-card strong{
+    display:block;
+    font-size:20px;
+    color:#2563eb;
+}
+
+.details-list{
+    margin:10px 0 15px 20px;
+}
+
+.details-list li{
+    margin-bottom:6px;
+}
+
+/* BAC */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.subject-header,
+.subject-row{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 70px;
+    gap:10px;
+    align-items:center;
+}
+
+.subject-header{
+    font-weight:bold;
+    margin:20px 0 8px;
+    color:#475569;
+}
+
+.subject-row{
+    margin-bottom:10px;
+}
+
+.subject-row input{
+    background:#fff;
+}
+
+.coefficient{
+    background:#e2e8f0 !important;
+    font-weight:bold;
+    text-align:center;
+    cursor:not-allowed;
+}
+
+.remove-btn{
+    width:70px;
+    margin:0;
+    background:#dc2626;
+    padding:10px;
+}
+
+.result{
+    margin-top:20px;
+    padding:20px;
+    background:#eff6ff;
+    border-radius:15px;
+    text-align:center;
+    display:none;
+}
+
+.result h3{
+    font-size:28px;
+    color:#1d4ed8;
+}
+
+/* EMPLOI DU TEMPS */
+
+.schedule-form{
+    display:grid;
+    grid-template-columns:1fr 1fr 1.5fr 1fr;
+    gap:10px;
+}
+
+.schedule-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.schedule-table th,
+.schedule-table td{
+    padding:12px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:left;
+}
+
+.schedule-table th{
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+.table-delete{
+    width:auto;
+    margin:0;
+    padding:7px 10px;
+}
+
+/* BUDGET */
+
+.budget-summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.money-card{
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.money-card h3{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.money-card strong{
+    font-size:24px;
+}
+
+.revenue{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.expense{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.balance{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+.budget-form{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr auto;
+    gap:10px;
+}
+
+.budget-form button{
+    width:auto;
+    padding:13px 20px;
+}
+
+.budget-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.budget-table th,
+.budget-table td{
+    padding:12px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:left;
+}
+
+/* PROFILE */
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.profile-result{
+    margin-top:15px;
+    padding:15px;
+    background:#ecfdf5;
+    color:#166534;
+    border-radius:12px;
+    display:none;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:30px 15px;
+    color:#64748b;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .dashboard{
+        grid-template-columns:1fr 1fr;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      min-height: 100vh;
+    .filieres{
+        grid-template-columns:1fr 1fr;
     }
 
-    header {
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      color: white;
-      padding: 30px 20px;
-      border-radius: 0 0 25px 25px;
-      text-align: center;
+    .info-grid{
+        grid-template-columns:1fr;
     }
 
-    header h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
+    .schedule-form{
+        grid-template-columns:1fr 1fr;
     }
 
-    header p {
-      font-size: 15px;
-      opacity: 0.9;
+    .budget-form{
+        grid-template-columns:1fr 1fr;
     }
 
-    .container {
-      width: 92%;
-      max-width: 950px;
-      margin: 25px auto;
+    .budget-form button{
+        width:100%;
+    }
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:27px;
     }
 
-    .welcome,
-    .section {
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    .container{
+        width:94%;
     }
 
-    .welcome {
-      padding: 20px;
-      margin-bottom: 20px;
+    .section{
+        padding:17px;
     }
 
-    .welcome h2 {
-      color: #2563eb;
-      margin-bottom: 8px;
+    .dashboard{
+        grid-template-columns:1fr 1fr;
     }
 
-    .search-box {
-      margin: 20px 0;
+    .filieres{
+        grid-template-columns:1fr;
     }
 
-    .search-box input,
-    .form-group input,
-    .form-group select,
-    .level-select,
-    .series-select {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #d7dce5;
-      border-radius: 10px;
-      font-size: 15px;
-      background: white;
-      outline: none;
+    .form-grid,
+    .profile-grid{
+        grid-template-columns:1fr;
     }
 
-    .search-box input:focus,
-    .form-group input:focus,
-    .form-group select:focus,
-    .level-select:focus,
-    .series-select:focus {
-      border-color: #2563eb;
+    .subject-header{
+        display:none;
     }
 
-    .section-title {
-      margin: 25px 0 15px;
-      font-size: 22px;
+    .subject-row{
+        grid-template-columns:1.7fr .8fr .8fr 55px;
+        gap:6px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
+    .remove-btn{
+        width:55px;
+        padding:10px 5px;
     }
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 18px;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.06);
-      cursor: pointer;
-      transition: 0.2s;
+    .schedule-form{
+        grid-template-columns:1fr;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
+    .schedule-table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
     }
 
-    .card .icon {
-      font-size: 32px;
-      margin-bottom: 10px;
+    .budget-summary{
+        grid-template-columns:1fr;
     }
 
-    .card h3 {
-      font-size: 17px;
-      margin-bottom: 5px;
+    .budget-form{
+        grid-template-columns:1fr;
     }
 
-    .card p {
-      font-size: 13px;
-      color: #667085;
+    .budget-table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
     }
-
-    .section {
-      margin-top: 25px;
-      padding: 22px;
-    }
-
-    .section h2 {
-      margin-bottom: 18px;
-      color: #2563eb;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 11px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: #1d4ed8;
-    }
-
-    .btn-secondary {
-      background: #eef2ff;
-      color: #3730a3;
-    }
-
-    .average-info {
-      background: #eff6ff;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .calculator-choice {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .choice-box label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
-
-    .choice-box select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d7dce5;
-      border-radius: 10px;
-      background: white;
-      font-size: 15px;
-    }
-
-    .subjects-container {
-      display: none;
-      margin-top: 20px;
-    }
-
-    .table-header,
-    .subject-row {
-      display: grid;
-      grid-template-columns: 1fr 110px 110px;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .table-header {
-      background: #172033;
-      color: white;
-      padding: 13px;
-      border-radius: 10px 10px 0 0;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .subject-row {
-      padding: 10px;
-      border-bottom: 1px solid #e5e7eb;
-      background: white;
-    }
-
-    .subject-row:nth-child(even) {
-      background: #f8fafc;
-    }
-
-    .subject-name {
-      font-weight: 600;
-    }
-
-    .coefficient {
-      text-align: center;
-      font-weight: bold;
-      color: #2563eb;
-      background: #eff6ff;
-      padding: 9px;
-      border-radius: 8px;
-    }
-
-    .grade-input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #d7dce5;
-      border-radius: 8px;
-      font-size: 15px;
-      text-align: center;
-    }
-
-    .grade-input:focus {
-      outline: none;
-      border-color: #2563eb;
-    }
-
-    .total-coef {
-      margin: 15px 0;
-      padding: 13px;
-      background: #f8fafc;
-      border-radius: 10px;
-      font-size: 14px;
-    }
-
-    .average-result {
-      display: none;
-      margin-top: 20px;
-      padding: 22px;
-      background: linear-gradient(135deg, #eff6ff, #eef2ff);
-      border-radius: 15px;
-      text-align: center;
-    }
-
-    .average-result .number {
-      font-size: 44px;
-      font-weight: bold;
-      color: #2563eb;
-      margin: 10px 0;
-    }
-
-    .mention {
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .source-note {
-      margin-top: 15px;
-      font-size: 12px;
-      color: #667085;
-      line-height: 1.5;
-    }
-
-    .result {
-      display: none;
-      margin-top: 18px;
-      padding: 15px;
-      background: #eff6ff;
-      border-radius: 12px;
-      color: #1e3a8a;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: #667085;
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-
-      header h1 {
-        font-size: 28px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .calculator-choice {
-        grid-template-columns: 1fr;
-      }
-
-      .table-header,
-      .subject-row {
-        grid-template-columns: 1fr 75px 70px;
-      }
-
-      .table-header {
-        font-size: 12px;
-      }
-
-      .subject-row {
-        font-size: 13px;
-      }
-
-      .grade-input {
-        padding: 9px 5px;
-      }
-    }
-
-    @media (max-width: 380px) {
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
-  <h1>🎓 Étudiant+</h1>
-
-  <p>
-    Ton espace pour mieux préparer ton avenir
-  </p>
-
+    <h1>🎓 Étudiant+</h1>
+    <p>Ton assistant étudiant pour apprendre, t'organiser et préparer ton avenir.</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-  <section class="welcome">
+<!-- TABLEAU DE BORD -->
 
-    <h2>
-      Bienvenue sur Étudiant+ 👋
-    </h2>
+<section class="section">
+    <h2>🏠 Tableau de bord</h2>
+
+    <div class="dashboard">
+
+        <div class="dashboard-card" onclick="scrollToSection('bac')">
+            <div class="icon">🎓</div>
+            <h3>Calculateur BAC</h3>
+            <p>Calcule ta moyenne</p>
+        </div>
+
+        <div class="dashboard-card" onclick="scrollToSection('orientation')">
+            <div class="icon">🧭</div>
+            <h3>Orientation</h3>
+            <p>Choisis ta filière</p>
+        </div>
+
+        <div class="dashboard-card" onclick="scrollToSection('emploi')">
+            <div class="icon">📅</div>
+            <h3>Emploi du temps</h3>
+            <p>Organise tes cours</p>
+        </div>
+
+        <div class="dashboard-card" onclick="scrollToSection('budget')">
+            <div class="icon">💰</div>
+            <h3>Budget</h3>
+            <p>Gère ton argent</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ORIENTATION -->
+
+<section class="section" id="orientation">
+
+    <h2>🧭 Orientation</h2>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchFiliere"
+            placeholder="🔎 Rechercher une filière..."
+            oninput="searchFilieres()"
+        >
+    </div>
+
+    <div class="filieres" id="filieresContainer">
+
+        <div class="filiere-card" data-name="informatique" onclick="showFiliere('informatique')">
+            <h3>💻 Informatique</h3>
+            <p>Technologie, logiciels, réseaux et données.</p>
+        </div>
+
+        <div class="filiere-card" data-name="mathématiques" onclick="showFiliere('mathematiques')">
+            <h3>📐 Mathématiques</h3>
+            <p>Analyse, logique, modélisation et recherche.</p>
+        </div>
+
+        <div class="filiere-card" data-name="médecine" onclick="showFiliere('medecine')">
+            <h3>🩺 Médecine</h3>
+            <p>Formation médicale et santé.</p>
+        </div>
+
+        <div class="filiere-card" data-name="architecture" onclick="showFiliere('architecture')">
+            <h3>🏛️ Architecture</h3>
+            <p>Conception des bâtiments et espaces.</p>
+        </div>
+
+        <div class="filiere-card" data-name="droit" onclick="showFiliere('droit')">
+            <h3>⚖️ Droit</h3>
+            <p>Lois, justice et administration.</p>
+        </div>
+
+        <div class="filiere-card" data-name="économie" onclick="showFiliere('economie')">
+            <h3>📈 Économie</h3>
+            <p>Analyse économique et politiques publiques.</p>
+        </div>
+
+        <div class="filiere-card" data-name="finance" onclick="showFiliere('finance')">
+            <h3>💳 Finance</h3>
+            <p>Gestion financière, banques et investissements.</p>
+        </div>
+
+        <div class="filiere-card" data-name="gestion" onclick="showFiliere('gestion')">
+            <h3>📊 Gestion</h3>
+            <p>Management, entreprises et organisation.</p>
+        </div>
+
+        <div class="filiere-card" data-name="ingénierie" onclick="showFiliere('ingenierie')">
+            <h3>⚙️ Ingénierie</h3>
+            <p>Sciences appliquées et conception technique.</p>
+        </div>
+
+        <div class="filiere-card" data-name="sciences" onclick="showFiliere('sciences')">
+            <h3>🔬 Sciences</h3>
+            <p>Recherche, expérimentation et innovation.</p>
+        </div>
+
+        <div class="filiere-card" data-name="communication" onclick="showFiliere('communication')">
+            <h3>📢 Communication</h3>
+            <p>Médias, communication et marketing.</p>
+        </div>
+
+        <div class="filiere-card" data-name="lettres" onclick="showFiliere('lettres')">
+            <h3>📚 Lettres</h3>
+            <p>Langues, littérature et culture.</p>
+        </div>
+
+    </div>
+
+    <div class="details-box" id="filiereDetails"></div>
+
+</section>
+
+
+<!-- CALCULATEUR BAC -->
+
+<section class="section" id="bac">
+
+    <h2>🎓 Calculateur BAC</h2>
 
     <p>
-      Découvre les filières, calcule ta moyenne,
-      prépare ton orientation et construis ton projet universitaire.
+        Sélectionne ta série. Les matières et coefficients apparaissent automatiquement.
+        <strong>Tu entres uniquement tes notes.</strong>
     </p>
 
-  </section>
-
-
-  <!-- RECHERCHE -->
-
-  <div class="search-box">
-
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="🔎 Rechercher une filière..."
-      onkeyup="searchFiliere()"
-    >
-
-  </div>
-
-
-  <!-- FILIERES -->
-
-  <h2 class="section-title">
-    📚 Filières disponibles
-  </h2>
-
-  <section class="grid" id="filieres">
-
-    <div class="card" data-name="informatique">
-      <div class="icon">💻</div>
-      <h3>Informatique</h3>
-      <p>Programmation, logiciels et technologies.</p>
-    </div>
-
-    <div class="card" data-name="mathematiques">
-      <div class="icon">📐</div>
-      <h3>Mathématiques</h3>
-      <p>Analyse, algèbre et raisonnement.</p>
-    </div>
-
-    <div class="card" data-name="medecine">
-      <div class="icon">🩺</div>
-      <h3>Médecine</h3>
-      <p>Sciences médicales et santé.</p>
-    </div>
-
-    <div class="card" data-name="architecture">
-      <div class="icon">🏛️</div>
-      <h3>Architecture</h3>
-      <p>Conception, bâtiments et urbanisme.</p>
-    </div>
-
-    <div class="card" data-name="droit">
-      <div class="icon">⚖️</div>
-      <h3>Droit</h3>
-      <p>Lois, justice et institutions.</p>
-    </div>
-
-    <div class="card" data-name="economie">
-      <div class="icon">📊</div>
-      <h3>Économie</h3>
-      <p>Économie, marchés et gestion.</p>
-    </div>
-
-    <div class="card" data-name="finance">
-      <div class="icon">💰</div>
-      <h3>Finance</h3>
-      <p>Finance, comptabilité et fiscalité.</p>
-    </div>
-
-    <div class="card" data-name="gestion">
-      <div class="icon">📈</div>
-      <h3>Gestion</h3>
-      <p>Management et administration.</p>
-    </div>
-
-    <div class="card" data-name="ingenierie">
-      <div class="icon">⚙️</div>
-      <h3>Ingénierie</h3>
-      <p>Sciences, techniques et innovation.</p>
-    </div>
-
-    <div class="card" data-name="sciences">
-      <div class="icon">🔬</div>
-      <h3>Sciences</h3>
-      <p>Physique, chimie et sciences naturelles.</p>
-    </div>
-
-    <div class="card" data-name="communication">
-      <div class="icon">📢</div>
-      <h3>Communication</h3>
-      <p>Médias, communication et marketing.</p>
-    </div>
-
-    <div class="card" data-name="lettres">
-      <div class="icon">📖</div>
-      <h3>Lettres</h3>
-      <p>Langues, littérature et culture.</p>
-    </div>
-
-  </section>
-
-
-  <!-- CALCULATEUR -->
-
-  <section class="section">
-
-    <h2>
-      🧮 Calculateur de moyenne
-    </h2>
-
-    <div class="average-info">
-
-      <strong>
-        📌 Comment ça marche ?
-      </strong>
-
-      <br>
-
-      1️⃣ Choisis ton niveau.
-
-      <br>
-
-      2️⃣ Choisis ta série.
-
-      <br>
-
-      3️⃣ Les matières et coefficients apparaissent automatiquement.
-
-      <br>
-
-      4️⃣ Tu entres uniquement tes notes.
-
-      <br>
-
-      5️⃣ Étudiant+ calcule ta moyenne automatiquement.
-
-      <br><br>
-
-      🔒 <strong>
-        Les coefficients sont visibles et ne peuvent pas être modifiés.
-      </strong>
-
-    </div>
-
-
-    <div class="calculator-choice">
-
-      <div class="choice-box">
-
-        <label for="niveau">
-          🎓 Niveau
-        </label>
-
-        <select
-          id="niveau"
-          onchange="updateSeries()"
-        >
-
-          <option value="">
-            Choisir ton niveau
-          </option>
-
-          <option value="seconde">
-            Seconde
-          </option>
-
-          <option value="premiere">
-            Première
-          </option>
-
-          <option value="terminale">
-            Terminale
-          </option>
-
-          <option value="bac">
-            Baccalauréat
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="choice-box">
-
-        <label for="serie">
-          📚 Série
-        </label>
-
-        <select
-          id="serie"
-          onchange="loadSubjects()"
-          disabled
-        >
-
-          <option value="">
-            Choisir d'abord ton niveau
-          </option>
-
-        </select>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="subjects-container"
-      id="subjectsContainer"
-    >
-
-      <div
-        class="table-header"
-      >
+    <div class="form-grid" style="margin-top:15px;">
 
         <div>
-          Matière
+            <label><strong>Niveau</strong></label>
+            <select id="niveau">
+                <option value="terminale">Terminale — Baccalauréat</option>
+            </select>
         </div>
 
-        <div style="text-align:center;">
-          Ta note
+        <div>
+            <label><strong>Série</strong></label>
+            <select id="serie" onchange="loadSubjects()">
+                <option value="">-- Choisir une série --</option>
+                <option value="A2">A2</option>
+                <option value="A4">A4</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>
         </div>
 
-        <div style="text-align:center;">
-          Coef.
-        </div>
+    </div>
 
-      </div>
+    <div id="subjectsArea"></div>
 
-
-      <div id="subjects">
-      </div>
-
-
-      <div
-        class="total-coef"
-        id="totalCoef"
-      >
-      </div>
-
-
-      <button
-        class="btn"
-        onclick="calculateAverage()"
-      >
+    <button onclick="calculateAverage()" id="calculateButton" style="display:none;">
         🧮 Calculer ma moyenne
-      </button>
-
-
-      <div
-        class="average-result"
-        id="averageResult"
-      >
-
-        <div>
-          Ta moyenne
-        </div>
-
-        <div
-          class="number"
-          id="averageNumber"
-        >
-          0 / 20
-        </div>
-
-        <div
-          class="mention"
-          id="mention"
-        >
-        </div>
-
-      </div>
-
-
-      <div class="source-note">
-
-        ℹ️ Les coefficients affichés sont intégrés dans
-        Étudiant+ selon la grille utilisée pour le
-        baccalauréat général au Congo-Brazzaville.
-        Ils sont affichés à titre informatif et ne sont pas modifiables.
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROFIL -->
-
-  <section class="section">
-
-    <h2>
-      👤 Profil étudiant
-    </h2>
-
-
-    <div class="form-group">
-
-      <label for="nom">
-        Nom
-      </label>
-
-      <input
-        type="text"
-        id="nom"
-        placeholder="Entrez votre nom"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="prenom">
-        Prénom
-      </label>
-
-      <input
-        type="text"
-        id="prenom"
-        placeholder="Entrez votre prénom"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label for="filiere">
-        Filière souhaitée
-      </label>
-
-      <select id="filiere">
-
-        <option value="">
-          Choisir une filière
-        </option>
-
-        <option>Informatique</option>
-        <option>Mathématiques</option>
-        <option>Médecine</option>
-        <option>Architecture</option>
-        <option>Droit</option>
-        <option>Économie</option>
-        <option>Finance</option>
-        <option>Gestion</option>
-        <option>Ingénierie</option>
-        <option>Sciences</option>
-        <option>Communication</option>
-        <option>Lettres</option>
-
-      </select>
-
-    </div>
-
-
-    <button
-      class="btn"
-      onclick="enregistrerProfil()"
-    >
-      Enregistrer mon profil
     </button>
 
-
-    <div
-      class="result"
-      id="result"
-    >
+    <div class="result" id="averageResult">
+        <h3 id="averageValue">0 / 20</h3>
+        <p id="averageMessage"></p>
     </div>
 
-  </section>
+</section>
 
-</main>
 
+<!-- EMPLOI DU TEMPS -->
+
+<section class="section" id="emploi">
+
+    <h2>📅 Mon emploi du temps</h2>
+
+    <p>Ajoute tes cours pour organiser ta semaine.</p>
+
+    <div class="schedule-form" style="margin-top:15px;">
+
+        <select id="day">
+            <option value="Lundi">Lundi</option>
+            <option value="Mardi">Mardi</option>
+            <option value="Mercredi">Mercredi</option>
+            <option value="Jeudi">Jeudi</option>
+            <option value="Vendredi">Vendredi</option>
+            <option value="Samedi">Samedi</option>
+        </select>
+
+        <input type="text" id="time" placeholder="Ex : 08h00 - 10h00">
+
+        <input type="text" id="course" placeholder="Matière">
+
+        <input type="text" id="room" placeholder="Salle">
+
+    </div>
+
+    <button onclick="addSchedule()">➕ Ajouter le cours</button>
+
+    <table class="schedule-table">
+
+        <thead>
+            <tr>
+                <th>Jour</th>
+                <th>Heure</th>
+                <th>Matière</th>
+                <th>Salle</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="scheduleBody"></tbody>
+
+    </table>
+
+</section>
+
+
+<!-- BUDGET -->
+
+<section class="section" id="budget">
+
+    <h2>💰 Mon budget</h2>
+
+    <p>Gère tes revenus et tes dépenses facilement.</p>
+
+    <div class="budget-summary" style="margin-top:18px;">
+
+        <div class="money-card revenue">
+            <h3>💵 Revenus</h3>
+            <strong id="totalRevenue">0 FCFA</strong>
+        </div>
+
+        <div class="money-card expense">
+            <h3>💸 Dépenses</h3>
+            <strong id="totalExpense">0 FCFA</strong>
+        </div>
+
+        <div class="money-card balance">
+            <h3>💰 Solde</h3>
+            <strong id="totalBalance">0 FCFA</strong>
+        </div>
+
+    </div>
+
+    <h3 style="margin-top:20px;">Ajouter une opération</h3>
+
+    <div class="budget-form" style="margin-top:12px;">
+
+        <select id="budgetType">
+            <option value="revenue">🟢 Revenu</option>
+            <option value="expense">🔴 Dépense</option>
+        </select>
+
+        <input
+            type="text"
+            id="budgetDescription"
+            placeholder="Ex : Bourse"
+        >
+
+        <input
+            type="number"
+            id="budgetAmount"
+            placeholder="Montant en FCFA"
+            min="0"
+        >
+
+        <button onclick="addBudget()">Ajouter</button>
+
+    </div>
+
+    <table class="budget-table">
+
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Montant</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="budgetBody"></tbody>
+
+    </table>
+
+</section>
+
+
+<!-- PROFIL -->
+
+<section class="section" id="profil">
+
+    <h2>👤 Mon profil étudiant</h2>
+
+    <div class="profile-grid">
+
+        <div>
+            <label>Nom</label>
+            <input type="text" id="lastName" placeholder="Votre nom">
+        </div>
+
+        <div>
+            <label>Prénom</label>
+            <input type="text" id="firstName" placeholder="Votre prénom">
+        </div>
+
+        <div>
+            <label>Filière souhaitée</label>
+            <select id="profileFiliere">
+                <option value="">-- Choisir --</option>
+                <option>Informatique</option>
+                <option>Mathématiques</option>
+                <option>Médecine</option>
+                <option>Architecture</option>
+                <option>Droit</option>
+                <option>Économie</option>
+                <option>Finance</option>
+                <option>Gestion</option>
+                <option>Ingénierie</option>
+                <option>Sciences</option>
+                <option>Communication</option>
+                <option>Lettres</option>
+            </select>
+        </div>
+
+    </div>
+
+    <button onclick="saveProfile()">👤 Enregistrer mon profil</button>
+
+    <div class="profile-result" id="profileResult"></div>
+
+</section>
+
+</div>
 
 <footer>
-
-  © 2026 Étudiant+ — Tous droits réservés.
-
+    <p>🎓 Étudiant+ — Ton assistant étudiant</p>
+    <p>© 2026</p>
 </footer>
 
 
 <script>
 
 /* =========================
-   DONNÉES DES COEFFICIENTS
-   ========================= */
+   NAVIGATION
+========================= */
 
-const bacData = {
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({
+        behavior:"smooth"
+    });
+}
 
-  A2: [
 
-    {
-      name: "Philosophie",
-      coef: 5
+/* =========================
+   RECHERCHE FILIERES
+========================= */
+
+function searchFilieres(){
+
+    const search = document
+        .getElementById("searchFiliere")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const cards = document.querySelectorAll(".filiere-card");
+
+    cards.forEach(card => {
+
+        const name = card.dataset.name.toLowerCase();
+
+        if(name.includes(search)){
+            card.style.display = "";
+        }else{
+            card.style.display = "none";
+        }
+
+    });
+}
+
+
+/* =========================
+   FICHES FILIERES
+========================= */
+
+const filiereData = {
+
+    informatique:{
+        title:"💻 Informatique",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Secteur en forte évolution",
+            "Nombreuses spécialisations",
+            "Possibilité de travailler à distance",
+            "Possibilité de créer sa propre entreprise",
+            "Compétences utilisables à l'international"
+        ],
+        jobs:[
+            "Développeur logiciel",
+            "Développeur web/mobile",
+            "Administrateur systèmes et réseaux",
+            "Analyste de données",
+            "Ingénieur cybersécurité",
+            "Ingénieur logiciel",
+            "Architecte logiciel"
+        ],
+        sectors:[
+            "Entreprises technologiques",
+            "Banques",
+            "Télécommunications",
+            "Administrations",
+            "Startups",
+            "Cybersécurité",
+            "Intelligence artificielle"
+        ]
     },
 
-    {
-      name: "Français",
-      coef: 5
+    mathematiques:{
+        title:"📐 Mathématiques",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Développe fortement le raisonnement logique",
+            "Base importante pour les sciences et l'informatique",
+            "Accès à la recherche",
+            "Possibilités dans la finance et la data",
+            "Bonne base pour l'enseignement"
+        ],
+        jobs:[
+            "Enseignant",
+            "Statisticien",
+            "Data analyst",
+            "Actuaire",
+            "Chercheur",
+            "Analyste quantitatif"
+        ],
+        sectors:[
+            "Éducation",
+            "Banques",
+            "Assurances",
+            "Recherche",
+            "Data science",
+            "Administration"
+        ]
     },
 
-    {
-      name: "Histoire-Géographie",
-      coef: 3
+    medecine:{
+        title:"🩺 Médecine",
+        licence:"Durée variable selon le système universitaire",
+        master:"Formation médicale approfondie selon le parcours",
+        doctorat:"Parcours médical et/ou recherche selon spécialisation",
+        advantages:[
+            "Profession de santé",
+            "Nombreuses spécialités",
+            "Forte utilité sociale",
+            "Possibilité de recherche médicale"
+        ],
+        jobs:[
+            "Médecin",
+            "Médecin spécialiste",
+            "Chercheur",
+            "Enseignant-chercheur"
+        ],
+        sectors:[
+            "Hôpitaux",
+            "Cliniques",
+            "Centres de santé",
+            "Recherche médicale",
+            "Organisations sanitaires"
+        ]
     },
 
-    {
-      name: "Anglais",
-      coef: 4
+    architecture:{
+        title:"🏛️ Architecture",
+        licence:"Durée variable selon le système de formation",
+        master:"Approfondissement professionnel",
+        doctorat:"Possible en recherche",
+        advantages:[
+            "Créativité et technique",
+            "Travail sur des projets concrets",
+            "Possibilité d'exercer en indépendant",
+            "Lien avec l'urbanisme et la construction"
+        ],
+        jobs:[
+            "Architecte",
+            "Dessinateur-projeteur",
+            "Urbaniste",
+            "Chef de projet",
+            "Consultant"
+        ],
+        sectors:[
+            "Cabinets d'architecture",
+            "BTP",
+            "Immobilier",
+            "Urbanisme",
+            "Bureaux d'études"
+        ]
     },
 
-    {
-      name: "Mathématiques",
-      coef: 3
+    droit:{
+        title:"⚖️ Droit",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Bonne base pour comprendre les règles juridiques",
+            "Nombreuses spécialisations",
+            "Possibilités dans le secteur public et privé"
+        ],
+        jobs:[
+            "Juriste",
+            "Avocat selon les conditions d'accès",
+            "Conseiller juridique",
+            "Magistrat selon le parcours",
+            "Notaire selon le parcours"
+        ],
+        sectors:[
+            "Cabinets juridiques",
+            "Entreprises",
+            "Administrations",
+            "Banques",
+            "Organisations internationales"
+        ]
     },
 
-    {
-      name: "Langue optionnelle",
-      coef: 3
+    economie:{
+        title:"📈 Économie",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Compréhension des mécanismes économiques",
+            "Bonne base pour l'analyse",
+            "Possibilités dans plusieurs secteurs"
+        ],
+        jobs:[
+            "Économiste",
+            "Analyste",
+            "Chargé d'études",
+            "Consultant",
+            "Analyste économique"
+        ],
+        sectors:[
+            "Banques",
+            "Administrations",
+            "Cabinets de conseil",
+            "Organisations internationales",
+            "Entreprises"
+        ]
     },
 
-    {
-      name: "Éducation physique et sportive",
-      coef: 2
+    finance:{
+        title:"💳 Finance",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Formation orientée vers la gestion financière",
+            "Débouchés dans les banques et entreprises",
+            "Possibilité de spécialisation"
+        ],
+        jobs:[
+            "Analyste financier",
+            "Contrôleur financier",
+            "Gestionnaire financier",
+            "Auditeur",
+            "Chargé de clientèle bancaire"
+        ],
+        sectors:[
+            "Banques",
+            "Assurances",
+            "Entreprises",
+            "Cabinets d'audit",
+            "Marchés financiers"
+        ]
+    },
+
+    gestion:{
+        title:"📊 Gestion",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Formation polyvalente",
+            "Utile dans de nombreux secteurs",
+            "Bonne base pour entreprendre"
+        ],
+        jobs:[
+            "Manager",
+            "Assistant de gestion",
+            "Responsable administratif",
+            "Contrôleur de gestion",
+            "Entrepreneur"
+        ],
+        sectors:[
+            "Entreprises",
+            "Banques",
+            "Administrations",
+            "ONG",
+            "Startups"
+        ]
+    },
+
+    ingenierie:{
+        title:"⚙️ Ingénierie",
+        licence:"3 à 4 ans selon la formation",
+        master:"Approfondissement spécialisé",
+        doctorat:"Possible en recherche",
+        advantages:[
+            "Forte orientation scientifique et technique",
+            "Résolution de problèmes complexes",
+            "Nombreuses spécialisations"
+        ],
+        jobs:[
+            "Ingénieur",
+            "Chef de projet",
+            "Consultant technique",
+            "Ingénieur R&D"
+        ],
+        sectors:[
+            "Industrie",
+            "Énergie",
+            "Télécommunications",
+            "Construction",
+            "Technologies"
+        ]
+    },
+
+    sciences:{
+        title:"🔬 Sciences",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Formation scientifique",
+            "Accès à la recherche",
+            "Possibilités dans l'enseignement",
+            "Nombreuses spécialisations"
+        ],
+        jobs:[
+            "Chercheur",
+            "Enseignant",
+            "Technicien",
+            "Analyste",
+            "Ingénieur selon spécialisation"
+        ],
+        sectors:[
+            "Laboratoires",
+            "Universités",
+            "Industrie",
+            "Recherche",
+            "Environnement"
+        ]
+    },
+
+    communication:{
+        title:"📢 Communication",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Développe les compétences relationnelles",
+            "Secteur lié aux médias et au numérique",
+            "Possibilité d'entreprendre"
+        ],
+        jobs:[
+            "Chargé de communication",
+            "Community manager",
+            "Attaché de presse",
+            "Responsable marketing",
+            "Créateur de contenu"
+        ],
+        sectors:[
+            "Médias",
+            "Entreprises",
+            "Agences",
+            "Marketing",
+            "Réseaux sociaux"
+        ]
+    },
+
+    lettres:{
+        title:"📚 Lettres",
+        licence:"3 ans",
+        master:"2 ans supplémentaires",
+        doctorat:"3 ans supplémentaires minimum",
+        advantages:[
+            "Maîtrise de la langue et de l'expression",
+            "Développement de l'analyse et de la culture",
+            "Possibilités dans l'enseignement et la communication"
+        ],
+        jobs:[
+            "Enseignant",
+            "Rédacteur",
+            "Correcteur",
+            "Journaliste selon le parcours",
+            "Éditeur"
+        ],
+        sectors:[
+            "Éducation",
+            "Édition",
+            "Médias",
+            "Communication",
+            "Culture"
+        ]
     }
-
-  ],
-
-
-  A4: [
-
-    {
-      name: "Philosophie",
-      coef: 5
-    },
-
-    {
-      name: "Français",
-      coef: 5
-    },
-
-    {
-      name: "Anglais",
-      coef: 4
-    },
-
-    {
-      name: "Histoire-Géographie",
-      coef: 3
-    },
-
-    {
-      name: "Mathématiques",
-      coef: 3
-    },
-
-    {
-      name: "Langue optionnelle",
-      coef: 3
-    },
-
-    {
-      name: "Éducation physique et sportive",
-      coef: 2
-    }
-
-  ],
-
-
-  C: [
-
-    {
-      name: "Mathématiques",
-      coef: 5
-    },
-
-    {
-      name: "Sciences physiques",
-      coef: 5
-    },
-
-    {
-      name: "Sciences de la vie et de la terre",
-      coef: 4
-    },
-
-    {
-      name: "Français ou philosophie",
-      coef: 3
-    },
-
-    {
-      name: "Anglais",
-      coef: 3
-    },
-
-    {
-      name: "Histoire ou géographie",
-      coef: 3
-    },
-
-    {
-      name: "Éducation physique et sportive",
-      coef: 2
-    }
-
-  ],
-
-
-  D: [
-
-    {
-      name: "Sciences de la vie et de la terre",
-      coef: 5
-    },
-
-    {
-      name: "Sciences physiques",
-      coef: 5
-    },
-
-    {
-      name: "Mathématiques",
-      coef: 4
-    },
-
-    {
-      name: "Français ou philosophie",
-      coef: 3
-    },
-
-    {
-      name: "Anglais",
-      coef: 3
-    },
-
-    {
-      name: "Histoire ou géographie",
-      coef: 3
-    },
-
-    {
-      name: "Éducation physique et sportive",
-      coef: 2
-    }
-
-  ]
 
 };
 
 
-/* =========================
-   NIVEAUX ET SÉRIES
-   ========================= */
+function showFiliere(key){
 
-function updateSeries() {
+    const data = filiereData[key];
 
-  const niveau =
-    document.getElementById("niveau").value;
+    if(!data) return;
 
-  const serie =
-    document.getElementById("serie");
+    const advantages = data.advantages
+        .map(item => `<li>${item}</li>`)
+        .join("");
 
-  serie.innerHTML = "";
+    const jobs = data.jobs
+        .map(item => `<li>${item}</li>`)
+        .join("");
 
-  serie.disabled = true;
+    const sectors = data.sectors
+        .map(item => `<li>${item}</li>`)
+        .join("");
 
-  document.getElementById(
-    "subjectsContainer"
-  ).style.display = "none";
+    const box = document.getElementById("filiereDetails");
 
+    box.innerHTML = `
 
-  if (niveau === "") {
+        <h3>${data.title}</h3>
 
-    serie.innerHTML =
-      '<option value="">Choisir d’abord ton niveau</option>';
+        <div class="info-grid">
 
-    return;
+            <div class="info-card">
+                <span>🎓 Licence</span>
+                <strong>${data.licence}</strong>
+            </div>
 
-  }
+            <div class="info-card">
+                <span>📘 Master</span>
+                <strong>${data.master}</strong>
+            </div>
 
+            <div class="info-card">
+                <span>🔬 Doctorat</span>
+                <strong>${data.doctorat}</strong>
+            </div>
 
-  /*
-    Les coefficients officiellement intégrés
-    dans cette version concernent le BAC.
-    Pour Seconde/Première, on prépare la structure
-    mais on évite de présenter des coefficients
-    non vérifiés comme officiels.
-  */
+        </div>
 
-  if (
-    niveau === "seconde" ||
-    niveau === "premiere"
-  ) {
+        <h4>⭐ Avantages</h4>
+        <ul class="details-list">
+            ${advantages}
+        </ul>
 
-    serie.innerHTML = `
-      <option value="">
-        Données de coefficients à confirmer
-      </option>
-    `;
+        <h4>💼 Métiers et opportunités</h4>
+        <ul class="details-list">
+            ${jobs}
+        </ul>
 
-    return;
+        <h4>🌍 Secteurs d'activité</h4>
+        <ul class="details-list">
+            ${sectors}
+        </ul>
 
-  }
-
-
-  serie.disabled = false;
-
-
-  serie.innerHTML = `
-
-    <option value="">
-      Choisir une série
-    </option>
-
-    <option value="A2">
-      Série A2
-    </option>
-
-    <option value="A4">
-      Série A4
-    </option>
-
-    <option value="C">
-      Série C
-    </option>
-
-    <option value="D">
-      Série D
-    </option>
-
-  `;
-
-}
-
-
-/* =========================
-   AFFICHER LES MATIÈRES
-   ========================= */
-
-function loadSubjects() {
-
-  const serie =
-    document.getElementById("serie").value;
-
-  const subjects =
-    document.getElementById("subjects");
-
-  const container =
-    document.getElementById("subjectsContainer");
-
-  subjects.innerHTML = "";
-
-
-  if (
-    serie === "" ||
-    !bacData[serie]
-  ) {
-
-    container.style.display = "none";
-
-    return;
-
-  }
-
-
-  bacData[serie].forEach(function(subject) {
-
-    const row =
-      document.createElement("div");
-
-    row.className = "subject-row";
-
-
-    row.innerHTML = `
-
-      <div class="subject-name">
-        ${subject.name}
-      </div>
-
-      <div>
-        <input
-          type="number"
-          class="grade-input"
-          min="0"
-          max="20"
-          step="0.01"
-          placeholder="/20"
-          data-coef="${subject.coef}"
-        >
-      </div>
-
-      <div class="coefficient">
-        ${subject.coef}
-      </div>
+        <button onclick="closeFiliere()" class="secondary">
+            Fermer la fiche
+        </button>
 
     `;
 
+    box.style.display = "block";
 
-    subjects.appendChild(row);
-
-  });
-
-
-  let total = 0;
-
-  bacData[serie].forEach(function(subject) {
-
-    total += subject.coef;
-
-  });
+    box.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+}
 
 
-  document.getElementById(
-    "totalCoef"
-  ).innerHTML =
-    "🔢 Total des coefficients : <strong>" +
-    total +
-    "</strong>";
+function closeFiliere(){
 
-
-  container.style.display = "block";
-
-
-  document.getElementById(
-    "averageResult"
-  ).style.display = "none";
+    document.getElementById("filiereDetails").style.display="none";
 
 }
 
 
 /* =========================
-   CALCUL DE LA MOYENNE
-   ========================= */
+   CALCULATEUR BAC
+========================= */
 
-function calculateAverage() {
+const bacSubjects = {
 
-  const inputs =
-    document.querySelectorAll(
-      ".grade-input"
-    );
+    A2:[
+        ["Philosophie",5],
+        ["Français",5],
+        ["Histoire-Géographie",3],
+        ["Anglais",4],
+        ["Mathématiques",3],
+        ["Langue optionnelle",3],
+        ["EPS",2]
+    ],
+
+    A4:[
+        ["Philosophie",5],
+        ["Français",5],
+        ["Anglais",4],
+        ["Histoire-Géographie",3],
+        ["Mathématiques",3],
+        ["Langue optionnelle",3],
+        ["EPS",2]
+    ],
+
+    C:[
+        ["Mathématiques",5],
+        ["Sciences physiques",5],
+        ["SVT",4],
+        ["Français ou philosophie",3],
+        ["Anglais",3],
+        ["Histoire ou géographie",3],
+        ["EPS",2]
+    ],
+
+    D:[
+        ["SVT",5],
+        ["Sciences physiques",5],
+        ["Mathématiques",4],
+        ["Français ou philosophie",3],
+        ["Anglais",3],
+        ["Histoire ou géographie",3],
+        ["EPS",2]
+    ]
+
+};
 
 
-  let totalPoints = 0;
+function loadSubjects(){
 
-  let totalCoef = 0;
+    const serie = document.getElementById("serie").value;
 
-  let numberOfNotes = 0;
+    const area = document.getElementById("subjectsArea");
 
+    const button = document.getElementById("calculateButton");
 
-  for (
-    const input of inputs
-  ) {
+    document.getElementById("averageResult").style.display="none";
 
-    const value =
-      input.value.trim();
+    if(!serie){
 
-
-    /*
-      Une matière sans note est ignorée.
-    */
-
-    if (value === "") {
-      continue;
+        area.innerHTML="";
+        button.style.display="none";
+        return;
     }
 
+    const subjects = bacSubjects[serie];
 
-    const note =
-      parseFloat(value);
+    let html = `
+
+        <div class="subject-header">
+
+            <div>Matière</div>
+            <div>Note /20</div>
+            <div>Coefficient</div>
+            <div></div>
+
+        </div>
+
+    `;
+
+    subjects.forEach((subject,index)=>{
+
+        html += `
+
+            <div class="subject-row" data-subject="${index}">
+
+                <input
+                    type="text"
+                    value="${subject[0]}"
+                    readonly
+                >
+
+                <input
+                    type="number"
+                    class="note"
+                    min="0"
+                    max="20"
+                    step="0.01"
+                    placeholder="/20"
+                >
+
+                <input
+                    type="number"
+                    class="coefficient"
+                    value="${subject[1]}"
+                    readonly
+                    tabindex="-1"
+                >
+
+                <button
+                    class="remove-btn"
+                    onclick="clearNote(this)"
+                    title="Effacer la note"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+    area.innerHTML = html;
+
+    button.style.display="block";
+}
 
 
-    const coef =
-      parseFloat(
-        input.dataset.coef
-      );
+function clearNote(button){
+
+    const row = button.parentElement;
+
+    const note = row.querySelector(".note");
+
+    note.value="";
+
+}
 
 
-    if (
-      isNaN(note) ||
-      note < 0 ||
-      note > 20
-    ) {
+function calculateAverage(){
 
-      alert(
-        "⚠️ Une note doit être comprise entre 0 et 20."
-      );
+    const rows = document.querySelectorAll(".subject-row");
 
-      input.focus();
+    let totalPoints = 0;
+    let totalCoefficients = 0;
+    let valid = true;
 
-      return;
+    rows.forEach(row=>{
 
+        const noteInput = row.querySelector(".note");
+        const coefficientInput = row.querySelector(".coefficient");
+
+        const note = parseFloat(noteInput.value);
+        const coefficient = parseFloat(coefficientInput.value);
+
+        if(isNaN(note) || note < 0 || note > 20){
+
+            valid=false;
+
+            noteInput.style.borderColor="#dc2626";
+
+        }else{
+
+            noteInput.style.borderColor="";
+
+            totalPoints += note * coefficient;
+            totalCoefficients += coefficient;
+
+        }
+
+    });
+
+    if(!valid){
+
+        alert("⚠️ Vérifie que toutes les notes sont renseignées entre 0 et 20.");
+
+        return;
     }
 
+    if(totalCoefficients === 0){
 
-    totalPoints +=
-      note * coef;
+        alert("⚠️ Aucune matière valide.");
 
+        return;
+    }
 
-    totalCoef +=
-      coef;
+    const average = totalPoints / totalCoefficients;
 
+    document.getElementById("averageValue").textContent =
+        average.toFixed(2) + " / 20";
 
-    numberOfNotes++;
+    let message="";
 
-  }
+    if(average >= 16){
+        message="🏆 Excellent résultat !";
+    }else if(average >= 14){
+        message="🌟 Très bien !";
+    }else if(average >= 12){
+        message="👏 Bien !";
+    }else if(average >= 10){
+        message="✅ Moyenne suffisante.";
+    }else{
+        message="📚 Il faut encore progresser.";
+    }
 
+    document.getElementById("averageMessage").textContent=message;
 
-  if (
-    numberOfNotes === 0
-  ) {
-
-    alert(
-      "⚠️ Entre au moins une note."
-    );
-
-    return;
-
-  }
-
-
-  const average =
-    totalPoints / totalCoef;
-
-
-  document.getElementById(
-    "averageNumber"
-  ).textContent =
-    average.toFixed(2) +
-    " / 20";
-
-
-  const mention =
-    document.getElementById(
-      "mention"
-    );
-
-
-  if (average >= 16) {
-
-    mention.textContent =
-      "🏆 Excellent";
-
-  }
-
-  else if (average >= 14) {
-
-    mention.textContent =
-      "🌟 Très bien";
-
-  }
-
-  else if (average >= 12) {
-
-    mention.textContent =
-      "👏 Bien";
-
-  }
-
-  else if (average >= 10) {
-
-    mention.textContent =
-      "✅ Passable";
-
-  }
-
-  else {
-
-    mention.textContent =
-      "📚 À améliorer";
-
-  }
-
-
-  document.getElementById(
-    "averageResult"
-  ).style.display =
-    "block";
+    document.getElementById("averageResult").style.display="block";
 
 }
 
 
 /* =========================
-   RECHERCHE FILIÈRES
-   ========================= */
+   EMPLOI DU TEMPS
+========================= */
 
-function searchFiliere() {
-
-  const input =
-    document
-      .getElementById("searchInput")
-      .value
-      .toLowerCase()
-      .trim();
+let schedules =
+    JSON.parse(localStorage.getItem("etudiantplus_schedule")) || [];
 
 
-  const cards =
-    document.querySelectorAll(
-      ".card"
+function addSchedule(){
+
+    const day = document.getElementById("day").value;
+    const time = document.getElementById("time").value.trim();
+    const course = document.getElementById("course").value.trim();
+    const room = document.getElementById("room").value.trim();
+
+    if(!time || !course){
+
+        alert("⚠️ Indique au minimum l'heure et la matière.");
+
+        return;
+    }
+
+    schedules.push({
+        day,
+        time,
+        course,
+        room
+    });
+
+    saveSchedules();
+
+    document.getElementById("time").value="";
+    document.getElementById("course").value="";
+    document.getElementById("room").value="";
+
+    displaySchedules();
+}
+
+
+function saveSchedules(){
+
+    localStorage.setItem(
+        "etudiantplus_schedule",
+        JSON.stringify(schedules)
     );
 
-
-  cards.forEach(function(card) {
-
-    const name =
-      card
-        .getAttribute("data-name")
-        .toLowerCase();
+}
 
 
-    if (
-      name.includes(input)
-    ) {
+function deleteSchedule(index){
 
-      card.style.display =
-        "block";
+    schedules.splice(index,1);
 
-    }
+    saveSchedules();
 
-    else {
+    displaySchedules();
 
-      card.style.display =
-        "none";
+}
 
-    }
 
-  });
+function displaySchedules(){
+
+    const body = document.getElementById("scheduleBody");
+
+    body.innerHTML="";
+
+    const order = {
+        "Lundi":1,
+        "Mardi":2,
+        "Mercredi":3,
+        "Jeudi":4,
+        "Vendredi":5,
+        "Samedi":6
+    };
+
+    const sorted = [...schedules].sort(
+        (a,b)=>order[a.day]-order[b.day]
+    );
+
+    sorted.forEach((item)=>{
+
+        const originalIndex = schedules.indexOf(item);
+
+        body.innerHTML += `
+
+            <tr>
+
+                <td>${item.day}</td>
+                <td>${item.time}</td>
+                <td>${item.course}</td>
+                <td>${item.room || "-"}</td>
+
+                <td>
+                    <button
+                        class="table-delete danger"
+                        onclick="deleteSchedule(${originalIndex})"
+                    >
+                        🗑️
+                    </button>
+                </td>
+
+            </tr>
+
+        `;
+
+    });
 
 }
 
 
 /* =========================
-   PROFIL ÉTUDIANT
-   ========================= */
+   BUDGET
+========================= */
 
-function enregistrerProfil() {
-
-  const nom =
-    document
-      .getElementById("nom")
-      .value
-      .trim();
+let budget =
+    JSON.parse(localStorage.getItem("etudiantplus_budget")) || [];
 
 
-  const prenom =
-    document
-      .getElementById("prenom")
-      .value
-      .trim();
+function addBudget(){
+
+    const type =
+        document.getElementById("budgetType").value;
+
+    const description =
+        document.getElementById("budgetDescription").value.trim();
+
+    const amount =
+        parseFloat(document.getElementById("budgetAmount").value);
+
+    if(!description || isNaN(amount) || amount <= 0){
+
+        alert("⚠️ Entre une description et un montant valide.");
+
+        return;
+    }
+
+    budget.push({
+        type,
+        description,
+        amount
+    });
+
+    saveBudget();
+
+    document.getElementById("budgetDescription").value="";
+    document.getElementById("budgetAmount").value="";
+
+    displayBudget();
+}
 
 
-  const filiere =
-    document
-      .getElementById("filiere")
-      .value;
+function saveBudget(){
 
-
-  const result =
-    document.getElementById(
-      "result"
+    localStorage.setItem(
+        "etudiantplus_budget",
+        JSON.stringify(budget)
     );
 
+}
 
-  if (
-    nom === "" ||
-    prenom === "" ||
-    filiere === ""
-  ) {
 
-    result.style.display =
-      "block";
+function deleteBudget(index){
 
+    budget.splice(index,1);
+
+    saveBudget();
+
+    displayBudget();
+
+}
+
+
+function displayBudget(){
+
+    const body = document.getElementById("budgetBody");
+
+    body.innerHTML="";
+
+    let revenue=0;
+    let expense=0;
+
+    budget.forEach((item,index)=>{
+
+        if(item.type === "revenue"){
+            revenue += item.amount;
+        }else{
+            expense += item.amount;
+        }
+
+        const typeLabel =
+            item.type === "revenue"
+            ? "🟢 Revenu"
+            : "🔴 Dépense";
+
+        body.innerHTML += `
+
+            <tr>
+
+                <td>${typeLabel}</td>
+
+                <td>${escapeHTML(item.description)}</td>
+
+                <td>
+                    ${item.amount.toLocaleString("fr-FR")} FCFA
+                </td>
+
+                <td>
+                    <button
+                        class="table-delete danger"
+                        onclick="deleteBudget(${index})"
+                    >
+                        🗑️
+                    </button>
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+    const balance = revenue-expense;
+
+    document.getElementById("totalRevenue").textContent =
+        revenue.toLocaleString("fr-FR") + " FCFA";
+
+    document.getElementById("totalExpense").textContent =
+        expense.toLocaleString("fr-FR") + " FCFA";
+
+    document.getElementById("totalBalance").textContent =
+        balance.toLocaleString("fr-FR") + " FCFA";
+
+}
+
+
+/* =========================
+   PROFIL
+========================= */
+
+function saveProfile(){
+
+    const lastName =
+        document.getElementById("lastName").value.trim();
+
+    const firstName =
+        document.getElementById("firstName").value.trim();
+
+    const filiere =
+        document.getElementById("profileFiliere").value;
+
+    if(!lastName || !firstName || !filiere){
+
+        alert("⚠️ Remplis toutes les informations.");
+
+        return;
+    }
+
+    const profile = {
+        lastName,
+        firstName,
+        filiere
+    };
+
+    localStorage.setItem(
+        "etudiantplus_profile",
+        JSON.stringify(profile)
+    );
+
+    const result =
+        document.getElementById("profileResult");
 
     result.innerHTML =
-      "⚠️ Veuillez remplir tous les champs.";
+        `✅ Profil enregistré : <strong>${escapeHTML(firstName)} ${escapeHTML(lastName)}</strong> — ${escapeHTML(filiere)}.`;
+
+    result.style.display="block";
+}
 
 
-    return;
+function loadProfile(){
 
-  }
+    const profile =
+        JSON.parse(
+            localStorage.getItem("etudiantplus_profile")
+        );
 
+    if(!profile) return;
 
-  result.style.display =
-    "block";
+    document.getElementById("lastName").value =
+        profile.lastName || "";
 
+    document.getElementById("firstName").value =
+        profile.firstName || "";
 
-  result.innerHTML =
-    "✅ Profil enregistré !<br><br>" +
-
-    "Bienvenue <strong>" +
-
-    prenom +
-
-    " " +
-
-    nom +
-
-    "</strong>.<br>" +
-
-    "Filière choisie : <strong>" +
-
-    filiere +
-
-    "</strong>.";
+    document.getElementById("profileFiliere").value =
+        profile.filiere || "";
 
 }
+
+
+/* =========================
+   SECURITE TEXTE
+========================= */
+
+function escapeHTML(text){
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+displaySchedules();
+
+displayBudget();
+
+loadProfile();
 
 </script>
 
