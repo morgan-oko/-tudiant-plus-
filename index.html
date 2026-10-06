@@ -2,236 +2,45 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
-<title>Étudiant+ 🌍</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<title>Étudiant+</title>
 
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  background:#f4f7fb;
-  color:#172033
-}
-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:#0f172a;
-  color:#fff;
-  padding:12px 15px;
-  box-shadow:0 3px 15px #0003
-}
-.head{
-  max-width:1250px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px
-}
-.logo{font-size:21px;font-weight:900}
-.logo span{color:#38bdf8}
-nav{
-  max-width:1250px;
-  margin:9px auto 0;
-  display:flex;
-  gap:6px;
-  overflow:auto;
-  padding-bottom:2px
-}
-nav button{
-  border:0;
-  border-radius:11px;
-  padding:10px 12px;
-  background:#1e293b;
-  color:white;
-  font-weight:750;
-  white-space:nowrap;
-  cursor:pointer
-}
-main{max-width:1250px;margin:auto;padding:18px}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:#2563eb;color:#fff;padding:18px;position:sticky;top:0;z-index:10}
+header h1{margin:0 0 5px}
+header p{margin:0;opacity:.9}
+.controls{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+select,input,textarea,button{font:inherit}
+select,input,textarea{padding:11px;border:1px solid #ccd5e1;border-radius:10px;background:#fff}
+.controls select{flex:1;min-width:150px}
+button{padding:11px 15px;border:0;border-radius:10px;background:#2563eb;color:white;cursor:pointer}
+nav{display:flex;gap:7px;overflow-x:auto;background:#fff;padding:10px;border-bottom:1px solid #ddd}
+nav button{background:#e8eefc;color:#173a8a;white-space:nowrap}
+nav button.active{background:#2563eb;color:#fff}
+main{max-width:1100px;margin:auto;padding:18px}
 section{display:none}
-.active{display:block}
-.hero,.card{
-  background:#fff;
-  border-radius:18px;
-  padding:19px;
-  margin-bottom:15px;
-  box-shadow:0 5px 22px #0f172a0d
-}
-.hero{
-  background:linear-gradient(135deg,#0f172a,#1d4ed8);
-  color:#fff
-}
-.hero p{color:#dbeafe}
-h1,h2,h3{margin-top:0}
-.muted{color:#64748b}
-.hero .muted{color:#dbeafe}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px
-}
-.controls{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px
-}
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #cbd5e1;
-  border-radius:11px;
-  background:#fff;
-  font:inherit
-}
-textarea{min-height:90px}
-.btn{
-  border:0;
-  border-radius:11px;
-  padding:11px 14px;
-  background:#2563eb;
-  color:#fff;
-  font-weight:800;
-  cursor:pointer
-}
-.btn.secondary{
-  background:#e2e8f0;
-  color:#172033
-}
-.btn.danger{background:#dc2626}
-.actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:9px
-}
-.field{
-  cursor:pointer;
-  transition:.2s
-}
-.field:hover{transform:translateY(-2px)}
-.emoji{font-size:31px}
-.tag{
-  display:inline-block;
-  background:#e0f2fe;
-  color:#075985;
-  border-radius:999px;
-  padding:4px 9px;
-  margin:2px;
-  font-size:12px;
-  font-weight:800
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:10px
-}
-th,td{
-  padding:9px;
-  border-bottom:1px solid #e2e8f0;
-  text-align:left
-}
-th{background:#f8fafc}
-.small{font-size:13px}
-.big{font-size:30px;font-weight:900}
-.stat{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px
-}
-.stat .card{margin:0}
-.progress{
-  height:10px;
-  background:#e2e8f0;
-  border-radius:99px;
-  overflow:hidden;
-  margin:8px 0
-}
-.progress i{
-  display:block;
-  height:100%;
-  background:#2563eb;
-  width:0
-}
-.photo{
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#e2e8f0;
-  border:4px solid #fff;
-  box-shadow:0 4px 15px #0002
-}
-.hidden{display:none!important}
-.notice{
-  padding:12px;
-  border-radius:12px;
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  color:#9a3412;
-  margin:10px 0
-}
-.success{
-  padding:12px;
-  border-radius:12px;
-  background:#ecfdf5;
-  border:1px solid #a7f3d0;
-  color:#047857;
-  margin:10px 0
-}
-.filiere{
-  cursor:pointer;
-  transition:.2s;
-  border:2px solid transparent
-}
-.filiere:hover{
-  transform:translateY(-3px);
-  border-color:#38bdf8
-}
-.back{
-  margin-bottom:12px
-}
-.badge{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#dbeafe;
-  color:#1e40af;
-  font-size:12px;
-  font-weight:800
-}
-.schedule-day{
-  border-left:4px solid #2563eb;
-  padding-left:12px;
-  margin:10px 0
-}
-.empty{
-  text-align:center;
-  padding:25px;
-  color:#64748b
-}
-footer{
-  text-align:center;
-  color:#64748b;
-  padding:25px
-}
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .stat{grid-template-columns:repeat(2,1fr)}
-}
+section.active{display:block}
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:15px;box-shadow:0 4px 16px #0000000d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.filiere{cursor:pointer;transition:.2s}
+.filiere:hover{transform:translateY(-2px)}
+.icon{font-size:30px}
+h2{color:#173a8a;margin-top:0}
+h3{margin-bottom:7px}
+.small{font-size:13px;color:#64748b}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.badge{display:inline-block;background:#e8eefc;color:#173a8a;padding:5px 9px;border-radius:20px;margin:3px}
+.result{font-size:23px;font-weight:bold;margin-top:15px}
+.hidden{display:none}
+ul{line-height:1.7}
+footer{text-align:center;padding:25px;color:#64748b}
+
 @media(max-width:600px){
-  main{padding:12px}
-  .grid{grid-template-columns:1fr}
-  .controls{grid-template-columns:1fr}
-  .stat{grid-template-columns:1fr 1fr}
-  .hero{padding:16px}
-  h1{font-size:25px}
-  nav button{padding:9px 10px}
-  table{font-size:13px}
+ main{padding:12px}
+ .row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -239,2790 +48,1225 @@ footer{
 <body>
 
 <header>
-  <div class="head">
-    <div class="logo">🎓 Étudiant<span>+</span></div>
+<h1>🎓 Étudiant+</h1>
+<p id="welcome">Ton assistant étudiant international</p>
 
-    <div style="display:flex;gap:6px">
-      <select id="countrySelect" style="width:auto;min-width:145px"></select>
-      <select id="languageSelect" style="width:auto;min-width:115px"></select>
-    </div>
-  </div>
-
-  <nav>
-    <button onclick="showSection('home')">🏠 <span data-i18n="home">Accueil</span></button>
-    <button onclick="showSection('calculator')">🧮 <span data-i18n="results">Résultats</span></button>
-    <button onclick="showSection('orientation')">🎓 <span data-i18n="orientation">Orientation</span></button>
-    <button onclick="showSection('studies')">📚 <span data-i18n="studies">Mes études</span></button>
-    <button onclick="showSection('schedule')">📅 <span data-i18n="schedule">Emploi du temps</span></button>
-    <button onclick="showSection('budget')">💰 <span data-i18n="budget">Budget</span></button>
-    <button onclick="showSection('profile')">👤 <span data-i18n="profile">Profil</span></button>
-  </nav>
+<div class="controls">
+<select id="country"></select>
+<select id="language">
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+<option value="es">🇪🇸 Español</option>
+<option value="pt">🇵🇹 Português</option>
+<option value="de">🇩🇪 Deutsch</option>
+<option value="it">🇮🇹 Italiano</option>
+<option value="zh">🇨🇳 中文</option>
+<option value="ar">🇸🇦 العربية</option>
+<option value="ru">🇷🇺 Русский</option>
+<option value="ja">🇯🇵 日本語</option>
+<option value="ko">🇰🇷 한국어</option>
+<option value="hi">🇮🇳 हिन्दी</option>
+</select>
+</div>
 </header>
+
+<nav>
+<button class="active" data-section="home">🏠 Accueil</button>
+<button data-section="calculator">🧮 Moyenne</button>
+<button data-section="orientation">🎓 Filières</button>
+<button data-section="studies">📚 Études</button>
+<button data-section="schedule">📅 Planning</button>
+<button data-section="budget">💰 Budget</button>
+<button data-section="profile">👤 Profil</button>
+</nav>
 
 <main>
 
+<!-- ACCUEIL -->
 <section id="home" class="active">
 
-  <div class="hero">
-    <h1>🎓 Étudiant+</h1>
-    <p data-i18n="welcome">
-      Ton assistant étudiant pour réussir tes études, calculer tes résultats,
-      choisir une filière et organiser ta vie universitaire.
-    </p>
+<div class="card">
+<h2>Bienvenue sur Étudiant+ 🚀</h2>
+<p>Une application internationale pour aider les étudiants à choisir leur orientation, suivre leurs études et préparer leur avenir professionnel.</p>
+<p>🌍 Pays : <strong id="countryName">Congo</strong></p>
+</div>
 
-    <div class="actions">
-      <button class="btn" onclick="showSection('calculator')">
-        🧮 Calculer mes résultats
-      </button>
+<div class="grid">
 
-      <button class="btn secondary" onclick="showSection('orientation')">
-        🎓 Explorer les filières
-      </button>
-    </div>
-  </div>
+<div class="card">
+<div class="icon">🧮</div>
+<h3>Calcul de moyenne</h3>
+<p>Calcule ta moyenne avec les coefficients disponibles.</p>
+</div>
 
-  <div class="card">
-    <h2>🌍 <span data-i18n="countrySystem">Ton pays et ton système scolaire</span></h2>
+<div class="card">
+<div class="icon">🎓</div>
+<h3>Orientation</h3>
+<p>Explore plus de 50 filières.</p>
+</div>
 
-    <p class="muted">
-      Le pays sélectionné détermine les informations scolaires utilisées
-      par l'application.
-    </p>
+<div class="card">
+<div class="icon">💼</div>
+<h3>Carrière</h3>
+<p>Découvre les métiers et secteurs liés à chaque filière.</p>
+</div>
 
-    <div class="stat">
-      <div class="card">
-        <div class="small">🌍 Pays</div>
-        <div class="big" id="homeCountry">—</div>
-      </div>
+<div class="card">
+<div class="icon">💰</div>
+<h3>Potentiel professionnel</h3>
+<p>Consulte les informations salariales lorsqu'une source fiable est disponible.</p>
+</div>
 
-      <div class="card">
-        <div class="small">💱 Devise</div>
-        <div class="big" id="homeCurrency">—</div>
-      </div>
-
-      <div class="card">
-        <div class="small">📚 Système</div>
-        <div class="big" id="homeSystem">—</div>
-      </div>
-
-      <div class="card">
-        <div class="small">🗣️ Langue</div>
-        <div class="big" id="homeLanguage">—</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>🔎 Rechercher une filière</h2>
-
-    <input
-      id="homeSearch"
-      placeholder="Exemple : informatique, médecine, droit..."
-      oninput="filterHomeFields()"
-    >
-
-    <div id="homeFields" class="grid" style="margin-top:12px"></div>
-  </div>
-
+</div>
 </section>
 
 
+<!-- CALCULATEUR -->
 <section id="calculator">
 
-  <div class="card">
-    <h2>🧮 Calculateur de résultats</h2>
+<div class="card">
 
-    <div class="controls">
+<h2>🧮 Calculateur de moyenne</h2>
 
-      <div>
-        <label>Pays</label>
-        <select id="calcCountry"></select>
-      </div>
+<p class="small">
+Les coefficients sont utilisés lorsqu'ils sont disponibles. Pour les autres pays,
+tu peux entrer tes propres coefficients.
+</p>
 
-      <div>
-        <label>Système / examen</label>
-        <select id="examSelect"></select>
-      </div>
+<select id="series"></select>
 
-      <div>
-        <label>Série / voie</label>
-        <select id="trackSelect"></select>
-      </div>
+<button onclick="loadSubjects()" style="margin-top:10px">
+Charger les matières
+</button>
 
-    </div>
+<div id="subjects" style="margin-top:15px"></div>
 
-    <div id="calcNotice" class="notice hidden"></div>
+<button id="calcButton" class="hidden" onclick="calculateAverage()">
+Calculer
+</button>
 
-    <div id="subjectsContainer"></div>
+<div id="averageResult"></div>
 
-    <div class="actions">
-      <button class="btn" onclick="calculateAverage()">
-        🧮 Calculer
-      </button>
-
-      <button class="btn secondary" onclick="addSubject()">
-        ➕ Ajouter une matière
-      </button>
-
-      <button class="btn secondary" onclick="resetCalculator()">
-        🔄 Réinitialiser
-      </button>
-    </div>
-
-    <div id="resultBox" style="margin-top:15px"></div>
-  </div>
-
+</div>
 </section>
 
 
+<!-- ORIENTATION -->
 <section id="orientation">
 
-  <div id="orientationList">
+<div class="card">
+<h2>🎓 Orientation</h2>
 
-    <div class="hero">
-      <h1>🎓 Orientation</h1>
-      <p>
-        Découvre les principales filières, leurs études, leurs débouchés
-        et leurs possibilités d'évolution.
-      </p>
-    </div>
+<input
+id="searchFiliere"
+placeholder="🔎 Rechercher une filière..."
+oninput="filterFilieres()">
 
-    <input
-      id="orientationSearch"
-      placeholder="🔎 Rechercher une filière..."
-      oninput="renderOrientation()"
-      style="margin-bottom:15px"
-    >
+<p class="small">
+Plus de 50 filières disponibles.
+</p>
+</div>
 
-    <div id="orientationGrid" class="grid"></div>
+<div id="filiereGrid" class="grid"></div>
 
-  </div>
-
-  <div id="orientationDetail" class="hidden"></div>
+<div id="fiche" class="card hidden"></div>
 
 </section>
 
 
+<!-- ETUDES -->
 <section id="studies">
 
-  <div class="hero">
-    <h1>📚 Mes études</h1>
-    <p>
-      Suis tes matières, tes notes, tes objectifs et ta progression.
-    </p>
-  </div>
+<div class="card">
 
-  <div class="card">
+<h2>📚 Mes études</h2>
 
-    <div class="controls">
+<div class="row">
+<input id="subjectName" placeholder="Matière">
+<input id="subjectGrade" type="number" min="0" max="20" placeholder="Note /20">
+</div>
 
-      <div>
-        <label>Matière</label>
-        <input id="studySubject" placeholder="Mathématiques">
-      </div>
+<div class="row">
+<input id="subjectTarget" type="number" min="0" max="20" placeholder="Objectif /20">
+<input id="subjectComment" placeholder="Commentaire">
+</div>
 
-      <div>
-        <label>Note actuelle /20</label>
-        <input id="studyGrade" type="number" min="0" max="20" step="0.01">
-      </div>
+<button onclick="addStudy()">➕ Ajouter</button>
 
-      <div>
-        <label>Objectif /20</label>
-        <input id="studyTarget" type="number" min="0" max="20" step="0.01">
-      </div>
+</div>
 
-      <div>
-        <label>Commentaire</label>
-        <input id="studyComment" placeholder="À revoir...">
-      </div>
-
-    </div>
-
-    <div class="actions">
-      <button class="btn" onclick="addStudy()">➕ Ajouter</button>
-      <button class="btn secondary" onclick="clearStudies()">🗑️ Tout effacer</button>
-    </div>
-
-  </div>
-
-  <div class="card">
-    <h2>📊 Progression</h2>
-    <div id="studiesList"></div>
-  </div>
+<div id="studyList"></div>
 
 </section>
 
 
+<!-- PLANNING -->
 <section id="schedule">
 
-  <div class="hero">
-    <h1>📅 Emploi du temps</h1>
-    <p>
-      Organise tes cours par jour et garde une vision claire de ta semaine.
-    </p>
-  </div>
+<div class="card">
 
-  <div class="card">
+<h2>📅 Emploi du temps</h2>
 
-    <div class="controls">
+<div class="row">
+<input id="day" type="date">
+<input id="scheduleText" placeholder="Matière — heure — salle">
+</div>
 
-      <div>
-        <label>Jour</label>
-        <select id="scheduleDay">
-          <option>Lundi</option>
-          <option>Mardi</option>
-          <option>Mercredi</option>
-          <option>Jeudi</option>
-          <option>Vendredi</option>
-          <option>Samedi</option>
-          <option>Dimanche</option>
-        </select>
-      </div>
+<button onclick="addSchedule()">➕ Ajouter</button>
 
-      <div>
-        <label>Matière</label>
-        <input id="scheduleSubject" placeholder="Programmation">
-      </div>
+<button onclick="enableNotifications()">
+🔔 Notifications
+</button>
 
-      <div>
-        <label>Heure de début</label>
-        <input id="scheduleStart" type="time">
-      </div>
+</div>
 
-      <div>
-        <label>Heure de fin</label>
-        <input id="scheduleEnd" type="time">
-      </div>
-
-      <div>
-        <label>Salle</label>
-        <input id="scheduleRoom" placeholder="Salle 204">
-      </div>
-
-    </div>
-
-    <div class="actions">
-      <button class="btn" onclick="addSchedule()">➕ Ajouter</button>
-      <button class="btn secondary" onclick="requestNotifications()">
-        🔔 Activer les notifications
-      </button>
-    </div>
-
-  </div>
-
-  <div class="card">
-    <h2>📆 Ma semaine</h2>
-    <div id="scheduleList"></div>
-  </div>
+<div id="scheduleList"></div>
 
 </section>
 
 
+<!-- BUDGET -->
 <section id="budget">
 
-  <div class="hero">
-    <h1>💰 Mon budget</h1>
-    <p>
-      Suis tes dépenses et tes revenus pour mieux gérer ton argent.
-    </p>
-  </div>
+<div class="card">
 
-  <div class="card">
+<h2>💰 Budget étudiant</h2>
 
-    <div class="controls">
+<div class="row">
 
-      <div>
-        <label>Type</label>
-        <select id="budgetType">
-          <option value="expense">💸 Dépense</option>
-          <option value="income">💵 Revenu</option>
-        </select>
-      </div>
+<select id="budgetType">
+<option value="expense">💸 Dépense</option>
+<option value="income">💵 Revenu</option>
+</select>
 
-      <div>
-        <label>Montant</label>
-        <input id="budgetAmount" type="number" min="0" step="0.01">
-      </div>
+<select id="budgetCategory">
+<option>Nourriture</option>
+<option>Transport</option>
+<option>Logement</option>
+<option>Internet</option>
+<option>Études</option>
+<option>Vêtements</option>
+<option>Loisirs</option>
+<option>Santé</option>
+<option>Autres</option>
+</select>
 
-      <div>
-        <label>Catégorie</label>
-        <select id="budgetCategory">
-          <option>🍲 Nourriture</option>
-          <option>🚌 Transport</option>
-          <option>🏠 Logement</option>
-          <option>📶 Internet</option>
-          <option>📚 Études</option>
-          <option>👕 Vêtements</option>
-          <option>🎮 Loisirs</option>
-          <option>🏥 Santé</option>
-          <option>💳 Autres</option>
-        </select>
-      </div>
+</div>
 
-      <div>
-        <label>Description</label>
-        <input id="budgetDescription" placeholder="Repas, taxi...">
-      </div>
+<div class="row">
 
-    </div>
+<input id="budgetAmount" type="number" placeholder="Montant">
 
-    <div class="actions">
-      <button class="btn" onclick="addBudget()">➕ Ajouter</button>
-      <button class="btn secondary" onclick="clearBudget()">🗑️ Effacer</button>
-    </div>
+<input id="budgetDescription" placeholder="Description">
 
-  </div>
+</div>
 
-  <div class="stat">
+<button onclick="addBudget()">➕ Enregistrer</button>
 
-    <div class="card">
-      <div class="small">💵 Revenus</div>
-      <div class="big" id="totalIncome">0</div>
-    </div>
+</div>
 
-    <div class="card">
-      <div class="small">💸 Dépenses</div>
-      <div class="big" id="totalExpense">0</div>
-    </div>
+<div class="card">
 
-    <div class="card">
-      <div class="small">📊 Solde</div>
-      <div class="big" id="balance">0</div>
-    </div>
+<h3>📊 Résumé</h3>
 
-    <div class="card">
-      <div class="small">💱 Devise</div>
-      <div class="big" id="budgetCurrency">—</div>
-    </div>
+<div id="budgetSummary"></div>
 
-  </div>
+</div>
 
-  <div class="card">
-    <h2>📋 Historique</h2>
-    <div id="budgetList"></div>
-  </div>
+<div id="budgetList"></div>
 
 </section>
 
 
+<!-- PROFIL -->
 <section id="profile">
 
-  <div class="hero">
-    <h1>👤 Mon profil</h1>
-    <p>Personnalise ton espace étudiant.</p>
-  </div>
+<div class="card">
 
-  <div class="card">
+<h2>👤 Mon profil</h2>
 
-    <div style="text-align:center;margin-bottom:18px">
+<div class="row">
+<input id="profileLast" placeholder="Nom">
+<input id="profileFirst" placeholder="Prénom">
+</div>
 
-      <img id="profilePhoto" class="photo" alt="Photo de profil">
+<div class="row">
+<input id="profileInstitution" placeholder="Université / Institution">
+<input id="profileLevel" placeholder="Niveau d'études">
+</div>
 
-      <div style="margin-top:10px">
-        <input
-          id="photoInput"
-          type="file"
-          accept="image/*"
-          onchange="savePhoto(event)"
-        >
-      </div>
+<div class="row">
+<input id="profileField" placeholder="Filière">
+<input id="profileGoal" placeholder="Objectif professionnel">
+</div>
 
-    </div>
+<button onclick="saveProfile()">💾 Enregistrer</button>
 
-    <div class="controls">
+<div id="profileResult"></div>
 
-      <div>
-        <label>Nom</label>
-        <input id="profileLastName">
-      </div>
-
-      <div>
-        <label>Prénom</label>
-        <input id="profileFirstName">
-      </div>
-
-      <div>
-        <label>Pays</label>
-        <select id="profileCountry"></select>
-      </div>
-
-      <div>
-        <label>Université / Institution</label>
-        <input id="profileInstitution">
-      </div>
-
-      <div>
-        <label>Niveau d'études</label>
-        <select id="profileLevel">
-          <option>Terminale</option>
-          <option>Licence 1</option>
-          <option>Licence 2</option>
-          <option>Licence 3</option>
-          <option>Master 1</option>
-          <option>Master 2</option>
-          <option>Doctorat</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Série</label>
-        <input id="profileSeries" placeholder="D, C, A2...">
-      </div>
-
-      <div>
-        <label>Filière</label>
-        <input id="profileField" placeholder="Informatique">
-      </div>
-
-      <div>
-        <label>Objectif professionnel</label>
-        <input id="profileGoal" placeholder="Ingénieur logiciel">
-      </div>
-
-    </div>
-
-    <div class="actions">
-      <button class="btn" onclick="saveProfile()">💾 Enregistrer</button>
-    </div>
-
-    <div id="profileMessage"></div>
-
-  </div>
+</div>
 
 </section>
 
 </main>
 
 <footer>
-  🎓 Étudiant+ — Ton assistant étudiant 🌍
+🎓 Étudiant+ — Ton avenir commence ici 🌍
 </footer>
 
 
 <script>
 
-/* =========================================================
-   LANGUES
-========================================================= */
-
-const languages={
-  fr:"Français",
-  en:"English",
-  es:"Español",
-  zh:"中文",
-  hi:"हिन्दी",
-  ar:"العربية",
-  pt:"Português",
-  ru:"Русский",
-  ja:"日本語",
-  de:"Deutsch",
-  it:"Italiano",
-  ko:"한국어"
-};
-
-const translations={
-
-fr:{
-  home:"Accueil",
-  results:"Résultats",
-  orientation:"Orientation",
-  studies:"Mes études",
-  schedule:"Emploi du temps",
-  budget:"Budget",
-  profile:"Profil",
-  welcome:"Ton assistant étudiant pour réussir tes études, calculer tes résultats, choisir une filière et organiser ta vie universitaire.",
-  countrySystem:"Ton pays et ton système scolaire"
-},
-
-en:{
-  home:"Home",
-  results:"Results",
-  orientation:"Orientation",
-  studies:"My studies",
-  schedule:"Schedule",
-  budget:"Budget",
-  profile:"Profile",
-  welcome:"Your student assistant to succeed in your studies, calculate your results, choose a field and organize your student life.",
-  countrySystem:"Your country and education system"
-},
-
-es:{
-  home:"Inicio",
-  results:"Resultados",
-  orientation:"Orientación",
-  studies:"Mis estudios",
-  schedule:"Horario",
-  budget:"Presupuesto",
-  profile:"Perfil",
-  welcome:"Tu asistente estudiantil para tener éxito en tus estudios.",
-  countrySystem:"Tu país y sistema educativo"
-},
-
-pt:{
-  home:"Início",
-  results:"Resultados",
-  orientation:"Orientação",
-  studies:"Meus estudos",
-  schedule:"Horário",
-  budget:"Orçamento",
-  profile:"Perfil",
-  welcome:"O teu assistente estudantil.",
-  countrySystem:"O teu país e sistema educativo"
-},
-
-de:{
-  home:"Start",
-  results:"Ergebnisse",
-  orientation:"Orientierung",
-  studies:"Mein Studium",
-  schedule:"Stundenplan",
-  budget:"Budget",
-  profile:"Profil",
-  welcome:"Dein Studentenassistent.",
-  countrySystem:"Dein Land und Bildungssystem"
-},
-
-it:{
-  home:"Home",
-  results:"Risultati",
-  orientation:"Orientamento",
-  studies:"I miei studi",
-  schedule:"Orario",
-  budget:"Budget",
-  profile:"Profilo",
-  welcome:"Il tuo assistente universitario.",
-  countrySystem:"Il tuo paese e sistema educativo"
-}
-
-};
-
-
-/* =========================================================
-   PAYS
-========================================================= */
-
-const countryCodes=[
-"CG","CD","DZ","CM","GA","CI","SN","MA","TN","BJ","BF","NE","TD","CF","GQ",
-"FR","BE","CH","CA","US","GB","DE","ES","IT","PT","NL","SE","NO","DK","FI",
-"RU","UA","TR","EG","ZA","NG","GH","KE","ET","IN","CN","JP","KR","AU","NZ",
-"BR","MX","AR","CL","CO","PE","SA","AE","QA","IL","SG","MY","ID","TH","VN",
-"PH","PK","BD","NP","LK","GR","PL","CZ","AT","RO","HU","IE","IS","LU","MC",
-"ML","MR","GN","SL","LR","TG","GH","GM","GW","CV","KM","MG","MU","SC","MZ",
-"ZW","ZM","NA","BW","SZ","LS","TZ","UG","RW","BI","SO","SD","SS","ER","DJ"
-];
-
-const currencyMap={
-CG:"XAF",CD:"CDF",DZ:"DZD",CM:"XAF",GA:"XAF",CI:"XOF",
-SN:"XOF",MA:"MAD",TN:"TND",BJ:"XOF",BF:"XOF",NE:"XOF",
-TD:"XAF",CF:"XAF",GQ:"XAF",FR:"EUR",BE:"EUR",CH:"CHF",
-CA:"CAD",US:"USD",GB:"GBP",DE:"EUR",ES:"EUR",IT:"EUR",
-PT:"EUR",NL:"EUR",SE:"SEK",NO:"NOK",DK:"DKK",FI:"EUR",
-RU:"RUB",UA:"UAH",TR:"TRY",EG:"EGP",ZA:"ZAR",NG:"NGN",
-GH:"GHS",KE:"KES",ET:"ETB",IN:"INR",CN:"CNY",JP:"JPY",
-KR:"KRW",AU:"AUD",NZ:"NZD",BR:"BRL",MX:"MXN",AR:"ARS",
-CL:"CLP",CO:"COP",PE:"PEN",SA:"SAR",AE:"AED",QA:"QAR",
-IL:"ILS",SG:"SGD",MY:"MYR",ID:"IDR",TH:"THB",VN:"VND",
-PH:"PHP",PK:"PKR",BD:"BDT",NP:"NPR",LK:"LKR",GR:"EUR",
-PL:"PLN",CZ:"CZK",AT:"EUR",RO:"RON",HU:"HUF",IE:"EUR",
-IS:"ISK",LU:"EUR",MC:"EUR"
-};
-
-
-/* =========================================================
-   SYSTEMES SCOLAIRES
-========================================================= */
+/* =========================
+   PAYS ET SYSTEMES
+========================= */
 
 const systems={
 
 CG:{
- name:"Congo",
- exams:{
-   BAC:{
-     name:"Baccalauréat",
-     tracks:{
-       A2:{
-         name:"Série A2",
-         subjects:[
-           ["Philosophie",5],
-           ["Français",5],
-           ["Histoire-Géographie",3],
-           ["Anglais",4],
-           ["Mathématiques",3],
-           ["Langue optionnelle",3],
-           ["EPS",2]
-         ]
-       },
+name:"Congo",
+series:{
+A2:[
+["Philosophie",5],
+["Français",5],
+["Histoire-Géographie",3],
+["Anglais",4],
+["Mathématiques",3],
+["Langue optionnelle",3],
+["EPS",2]
+],
 
-       A4:{
-         name:"Série A4",
-         subjects:[
-           ["Philosophie",5],
-           ["Français",5],
-           ["Anglais",4],
-           ["Histoire-Géographie",3],
-           ["Mathématiques",3],
-           ["Langue optionnelle",3],
-           ["EPS",2]
-         ]
-       },
+A4:[
+["Philosophie",5],
+["Français",5],
+["Anglais",4],
+["Histoire-Géographie",3],
+["Mathématiques",3],
+["Langue optionnelle",3],
+["EPS",2]
+],
 
-       C:{
-         name:"Série C",
-         subjects:[
-           ["Mathématiques",5],
-           ["Sciences physiques",5],
-           ["SVT",4],
-           ["Français ou philosophie",3],
-           ["Anglais",3],
-           ["Histoire ou géographie",3],
-           ["EPS",2]
-         ]
-       },
+C:[
+["Mathématiques",5],
+["Sciences physiques",5],
+["SVT",4],
+["Français ou philosophie",3],
+["Anglais",3],
+["Histoire ou géographie",3],
+["EPS",2]
+],
 
-       D:{
-         name:"Série D",
-         subjects:[
-           ["SVT",5],
-           ["Sciences physiques",5],
-           ["Mathématiques",4],
-           ["Français ou philosophie",3],
-           ["Anglais",3],
-           ["Histoire ou géographie",3],
-           ["EPS",2]
-         ]
-       }
-     }
-   }
- }
-},
-
-DZ:{
- name:"Algérie",
- exams:{
-   BAC:{
-     name:"Baccalauréat",
-     tracks:{
-       sciences:{
-         name:"Sciences expérimentales",
-         subjects:[]
-       },
-       maths:{
-         name:"Mathématiques",
-         subjects:[]
-       },
-       tech:{
-         name:"Technique mathématique",
-         subjects:[]
-       },
-       gestion:{
-         name:"Gestion et économie",
-         subjects:[]
-       },
-       philosophie:{
-         name:"Arts et philosophie",
-         subjects:[]
-       },
-       langues:{
-         name:"Langues étrangères",
-         subjects:[]
-       }
-     }
-   }
- }
+D:[
+["SVT",5],
+["Sciences physiques",5],
+["Mathématiques",4],
+["Français ou philosophie",3],
+["Anglais",3],
+["Histoire ou géographie",3],
+["EPS",2]
+]
+}
 },
 
 FR:{
- name:"France",
- exams:{
-   BAC2027:{
-     name:"Baccalauréat général — session 2027",
-     tracks:{
-       general:{
-         name:"Voie générale",
-         subjects:[
-           ["Français écrit",5],
-           ["Français oral",5],
-           ["Mathématiques anticipées",2],
-           ["Philosophie",8],
-           ["Grand oral",8],
-           ["Spécialité 1",16],
-           ["Spécialité 2",16],
-           ["Histoire-Géographie contrôle continu",6],
-           ["LVA contrôle continu",6],
-           ["LVB contrôle continu",6],
-           ["Enseignement scientifique contrôle continu",6],
-           ["EPS contrôle continu",6],
-           ["EMC contrôle continu",2],
-           ["Spécialité abandonnée",8]
-         ]
-       }
-     }
-   }
- }
+name:"France",
+series:{
+"Général":[
+["Français écrit",5],
+["Français oral",5],
+["Philosophie",8],
+["Spécialité 1",16],
+["Spécialité 2",16],
+["Grand oral",8]
+]
+}
+},
+
+DZ:{
+name:"Algérie",
+series:{
+"Scientifique":[
+["Matière 1",1],
+["Matière 2",1],
+["Matière 3",1]
+],
+"Littéraire":[
+["Matière 1",1],
+["Matière 2",1],
+["Matière 3",1]
+]
+}
 }
 
 };
 
 
-/* =========================================================
-   FILIERES
-========================================================= */
+/* =========================
+   PAYS
+========================= */
 
-const fields=[
+const countries=[
 
-{
- name:"Informatique",
- icon:"💻",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Nombreuses spécialisations",
-   "Secteur en évolution constante",
-   "Possibilité de travail à distance",
-   "Entrepreneuriat possible",
-   "Compétences utilisables à l'international"
- ],
- jobsLicense:[
-   "Développeur junior",
-   "Technicien informatique",
-   "Support informatique",
-   "Administrateur systèmes junior"
- ],
- jobsMaster:[
-   "Ingénieur logiciel",
-   "Data analyst",
-   "Ingénieur cybersécurité",
-   "Ingénieur réseaux",
-   "Architecte logiciel"
- ],
- jobsDoctorate:[
-   "Enseignant-chercheur",
-   "Chercheur",
-   "Expert spécialisé",
-   "R&D"
- ],
- sectors:[
-   "Banques",
-   "Télécommunications",
-   "Entreprises technologiques",
-   "Startups",
-   "Administrations",
-   "Cybersécurité",
-   "Intelligence artificielle"
- ]
-},
-
-{
- name:"Mathématiques",
- icon:"📐",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Excellente base scientifique",
-   "Très bonne capacité d'analyse",
-   "Accès aux métiers quantitatifs",
-   "Base solide pour l'informatique et l'IA"
- ],
- jobsLicense:[
-   "Assistant statistique",
-   "Assistant data",
-   "Enseignement après formation adaptée"
- ],
- jobsMaster:[
-   "Statisticien",
-   "Data analyst",
-   "Actuaire",
-   "Quantitative analyst",
-   "Chercheur"
- ],
- jobsDoctorate:[
-   "Enseignant-chercheur",
-   "Chercheur",
-   "Expert mathématique"
- ],
- sectors:[
-   "Banques",
-   "Assurances",
-   "Recherche",
-   "Data science",
-   "Éducation",
-   "Finance"
- ]
-},
-
-{
- name:"Médecine",
- icon:"🩺",
- license:6,
- master:0,
- doctorate:3,
- advantages:[
-   "Profession réglementée",
-   "Forte responsabilité professionnelle",
-   "Nombreuses spécialités médicales",
-   "Possibilité de recherche"
- ],
- jobsLicense:[
-   "Médecin généraliste après le cursus et les autorisations requises"
- ],
- jobsMaster:[
-   "Spécialisation médicale selon le système national"
- ],
- jobsDoctorate:[
-   "Recherche médicale",
-   "Enseignement universitaire"
- ],
- sectors:[
-   "Hôpitaux",
-   "Cliniques",
-   "Recherche",
-   "Santé publique"
- ]
-},
-
-{
- name:"Architecture",
- icon:"🏛️",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Créativité",
-   "Conception de bâtiments",
-   "Possibilité d'entrepreneuriat",
-   "Travail avec ingénieurs et urbanistes"
- ],
- jobsLicense:[
-   "Assistant architecte",
-   "Dessinateur",
-   "Modeleur 3D"
- ],
- jobsMaster:[
-   "Architecte",
-   "Urbaniste",
-   "Chef de projet"
- ],
- jobsDoctorate:[
-   "Chercheur",
-   "Enseignant-chercheur"
- ],
- sectors:[
-   "Cabinets d'architecture",
-   "Construction",
-   "Urbanisme",
-   "Immobilier",
-   "Bureaux d'études"
- ]
-},
-
-{
- name:"Droit",
- icon:"⚖️",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Large domaine professionnel",
-   "Nombreuses spécialisations",
-   "Possibilités dans le public et le privé"
- ],
- jobsLicense:[
-   "Assistant juridique",
-   "Juriste junior"
- ],
- jobsMaster:[
-   "Juriste",
-   "Avocat selon conditions nationales",
-   "Conseiller juridique",
-   "Juriste d'entreprise"
- ],
- jobsDoctorate:[
-   "Enseignant-chercheur",
-   "Chercheur"
- ],
- sectors:[
-   "Cabinets juridiques",
-   "Entreprises",
-   "Administrations",
-   "Banques",
-   "ONG"
- ]
-},
-
-{
- name:"Économie",
- icon:"📊",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Compréhension des marchés",
-   "Bonne base en analyse",
-   "Débouchés publics et privés"
- ],
- jobsLicense:[
-   "Assistant économique",
-   "Assistant administratif"
- ],
- jobsMaster:[
-   "Économiste",
-   "Analyste",
-   "Consultant"
- ],
- jobsDoctorate:[
-   "Chercheur",
-   "Enseignant-chercheur"
- ],
- sectors:[
-   "Banques",
-   "Institutions publiques",
-   "ONG",
-   "Cabinets de conseil"
- ]
-},
-
-{
- name:"Finance",
- icon:"💳",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Secteur financier",
-   "Métiers analytiques",
-   "Possibilités en banque et assurance"
- ],
- jobsLicense:[
-   "Assistant financier",
-   "Assistant comptable"
- ],
- jobsMaster:[
-   "Analyste financier",
-   "Risk manager",
-   "Contrôleur financier"
- ],
- jobsDoctorate:[
-   "Chercheur",
-   "Enseignant-chercheur"
- ],
- sectors:[
-   "Banques",
-   "Assurances",
-   "Entreprises",
-   "Marchés financiers"
- ]
-},
-
-{
- name:"Gestion",
- icon:"📋",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Formation polyvalente",
-   "Nombreuses entreprises accessibles",
-   "Entrepreneuriat"
- ],
- jobsLicense:[
-   "Assistant gestion",
-   "Assistant administratif"
- ],
- jobsMaster:[
-   "Manager",
-   "Contrôleur de gestion",
-   "Consultant"
- ],
- jobsDoctorate:[
-   "Recherche",
-   "Enseignement supérieur"
- ],
- sectors:[
-   "Entreprises",
-   "Administrations",
-   "Banques",
-   "ONG"
- ]
-},
-
-{
- name:"Ingénierie",
- icon:"⚙️",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Formation scientifique",
-   "Résolution de problèmes complexes",
-   "Nombreuses spécialisations"
- ],
- jobsLicense:[
-   "Technicien",
-   "Assistant ingénieur"
- ],
- jobsMaster:[
-   "Ingénieur",
-   "Chef de projet",
-   "Consultant"
- ],
- jobsDoctorate:[
-   "Chercheur",
-   "R&D",
-   "Enseignant-chercheur"
- ],
- sectors:[
-   "Industrie",
-   "Énergie",
-   "Télécommunications",
-   "Construction",
-   "Technologies"
- ]
-},
-
-{
- name:"Sciences",
- icon:"🔬",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Base scientifique solide",
-   "Recherche",
-   "Nombreuses spécialisations"
- ],
- jobsLicense:[
-   "Technicien scientifique",
-   "Assistant laboratoire"
- ],
- jobsMaster:[
-   "Scientifique",
-   "Analyste",
-   "Ingénieur selon spécialisation"
- ],
- jobsDoctorate:[
-   "Chercheur",
-   "Enseignant-chercheur"
- ],
- sectors:[
-   "Laboratoires",
-   "Universités",
-   "Industrie",
-   "Recherche"
- ]
-},
-
-{
- name:"Communication",
- icon:"📣",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Créativité",
-   "Communication numérique",
-   "Médias et entreprises"
- ],
- jobsLicense:[
-   "Assistant communication",
-   "Community manager"
- ],
- jobsMaster:[
-   "Responsable communication",
-   "Consultant",
-   "Chargé de communication"
- ],
- jobsDoctorate:[
-   "Recherche",
-   "Enseignement supérieur"
- ],
- sectors:[
-   "Médias",
-   "Entreprises",
-   "Agences",
-   "ONG",
-   "Institutions"
- ]
-},
-
-{
- name:"Lettres",
- icon:"📚",
- license:3,
- master:2,
- doctorate:3,
- advantages:[
-   "Maîtrise de la langue",
-   "Culture générale",
-   "Recherche et enseignement"
- ],
- jobsLicense:[
-   "Assistant éditorial",
-   "Rédacteur"
- ],
- jobsMaster:[
-   "Éditeur",
-   "Enseignant selon conditions",
-   "Rédacteur spécialisé"
- ],
- jobsDoctorate:[
-   "Chercheur",
-   "Enseignant-chercheur"
- ],
- sectors:[
-   "Édition",
-   "Culture",
-   "Éducation",
-   "Médias"
- ]
-}
+["CG","🇨🇬 Congo"],
+["DZ","🇩🇿 Algérie"],
+["FR","🇫🇷 France"],
+["CM","🇨🇲 Cameroun"],
+["CI","🇨🇮 Côte d'Ivoire"],
+["SN","🇸🇳 Sénégal"],
+["CD","🇨🇩 RD Congo"],
+["GA","🇬🇦 Gabon"],
+["MA","🇲🇦 Maroc"],
+["US","🇺🇸 États-Unis"],
+["CA","🇨🇦 Canada"],
+["GB","🇬🇧 Royaume-Uni"],
+["DE","🇩🇪 Allemagne"],
+["ES","🇪🇸 Espagne"],
+["IT","🇮🇹 Italie"],
+["PT","🇵🇹 Portugal"],
+["CN","🇨🇳 Chine"],
+["IN","🇮🇳 Inde"],
+["JP","🇯🇵 Japon"],
+["RU","🇷🇺 Russie"],
+["BR","🇧🇷 Brésil"],
+["BE","🇧🇪 Belgique"],
+["CH","🇨🇭 Suisse"],
+["AU","🇦🇺 Australie"],
+["ZA","🇿🇦 Afrique du Sud"]
 
 ];
 
 
-/* =========================================================
-   ETAT
-========================================================= */
+/* =========================
+   50+ FILIERES
+========================= */
 
-let currentCountry=localStorage.getItem("student_country") || "CG";
+const filieres=[
 
-let currentLanguage=
-  localStorage.getItem("student_language") ||
-  (navigator.language || "fr").slice(0,2);
+["💻","Informatique","Développement, logiciels, systèmes et technologies numériques."],
+["🖥️","Génie informatique","Conception de systèmes informatiques et logiciels."],
+["🤖","Intelligence artificielle","IA, apprentissage automatique et automatisation."],
+["📊","Data Science","Analyse des données, statistiques et modèles prédictifs."],
+["🔐","Cybersécurité","Protection des systèmes, réseaux et données."],
+["📡","Réseaux & télécommunications","Réseaux informatiques, télécoms et infrastructures."],
+["💾","Développement logiciel","Création et maintenance d'applications."],
+["🗄️","Systèmes d'information","Gestion des systèmes numériques des organisations."],
 
-if(!languages[currentLanguage]){
-  currentLanguage="en";
+["🏗️","Génie civil","Construction, infrastructures, bâtiments et travaux publics."],
+["⚡","Génie électrique","Électricité, électronique et systèmes énergétiques."],
+["⚙️","Génie mécanique","Machines, mécanique, conception et production."],
+["🏭","Génie industriel","Production, qualité, optimisation et industrie."],
+["🧪","Génie chimique","Procédés industriels, chimie et production."],
+["🔋","Génie énergétique","Énergie, efficacité énergétique et systèmes."],
+["🔩","Génie des matériaux","Métaux, polymères, matériaux et technologies."],
+["⛏️","Génie minier","Exploitation et gestion des ressources minières."],
+["🌋","Géologie","Étude de la Terre, ressources et environnement."],
+["🛢️","Pétrole & gaz","Exploration, production et industrie énergétique."],
+
+["📐","Mathématiques","Mathématiques fondamentales et appliquées."],
+["⚛️","Physique","Matière, énergie, phénomènes physiques et recherche."],
+["🧪","Chimie","Analyse, laboratoire, industrie et recherche."],
+["🧬","Biologie","Organismes vivants, recherche et laboratoire."],
+["🔬","Biochimie","Processus chimiques du vivant et laboratoire."],
+
+["🩺","Médecine","Diagnostic, traitement et santé."],
+["💊","Pharmacie","Médicaments, industrie pharmaceutique et santé."],
+["🦷","Odontologie","Santé dentaire et soins bucco-dentaires."],
+["👩🏾‍⚕️","Sciences infirmières","Soins infirmiers et accompagnement des patients."],
+["🏥","Santé publique","Prévention, politiques et programmes de santé."],
+
+["📈","Économie","Analyse économique, politiques et marchés."],
+["💳","Finance","Finance d'entreprise, marchés et gestion financière."],
+["🧾","Comptabilité","Comptabilité, audit et gestion financière."],
+["📁","Gestion","Administration et gestion des organisations."],
+["📣","Marketing","Marketing, publicité et stratégie commerciale."],
+["💼","Management","Gestion des équipes et des organisations."],
+["🏦","Banque & assurance","Banque, assurance, crédit et gestion des risques."],
+["👥","Ressources humaines","Recrutement, formation et gestion du personnel."],
+["🚚","Logistique & transport","Transport, chaîne logistique et approvisionnement."],
+
+["⚖️","Droit","Droit, justice, administration et conseil juridique."],
+["🌍","Relations internationales","Diplomatie, coopération et organisations internationales."],
+["🏛️","Sciences politiques","Institutions, politiques publiques et analyse politique."],
+["🏢","Administration publique","Gestion et administration des services publics."],
+["👥","Sociologie","Étude des sociétés et comportements sociaux."],
+["🧠","Psychologie","Étude du comportement et accompagnement psychologique."],
+
+["🌱","Agronomie","Agriculture, production et technologies agricoles."],
+["🌳","Sciences environnementales","Protection de l'environnement et développement durable."],
+["🗺️","Aménagement du territoire","Organisation et développement des territoires."],
+["🏙️","Urbanisme","Planification et développement des villes."],
+
+["📢","Communication","Communication, stratégie digitale et relations publiques."],
+["📰","Journalisme","Information, médias et production journalistique."],
+["🎨","Design graphique","Création visuelle, identité et communication."],
+["🏨","Tourisme & hôtellerie","Tourisme, accueil, hôtellerie et services."],
+
+["📚","Lettres","Langues, littérature, culture et enseignement."],
+["🎓","Sciences de l'éducation","Éducation, pédagogie et formation."],
+["🧑🏾‍🏫","Enseignement","Formation et transmission des connaissances."],
+["🏃🏾","Sciences du sport","Sport, entraînement et activité physique."]
+
+];
+
+
+/* =========================
+   OUTILS
+========================= */
+
+const $=id=>document.getElementById(id);
+
+function save(key,value){
+localStorage.setItem(key,JSON.stringify(value));
 }
 
-let studiesData=
-  JSON.parse(localStorage.getItem("student_studies") || "[]");
-
-let scheduleData=
-  JSON.parse(localStorage.getItem("student_schedule") || "[]");
-
-let budgetData=
-  JSON.parse(localStorage.getItem("student_budget") || "[]");
-
-let profileData=
-  JSON.parse(localStorage.getItem("student_profile") || "{}");
-
-
-/* =========================================================
-   INITIALISATION
-========================================================= */
-
-function countryName(code){
-
-  try{
-    const dn=new Intl.DisplayNames(
-      [currentLanguage],
-      {type:"region"}
-    );
-
-    return dn.of(code) || code;
-
-  }catch(e){
-
-    return code;
-
-  }
-
+function get(key,def=[]){
+try{
+return JSON.parse(localStorage.getItem(key)) ?? def;
+}catch{
+return def;
 }
-
-
-function populateCountries(){
-
-  const selectors=[
-    document.getElementById("countrySelect"),
-    document.getElementById("calcCountry"),
-    document.getElementById("profileCountry")
-  ];
-
-  selectors.forEach(select=>{
-
-    if(!select)return;
-
-    select.innerHTML="";
-
-    countryCodes.forEach(code=>{
-
-      const option=document.createElement("option");
-
-      option.value=code;
-      option.textContent=
-        countryName(code)+" ("+
-        code+
-        ")";
-
-      select.appendChild(option);
-
-    });
-
-    select.value=currentCountry;
-
-  });
-
-}
-
-
-function populateLanguages(){
-
-  const select=document.getElementById("languageSelect");
-
-  select.innerHTML="";
-
-  Object.entries(languages).forEach(([code,name])=>{
-
-    const option=document.createElement("option");
-
-    option.value=code;
-    option.textContent=name;
-
-    select.appendChild(option);
-
-  });
-
-  select.value=currentLanguage;
-
 }
 
 
-function applyLanguage(){
-
-  document.documentElement.lang=currentLanguage;
-
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-
-    const key=el.dataset.i18n;
-
-    if(
-      translations[currentLanguage] &&
-      translations[currentLanguage][key]
-    ){
-
-      el.textContent=
-        translations[currentLanguage][key];
-
-    }
-
-  });
-
-  populateCountries();
-
-  populateLanguages();
-
-  updateHome();
-
-  renderOrientation();
-
-}
-
-
-function changeLanguage(){
-
-  currentLanguage=
-    document.getElementById("languageSelect").value;
-
-  localStorage.setItem(
-    "student_language",
-    currentLanguage
-  );
-
-  applyLanguage();
-
-}
-
-
-/* =========================================================
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
-function showSection(id){
+document.querySelectorAll("nav button").forEach(button=>{
 
-  document.querySelectorAll("main section")
-    .forEach(section=>{
-      section.classList.remove("active");
-    });
+button.onclick=()=>{
 
-  const target=document.getElementById(id);
+document.querySelectorAll("nav button")
+.forEach(x=>x.classList.remove("active"));
 
-  if(target){
-    target.classList.add("active");
-  }
+document.querySelectorAll("main section")
+.forEach(x=>x.classList.remove("active"));
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+button.classList.add("active");
 
-}
+$(button.dataset.section).classList.add("active");
+
+};
+
+});
 
 
-/* =========================================================
+/* =========================
    PAYS
-========================================================= */
+========================= */
 
-function changeCountry(code){
+function initCountries(){
 
-  currentCountry=code;
+$("country").innerHTML=countries
+.map(c=>`<option value="${c[0]}">${c[1]}</option>`)
+.join("");
 
-  localStorage.setItem(
-    "student_country",
-    currentCountry
-  );
+const saved=localStorage.getItem("country")||"CG";
 
-  document.getElementById("countrySelect").value=currentCountry;
-  document.getElementById("calcCountry").value=currentCountry;
-  document.getElementById("profileCountry").value=currentCountry;
+$("country").value=saved;
 
-  updateHome();
+$("country").onchange=()=>{
 
-  renderCalculator();
+localStorage.setItem("country",$("country").value);
 
-  renderBudget();
+updateCountry();
 
-}
+};
 
-
-function updateHome(){
-
-  const name=countryName(currentCountry);
-
-  document.getElementById("homeCountry").textContent=name;
-
-  document.getElementById("homeCurrency").textContent=
-    currencyMap[currentCountry] || "—";
-
-  document.getElementById("homeLanguage").textContent=
-    languages[currentLanguage] || currentLanguage;
-
-  document.getElementById("homeSystem").textContent=
-    systems[currentCountry]
-      ? systems[currentCountry].name
-      : "Système local";
+updateCountry();
 
 }
 
 
-/* =========================================================
-   FILIERES ACCUEIL
-========================================================= */
+function updateCountry(){
 
-function renderHomeFields(list=fields){
+const code=$("country").value;
 
-  const container=document.getElementById("homeFields");
+const system=systems[code];
 
-  container.innerHTML="";
+$("countryName").textContent=
+system?.name ||
+countries.find(c=>c[0]===code)?.[1] ||
+code;
 
-  list.forEach(field=>{
+if(system){
 
-    const div=document.createElement("div");
+$("series").innerHTML=
+Object.keys(system.series)
+.map(x=>`<option value="${x}">${x}</option>`)
+.join("");
 
-    div.className="card filiere";
+}else{
 
-    div.innerHTML=`
-      <div class="emoji">${field.icon}</div>
-      <h3>${field.name}</h3>
-      <p class="muted">
-        Licence ${field.license} ans
-        • Master ${field.master} ans
-      </p>
-      <span class="badge">Voir la fiche</span>
-    `;
+$("series").innerHTML=
+`<option value="custom">Personnalisé</option>`;
 
-    div.onclick=()=>openField(field.name);
-
-    container.appendChild(div);
-
-  });
+}
 
 }
 
 
-function filterHomeFields(){
+/* =========================
+   LANGUE AUTOMATIQUE
+========================= */
 
-  const q=
-    document.getElementById("homeSearch")
-      .value
-      .toLowerCase()
-      .trim();
+function initLanguage(){
 
-  const filtered=fields.filter(field=>
-    field.name.toLowerCase().includes(q)
-  );
+const languages=[
+"fr","en","es","pt","de","it",
+"zh","ar","ru","ja","ko","hi"
+];
 
-  renderHomeFields(filtered);
+let saved=localStorage.getItem("language");
+
+if(!saved){
+
+const browser=(navigator.language||"fr").slice(0,2);
+
+saved=languages.includes(browser)
+?browser
+:"en";
+
+}
+
+$("language").value=saved;
+
+$("language").onchange=()=>{
+
+localStorage.setItem(
+"language",
+$("language").value
+);
+
+};
 
 }
 
 
-/* =========================================================
-   ORIENTATION
-========================================================= */
-
-function renderOrientation(){
-
-  const q=
-    (document.getElementById("orientationSearch")?.value || "")
-      .toLowerCase()
-      .trim();
-
-  const grid=document.getElementById("orientationGrid");
-
-  if(!grid)return;
-
-  grid.innerHTML="";
-
-  fields
-    .filter(field=>
-      field.name.toLowerCase().includes(q)
-    )
-    .forEach(field=>{
-
-      const card=document.createElement("div");
-
-      card.className="card filiere";
-
-      card.innerHTML=`
-        <div class="emoji">${field.icon}</div>
-        <h3>${field.name}</h3>
-
-        <p>
-          🎓 Licence : ${field.license} ans
-        </p>
-
-        <p>
-          🎓 Master : ${field.master} ans
-        </p>
-
-        <p>
-          🔬 Doctorat : ${field.doctorate} ans
-        </p>
-
-        <span class="badge">
-          Découvrir
-        </span>
-      `;
-
-      card.onclick=()=>openField(field.name);
-
-      grid.appendChild(card);
-
-    });
-
-}
-
-
-function openField(name){
-
-  const field=
-    fields.find(x=>x.name===name);
-
-  if(!field)return;
-
-  document.getElementById("orientationList")
-    .classList.add("hidden");
-
-  const detail=
-    document.getElementById("orientationDetail");
-
-  detail.classList.remove("hidden");
-
-  detail.innerHTML=`
-
-    <button class="btn secondary back"
-      onclick="closeField()">
-      ← Retour aux filières
-    </button>
-
-    <div class="hero">
-      <div class="emoji">${field.icon}</div>
-      <h1>${field.name}</h1>
-      <p>
-        Une présentation générale du parcours et des débouchés.
-      </p>
-    </div>
-
-    <div class="card">
-
-      <h2>🎓 Parcours universitaire</h2>
-
-      <table>
-        <tr>
-          <th>Diplôme</th>
-          <th>Durée</th>
-        </tr>
-
-        <tr>
-          <td>Licence</td>
-          <td>${field.license} ans</td>
-        </tr>
-
-        <tr>
-          <td>Master</td>
-          <td>${field.master} ans</td>
-        </tr>
-
-        <tr>
-          <td>Doctorat</td>
-          <td>${field.doctorate} ans minimum</td>
-        </tr>
-      </table>
-
-      <p>
-        ⏱️ Parcours indicatif jusqu'au doctorat :
-        <strong>
-          ${field.license+field.master+field.doctorate} ans
-        </strong>
-      </p>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>⭐ Avantages</h2>
-
-      <ul>
-        ${field.advantages
-          .map(x=>`<li>${x}</li>`)
-          .join("")}
-      </ul>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>💼 Débouchés après la Licence</h2>
-
-      <ul>
-        ${field.jobsLicense
-          .map(x=>`<li>${x}</li>`)
-          .join("")}
-      </ul>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🚀 Débouchés après le Master</h2>
-
-      <ul>
-        ${field.jobsMaster
-          .map(x=>`<li>${x}</li>`)
-          .join("")}
-      </ul>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🔬 Après le Doctorat</h2>
-
-      <ul>
-        ${field.jobsDoctorate
-          .map(x=>`<li>${x}</li>`)
-          .join("")}
-      </ul>
-
-    </div>
-
-
-    <div class="card">
-
-      <h2>🌍 Secteurs professionnels</h2>
-
-      <div>
-        ${field.sectors
-          .map(x=>`<span class="tag">${x}</span>`)
-          .join("")}
-      </div>
-
-    </div>
-
-
-    <div class="notice">
-      💰 <strong>Salaires :</strong>
-      Étudiant+ n'affiche pas de salaire inventé.
-      Les données salariales devront être ajoutées pays par pays
-      avec une source fiable, une période et un métier précis.
-    </div>
-
-  `;
-
-  showSection("orientation");
-
-}
-
-
-function closeField(){
-
-  document.getElementById("orientationDetail")
-    .classList.add("hidden");
-
-  document.getElementById("orientationList")
-    .classList.remove("hidden");
-
-}
-
-
-/* =========================================================
+/* =========================
    CALCULATEUR
-========================================================= */
+========================= */
 
-function renderCalculator(){
+function loadSubjects(){
 
-  const country=
-    document.getElementById("calcCountry");
+const code=$("country").value;
 
-  if(!country)return;
+const serie=$("series").value;
 
-  country.value=currentCountry;
+let list=systems[code]?.series?.[serie];
 
-  const exam=
-    document.getElementById("examSelect");
+if(!list){
 
-  const track=
-    document.getElementById("trackSelect");
-
-  exam.innerHTML="";
-  track.innerHTML="";
-
-  const data=systems[currentCountry];
-
-  if(!data){
-
-    exam.innerHTML=
-      `<option value="custom">
-        Mode personnalisé
-      </option>`;
-
-    track.innerHTML=
-      `<option value="custom">
-        Matières personnalisées
-      </option>`;
-
-    document.getElementById("calcNotice")
-      .classList.remove("hidden");
-
-    document.getElementById("calcNotice").innerHTML=
-      `
-      ⚠️ Les coefficients officiels de ce pays
-      ne sont pas encore intégrés dans cette version.
-      Tu peux néanmoins créer un calcul personnalisé.
-      Ne considère pas les coefficients proposés comme officiels.
-      `;
-
-    renderSubjects([]);
-
-    return;
-
-  }
-
-  document.getElementById("calcNotice")
-    .classList.add("hidden");
-
-  Object.entries(data.exams)
-    .forEach(([key,value])=>{
-
-      const option=
-        document.createElement("option");
-
-      option.value=key;
-      option.textContent=value.name;
-
-      exam.appendChild(option);
-
-    });
-
-  renderTracks();
+list=[
+["Matière 1",1],
+["Matière 2",1],
+["Matière 3",1],
+["Matière 4",1],
+["Matière 5",1]
+];
 
 }
 
+$("subjects").innerHTML=list.map((x)=>`
 
-function renderTracks(){
+<div class="row">
 
-  const country=
-    document.getElementById("calcCountry").value;
+<input value="${x[0]}" data-name>
 
-  const exam=
-    document.getElementById("examSelect").value;
+<input
+type="number"
+min="0"
+max="20"
+step=".01"
+placeholder="Note /20"
+data-grade>
 
-  const track=
-    document.getElementById("trackSelect");
+<input
+type="number"
+min="0"
+step=".01"
+value="${x[1]}"
+data-coef>
 
-  track.innerHTML="";
+</div>
 
-  const data=
-    systems[country]?.exams?.[exam];
+`).join("");
 
-  if(!data){
-
-    track.innerHTML=
-      `<option value="custom">Personnalisé</option>`;
-
-    renderSubjects([]);
-
-    return;
-
-  }
-
-  Object.entries(data.tracks)
-    .forEach(([key,value])=>{
-
-      const option=
-        document.createElement("option");
-
-      option.value=key;
-      option.textContent=value.name;
-
-      track.appendChild(option);
-
-    });
-
-  renderSubjects();
-
-}
-
-
-function renderSubjects(custom=[]){
-
-  const container=
-    document.getElementById("subjectsContainer");
-
-  container.innerHTML="";
-
-  const country=
-    document.getElementById("calcCountry").value;
-
-  const exam=
-    document.getElementById("examSelect").value;
-
-  const track=
-    document.getElementById("trackSelect").value;
-
-  const data=
-    systems[country]
-      ?.exams?.[exam]
-      ?.tracks?.[track];
-
-  let subjects=
-    data?.subjects?.length
-      ? data.subjects
-      : custom;
-
-  if(!subjects.length){
-
-    subjects=[
-      ["Matière 1",1],
-      ["Matière 2",1],
-      ["Matière 3",1],
-      ["Matière 4",1],
-      ["Matière 5",1]
-    ];
-
-  }
-
-  subjects.forEach((subject,index)=>{
-
-    addSubjectRow(
-      subject[0],
-      subject[1],
-      index
-    );
-
-  });
-
-}
-
-
-function addSubjectRow(name="",coef=1,index=null){
-
-  const container=
-    document.getElementById("subjectsContainer");
-
-  const row=
-    document.createElement("div");
-
-  row.className="card";
-
-  row.innerHTML=`
-
-    <div class="controls">
-
-      <div>
-        <label>Matière</label>
-        <input
-          class="subject-name"
-          value="${escapeHtml(name)}"
-        >
-      </div>
-
-      <div>
-        <label>Coefficient</label>
-        <input
-          class="subject-coef"
-          type="number"
-          min="0"
-          step="0.01"
-          value="${coef}"
-        >
-      </div>
-
-      <div>
-        <label>Note /20</label>
-        <input
-          class="subject-grade"
-          type="number"
-          min="0"
-          max="20"
-          step="0.01"
-          placeholder="Ex : 14"
-        >
-      </div>
-
-    </div>
-
-    <button
-      class="btn danger"
-      style="margin-top:8px"
-      onclick="this.parentElement.remove()">
-      🗑️ Supprimer
-    </button>
-
-  `;
-
-  container.appendChild(row);
-
-}
-
-
-function addSubject(){
-
-  addSubjectRow(
-    "Nouvelle matière",
-    1
-  );
+$("calcButton").classList.remove("hidden");
 
 }
 
 
 function calculateAverage(){
 
-  const rows=
-    document.querySelectorAll(
-      "#subjectsContainer .card"
-    );
+let total=0;
+let coefficients=0;
+let valid=true;
 
-  let total=0;
-  let coefTotal=0;
-  let valid=true;
+document.querySelectorAll("#subjects .row")
+.forEach(row=>{
 
-  rows.forEach(row=>{
+const grade=parseFloat(
+row.querySelector("[data-grade]").value
+);
 
-    const grade=
-      parseFloat(
-        row.querySelector(".subject-grade")?.value
-      );
+const coef=parseFloat(
+row.querySelector("[data-coef]").value
+);
 
-    const coef=
-      parseFloat(
-        row.querySelector(".subject-coef")?.value
-      );
+if(!isNaN(grade)&&!isNaN(coef)&&coef>0){
 
-    if(
-      Number.isNaN(grade) ||
-      Number.isNaN(coef) ||
-      grade<0 ||
-      grade>20 ||
-      coef<0
-    ){
+if(grade<0||grade>20)
+valid=false;
 
-      valid=false;
+total+=grade*coef;
+coefficients+=coef;
 
-      return;
+}
 
-    }
+});
 
-    total+=grade*coef;
-    coefTotal+=coef;
+if(!valid||coefficients===0){
 
-  });
+$("averageResult").innerHTML=
+"⚠️ Vérifie les notes et coefficients.";
 
-  const result=
-    document.getElementById("resultBox");
+return;
 
-  if(!valid || coefTotal===0){
+}
 
-    result.innerHTML=
-      `<div class="notice">
-        ⚠️ Vérifie les notes et les coefficients.
-        Les notes doivent être comprises entre 0 et 20.
-      </div>`;
+const average=total/coefficients;
 
-    return;
+let mention="";
 
-  }
+if(average>=16)mention="Très bien 🏆";
+else if(average>=14)mention="Bien 🥇";
+else if(average>=12)mention="Assez bien 👍";
+else if(average>=10)mention="Passable ✅";
+else mention="À améliorer 📚";
 
-  const average=
-    total/coefTotal;
+$("averageResult").innerHTML=`
 
-  let mention="";
+<div class="result">
+Moyenne : ${average.toFixed(2)} / 20
+</div>
 
-  if(average>=16){
-    mention="Très bien 🏆";
-  }else if(average>=14){
-    mention="Bien 👏";
-  }else if(average>=12){
-    mention="Assez bien 👍";
-  }else if(average>=10){
-    mention="Passable ✅";
-  }else{
-    mention="À améliorer 📚";
-  }
+<p>${mention}</p>
 
-  result.innerHTML=`
-
-    <div class="success">
-
-      <div class="small">
-        Moyenne pondérée
-      </div>
-
-      <div class="big">
-        ${average.toFixed(2)} / 20
-      </div>
-
-      <h3>${mention}</h3>
-
-      <p>
-        Total des coefficients :
-        <strong>${coefTotal}</strong>
-      </p>
-
-    </div>
-
-  `;
+`;
 
 }
 
 
-function resetCalculator(){
+/* =========================
+   FILIERES
+========================= */
 
-  document.getElementById("resultBox")
-    .innerHTML="";
+function renderFilieres(list=filieres){
 
-  renderCalculator();
+$("filiereGrid").innerHTML=list
+.map((f,i)=>`
+
+<div
+class="card filiere"
+onclick="showFiche(${filieres.indexOf(f)})">
+
+<div class="icon">${f[0]}</div>
+
+<h3>${f[1]}</h3>
+
+<p>${f[2]}</p>
+
+</div>
+
+`)
+.join("");
 
 }
 
 
-/* =========================================================
-   ETUDES
-========================================================= */
+function filterFilieres(){
+
+const q=$("searchFiliere")
+.value
+.toLowerCase();
+
+renderFilieres(
+
+filieres.filter(f=>
+f[1].toLowerCase().includes(q) ||
+f[2].toLowerCase().includes(q)
+)
+
+);
+
+}
+
+
+function showFiche(index){
+
+const f=filieres[index];
+
+$("fiche").classList.remove("hidden");
+
+$("fiche").innerHTML=`
+
+<h2>${f[0]} ${f[1]}</h2>
+
+<p>${f[2]}</p>
+
+<span class="badge">🎓 Licence : 3 ans</span>
+<span class="badge">🎓 Master : +2 ans</span>
+<span class="badge">🎓 Doctorat : +3 ans minimum</span>
+
+<h3>💼 Métiers possibles</h3>
+
+<ul>
+<li>Professionnel du domaine</li>
+<li>Technicien / spécialiste</li>
+<li>Consultant selon la spécialisation</li>
+<li>Entrepreneur</li>
+<li>Enseignant / chercheur après les études adaptées</li>
+</ul>
+
+<h3>🏢 Secteurs</h3>
+
+<p>
+Entreprises privées, administrations, organisations,
+ONG, institutions, cabinets spécialisés et entrepreneuriat.
+</p>
+
+<h3>💰 Potentiel professionnel</h3>
+
+<p>
+Le salaire dépend du pays, du métier, du niveau d'études,
+de l'expérience et de l'employeur.
+</p>
+
+<p class="small">
+⚠️ Étudiant+ n'invente aucun salaire.
+Lorsqu'une donnée salariale fiable sera disponible,
+elle devra préciser le pays, le métier, l'année et la source.
+</p>
+
+<h3>🌍 International</h3>
+
+<p>
+Les possibilités internationales dépendent de la reconnaissance
+du diplôme, des compétences, de l'expérience et des règles
+du pays d'accueil.
+</p>
+
+<button onclick="$('fiche').classList.add('hidden')">
+Fermer
+</button>
+
+`;
+
+$("fiche").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   MES ETUDES
+========================= */
 
 function addStudy(){
 
-  const subject=
-    document.getElementById("studySubject")
-      .value.trim();
+const studies=get("studies");
 
-  const grade=
-    parseFloat(
-      document.getElementById("studyGrade").value
-    );
+studies.push({
 
-  const target=
-    parseFloat(
-      document.getElementById("studyTarget").value
-    );
+name:$("subjectName").value,
 
-  const comment=
-    document.getElementById("studyComment").value;
+grade:$("subjectGrade").value,
 
-  if(
-    !subject ||
-    Number.isNaN(grade) ||
-    Number.isNaN(target)
-  ){
+target:$("subjectTarget").value,
 
-    alert("Remplis la matière, la note et l'objectif.");
+comment:$("subjectComment").value
 
-    return;
+});
 
-  }
+save("studies",studies);
 
-  studiesData.push({
-    subject,
-    grade,
-    target,
-    comment
-  });
+$("subjectName").value="";
+$("subjectGrade").value="";
+$("subjectTarget").value="";
+$("subjectComment").value="";
 
-  localStorage.setItem(
-    "student_studies",
-    JSON.stringify(studiesData)
-  );
-
-  document.getElementById("studySubject").value="";
-  document.getElementById("studyGrade").value="";
-  document.getElementById("studyTarget").value="";
-  document.getElementById("studyComment").value="";
-
-  renderStudies();
+renderStudies();
 
 }
 
 
 function renderStudies(){
 
-  const container=
-    document.getElementById("studiesList");
+const studies=get("studies");
 
-  if(!studiesData.length){
+if(!studies.length){
 
-    container.innerHTML=
-      `<div class="empty">
-        Aucune matière enregistrée.
-      </div>`;
+$("studyList").innerHTML=
+`<div class="card">Aucune matière enregistrée.</div>`;
 
-    return;
+return;
 
-  }
+}
 
-  container.innerHTML="";
+$("studyList").innerHTML=studies
+.map((s,i)=>{
 
-  studiesData.forEach((item,index)=>{
+const grade=Number(s.grade);
+const target=Number(s.target);
 
-    let status="🔴 À améliorer";
+let status="🔴 À améliorer";
 
-    if(item.grade>=item.target){
+if(grade>=target)
+status="🟢 Objectif atteint";
+else if(grade>=target-2)
+status="🟡 En progression";
 
-      status="🟢 Objectif atteint";
+return `
 
-    }else if(item.grade>=item.target-2){
+<div class="card">
 
-      status="🟡 En progression";
+<h3>${s.name||"Matière"}</h3>
 
-    }
+<p>
+Note : <strong>${s.grade||"-"}/20</strong>
+</p>
 
-    const progress=
-      Math.max(
-        0,
-        Math.min(
-          100,
-          item.grade/item.target*100
-        )
-      );
+<p>
+Objectif : ${s.target||"-"}/20
+</p>
 
-    const card=
-      document.createElement("div");
+<p>${status}</p>
 
-    card.className="card";
+<p>${s.comment||""}</p>
 
-    card.innerHTML=`
+<button onclick="deleteStudy(${i})">
+Supprimer
+</button>
 
-      <h3>${escapeHtml(item.subject)}</h3>
+</div>
 
-      <p>
-        Note :
-        <strong>${item.grade}/20</strong>
-        |
-        Objectif :
-        <strong>${item.target}/20</strong>
-      </p>
+`;
 
-      <div class="progress">
-        <i style="width:${progress}%"></i>
-      </div>
-
-      <p>${status}</p>
-
-      ${
-        item.comment
-          ? `<p class="muted">${escapeHtml(item.comment)}</p>`
-          : ""
-      }
-
-      <button
-        class="btn danger"
-        onclick="deleteStudy(${index})">
-        🗑️ Supprimer
-      </button>
-
-    `;
-
-    container.appendChild(card);
-
-  });
+})
+.join("");
 
 }
 
 
-function deleteStudy(index){
+function deleteStudy(i){
 
-  studiesData.splice(index,1);
+const studies=get("studies");
 
-  localStorage.setItem(
-    "student_studies",
-    JSON.stringify(studiesData)
-  );
+studies.splice(i,1);
 
-  renderStudies();
+save("studies",studies);
 
-}
-
-
-function clearStudies(){
-
-  if(!confirm("Effacer toutes les matières ?"))return;
-
-  studiesData=[];
-
-  localStorage.setItem(
-    "student_studies",
-    "[]"
-  );
-
-  renderStudies();
+renderStudies();
 
 }
 
 
-/* =========================================================
+/* =========================
    EMPLOI DU TEMPS
-========================================================= */
+========================= */
 
 function addSchedule(){
 
-  const day=
-    document.getElementById("scheduleDay").value;
+const schedule=get("schedule");
 
-  const subject=
-    document.getElementById("scheduleSubject")
-      .value.trim();
+schedule.push({
 
-  const start=
-    document.getElementById("scheduleStart").value;
+day:$("day").value ||
+new Date().toISOString().slice(0,10),
 
-  const end=
-    document.getElementById("scheduleEnd").value;
+text:$("scheduleText").value
 
-  const room=
-    document.getElementById("scheduleRoom").value;
+});
 
-  if(!subject || !start || !end){
+save("schedule",schedule);
 
-    alert("Indique la matière et les horaires.");
+$("scheduleText").value="";
 
-    return;
-
-  }
-
-  scheduleData.push({
-    day,
-    subject,
-    start,
-    end,
-    room
-  });
-
-  localStorage.setItem(
-    "student_schedule",
-    JSON.stringify(scheduleData)
-  );
-
-  document.getElementById("scheduleSubject").value="";
-  document.getElementById("scheduleStart").value="";
-  document.getElementById("scheduleEnd").value="";
-  document.getElementById("scheduleRoom").value="";
-
-  renderSchedule();
+renderSchedule();
 
 }
 
 
 function renderSchedule(){
 
-  const container=
-    document.getElementById("scheduleList");
+const schedule=get("schedule");
 
-  if(!scheduleData.length){
+if(!schedule.length){
 
-    container.innerHTML=
-      `<div class="empty">
-        Aucun cours enregistré.
-      </div>`;
+$("scheduleList").innerHTML=
+`<div class="card">Aucun cours enregistré.</div>`;
 
-    return;
+return;
 
-  }
+}
 
-  const days=[
-    "Lundi",
-    "Mardi",
-    "Mercredi",
-    "Jeudi",
-    "Vendredi",
-    "Samedi",
-    "Dimanche"
-  ];
+$("scheduleList").innerHTML=schedule
+.map((s,i)=>`
 
-  container.innerHTML="";
+<div class="card">
 
-  days.forEach(day=>{
+<h3>📅 ${s.day}</h3>
 
-    const entries=
-      scheduleData
-        .filter(x=>x.day===day)
-        .sort((a,b)=>
-          a.start.localeCompare(b.start)
-        );
+<p>${s.text}</p>
 
-    if(!entries.length)return;
+<button onclick="deleteSchedule(${i})">
+Supprimer
+</button>
 
-    const block=
-      document.createElement("div");
+</div>
 
-    block.className="schedule-day";
-
-    block.innerHTML=
-      `<h3>${day}</h3>`;
-
-    entries.forEach(item=>{
-
-      const index=
-        scheduleData.indexOf(item);
-
-      const div=
-        document.createElement("div");
-
-      div.className="card";
-
-      div.innerHTML=`
-
-        <strong>
-          ${escapeHtml(item.subject)}
-        </strong>
-
-        <p>
-          ⏰ ${item.start} → ${item.end}
-        </p>
-
-        ${
-          item.room
-            ? `<p>🚪 ${escapeHtml(item.room)}</p>`
-            : ""
-        }
-
-        <button
-          class="btn danger"
-          onclick="deleteSchedule(${index})">
-          🗑️ Supprimer
-        </button>
-
-      `;
-
-      block.appendChild(div);
-
-    });
-
-    container.appendChild(block);
-
-  });
+`)
+.join("");
 
 }
 
 
-function deleteSchedule(index){
+function deleteSchedule(i){
 
-  scheduleData.splice(index,1);
+const schedule=get("schedule");
 
-  localStorage.setItem(
-    "student_schedule",
-    JSON.stringify(scheduleData)
-  );
+schedule.splice(i,1);
 
-  renderSchedule();
+save("schedule",schedule);
 
-}
-
-
-function requestNotifications(){
-
-  if(!("Notification" in window)){
-
-    alert(
-      "Les notifications ne sont pas prises en charge par ce navigateur."
-    );
-
-    return;
-
-  }
-
-  Notification.requestPermission()
-    .then(permission=>{
-
-      if(permission==="granted"){
-
-        alert(
-          "🔔 Autorisation des notifications accordée."
-        );
-
-      }else{
-
-        alert(
-          "Les notifications n'ont pas été autorisées."
-        );
-
-      }
-
-    });
+renderSchedule();
 
 }
 
 
-/* =========================================================
+async function enableNotifications(){
+
+if(!("Notification" in window)){
+
+alert("Les notifications ne sont pas disponibles sur ce navigateur.");
+
+return;
+
+}
+
+const permission=
+await Notification.requestPermission();
+
+if(permission==="granted"){
+
+alert("🔔 Notifications autorisées.");
+
+}else{
+
+alert("Notifications non autorisées.");
+
+}
+
+}
+
+
+/* =========================
    BUDGET
-========================================================= */
+========================= */
 
 function addBudget(){
 
-  const type=
-    document.getElementById("budgetType").value;
+const budget=get("budget");
 
-  const amount=
-    parseFloat(
-      document.getElementById("budgetAmount").value
-    );
+const amount=Number($("budgetAmount").value);
 
-  const category=
-    document.getElementById("budgetCategory").value;
+if(!amount||amount<0){
 
-  const description=
-    document.getElementById("budgetDescription")
-      .value.trim();
+alert("Entre un montant valide.");
 
-  if(
-    Number.isNaN(amount) ||
-    amount<=0
-  ){
+return;
 
-    alert("Indique un montant valide.");
+}
 
-    return;
+budget.push({
 
-  }
+type:$("budgetType").value,
 
-  budgetData.push({
-    type,
-    amount,
-    category,
-    description,
-    date:new Date().toLocaleDateString()
-  });
+category:$("budgetCategory").value,
 
-  localStorage.setItem(
-    "student_budget",
-    JSON.stringify(budgetData)
-  );
+amount:amount,
 
-  document.getElementById("budgetAmount").value="";
-  document.getElementById("budgetDescription").value="";
+description:$("budgetDescription").value,
 
-  renderBudget();
+date:new Date().toLocaleDateString()
+
+});
+
+save("budget",budget);
+
+$("budgetAmount").value="";
+$("budgetDescription").value="";
+
+renderBudget();
 
 }
 
 
 function renderBudget(){
 
-  let income=0;
-  let expense=0;
+const budget=get("budget");
 
-  budgetData.forEach(item=>{
+let income=0;
+let expenses=0;
 
-    if(item.type==="income"){
-      income+=item.amount;
-    }else{
-      expense+=item.amount;
-    }
+budget.forEach(x=>{
 
-  });
+if(x.type==="income")
+income+=x.amount;
+else
+expenses+=x.amount;
 
-  document.getElementById("totalIncome")
-    .textContent=
-    formatMoney(income);
+});
 
-  document.getElementById("totalExpense")
-    .textContent=
-    formatMoney(expense);
+$("budgetSummary").innerHTML=`
 
-  document.getElementById("balance")
-    .textContent=
-    formatMoney(income-expense);
+<p>💵 Revenus : <strong>${income.toFixed(2)}</strong></p>
 
-  document.getElementById("budgetCurrency")
-    .textContent=
-    currencyMap[currentCountry] || "—";
+<p>💸 Dépenses : <strong>${expenses.toFixed(2)}</strong></p>
 
-  const container=
-    document.getElementById("budgetList");
+<p>📊 Solde : <strong>${(income-expenses).toFixed(2)}</strong></p>
 
-  if(!budgetData.length){
+`;
 
-    container.innerHTML=
-      `<div class="empty">
-        Aucun mouvement enregistré.
-      </div>`;
+$("budgetList").innerHTML=budget
+.map((x,i)=>`
 
-    return;
+<div class="card">
 
-  }
+<h3>
+${x.type==="income"?"💵":"💸"}
+${x.category}
+</h3>
 
-  container.innerHTML="";
+<p>${x.description||""}</p>
 
-  [...budgetData]
-    .reverse()
-    .forEach((item,reverseIndex)=>{
+<p>
+<strong>${x.amount.toFixed(2)}</strong>
+</p>
 
-      const index=
-        budgetData.length-1-reverseIndex;
+<p class="small">${x.date}</p>
 
-      const card=
-        document.createElement("div");
+<button onclick="deleteBudget(${i})">
+Supprimer
+</button>
 
-      card.className="card";
+</div>
 
-      const sign=
-        item.type==="income"
-          ? "+"
-          : "-";
-
-      card.innerHTML=`
-
-        <h3>
-          ${sign}${formatMoney(item.amount)}
-        </h3>
-
-        <p>
-          ${escapeHtml(item.category)}
-        </p>
-
-        ${
-          item.description
-            ? `<p class="muted">
-                ${escapeHtml(item.description)}
-              </p>`
-            : ""
-        }
-
-        <p class="small">
-          ${item.date}
-        </p>
-
-        <button
-          class="btn danger"
-          onclick="deleteBudget(${index})">
-          🗑️ Supprimer
-        </button>
-
-      `;
-
-      container.appendChild(card);
-
-    });
+`)
+.join("");
 
 }
 
 
-function formatMoney(value){
+function deleteBudget(i){
 
-  const currency=
-    currencyMap[currentCountry] || "";
+const budget=get("budget");
 
-  return value.toLocaleString(
-    currentLanguage,
-    {
-      maximumFractionDigits:2
-    }
-  )+" "+currency;
+budget.splice(i,1);
+
+save("budget",budget);
+
+renderBudget();
 
 }
 
 
-function deleteBudget(index){
-
-  budgetData.splice(index,1);
-
-  localStorage.setItem(
-    "student_budget",
-    JSON.stringify(budgetData)
-  );
-
-  renderBudget();
-
-}
-
-
-function clearBudget(){
-
-  if(!confirm("Effacer tout l'historique du budget ?"))
-    return;
-
-  budgetData=[];
-
-  localStorage.setItem(
-    "student_budget",
-    "[]"
-  );
-
-  renderBudget();
-
-}
-
-
-/* =========================================================
+/* =========================
    PROFIL
-========================================================= */
-
-function loadProfile(){
-
-  document.getElementById("profileLastName").value=
-    profileData.lastName || "";
-
-  document.getElementById("profileFirstName").value=
-    profileData.firstName || "";
-
-  document.getElementById("profileInstitution").value=
-    profileData.institution || "";
-
-  document.getElementById("profileLevel").value=
-    profileData.level || "Terminale";
-
-  document.getElementById("profileSeries").value=
-    profileData.series || "";
-
-  document.getElementById("profileField").value=
-    profileData.field || "";
-
-  document.getElementById("profileGoal").value=
-    profileData.goal || "";
-
-  document.getElementById("profileCountry").value=
-    profileData.country || currentCountry;
-
-  if(profileData.photo){
-
-    document.getElementById("profilePhoto")
-      .src=profileData.photo;
-
-  }else{
-
-    document.getElementById("profilePhoto")
-      .removeAttribute("src");
-
-  }
-
-}
-
+========================= */
 
 function saveProfile(){
 
-  profileData={
-    lastName:
-      document.getElementById("profileLastName").value,
+const profile={
 
-    firstName:
-      document.getElementById("profileFirstName").value,
+last:$("profileLast").value,
 
-    country:
-      document.getElementById("profileCountry").value,
+first:$("profileFirst").value,
 
-    institution:
-      document.getElementById("profileInstitution").value,
+institution:$("profileInstitution").value,
 
-    level:
-      document.getElementById("profileLevel").value,
+level:$("profileLevel").value,
 
-    series:
-      document.getElementById("profileSeries").value,
+field:$("profileField").value,
 
-    field:
-      document.getElementById("profileField").value,
+goal:$("profileGoal").value
 
-    goal:
-      document.getElementById("profileGoal").value,
+};
 
-    photo:
-      profileData.photo || ""
-  };
+save("profile",profile);
 
-  localStorage.setItem(
-    "student_profile",
-    JSON.stringify(profileData)
-  );
-
-  currentCountry=profileData.country;
-
-  localStorage.setItem(
-    "student_country",
-    currentCountry
-  );
-
-  updateHome();
-
-  document.getElementById("profileMessage")
-    .innerHTML=
-    `<div class="success">
-      ✅ Profil enregistré avec succès.
-    </div>`;
+showProfile(profile);
 
 }
 
 
-function savePhoto(event){
+function showProfile(p){
 
-  const file=
-    event.target.files[0];
+$("profileResult").innerHTML=`
 
-  if(!file)return;
+<div class="card">
 
-  if(file.size>4*1024*1024){
+<h3>
+👋 ${p.first||""} ${p.last||""}
+</h3>
 
-    alert(
-      "La photo est trop lourde. Choisis une image de moins de 4 Mo."
-    );
+<p>🏫 ${p.institution||"Institution non renseignée"}</p>
 
-    return;
+<p>🎓 ${p.level||"Niveau non renseigné"}</p>
 
-  }
+<p>📚 ${p.field||"Filière non renseignée"}</p>
 
-  const reader=
-    new FileReader();
+<p>🚀 ${p.goal||"Objectif non renseigné"}</p>
 
-  reader.onload=function(){
+</div>
 
-    profileData.photo=
-      reader.result;
-
-    localStorage.setItem(
-      "student_profile",
-      JSON.stringify(profileData)
-    );
-
-    document.getElementById("profilePhoto")
-      .src=reader.result;
-
-  };
-
-  reader.readAsDataURL(file);
+`;
 
 }
 
 
-/* =========================================================
-   UTILITAIRE
-========================================================= */
+function loadProfile(){
 
-function escapeHtml(value){
+const p=get("profile",null);
 
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+if(!p)return;
 
-}
+$("profileLast").value=p.last||"";
+$("profileFirst").value=p.first||"";
+$("profileInstitution").value=p.institution||"";
+$("profileLevel").value=p.level||"";
+$("profileField").value=p.field||"";
+$("profileGoal").value=p.goal||"";
 
-
-/* =========================================================
-   EVENEMENTS
-========================================================= */
-
-document.getElementById("countrySelect")
-  .addEventListener("change",function(){
-
-    changeCountry(this.value);
-
-  });
-
-document.getElementById("calcCountry")
-  .addEventListener("change",function(){
-
-    changeCountry(this.value);
-
-  });
-
-document.getElementById("profileCountry")
-  .addEventListener("change",function(){
-
-    changeCountry(this.value);
-
-  });
-
-document.getElementById("languageSelect")
-  .addEventListener("change",function(){
-
-    changeLanguage();
-
-  });
-
-document.getElementById("examSelect")
-  .addEventListener("change",function(){
-
-    renderTracks();
-
-  });
-
-document.getElementById("trackSelect")
-  .addEventListener("change",function(){
-
-    renderSubjects();
-
-  });
-
-
-/* =========================================================
-   LANCEMENT
-========================================================= */
-
-function init(){
-
-  populateCountries();
-
-  populateLanguages();
-
-  document.getElementById("countrySelect")
-    .value=currentCountry;
-
-  document.getElementById("calcCountry")
-    .value=currentCountry;
-
-  document.getElementById("profileCountry")
-    .value=currentCountry;
-
-  applyLanguage();
-
-  renderHomeFields();
-
-  renderCalculator();
-
-  renderStudies();
-
-  renderSchedule();
-
-  renderBudget();
-
-  loadProfile();
+showProfile(p);
 
 }
 
-init();
+
+/* =========================
+   INITIALISATION
+========================= */
+
+initCountries();
+initLanguage();
+
+renderFilieres();
+renderStudies();
+renderSchedule();
+renderBudget();
+loadProfile();
 
 </script>
 
