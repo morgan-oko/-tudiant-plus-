@@ -1,43 +1,431 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>Étudiant+</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<title>Étudiant+</title>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+      min-height: 100vh;
+    }
 
-<style>
+    header {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      padding: 30px 20px;
+      border-radius: 0 0 25px 25px;
+      text-align: center;
+    }
 
-* {
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
 
-  box-sizing: border-box;
+    header p {
+      font-size: 15px;
+      opacity: 0.9;
+    }
 
-  margin: 0;
+    .container {
+      width: 92%;
+      max-width: 900px;
+      margin: 25px auto;
+    }
 
-  padding: 0;
+    .welcome {
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
 
-}
+    .welcome h2 {
+      margin-bottom: 8px;
+      color: #2563eb;
+    }
 
-body {
+    .search-box {
+      margin: 20px 0;
+    }
 
-  font-family: Arial, sans-serif;
+    .search-box input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #d7dce5;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
 
-  background: #f4f7fb;
+    .search-box input:focus {
+      border-color: #2563eb;
+    }
 
-  color: #172033;
+    .section-title {
+      margin: 25px 0 15px;
+      font-size: 22px;
+    }
 
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
 
-header {
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-  background: linear-gradient(135deg, #2563eb, #4f46e5);
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
 
-  color: white;
+    .card .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-  padding: 25px 20px;
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
 
-  border-radius: 0 0 25p
+    .card p {
+      font-size: 13px;
+      color: #667085;
+    }
+
+    .form-section {
+      background: white;
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-section h2 {
+      margin-bottom: 18px;
+      color: #2563eb;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7dce5;
+      border-radius: 10px;
+      font-size: 15px;
+      background: white;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 11px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      background: #eff6ff;
+      border-radius: 12px;
+      color: #1e3a8a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎓 Étudiant+</h1>
+    <p>Ton espace pour mieux préparer ton avenir</p>
+  </header>
+
+  <main class="container">
+
+    <section class="welcome">
+      <h2>Bienvenue sur Étudiant+ 👋</h2>
+      <p>
+        Découvre les filières, prépare ton orientation
+        et construis ton projet universitaire.
+      </p>
+    </section>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="🔎 Rechercher une filière..."
+        onkeyup="searchFiliere()"
+      >
+    </div>
+
+    <h2 class="section-title">📚 Filières disponibles</h2>
+
+    <section class="grid" id="filieres">
+
+      <div class="card" data-name="informatique">
+        <div class="icon">💻</div>
+        <h3>Informatique</h3>
+        <p>Programmation, logiciels et technologies.</p>
+      </div>
+
+      <div class="card" data-name="mathematiques">
+        <div class="icon">📐</div>
+        <h3>Mathématiques</h3>
+        <p>Analyse, algèbre et raisonnement.</p>
+      </div>
+
+      <div class="card" data-name="medecine">
+        <div class="icon">🩺</div>
+        <h3>Médecine</h3>
+        <p>Sciences médicales et santé.</p>
+      </div>
+
+      <div class="card" data-name="architecture">
+        <div class="icon">🏛️</div>
+        <h3>Architecture</h3>
+        <p>Conception, bâtiments et urbanisme.</p>
+      </div>
+
+      <div class="card" data-name="droit">
+        <div class="icon">⚖️</div>
+        <h3>Droit</h3>
+        <p>Lois, justice et institutions.</p>
+      </div>
+
+      <div class="card" data-name="economie">
+        <div class="icon">📊</div>
+        <h3>Économie</h3>
+        <p>Économie, marchés et gestion.</p>
+      </div>
+
+      <div class="card" data-name="finance">
+        <div class="icon">💰</div>
+        <h3>Finance</h3>
+        <p>Finance, comptabilité et fiscalité.</p>
+      </div>
+
+      <div class="card" data-name="gestion">
+        <div class="icon">📈</div>
+        <h3>Gestion</h3>
+        <p>Management et administration.</p>
+      </div>
+
+      <div class="card" data-name="ingenierie">
+        <div class="icon">⚙️</div>
+        <h3>Ingénierie</h3>
+        <p>Sciences, techniques et innovation.</p>
+      </div>
+
+      <div class="card" data-name="sciences">
+        <div class="icon">🔬</div>
+        <h3>Sciences</h3>
+        <p>Physique, chimie et sciences naturelles.</p>
+      </div>
+
+      <div class="card" data-name="communication">
+        <div class="icon">📢</div>
+        <h3>Communication</h3>
+        <p>Médias, communication et marketing.</p>
+      </div>
+
+      <div class="card" data-name="lettres">
+        <div class="icon">📖</div>
+        <h3>Lettres</h3>
+        <p>Langues, littérature et culture.</p>
+      </div>
+
+    </section>
+
+    <section class="form-section">
+
+      <h2>👤 Profil étudiant</h2>
+
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          id="nom"
+          placeholder="Entrez votre nom"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input
+          type="text"
+          id="prenom"
+          placeholder="Entrez votre prénom"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="filiere">Filière souhaitée</label>
+
+        <select id="filiere">
+          <option value="">Choisir une filière</option>
+          <option>Informatique</option>
+          <option>Mathématiques</option>
+          <option>Médecine</option>
+          <option>Architecture</option>
+          <option>Droit</option>
+          <option>Économie</option>
+          <option>Finance</option>
+          <option>Gestion</option>
+          <option>Ingénierie</option>
+          <option>Sciences</option>
+          <option>Communication</option>
+          <option>Lettres</option>
+        </select>
+      </div>
+
+      <button class="btn" onclick="enregistrerProfil()">
+        Enregistrer mon profil
+      </button>
+
+      <div class="result" id="result"></div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Étudiant+ — Tous droits réservés.
+  </footer>
+
+  <script>
+
+    function searchFiliere() {
+
+      const input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+      const cards =
+        document.querySelectorAll(".card");
+
+      cards.forEach(function(card) {
+
+        const name =
+          card.getAttribute("data-name");
+
+        if (name.includes(input)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+    }
+
+
+    function enregistrerProfil() {
+
+      const nom =
+        document.getElementById("nom").value.trim();
+
+      const prenom =
+        document.getElementById("prenom").value.trim();
+
+      const filiere =
+        document.getElementById("filiere").value;
+
+      const result =
+        document.getElementById("result");
+
+
+      if (nom === "" || prenom === "" || filiere === "") {
+
+        result.style.display = "block";
+
+        result.innerHTML =
+          "⚠️ Veuillez remplir tous les champs.";
+
+        return;
+      }
+
+
+      result.style.display = "block";
+
+      result.innerHTML =
+        "✅ Profil enregistré !<br><br>" +
+        "Bienvenue <strong>" +
+        prenom +
+        " " +
+        nom +
+        "</strong>.<br>" +
+        "Filière choisie : <strong>" +
+        filiere +
+        "</strong>.";
+
+    }
+
+  </script>
+
+</body>
+</html>
