@@ -6631,6 +6631,781 @@ if (
   }
 
 })(); 
+ /* =========================================================
+   🎯 ÉTUDIANT+ — OBJECTIFS
+   ========================================================= */
+
+(function () {
+
+  const OBJECTIVES_KEY = "studentPlusObjectives";
+
+  function getObjectives() {
+    try {
+      const data = localStorage.getItem(OBJECTIVES_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveObjectives(objectives) {
+    localStorage.setItem(
+      OBJECTIVES_KEY,
+      JSON.stringify(objectives)
+    );
+  }
+
+  function escapeObjectiveText(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function getObjectiveProgress(current, target) {
+
+    current = Number(current) || 0;
+    target = Number(target) || 0;
+
+    if (target <= 0) return 0;
+
+    const progress = (current / target) * 100;
+
+    return Math.max(
+      0,
+      Math.min(100, Math.round(progress))
+    );
+  }
+
+  function getCategoryLabel(category) {
+
+    const labels = {
+      studies: "🎓 Études",
+      finance: "💰 Finance",
+      personal: "🌱 Personnel",
+      project: "🚀 Projet",
+      other: "📌 Autre"
+    };
+
+    return labels[category] || "📌 Autre";
+  }
+
+  function formatObjectiveDate(date) {
+
+    if (!date) return "Aucune date limite";
+
+    const d = new Date(date + "T00:00:00");
+
+    if (Number.isNaN(d.getTime())) {
+      return date;
+    }
+
+    return d.toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+  }
+
+  function createObjectivesInterface() {
+
+    if (document.getElementById("studentPlusObjectivesSection")) {
+      renderObjectives();
+      return;
+    }
+
+    const main = document.querySelector("main");
+
+    if (!main) return;
+
+    const section = document.createElement("section");
+
+    section.id = "studentPlusObjectivesSection";
+    section.className = "card";
+
+    section.style.marginTop = "24px";
+
+    section.innerHTML = `
+      <div style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        flex-wrap:wrap;
+        margin-bottom:18px;
+      ">
+        <div>
+          <h2 style="margin:0 0 6px;">
+            🎯 Mes objectifs
+          </h2>
+
+          <p style="
+            margin:0;
+            opacity:.75;
+          ">
+            Définis tes objectifs et suis automatiquement ta progression.
+          </p>
+        </div>
+
+        <div
+          id="studentPlusObjectivesCount"
+          style="
+            font-weight:700;
+            font-size:14px;
+          "
+        >
+          0 objectif
+        </div>
+      </div>
+
+      <div style="
+        display:grid;
+        grid-template-columns:
+          repeat(auto-fit,minmax(180px,1fr));
+        gap:12px;
+        margin-bottom:18px;
+      ">
+
+        <div>
+          <label for="objectiveTitle">
+            📝 Objectif
+          </label>
+
+          <input
+            id="objectiveTitle"
+            type="text"
+            placeholder="Ex. Obtenir 15/20 de moyenne"
+          >
+        </div>
+
+        <div>
+          <label for="objectiveCategory">
+            📂 Catégorie
+          </label>
+
+          <select id="objectiveCategory">
+            <option value="studies">🎓 Études</option>
+            <option value="finance">💰 Finance</option>
+            <option value="personal">🌱 Personnel</option>
+            <option value="project">🚀 Projet</option>
+            <option value="other">📌 Autre</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="objectiveCurrent">
+            📈 Valeur actuelle
+          </label>
+
+          <input
+            id="objectiveCurrent"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Ex. 8"
+          >
+        </div>
+
+        <div>
+          <label for="objectiveTarget">
+            🎯 Objectif à atteindre
+          </label>
+
+          <input
+            id="objectiveTarget"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Ex. 15"
+          >
+        </div>
+
+        <div>
+          <label for="objectiveDate">
+            📅 Date limite
+          </label>
+
+          <input
+            id="objectiveDate"
+            type="date"
+          >
+        </div>
+
+      </div>
+
+      <div style="
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        margin-bottom:20px;
+      ">
+
+        <button
+          type="button"
+          class="primary"
+          id="addStudentPlusObjective"
+        >
+          ➕ Ajouter l'objectif
+        </button>
+
+        <button
+          type="button"
+          class="secondary"
+          id="clearStudentPlusObjectives"
+        >
+          🧹 Effacer le formulaire
+        </button>
+
+      </div>
+
+      <div
+        id="studentPlusObjectivesSummary"
+        style="
+          display:grid;
+          grid-template-columns:
+            repeat(auto-fit,minmax(150px,1fr));
+          gap:10px;
+          margin-bottom:20px;
+        "
+      ></div>
+
+      <div id="studentPlusObjectivesList"></div>
+
+      <p
+        id="studentPlusObjectivesStatus"
+        style="
+          margin-top:15px;
+          opacity:.75;
+        "
+      ></p>
+    `;
+
+    main.appendChild(section);
+
+    document
+      .getElementById("addStudentPlusObjective")
+      .addEventListener(
+        "click",
+        addObjective
+      );
+
+    document
+      .getElementById("clearStudentPlusObjectives")
+      .addEventListener(
+        "click",
+        clearObjectiveForm
+      );
+
+    renderObjectives();
+  }
+
+  function addObjective() {
+
+    const title =
+      document
+        .getElementById("objectiveTitle")
+        .value
+        .trim();
+
+    const category =
+      document
+        .getElementById("objectiveCategory")
+        .value;
+
+    const current =
+      Number(
+        document
+          .getElementById("objectiveCurrent")
+          .value
+      );
+
+    const target =
+      Number(
+        document
+          .getElementById("objectiveTarget")
+          .value
+      );
+
+    const date =
+      document
+        .getElementById("objectiveDate")
+        .value;
+
+    const status =
+      document
+        .getElementById("studentPlusObjectivesStatus");
+
+    if (!title) {
+
+      status.textContent =
+        "⚠️ Donne un nom à ton objectif.";
+
+      return;
+    }
+
+    if (!Number.isFinite(current) || current < 0) {
+
+      status.textContent =
+        "⚠️ Vérifie la valeur actuelle.";
+
+      return;
+    }
+
+    if (!Number.isFinite(target) || target <= 0) {
+
+      status.textContent =
+        "⚠️ L'objectif à atteindre doit être supérieur à 0.";
+
+      return;
+    }
+
+    const objectives = getObjectives();
+
+    const progress =
+      getObjectiveProgress(
+        current,
+        target
+      );
+
+    const objective = {
+
+      id:
+        typeof crypto !== "undefined" &&
+        crypto.randomUUID
+          ? crypto.randomUUID()
+          : Date.now().toString(),
+
+      title,
+
+      category,
+
+      current,
+
+      target,
+
+      date,
+
+      progress,
+
+      completed:
+        progress >= 100,
+
+      createdAt:
+        new Date().toISOString()
+
+    };
+
+    objectives.push(objective);
+
+    saveObjectives(objectives);
+
+    clearObjectiveForm();
+
+    status.textContent =
+      "✅ Objectif ajouté avec succès.";
+
+    renderObjectives();
+  }
+
+  function clearObjectiveForm() {
+
+    const title =
+      document.getElementById(
+        "objectiveTitle"
+      );
+
+    const current =
+      document.getElementById(
+        "objectiveCurrent"
+      );
+
+    const target =
+      document.getElementById(
+        "objectiveTarget"
+      );
+
+    const date =
+      document.getElementById(
+        "objectiveDate"
+      );
+
+    if (title) title.value = "";
+    if (current) current.value = "";
+    if (target) target.value = "";
+    if (date) date.value = "";
+
+  }
+
+  function updateObjective(id) {
+
+    const objectives = getObjectives();
+
+    const objective =
+      objectives.find(
+        item => item.id === id
+      );
+
+    if (!objective) return;
+
+    const newCurrent =
+      prompt(
+        `Valeur actuelle pour "${objective.title}" :`,
+        objective.current
+      );
+
+    if (newCurrent === null) return;
+
+    const value =
+      Number(newCurrent);
+
+    if (!Number.isFinite(value) || value < 0) {
+
+      alert(
+        "Veuillez entrer une valeur valide."
+      );
+
+      return;
+    }
+
+    objective.current = value;
+
+    objective.progress =
+      getObjectiveProgress(
+        objective.current,
+        objective.target
+      );
+
+    objective.completed =
+      objective.progress >= 100;
+
+    saveObjectives(objectives);
+
+    renderObjectives();
+  }
+
+  function toggleObjective(id) {
+
+    const objectives = getObjectives();
+
+    const objective =
+      objectives.find(
+        item => item.id === id
+      );
+
+    if (!objective) return;
+
+    objective.completed =
+      !objective.completed;
+
+    if (objective.completed) {
+      objective.progress = 100;
+    }
+
+    saveObjectives(objectives);
+
+    renderObjectives();
+  }
+
+  function deleteObjective(id) {
+
+    const objective =
+      getObjectives().find(
+        item => item.id === id
+      );
+
+    if (!objective) return;
+
+    const confirmation =
+      confirm(
+        `Supprimer l'objectif "${objective.title}" ?`
+      );
+
+    if (!confirmation) return;
+
+    const objectives =
+      getObjectives().filter(
+        item => item.id !== id
+      );
+
+    saveObjectives(objectives);
+
+    renderObjectives();
+  }
+
+  function renderObjectives() {
+
+    const list =
+      document.getElementById(
+        "studentPlusObjectivesList"
+      );
+
+    if (!list) return;
+
+    const objectives =
+      getObjectives();
+
+    const count =
+      document.getElementById(
+        "studentPlusObjectivesCount"
+      );
+
+    const summary =
+      document.getElementById(
+        "studentPlusObjectivesSummary"
+      );
+
+    if (count) {
+
+      count.textContent =
+        objectives.length === 1
+          ? "1 objectif"
+          : `${objectives.length} objectifs`;
+
+    }
+
+    const completed =
+      objectives.filter(
+        item => item.completed
+      ).length;
+
+    const active =
+      objectives.length - completed;
+
+    const averageProgress =
+      objectives.length
+        ? Math.round(
+            objectives.reduce(
+              (sum, item) =>
+                sum + (
+                  Number(item.progress) || 0
+                ),
+              0
+            ) / objectives.length
+          )
+        : 0;
+
+    if (summary) {
+
+      summary.innerHTML = `
+
+        <div class="stats">
+          <strong>🎯 ${objectives.length}</strong>
+          <span>Objectifs</span>
+        </div>
+
+        <div class="stats">
+          <strong>🔥 ${active}</strong>
+          <span>En cours</span>
+        </div>
+
+        <div class="stats">
+          <strong>✅ ${completed}</strong>
+          <span>Terminés</span>
+        </div>
+
+        <div class="stats">
+          <strong>📊 ${averageProgress}%</strong>
+          <span>Progression moyenne</span>
+        </div>
+
+      `;
+    }
+
+    if (!objectives.length) {
+
+      list.innerHTML = `
+        <div class="card" style="text-align:center;">
+          <h3>🎯 Aucun objectif</h3>
+
+          <p style="opacity:.75;">
+            Commence par créer ton premier objectif.
+          </p>
+        </div>
+      `;
+
+      return;
+    }
+
+    list.innerHTML =
+      objectives
+        .map(objective => {
+
+          const progress =
+            Math.max(
+              0,
+              Math.min(
+                100,
+                Number(objective.progress) || 0
+              )
+            );
+
+          const status =
+            objective.completed
+              ? "✅ Terminé"
+              : "🔄 En cours";
+
+          return `
+
+            <div
+              class="card"
+              style="
+                margin-bottom:14px;
+                border-left:
+                  4px solid
+                  ${objective.completed
+                    ? "#16a34a"
+                    : "#2563eb"};
+              "
+            >
+
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:flex-start;
+                gap:12px;
+                flex-wrap:wrap;
+              ">
+
+                <div>
+
+                  <h3 style="margin:0 0 6px;">
+                    ${escapeObjectiveText(
+                      objective.title
+                    )}
+                  </h3>
+
+                  <div style="opacity:.75;">
+                    ${getCategoryLabel(
+                      objective.category
+                    )}
+                    ·
+                    ${status}
+                  </div>
+
+                </div>
+
+                <strong>
+                  ${progress}%
+                </strong>
+
+              </div>
+
+              <div style="
+                margin-top:12px;
+                height:10px;
+                background:#e5e7eb;
+                border-radius:999px;
+                overflow:hidden;
+              ">
+
+                <div style="
+                  width:${progress}%;
+                  height:100%;
+                  background:linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #16a34a
+                  );
+                  border-radius:999px;
+                  transition:width .3s ease;
+                "></div>
+
+              </div>
+
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                gap:10px;
+                flex-wrap:wrap;
+                margin-top:10px;
+                font-size:14px;
+              ">
+
+                <span>
+                  📈 ${objective.current}
+                  / ${objective.target}
+                </span>
+
+                <span>
+                  📅 ${formatObjectiveDate(
+                    objective.date
+                  )}
+                </span>
+
+              </div>
+
+              <div style="
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+                margin-top:14px;
+              ">
+
+                <button
+                  type="button"
+                  class="secondary"
+                  onclick="window.studentPlusUpdateObjective('${objective.id}')"
+                >
+                  📈 Modifier progression
+                </button>
+
+                <button
+                  type="button"
+                  class="success"
+                  onclick="window.studentPlusToggleObjective('${objective.id}')"
+                >
+                  ${
+                    objective.completed
+                      ? "↩️ Remettre en cours"
+                      : "✅ Marquer terminé"
+                  }
+                </button>
+
+                <button
+                  type="button"
+                  class="danger"
+                  onclick="window.studentPlusDeleteObjective('${objective.id}')"
+                >
+                  🗑️ Supprimer
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        })
+        .join("");
+  }
+
+  window.studentPlusUpdateObjective =
+    updateObjective;
+
+  window.studentPlusToggleObjective =
+    toggleObjective;
+
+  window.studentPlusDeleteObjective =
+    deleteObjective;
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      createObjectivesInterface
+    );
+
+  } else {
+
+    createObjectivesInterface();
+
+  }
+
+})(); 
 </script>
 </body>
 </html>
