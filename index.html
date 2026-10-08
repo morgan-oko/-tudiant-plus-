@@ -6084,7 +6084,553 @@ if (
   }
 
 })();
-</script>
+ /* =========================================================
+   📈 STATISTIQUES AVANCÉES — ÉTUDIANT+
+   ========================================================= */
 
+(function () {
+
+  function getJSON(key, fallback = []) {
+    try {
+      const data = JSON.parse(localStorage.getItem(key));
+      return data ?? fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function averageFromStudies() {
+    const studies = getJSON("studentPlusStudies", []);
+
+    const grades = studies
+      .map(s => Number(s.grade))
+      .filter(n => Number.isFinite(n));
+
+    if (!grades.length) return 0;
+
+    return grades.reduce((a, b) => a + b, 0) / grades.length;
+  }
+
+  function getAccountingStats() {
+    const accounting =
+      getJSON("studentPlusAccounting", []);
+
+    let income = 0;
+    let expenses = 0;
+
+    accounting.forEach(item => {
+
+      const amount = Number(item.amount) || 0;
+
+      if (
+        item.type === "income" ||
+        item.type === "revenu"
+      ) {
+        income += amount;
+      } else {
+        expenses += amount;
+      }
+    });
+
+    return {
+      income,
+      expenses,
+      balance: income - expenses
+    };
+  }
+
+  function getPlanningStats() {
+    const planning =
+      getJSON("studentPlusPlanning", []);
+
+    const total = planning.length;
+
+    const completed =
+      planning.filter(item =>
+        item.done === true
+      ).length;
+
+    const remaining =
+      Math.max(0, total - completed);
+
+    const progress =
+      total > 0
+        ? Math.round((completed / total) * 100)
+        : 0;
+
+    return {
+      total,
+      completed,
+      remaining,
+      progress
+    };
+  }
+
+  function getBudgetStats() {
+    const budgets =
+      getJSON("studentPlusBudgetPlans", []);
+
+    let planned = 0;
+    let savings = 0;
+
+    budgets.forEach(item => {
+      planned += Number(item.total) || 0;
+      savings += Number(item.savings) || 0;
+    });
+
+    return {
+      planned,
+      savings
+    };
+  }
+
+  function getCourseStats() {
+
+    return new Promise(resolve => {
+
+      if (typeof openCourseDB !== "function") {
+        resolve({
+          total: 0,
+          completed: 0,
+          favorites: 0,
+          progress: 0
+        });
+        return;
+      }
+
+      openCourseDB()
+        .then(db => {
+
+          const transaction =
+            db.transaction(
+              "courses",
+              "readonly"
+            );
+
+          const store =
+            transaction.objectStore("courses");
+
+          const request =
+            store.getAll();
+
+          request.onsuccess = () => {
+
+            const courses =
+              request.result || [];
+
+            const total =
+              courses.length;
+
+            const completed =
+              courses.filter(
+                course => course.completed === true
+              ).length;
+
+            const favorites =
+              courses.filter(
+                course => course.favorite === true
+              ).length;
+
+            const progress =
+              total > 0
+                ? Math.round(
+                    (completed / total) * 100
+                  )
+                : 0;
+
+            resolve({
+              total,
+              completed,
+              favorites,
+              progress
+            });
+          };
+
+          request.onerror = () => {
+
+            resolve({
+              total: 0,
+              completed: 0,
+              favorites: 0,
+              progress: 0
+            });
+          };
+
+        })
+        .catch(() => {
+
+          resolve({
+            total: 0,
+            completed: 0,
+            favorites: 0,
+            progress: 0
+          });
+
+        });
+    });
+  }
+
+  function createStatisticsInterface() {
+
+    if (
+      document.getElementById(
+        "studentPlusStatisticsSection"
+      )
+    ) {
+      return;
+    }
+
+    const main =
+      document.querySelector("main");
+
+    if (!main) return;
+
+    const section =
+      document.createElement("section");
+
+    section.id =
+      "studentPlusStatisticsSection";
+
+    section.className = "card";
+
+    section.style.marginTop = "25px";
+
+    section.innerHTML = `
+
+      <h2>📈 Statistiques avancées</h2>
+
+      <p>
+        Visualisez votre progression académique,
+        vos cours, votre planning et votre situation financière.
+      </p>
+
+      <div
+        id="studentPlusStatisticsGrid"
+        style="
+          display:grid;
+          grid-template-columns:
+          repeat(auto-fit,minmax(220px,1fr));
+          gap:15px;
+          margin-top:20px;
+        "
+      >
+
+        <div class="card">
+          <h3>🎓 Moyenne</h3>
+          <div
+            id="statsAverage"
+            style="
+              font-size:2rem;
+              font-weight:800;
+              margin:10px 0;
+            "
+          >
+            —
+          </div>
+
+          <div
+            style="
+              height:10px;
+              background:#e5e7eb;
+              border-radius:20px;
+              overflow:hidden;
+            "
+          >
+            <div
+              id="statsAverageBar"
+              style="
+                height:100%;
+                width:0%;
+                background:#2563eb;
+                transition:.4s;
+              "
+            ></div>
+          </div>
+
+          <small>
+            Progression vers 20/20
+          </small>
+        </div>
+
+        <div class="card">
+          <h3>📚 Cours</h3>
+
+          <div
+            id="statsCourses"
+            style="
+              font-size:1.1rem;
+              line-height:1.8;
+            "
+          >
+            Chargement...
+          </div>
+
+          <div
+            style="
+              height:10px;
+              background:#e5e7eb;
+              border-radius:20px;
+              overflow:hidden;
+              margin-top:10px;
+            "
+          >
+            <div
+              id="statsCoursesBar"
+              style="
+                height:100%;
+                width:0%;
+                background:#16a34a;
+                transition:.4s;
+              "
+            ></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📅 Planning</h3>
+
+          <div
+            id="statsPlanning"
+            style="
+              font-size:1.1rem;
+              line-height:1.8;
+            "
+          >
+            Chargement...
+          </div>
+
+          <div
+            style="
+              height:10px;
+              background:#e5e7eb;
+              border-radius:20px;
+              overflow:hidden;
+              margin-top:10px;
+            "
+          >
+            <div
+              id="statsPlanningBar"
+              style="
+                height:100%;
+                width:0%;
+                background:#7c3aed;
+                transition:.4s;
+              "
+            ></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>💰 Finances</h3>
+
+          <div
+            id="statsFinance"
+            style="
+              font-size:1.1rem;
+              line-height:1.8;
+            "
+          >
+            Chargement...
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>💳 Budget</h3>
+
+          <div
+            id="statsBudget"
+            style="
+              font-size:1.1rem;
+              line-height:1.8;
+            "
+          >
+            Chargement...
+          </div>
+        </div>
+
+      </div>
+
+      <button
+        id="refreshStudentPlusStatistics"
+        class="secondary"
+        type="button"
+        style="margin-top:20px;"
+      >
+        🔄 Actualiser les statistiques
+      </button>
+
+      <p
+        id="studentPlusStatisticsStatus"
+        style="
+          margin-top:10px;
+          font-weight:600;
+        "
+      ></p>
+
+    `;
+
+    main.appendChild(section);
+
+    document
+      .getElementById(
+        "refreshStudentPlusStatistics"
+      )
+      .addEventListener(
+        "click",
+        updateStudentPlusStatistics
+      );
+
+    updateStudentPlusStatistics();
+  }
+
+  async function updateStudentPlusStatistics() {
+
+    const average =
+      averageFromStudies();
+
+    const finance =
+      getAccountingStats();
+
+    const planning =
+      getPlanningStats();
+
+    const budget =
+      getBudgetStats();
+
+    const courses =
+      await getCourseStats();
+
+    const averageElement =
+      document.getElementById(
+        "statsAverage"
+      );
+
+    const averageBar =
+      document.getElementById(
+        "statsAverageBar"
+      );
+
+    if (averageElement) {
+      averageElement.textContent =
+        average
+          ? average.toFixed(2) + " / 20"
+          : "—";
+    }
+
+    if (averageBar) {
+      averageBar.style.width =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            (average / 20) * 100
+          )
+        ) + "%";
+    }
+
+    const coursesElement =
+      document.getElementById(
+        "statsCourses"
+      );
+
+    const coursesBar =
+      document.getElementById(
+        "statsCoursesBar"
+      );
+
+    if (coursesElement) {
+      coursesElement.innerHTML = `
+        Total : <strong>${courses.total}</strong><br>
+        Terminés : <strong>${courses.completed}</strong><br>
+        Favoris : <strong>${courses.favorites}</strong><br>
+        Progression : <strong>${courses.progress}%</strong>
+      `;
+    }
+
+    if (coursesBar) {
+      coursesBar.style.width =
+        courses.progress + "%";
+    }
+
+    const planningElement =
+      document.getElementById(
+        "statsPlanning"
+      );
+
+    const planningBar =
+      document.getElementById(
+        "statsPlanningBar"
+      );
+
+    if (planningElement) {
+      planningElement.innerHTML = `
+        Total : <strong>${planning.total}</strong><br>
+        Terminés : <strong>${planning.completed}</strong><br>
+        Restants : <strong>${planning.remaining}</strong><br>
+        Progression : <strong>${planning.progress}%</strong>
+      `;
+    }
+
+    if (planningBar) {
+      planningBar.style.width =
+        planning.progress + "%";
+    }
+
+    const financeElement =
+      document.getElementById(
+        "statsFinance"
+      );
+
+    if (financeElement) {
+      financeElement.innerHTML = `
+        Revenus : <strong>${finance.income.toFixed(2)}</strong><br>
+        Dépenses : <strong>${finance.expenses.toFixed(2)}</strong><br>
+        Solde réel :
+        <strong>${finance.balance.toFixed(2)}</strong>
+      `;
+    }
+
+    const budgetElement =
+      document.getElementById(
+        "statsBudget"
+      );
+
+    if (budgetElement) {
+      budgetElement.innerHTML = `
+        Budget planifié :
+        <strong>${budget.planned.toFixed(2)}</strong><br>
+        Épargne prévue :
+        <strong>${budget.savings.toFixed(2)}</strong>
+      `;
+    }
+
+    const status =
+      document.getElementById(
+        "studentPlusStatisticsStatus"
+      );
+
+    if (status) {
+      status.textContent =
+        "✅ Statistiques mises à jour.";
+    }
+  }
+
+  if (
+    document.readyState === "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      createStatisticsInterface
+    );
+
+  } else {
+
+    createStatisticsInterface();
+
+  }
+
+})(); 
+</script>
 </body>
 </html>
