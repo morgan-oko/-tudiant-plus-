@@ -2429,3 +2429,3092 @@ const translations = {
 
 
 /* =========================================================
+   DÉTECTION DE LANGUE
+   ========================================================= */
+
+const supportedLanguages = [
+  "fr",
+  "en",
+  "es",
+  "pt",
+  "de",
+  "it",
+  "zh",
+  "ru"
+];
+
+function detectLanguage() {
+
+  const saved = localStorage.getItem("studentPlusLanguage");
+
+  if (saved && supportedLanguages.includes(saved)) {
+    return saved;
+  }
+
+  const browserLanguage =
+    (navigator.language || "fr")
+      .toLowerCase()
+      .split("-")[0];
+
+  if (supportedLanguages.includes(browserLanguage)) {
+    return browserLanguage;
+  }
+
+  return "fr";
+}
+
+let currentLanguage = detectLanguage();
+
+function t(key) {
+
+  if (
+    translations[currentLanguage] &&
+    translations[currentLanguage][key]
+  ) {
+    return translations[currentLanguage][key];
+  }
+
+  if (translations.fr[key]) {
+    return translations.fr[key];
+  }
+
+  return key;
+}
+
+function changeLanguage(language) {
+
+  if (!supportedLanguages.includes(language)) {
+    language = "fr";
+  }
+
+  currentLanguage = language;
+
+  localStorage.setItem(
+    "studentPlusLanguage",
+    language
+  );
+
+  document.documentElement.lang = language;
+
+  document
+    .querySelectorAll("[data-i18n]")
+    .forEach(element => {
+      element.textContent = t(
+        element.getAttribute("data-i18n")
+      );
+    });
+
+  document.getElementById(
+    "appSubtitle"
+  ).textContent = t("subtitle");
+
+  document.getElementById(
+    "languageSelect"
+  ).value = language;
+
+  renderCountrySelects();
+  renderFields();
+
+  loadSeries();
+
+  renderCourses();
+  renderStudies();
+  renderPlanning();
+  renderBudget();
+  renderAccounting();
+
+  updateHome();
+
+}
+
+
+/* =========================================================
+   NOMS DES PAYS AUTOMATIQUES
+   ========================================================= */
+
+function getCountryName(code) {
+
+  try {
+
+    const localeMap = {
+      fr: "fr",
+      en: "en",
+      es: "es",
+      pt: "pt",
+      de: "de",
+      it: "it",
+      zh: "zh-CN",
+      ru: "ru"
+    };
+
+    const displayNames =
+      new Intl.DisplayNames(
+        [localeMap[currentLanguage] || "fr"],
+        { type: "region" }
+      );
+
+    const translated =
+      displayNames.of(code);
+
+    if (translated) {
+      return translated;
+    }
+
+  } catch (error) {}
+
+  const found =
+    countries.find(country => country[0] === code);
+
+  return found ? found[2] : code;
+}
+
+
+function renderCountrySelects() {
+
+  const selects = [
+    document.getElementById("countrySelect"),
+    document.getElementById("bacCountry"),
+    document.getElementById("profileCountry")
+  ];
+
+  selects.forEach(select => {
+
+    if (!select) return;
+
+    const oldValue = select.value;
+
+    select.innerHTML = "";
+
+    countries
+      .slice()
+      .sort((a,b) =>
+        getCountryName(a[0])
+          .localeCompare(
+            getCountryName(b[0]),
+            currentLanguage
+          )
+      )
+      .forEach(country => {
+
+        const option =
+          document.createElement("option");
+
+        option.value = country[0];
+
+        option.textContent =
+          `${country[1]} ${getCountryName(country[0])}`;
+
+        select.appendChild(option);
+
+      });
+
+    if (
+      countries.some(
+        country => country[0] === oldValue
+      )
+    ) {
+      select.value = oldValue;
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   DONNÉES BAC / COEFFICIENTS DISPONIBLES
+   ========================================================= */
+
+const bacData = {
+
+  CG: {
+    name: "Congo",
+    series: {
+      "A2": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 3],
+        ["Histoire-Géographie", 2],
+        ["Philosophie", 2],
+        ["Sciences", 2]
+      ],
+      "A4": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 3],
+        ["Histoire-Géographie", 2],
+        ["Philosophie", 2],
+        ["Sciences", 2]
+      ],
+      "C": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 5],
+        ["Physique", 4],
+        ["Chimie", 3],
+        ["Philosophie", 2]
+      ],
+      "D": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 5],
+        ["Physique", 3],
+        ["Chimie", 3],
+        ["SVT", 4]
+      ]
+    }
+  },
+
+  CM: {
+    name: "Cameroun",
+    series: {
+      "A1": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Philosophie", 2],
+        ["Mathématiques", 2]
+      ],
+      "A2": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Philosophie", 2],
+        ["Mathématiques", 2]
+      ],
+      "A3": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Philosophie", 2],
+        ["Mathématiques", 3]
+      ],
+      "A4": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Philosophie", 2],
+        ["Mathématiques", 2]
+      ],
+      "A5": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Philosophie", 2],
+        ["Mathématiques", 2]
+      ],
+      "C": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Mathématiques", 5],
+        ["Physique", 4],
+        ["Chimie", 3]
+      ],
+      "D": [
+        ["Français", 3],
+        ["Anglais", 3],
+        ["Mathématiques", 5],
+        ["Physique", 4],
+        ["Chimie", 3],
+        ["SVT", 4]
+      ]
+    }
+  },
+
+  FR: {
+    name: "France",
+    series: {
+      "Baccalauréat général": [
+        ["Français", 5],
+        ["Philosophie", 4],
+        ["Spécialité 1", 16],
+        ["Spécialité 2", 16],
+        ["Grand oral", 10]
+      ]
+    }
+  },
+
+  CI: {
+    name: "Côte d’Ivoire",
+    series: {
+      "A": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Philosophie", 3],
+        ["Histoire-Géographie", 2]
+      ],
+      "C": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 5],
+        ["Physique-Chimie", 4]
+      ],
+      "D": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 5],
+        ["Physique-Chimie", 4],
+        ["SVT", 4]
+      ]
+    }
+  },
+
+  SN: {
+    name: "Sénégal",
+    series: {
+      "L": [
+        ["Français", 5],
+        ["Anglais", 3],
+        ["Philosophie", 4],
+        ["Histoire-Géographie", 4]
+      ],
+      "S": [
+        ["Français", 3],
+        ["Anglais", 2],
+        ["Mathématiques", 5],
+        ["Physique-Chimie", 5],
+        ["SVT", 4]
+      ]
+    }
+  },
+
+  CD: {
+    name: "République démocratique du Congo",
+    series: {
+      "EXETAT": [
+        ["Français", 2],
+        ["Mathématiques", 2],
+        ["Anglais", 2],
+        ["Culture générale", 2],
+        ["Branche principale", 4]
+      ]
+    }
+  },
+
+  GA: {
+    name: "Gabon",
+    series: {
+      "A": [
+        ["Français", 4],
+        ["Anglais", 3],
+        ["Philosophie", 4],
+        ["Histoire-Géographie", 3]
+      ],
+      "C": [
+        ["Français", 3],
+        ["Mathématiques", 5],
+        ["Physique", 4],
+        ["Chimie", 3]
+      ],
+      "D": [
+        ["Français", 3],
+        ["Mathématiques", 5],
+        ["Physique", 4],
+        ["Chimie", 3],
+        ["SVT", 4]
+      ]
+    }
+  },
+
+  MA: {
+    name: "Maroc",
+    series: {
+      "Sciences physiques": [
+        ["Mathématiques", 7],
+        ["Physique-Chimie", 7],
+        ["Français", 4],
+        ["Arabe", 2]
+      ],
+      "SVT": [
+        ["Mathématiques", 7],
+        ["SVT", 7],
+        ["Physique-Chimie", 5],
+        ["Français", 4]
+      ]
+    }
+  },
+
+  DZ: {
+    name: "Algérie",
+    series: {
+      "Sciences expérimentales": [
+        ["Mathématiques", 5],
+        ["Sciences naturelles", 6],
+        ["Physique", 5],
+        ["Arabe", 3],
+        ["Français", 2],
+        ["Anglais", 2]
+      ],
+      "Mathématiques": [
+        ["Mathématiques", 7],
+        ["Physique", 6],
+        ["Sciences naturelles", 2],
+        ["Arabe", 3],
+        ["Français", 2],
+        ["Anglais", 2]
+      ]
+    }
+  }
+
+};
+
+
+/* =========================================================
+   MATIÈRES BAC
+   ========================================================= */
+
+let currentSubjects = [];
+
+function getCustomSubjectsKey() {
+
+  const country =
+    document.getElementById("bacCountry").value;
+
+  const series =
+    document.getElementById("bacSeries").value;
+
+  return `studentPlusCustomSubjects_${country}_${series}`;
+}
+
+function saveCurrentSubjects() {
+
+  localStorage.setItem(
+    getCustomSubjectsKey(),
+    JSON.stringify(currentSubjects)
+  );
+
+}
+
+function loadSeries() {
+
+  const country =
+    document.getElementById("bacCountry").value;
+
+  const seriesSelect =
+    document.getElementById("bacSeries");
+
+  seriesSelect.innerHTML = "";
+
+  const data = bacData[country];
+
+  if (data && data.series) {
+
+    Object.keys(data.series).forEach(series => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = series;
+      option.textContent = series;
+
+      seriesSelect.appendChild(option);
+
+    });
+
+    const customOption =
+      document.createElement("option");
+
+    customOption.value = "__custom__";
+    customOption.textContent =
+      "✍️ Système personnalisé";
+
+    seriesSelect.appendChild(customOption);
+
+    seriesSelect.value =
+      Object.keys(data.series)[0];
+
+    loadSubjects();
+
+  } else {
+
+    const option =
+      document.createElement("option");
+
+    option.value = "__custom__";
+    option.textContent =
+      "✍️ Système personnalisé";
+
+    seriesSelect.appendChild(option);
+
+    seriesSelect.value = "__custom__";
+
+    currentSubjects = [];
+
+    loadSavedCustomSubjects();
+
+    renderSubjects();
+
+  }
+
+}
+
+function loadSavedCustomSubjects() {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        getCustomSubjectsKey()
+      );
+
+    if (saved) {
+
+      currentSubjects =
+        JSON.parse(saved);
+
+    }
+
+  } catch (error) {
+
+    currentSubjects = [];
+
+  }
+
+}
+
+function loadSubjects() {
+
+  const country =
+    document.getElementById("bacCountry").value;
+
+  const series =
+    document.getElementById("bacSeries").value;
+
+  if (
+    series === "__custom__" ||
+    !bacData[country]
+  ) {
+
+    currentSubjects = [];
+
+    loadSavedCustomSubjects();
+
+    renderSubjects();
+
+    return;
+
+  }
+
+  currentSubjects =
+    bacData[country]
+      .series[series]
+      .map(item => ({
+        name: item[0],
+        grade: "",
+        coef: item[1]
+      }));
+
+  renderSubjects();
+
+}
+
+function renderSubjects() {
+
+  const container =
+    document.getElementById(
+      "subjectsContainer"
+    );
+
+  container.innerHTML = "";
+
+  if (!currentSubjects.length) {
+
+    const empty =
+      document.createElement("div");
+
+    empty.className = "empty";
+
+    empty.innerHTML = `
+      ✍️ <strong>Système personnalisé</strong><br>
+      Ajoute tes matières et leurs coefficients manuellement.
+    `;
+
+    container.appendChild(empty);
+
+    document
+      .getElementById("customSystemNotice")
+      .classList.remove("hidden");
+
+    return;
+
+  }
+
+  const country =
+    document.getElementById("bacCountry").value;
+
+  const series =
+    document.getElementById("bacSeries").value;
+
+  const isCustom =
+    series === "__custom__" ||
+    !bacData[country];
+
+  document
+    .getElementById("customSystemNotice")
+    .classList.toggle(
+      "hidden",
+      !isCustom
+    );
+
+  currentSubjects.forEach(
+    (subject, index) => {
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "subject-row";
+
+      row.innerHTML = `
+        <input
+          type="text"
+          value="${escapeHtmlAttribute(subject.name)}"
+          placeholder="Matière"
+          onchange="renameSubject(${index}, this.value)"
+        >
+
+        <input
+          type="number"
+          min="0"
+          max="100"
+          step="0.01"
+          value="${subject.grade}"
+          placeholder="Note"
+          onchange="changeSubjectGrade(${index}, this.value)"
+        >
+
+        <input
+          type="number"
+          min="0"
+          step="0.01"
+          value="${subject.coef}"
+          placeholder="Coefficient"
+          onchange="changeSubjectCoef(${index}, this.value)"
+        >
+
+        <button
+          class="danger"
+          type="button"
+          onclick="removeSubject(${index})"
+        >
+          🗑️
+        </button>
+      `;
+
+      container.appendChild(row);
+
+    }
+  );
+
+}
+
+function escapeHtmlAttribute(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+}
+
+function renameSubject(index, value) {
+
+  if (!currentSubjects[index]) return;
+
+  currentSubjects[index].name =
+    value.trim();
+
+  saveCurrentSubjects();
+
+}
+
+function changeSubjectGrade(index, value) {
+
+  if (!currentSubjects[index]) return;
+
+  currentSubjects[index].grade =
+    value === "" ? "" : Number(value);
+
+  saveCurrentSubjects();
+
+}
+
+function changeSubjectCoef(index, value) {
+
+  if (!currentSubjects[index]) return;
+
+  currentSubjects[index].coef =
+    value === "" ? "" : Number(value);
+
+  saveCurrentSubjects();
+
+}
+
+function removeSubject(index) {
+
+  currentSubjects.splice(index, 1);
+
+  saveCurrentSubjects();
+
+  renderSubjects();
+
+}
+
+function addCustomSubject() {
+
+  currentSubjects.push({
+    name: "Nouvelle matière",
+    grade: "",
+    coef: 1
+  });
+
+  saveCurrentSubjects();
+
+  renderSubjects();
+
+}
+
+function calculateAverage() {
+
+  let total =
+    0;
+
+  let totalCoef =
+    0;
+
+  let entered =
+    0;
+
+  currentSubjects.forEach(subject => {
+
+    const grade =
+      Number(subject.grade);
+
+    const coef =
+      Number(subject.coef);
+
+    if (
+      Number.isFinite(grade) &&
+      Number.isFinite(coef) &&
+      coef > 0
+    ) {
+
+      total += grade * coef;
+      totalCoef += coef;
+      entered++;
+
+    }
+
+  });
+
+  const result =
+    document.getElementById(
+      "averageResult"
+    );
+
+  const number =
+    document.getElementById(
+      "averageNumber"
+    );
+
+  const details =
+    document.getElementById(
+      "averageDetails"
+    );
+
+  if (!entered || !totalCoef) {
+
+    result.classList.remove("hidden");
+
+    number.textContent = "—";
+
+    details.textContent =
+      "Entre au moins une note et un coefficient valide.";
+
+    return;
+
+  }
+
+  const average =
+    total / totalCoef;
+
+  number.textContent =
+    average.toFixed(2) + " / 20";
+
+  details.textContent =
+    `${entered} matière(s) prise(s) en compte.`;
+
+  result.classList.remove("hidden");
+
+  localStorage.setItem(
+    "studentPlusLastAverage",
+    average.toFixed(2)
+  );
+
+  updateHome();
+
+}
+
+
+/* =========================================================
+   FILIÈRES
+   ========================================================= */
+
+const fields = [
+
+  ["💻","Informatique","Développement logiciel, systèmes et technologies numériques."],
+  ["🤖","Intelligence artificielle","IA, apprentissage automatique et systèmes intelligents."],
+  ["📊","Data Science","Analyse de données, statistiques et science des données."],
+  ["🔐","Cybersécurité","Sécurité informatique, réseaux et protection des systèmes."],
+  ["🌐","Réseaux","Réseaux informatiques, télécommunications et infrastructures."],
+  ["📐","Mathématiques","Mathématiques fondamentales et appliquées."],
+  ["🩺","Médecine","Formation médicale et sciences de la santé."],
+  ["💊","Pharmacie","Médicaments, sciences pharmaceutiques et santé."],
+  ["💰","Finance","Finance, marchés et gestion financière."],
+  ["🧾","Comptabilité","Comptabilité et gestion financière."],
+  ["📚","Finance–Comptabilité–Fiscalité","Finance, comptabilité et fiscalité."],
+  ["🏢","Gestion","Management et administration des organisations."],
+  ["📣","Marketing","Marketing, communication commerciale et stratégie."],
+  ["🏗️","Génie civil","Construction, infrastructures et travaux publics."],
+  ["⚡","Génie électrique","Électricité, électronique et systèmes."],
+  ["🏛️","Architecture","Conception architecturale et urbanisme."],
+  ["🌱","Agronomie","Agriculture, production et sciences agronomiques."],
+  ["⚖️","Droit","Droit, législation et administration juridique."],
+  ["🌍","Relations internationales","Diplomatie, relations internationales et géopolitique."],
+  ["🎤","Communication","Communication, médias et information."],
+  ["👨‍🏫","Sciences de l’éducation","Pédagogie, enseignement et sciences de l'éducation."],
+  ["🏨","Tourisme / Hôtellerie","Tourisme, hôtellerie et services."],
+  ["🚚","Logistique","Transport, chaîne d'approvisionnement et logistique."],
+  ["🎨","Design graphique","Création visuelle, graphisme et communication."],
+  ["🏃","Sciences du sport","Sport, entraînement et sciences de l'activité physique."]
+];
+
+function renderFields() {
+
+  const container =
+    document.getElementById(
+      "fieldsContainer"
+    );
+
+  container.innerHTML = "";
+
+  fields.forEach(field => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "field-card";
+
+    card.innerHTML = `
+      <div class="field-icon">${field[0]}</div>
+      <h3>${field[1]}</h3>
+      <p>${field[2]}</p>
+    `;
+
+    container.appendChild(card);
+
+  });
+
+  const profileField =
+    document.getElementById(
+      "profileField"
+    );
+
+  const old =
+    profileField.value;
+
+  profileField.innerHTML =
+    `<option value="">—</option>`;
+
+  fields.forEach(field => {
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      field[1];
+
+    option.textContent =
+      field[1];
+
+    profileField.appendChild(option);
+
+  });
+
+  if (
+    fields.some(
+      field => field[1] === old
+    )
+  ) {
+    profileField.value = old;
+  }
+
+}
+
+
+/* =========================================================
+   COURS PDF / INDEXEDDB
+   ========================================================= */
+
+const DB_NAME =
+  "EtudiantPlusDB";
+
+const DB_VERSION =
+  1;
+
+let courseDB = null;
+
+let courses = [];
+
+function openCourseDB() {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const request =
+        indexedDB.open(
+          DB_NAME,
+          DB_VERSION
+        );
+
+      request.onupgradeneeded =
+        event => {
+
+          const db =
+            event.target.result;
+
+          if (
+            !db.objectStoreNames.contains(
+              "courses"
+            )
+          ) {
+
+            db.createObjectStore(
+              "courses",
+              { keyPath: "id" }
+            );
+
+          }
+
+        };
+
+      request.onsuccess =
+        event => {
+
+          courseDB =
+            event.target.result;
+
+          resolve(courseDB);
+
+        };
+
+      request.onerror =
+        () => reject(
+          request.error
+        );
+
+    }
+  );
+
+}
+
+function dbPutCourse(course) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const transaction =
+        courseDB.transaction(
+          "courses",
+          "readwrite"
+        );
+
+      transaction.objectStore(
+        "courses"
+      ).put(course);
+
+      transaction.oncomplete =
+        resolve;
+
+      transaction.onerror =
+        () => reject(
+          transaction.error
+        );
+
+    }
+  );
+
+}
+
+function dbGetCourses() {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const request =
+        courseDB
+          .transaction("courses")
+          .objectStore("courses")
+          .getAll();
+
+      request.onsuccess =
+        () => resolve(
+          request.result || []
+        );
+
+      request.onerror =
+        () => reject(
+          request.error
+        );
+
+    }
+  );
+
+}
+
+function dbDeleteCourse(id) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const transaction =
+        courseDB.transaction(
+          "courses",
+          "readwrite"
+        );
+
+      transaction
+        .objectStore("courses")
+        .delete(id);
+
+      transaction.oncomplete =
+        resolve;
+
+      transaction.onerror =
+        () => reject(
+          transaction.error
+        );
+
+    }
+  );
+
+}
+
+async function initCourses() {
+
+  try {
+
+    await openCourseDB();
+
+    courses =
+      await dbGetCourses();
+
+    renderCourses();
+
+  } catch (error) {
+
+    console.error(
+      "Erreur IndexedDB :",
+      error
+    );
+
+  }
+
+}
+
+async function addCourse() {
+
+  const title =
+    document.getElementById(
+      "courseTitle"
+    ).value.trim();
+
+  const subject =
+    document.getElementById(
+      "courseSubject"
+    ).value.trim();
+
+  const description =
+    document.getElementById(
+      "courseDescription"
+    ).value.trim();
+
+  const file =
+    document.getElementById(
+      "courseFile"
+    ).files[0];
+
+  if (!title) {
+
+    alert("Ajoute un titre au cours.");
+
+    return;
+
+  }
+
+  if (!file) {
+
+    alert("Sélectionne un fichier PDF.");
+
+    return;
+
+  }
+
+  if (
+    file.type !== "application/pdf" &&
+    !file.name.toLowerCase().endsWith(".pdf")
+  ) {
+
+    alert("Le fichier doit être un PDF.");
+
+    return;
+
+  }
+
+  const course = {
+
+    id:
+      crypto.randomUUID
+        ? crypto.randomUUID()
+        : Date.now().toString(),
+
+    title,
+
+    subject,
+
+    description,
+
+    fileName:
+      file.name,
+
+    fileBlob:
+      file,
+
+    createdAt:
+      new Date().toISOString(),
+
+    completed:
+      false,
+
+    favorite:
+      false
+
+  };
+
+  await dbPutCourse(course);
+
+  courses.push(course);
+
+  document.getElementById(
+    "courseTitle"
+  ).value = "";
+
+  document.getElementById(
+    "courseSubject"
+  ).value = "";
+
+  document.getElementById(
+    "courseDescription"
+  ).value = "";
+
+  document.getElementById(
+    "courseFile"
+  ).value = "";
+
+  renderCourses();
+
+}
+
+async function toggleCourseCompleted(id) {
+
+  const course =
+    courses.find(
+      item => item.id === id
+    );
+
+  if (!course) return;
+
+  course.completed =
+    !course.completed;
+
+  await dbPutCourse(course);
+
+  renderCourses();
+
+}
+
+async function toggleCourseFavorite(id) {
+
+  const course =
+    courses.find(
+      item => item.id === id
+    );
+
+  if (!course) return;
+
+  course.favorite =
+    !course.favorite;
+
+  await dbPutCourse(course);
+
+  renderCourses();
+
+}
+
+async function deleteCourse(id) {
+
+  if (
+    !confirm(
+      "Supprimer définitivement ce cours PDF ?"
+    )
+  ) return;
+
+  await dbDeleteCourse(id);
+
+  courses =
+    courses.filter(
+      item => item.id !== id
+    );
+
+  renderCourses();
+
+}
+
+function renderCourses() {
+
+  const list =
+    document.getElementById(
+      "courseList"
+    );
+
+  const stats =
+    document.getElementById(
+      "courseStats"
+    );
+
+  const search =
+    document.getElementById(
+      "courseSearch"
+    ).value
+      .trim()
+      .toLowerCase();
+
+  const filtered =
+    courses.filter(course => {
+
+      return [
+        course.title,
+        course.subject,
+        course.description
+      ]
+      .join(" ")
+      .toLowerCase()
+      .includes(search);
+
+    });
+
+  const completed =
+    courses.filter(
+      course => course.completed
+    ).length;
+
+  stats.textContent =
+    `${courses.length} cours • ${completed} terminé(s)`;
+
+  list.innerHTML = "";
+
+  if (!filtered.length) {
+
+    list.innerHTML = `
+      <div class="empty">
+        Aucun cours trouvé.
+      </div>
+    `;
+
+    updateHome();
+
+    return;
+
+  }
+
+  filtered
+    .sort(
+      (a,b) =>
+        Number(b.favorite) -
+        Number(a.favorite)
+    )
+    .forEach(course => {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "course-item";
+
+      const url =
+        URL.createObjectURL(
+          course.fileBlob
+        );
+
+      item.innerHTML = `
+
+        <div class="item-header">
+
+          <div>
+            <div class="item-title">
+              ${course.favorite ? "⭐ " : ""}
+              ${escapeHtml(course.title)}
+            </div>
+
+            <div class="item-meta">
+              ${escapeHtml(course.subject || "Cours")}
+              •
+              ${escapeHtml(course.fileName)}
+            </div>
+          </div>
+
+        </div>
+
+        ${
+          course.description
+            ? `<p class="small muted" style="margin-top:8px">
+                ${escapeHtml(course.description)}
+              </p>`
+            : ""
+        }
+
+        <div class="actions">
+
+          <a
+            class="primary"
+            href="${url}"
+            target="_blank"
+            rel="noopener"
+          >
+            📖 Ouvrir le PDF
+          </a>
+
+          <button
+            class="secondary"
+            onclick="toggleCourseFavorite('${course.id}')"
+          >
+            ${course.favorite ? "⭐ Retirer favori" : "☆ Favori"}
+          </button>
+
+          <button
+            class="${course.completed ? "success" : "secondary"}"
+            onclick="toggleCourseCompleted('${course.id}')"
+          >
+            ${course.completed ? "✅ Terminé" : "☑️ Marquer terminé"}
+          </button>
+
+          <button
+            class="danger"
+            onclick="deleteCourse('${course.id}')"
+          >
+            🗑️
+          </button>
+
+        </div>
+
+      `;
+
+      list.appendChild(item);
+
+    });
+
+  updateHome();
+
+}
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   ÉTUDES
+   ========================================================= */
+
+const STUDIES_KEY =
+  "studentPlusStudies";
+
+function getStudies() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        STUDIES_KEY
+      ) || "[]"
+    );
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+function saveStudies(data) {
+
+  localStorage.setItem(
+    STUDIES_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+function addStudy() {
+
+  const subject =
+    document.getElementById(
+      "studySubject"
+    ).value.trim();
+
+  const grade =
+    Number(
+      document.getElementById(
+        "studyGrade"
+      ).value
+    );
+
+  const target =
+    Number(
+      document.getElementById(
+        "studyTarget"
+      ).value
+    );
+
+  const comment =
+    document.getElementById(
+      "studyComment"
+    ).value.trim();
+
+  if (
+    !subject ||
+    !Number.isFinite(grade) ||
+    !Number.isFinite(target) ||
+    target <= 0
+  ) {
+
+    alert(
+      "Complète correctement les informations."
+    );
+
+    return;
+
+  }
+
+  const data =
+    getStudies();
+
+  data.push({
+
+    id:
+      Date.now(),
+
+    subject,
+
+    grade,
+
+    target,
+
+    comment
+
+  });
+
+  saveStudies(data);
+
+  document.getElementById(
+    "studySubject"
+  ).value = "";
+
+  document.getElementById(
+    "studyGrade"
+  ).value = "";
+
+  document.getElementById(
+    "studyComment"
+  ).value = "";
+
+  renderStudies();
+
+}
+
+function deleteStudy(id) {
+
+  const data =
+    getStudies()
+      .filter(item => item.id !== id);
+
+  saveStudies(data);
+
+  renderStudies();
+
+}
+
+function renderStudies() {
+
+  const list =
+    document.getElementById(
+      "studyList"
+    );
+
+  const data =
+    getStudies();
+
+  list.innerHTML = "";
+
+  if (!data.length) {
+
+    list.innerHTML =
+      `<div class="empty">
+        Aucune matière enregistrée.
+      </div>`;
+
+    updateHome();
+
+    return;
+
+  }
+
+  data.forEach(item => {
+
+    const percent =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          (item.grade / item.target) * 100
+        )
+      );
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "study-item";
+
+    div.innerHTML = `
+
+      <div class="item-header">
+
+        <div>
+          <div class="item-title">
+            ${escapeHtml(item.subject)}
+          </div>
+
+          <div class="item-meta">
+            ${item.grade} / ${item.target}
+            ${
+              item.comment
+                ? " • " + escapeHtml(item.comment)
+                : ""
+            }
+          </div>
+        </div>
+
+        <button
+          class="danger"
+          onclick="deleteStudy(${item.id})"
+        >
+          🗑️
+        </button>
+
+      </div>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:${percent}%"
+        ></div>
+      </div>
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
+  updateHome();
+
+}
+
+
+/* =========================================================
+   PLANNING
+   ========================================================= */
+
+const PLANNING_KEY =
+  "studentPlusPlanning";
+
+function getPlanning() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        PLANNING_KEY
+      ) || "[]"
+    );
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+function savePlanning(data) {
+
+  localStorage.setItem(
+    PLANNING_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+function addPlanning() {
+
+  const date =
+    document.getElementById(
+      "planningDate"
+    ).value;
+
+  const activity =
+    document.getElementById(
+      "planningActivity"
+    ).value.trim();
+
+  if (!date || !activity) {
+
+    alert(
+      "Ajoute une date et une activité."
+    );
+
+    return;
+
+  }
+
+  const data =
+    getPlanning();
+
+  data.push({
+
+    id:
+      Date.now(),
+
+    date,
+
+    activity,
+
+    done:
+      false
+
+  });
+
+  savePlanning(data);
+
+  document.getElementById(
+    "planningActivity"
+  ).value = "";
+
+  renderPlanning();
+
+}
+
+function togglePlanning(id) {
+
+  const data =
+    getPlanning();
+
+  const item =
+    data.find(
+      item => item.id === id
+    );
+
+  if (!item) return;
+
+  item.done =
+    !item.done;
+
+  savePlanning(data);
+
+  renderPlanning();
+
+}
+
+function deletePlanning(id) {
+
+  savePlanning(
+    getPlanning()
+      .filter(item => item.id !== id)
+  );
+
+  renderPlanning();
+
+}
+
+function renderPlanning() {
+
+  const list =
+    document.getElementById(
+      "planningList"
+    );
+
+  const data =
+    getPlanning()
+      .sort(
+        (a,b) =>
+          a.date.localeCompare(b.date)
+      );
+
+  list.innerHTML = "";
+
+  if (!data.length) {
+
+    list.innerHTML =
+      `<div class="empty">
+        Aucune activité planifiée.
+      </div>`;
+
+    return;
+
+  }
+
+  data.forEach(item => {
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "planning-item";
+
+    div.innerHTML = `
+
+      <div class="item-header">
+
+        <div>
+
+          <div
+            class="item-title"
+            style="${
+              item.done
+                ? "text-decoration:line-through;opacity:.6"
+                : ""
+            }"
+          >
+            ${escapeHtml(item.activity)}
+          </div>
+
+          <div class="item-meta">
+            📅 ${escapeHtml(item.date)}
+          </div>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="${item.done ? "success" : "secondary"}"
+            onclick="togglePlanning(${item.id})"
+          >
+            ${item.done ? "✅" : "☑️"}
+          </button>
+
+          <button
+            class="danger"
+            onclick="deletePlanning(${item.id})"
+          >
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
+}
+
+
+/* =========================================================
+   BUDGET
+   ========================================================= */
+
+const BUDGET_KEY =
+  "studentPlusBudgetPlans";
+
+const budgetCategories = [
+  "savings",
+  "food",
+  "transport",
+  "housing",
+  "internet",
+  "studies",
+  "clothes"
+];
+
+function getBudgets() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        BUDGET_KEY
+      ) || "{}"
+    );
+
+  } catch {
+
+    return {};
+
+  }
+
+}
+
+function saveBudgets(data) {
+
+  localStorage.setItem(
+    BUDGET_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+function getCurrentMonth() {
+
+  return new Date()
+    .toISOString()
+    .slice(0,7);
+
+}
+
+function loadBudgetForm() {
+
+  const month =
+    document.getElementById(
+      "budgetMonth"
+    ).value;
+
+  const data =
+    getBudgets()[month] || {};
+
+  document.getElementById(
+    "budgetTotal"
+  ).value =
+    data.total ?? "";
+
+  document.getElementById(
+    "budgetSavings"
+  ).value =
+    data.savings ?? "";
+
+  document.getElementById(
+    "budgetFood"
+  ).value =
+    data.food ?? "";
+
+  document.getElementById(
+    "budgetTransport"
+  ).value =
+    data.transport ?? "";
+
+  document.getElementById(
+    "budgetHousing"
+  ).value =
+    data.housing ?? "";
+
+  document.getElementById(
+    "budgetInternet"
+  ).value =
+    data.internet ?? "";
+
+  document.getElementById(
+    "budgetStudies"
+  ).value =
+    data.studies ?? "";
+
+  document.getElementById(
+    "budgetClothes"
+  ).value =
+    data.clothes ?? "";
+
+}
+
+function saveBudget() {
+
+  const month =
+    document.getElementById(
+      "budgetMonth"
+    ).value;
+
+  if (!month) {
+
+    alert("Sélectionne un mois.");
+
+    return;
+
+  }
+
+  const data =
+    getBudgets();
+
+  data[month] = {
+
+    total:
+      Number(
+        document.getElementById(
+          "budgetTotal"
+        ).value
+      ) || 0,
+
+    savings:
+      Number(
+        document.getElementById(
+          "budgetSavings"
+        ).value
+      ) || 0,
+
+    food:
+      Number(
+        document.getElementById(
+          "budgetFood"
+        ).value
+      ) || 0,
+
+    transport:
+      Number(
+        document.getElementById(
+          "budgetTransport"
+        ).value
+      ) || 0,
+
+    housing:
+      Number(
+        document.getElementById(
+          "budgetHousing"
+        ).value
+      ) || 0,
+
+    internet:
+      Number(
+        document.getElementById(
+          "budgetInternet"
+        ).value
+      ) || 0,
+
+    studies:
+      Number(
+        document.getElementById(
+          "budgetStudies"
+        ).value
+      ) || 0,
+
+    clothes:
+      Number(
+        document.getElementById(
+          "budgetClothes"
+        ).value
+      ) || 0
+
+  };
+
+  saveBudgets(data);
+
+  renderBudget();
+
+  alert("Budget enregistré.");
+
+}
+
+function getAccounting() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "studentPlusAccounting"
+      ) || "[]"
+    );
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+function getRealExpensesByCategory(month) {
+
+  const accounting =
+    getAccounting();
+
+  const result = {};
+
+  accounting
+    .filter(
+      item =>
+        item.month === month &&
+        item.type === "expense"
+    )
+    .forEach(item => {
+
+      result[item.category] =
+        (result[item.category] || 0) +
+        Number(item.amount || 0);
+
+    });
+
+  return result;
+
+}
+
+function renderBudget() {
+
+  const month =
+    document.getElementById(
+      "budgetMonth"
+    ).value;
+
+  if (!month) return;
+
+  const budget =
+    getBudgets()[month] || {};
+
+  const total =
+    Number(budget.total || 0);
+
+  const plannedExpenses =
+    budgetCategories
+      .filter(
+        category =>
+          category !== "savings"
+      )
+      .reduce(
+        (sum, category) =>
+          sum +
+          Number(budget[category] || 0),
+        0
+      );
+
+  const savings =
+    Number(budget.savings || 0);
+
+  const plannedRemaining =
+    total -
+    plannedExpenses -
+    savings;
+
+  const realExpenses =
+    getAccounting()
+      .filter(
+        item =>
+          item.month === month &&
+          item.type === "expense"
+      )
+      .reduce(
+        (sum,item) =>
+          sum +
+          Number(item.amount || 0),
+        0
+      );
+
+  const summary =
+    document.getElementById(
+      "budgetSummary"
+    );
+
+  summary.innerHTML = `
+
+    <div class="budget-box">
+      Budget prévu
+      <strong>${formatMoney(total)}</strong>
+    </div>
+
+    <div class="budget-box">
+      Dépenses réelles
+      <strong>${formatMoney(realExpenses)}</strong>
+    </div>
+
+    <div class="budget-box">
+      Épargne prévue
+      <strong>${formatMoney(savings)}</strong>
+    </div>
+
+    <div class="budget-box">
+      Reste prévu
+      <strong>${formatMoney(plannedRemaining)}</strong>
+    </div>
+
+  `;
+
+  const realByCategory =
+    getRealExpensesByCategory(month);
+
+  const labels = {
+    food: "Nourriture",
+    transport: "Transport",
+    housing: "Logement",
+    internet: "Internet",
+    studies: "Études",
+    clothes: "Vêtements"
+  };
+
+  const comparison =
+    document.getElementById(
+      "budgetComparison"
+    );
+
+  comparison.innerHTML =
+    "<h3>Budget prévu vs dépenses réelles</h3>";
+
+  Object.keys(labels)
+    .forEach(key => {
+
+      const planned =
+        Number(
+          budget[key] || 0
+        );
+
+      const actual =
+        Number(
+          realByCategory[
+            labels[key]
+          ] || 0
+        );
+
+      const difference =
+        planned - actual;
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "accounting-category";
+
+      div.innerHTML = `
+
+        <span>
+          <strong>${labels[key]}</strong><br>
+          <span class="small muted">
+            Prévu : ${formatMoney(planned)}
+          </span>
+        </span>
+
+        <span style="text-align:right">
+          Réel : ${formatMoney(actual)}<br>
+          <span class="small ${
+            difference < 0
+              ? "danger-text"
+              : "muted"
+          }">
+            ${
+              difference >= 0
+                ? "Reste : "
+                : "Dépassement : "
+            }
+            ${formatMoney(Math.abs(difference))}
+          </span>
+        </span>
+
+      `;
+
+      comparison.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================================
+   COMPTABILITÉ
+   ========================================================= */
+
+function addAccounting() {
+
+  const month =
+    document.getElementById(
+      "accountingMonth"
+    ).value;
+
+  const type =
+    document.getElementById(
+      "accountingType"
+    ).value;
+
+  const amount =
+    Number(
+      document.getElementById(
+        "accountingAmount"
+      ).value
+    );
+
+  const category =
+    document.getElementById(
+      "accountingCategory"
+    ).value;
+
+  const date =
+    document.getElementById(
+      "accountingDate"
+    ).value;
+
+  const description =
+    document.getElementById(
+      "accountingDescription"
+    ).value.trim();
+
+  if (
+    !month ||
+    !Number.isFinite(amount) ||
+    amount <= 0 ||
+    !date
+  ) {
+
+    alert(
+      "Complète correctement les informations."
+    );
+
+    return;
+
+  }
+
+  const data =
+    getAccounting();
+
+  data.push({
+
+    id:
+      Date.now(),
+
+    month,
+
+    type,
+
+    amount,
+
+    category,
+
+    date,
+
+    description
+
+  });
+
+  localStorage.setItem(
+    "studentPlusAccounting",
+    JSON.stringify(data)
+  );
+
+  document.getElementById(
+    "accountingAmount"
+  ).value = "";
+
+  document.getElementById(
+    "accountingDescription"
+  ).value = "";
+
+  renderAccounting();
+
+  renderBudget();
+
+  updateHome();
+
+}
+
+function deleteAccounting(id) {
+
+  const data =
+    getAccounting()
+      .filter(
+        item => item.id !== id
+      );
+
+  localStorage.setItem(
+    "studentPlusAccounting",
+    JSON.stringify(data)
+  );
+
+  renderAccounting();
+
+  renderBudget();
+
+  updateHome();
+
+}
+
+function renderAccounting() {
+
+  const month =
+    document.getElementById(
+      "accountingMonth"
+    ).value;
+
+  if (!month) return;
+
+  const data =
+    getAccounting()
+      .filter(
+        item => item.month === month
+      )
+      .sort(
+        (a,b) =>
+          b.date.localeCompare(a.date)
+      );
+
+  let income = 0;
+  let expenses = 0;
+
+  data.forEach(item => {
+
+    if (item.type === "income") {
+
+      income +=
+        Number(item.amount);
+
+    } else {
+
+      expenses +=
+        Number(item.amount);
+
+    }
+
+  });
+
+  const balance =
+    income - expenses;
+
+  document.getElementById(
+    "accountingSummary"
+  ).innerHTML = `
+
+    <div class="budget-box">
+      Revenus
+      <strong>${formatMoney(income)}</strong>
+    </div>
+
+    <div class="budget-box">
+      Dépenses
+      <strong>${formatMoney(expenses)}</strong>
+    </div>
+
+    <div class="budget-box">
+      Solde réel
+      <strong>${formatMoney(balance)}</strong>
+    </div>
+
+    <div class="budget-box">
+      Transactions
+      <strong>${data.length}</strong>
+    </div>
+
+  `;
+
+  const categories =
+    {};
+
+  data
+    .filter(
+      item =>
+        item.type === "expense"
+    )
+    .forEach(item => {
+
+      categories[item.category] =
+        (categories[item.category] || 0) +
+        Number(item.amount);
+
+    });
+
+  const categoryContainer =
+    document.getElementById(
+      "accountingCategories"
+    );
+
+  categoryContainer.innerHTML = "";
+
+  if (!Object.keys(categories).length) {
+
+    categoryContainer.innerHTML =
+      `<div class="empty">
+        Aucune dépense enregistrée.
+      </div>`;
+
+  } else {
+
+    Object.entries(categories)
+      .sort(
+        (a,b) => b[1] - a[1]
+      )
+      .forEach(
+        ([category, amount]) => {
+
+          const div =
+            document.createElement("div");
+
+          div.className =
+            "accounting-category";
+
+          div.innerHTML = `
+            <span>${escapeHtml(category)}</span>
+            <strong>${formatMoney(amount)}</strong>
+          `;
+
+          categoryContainer.appendChild(div);
+
+        }
+      );
+
+  }
+
+  const list =
+    document.getElementById(
+      "accountingList"
+    );
+
+  list.innerHTML = "";
+
+  if (!data.length) {
+
+    list.innerHTML =
+      `<div class="empty">
+        Aucune transaction pour ce mois.
+      </div>`;
+
+    updateHome();
+
+    return;
+
+  }
+
+  data.forEach(item => {
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "accounting-item";
+
+    const sign =
+      item.type === "income"
+        ? "+"
+        : "-";
+
+    const color =
+      item.type === "income"
+        ? "var(--success)"
+        : "var(--danger)";
+
+    div.innerHTML = `
+
+      <div class="item-header">
+
+        <div>
+
+          <div class="item-title">
+            ${escapeHtml(item.category)}
+          </div>
+
+          <div class="item-meta">
+            ${escapeHtml(item.date)}
+            ${
+              item.description
+                ? " • " +
+                  escapeHtml(item.description)
+                : ""
+            }
+          </div>
+
+        </div>
+
+        <div style="text-align:right">
+
+          <strong
+            style="color:${color}"
+          >
+            ${sign}${formatMoney(item.amount)}
+          </strong>
+
+          <br>
+
+          <button
+            class="danger"
+            style="margin-top:7px"
+            onclick="deleteAccounting(${item.id})"
+          >
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    list.appendChild(div);
+
+  });
+
+  updateHome();
+
+}
+
+
+/* =========================================================
+   PROFIL
+   ========================================================= */
+
+const PROFILE_KEY =
+  "studentPlusProfile";
+
+function loadProfile() {
+
+  try {
+
+    const profile =
+      JSON.parse(
+        localStorage.getItem(
+          PROFILE_KEY
+        ) || "{}"
+      );
+
+    document.getElementById(
+      "profileLastName"
+    ).value =
+      profile.lastName || "";
+
+    document.getElementById(
+      "profileFirstName"
+    ).value =
+      profile.firstName || "";
+
+    document.getElementById(
+      "profileCountry"
+    ).value =
+      profile.country || "CG";
+
+    document.getElementById(
+      "profileUniversity"
+    ).value =
+      profile.university || "";
+
+    document.getElementById(
+      "profileLevel"
+    ).value =
+      profile.level || "";
+
+    document.getElementById(
+      "profileField"
+    ).value =
+      profile.field || "";
+
+    document.getElementById(
+      "profileAcademicGoal"
+    ).value =
+      profile.academicGoal || "";
+
+    document.getElementById(
+      "profileProfessionalGoal"
+    ).value =
+      profile.professionalGoal || "";
+
+  } catch (error) {}
+
+}
+
+function saveProfile() {
+
+  const profile = {
+
+    lastName:
+      document.getElementById(
+        "profileLastName"
+      ).value.trim(),
+
+    firstName:
+      document.getElementById(
+        "profileFirstName"
+      ).value.trim(),
+
+    country:
+      document.getElementById(
+        "profileCountry"
+      ).value,
+
+    university:
+      document.getElementById(
+        "profileUniversity"
+      ).value.trim(),
+
+    level:
+      document.getElementById(
+        "profileLevel"
+      ).value.trim(),
+
+    field:
+      document.getElementById(
+        "profileField"
+      ).value,
+
+    academicGoal:
+      document.getElementById(
+        "profileAcademicGoal"
+      ).value.trim(),
+
+    professionalGoal:
+      document.getElementById(
+        "profileProfessionalGoal"
+      ).value.trim()
+
+  };
+
+  localStorage.setItem(
+    PROFILE_KEY,
+    JSON.stringify(profile)
+  );
+
+  const saved =
+    document.getElementById(
+      "profileSaved"
+    );
+
+  saved.classList.remove(
+    "hidden"
+  );
+
+  setTimeout(
+    () =>
+      saved.classList.add(
+        "hidden"
+      ),
+    2500
+  );
+
+}
+
+
+/* =========================================================
+   FORMATAGE
+   ========================================================= */
+
+function formatMoney(amount) {
+
+  const country =
+    document.getElementById(
+      "countrySelect"
+    )?.value || "CG";
+
+  let currency = "XAF";
+
+  if (country === "CG") {
+    currency = "XAF";
+  } else if (
+    ["FR","DE","IT","ES","PT","BE","AT","FI","IE","NL"].includes(country)
+  ) {
+    currency = "EUR";
+  } else if (country === "US") {
+    currency = "USD";
+  } else if (country === "GB") {
+    currency = "GBP";
+  } else if (country === "DZ") {
+    currency = "DZD";
+  } else if (country === "MA") {
+    currency = "MAD";
+  } else if (country === "CA") {
+    currency = "CAD";
+  } else if (country === "JP") {
+    currency = "JPY";
+  } else if (country === "CN") {
+    currency = "CNY";
+  } else if (country === "RU") {
+    currency = "RUB";
+  }
+
+  try {
+
+    return new Intl.NumberFormat(
+      currentLanguage === "zh"
+        ? "zh-CN"
+        : currentLanguage,
+      {
+        style: "currency",
+        currency
+      }
+    ).format(
+      Number(amount || 0)
+    );
+
+  } catch {
+
+    return `${Number(amount || 0).toFixed(2)} ${currency}`;
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCUEIL / STATISTIQUES
+   ========================================================= */
+
+function updateHome() {
+
+  const average =
+    localStorage.getItem(
+      "studentPlusLastAverage"
+    );
+
+  document.getElementById(
+    "statAverage"
+  ).textContent =
+    average
+      ? `${average}/20`
+      : "—";
+
+  const coursesCompleted =
+    courses.filter(
+      course => course.completed
+    ).length;
+
+  document.getElementById(
+    "statCourses"
+  ).textContent =
+    coursesCompleted;
+
+  const accounting =
+    getAccounting();
+
+  const currentMonth =
+    getCurrentMonth();
+
+  const balance =
+    accounting
+      .filter(
+        item =>
+          item.month === currentMonth
+      )
+      .reduce(
+        (sum,item) =>
+          sum +
+          (
+            item.type === "income"
+              ? Number(item.amount)
+              : -Number(item.amount)
+          ),
+        0
+      );
+
+  document.getElementById(
+    "statBalance"
+  ).textContent =
+    formatMoney(balance);
+
+  const budget =
+    getBudgets()[currentMonth];
+
+  const homeBudget =
+    document.getElementById(
+      "homeBudgetSummary"
+    );
+
+  if (!budget) {
+
+    homeBudget.textContent =
+      "Aucun budget enregistré.";
+
+  } else {
+
+    const planned =
+      Number(budget.total || 0);
+
+    const expenses =
+      accounting
+        .filter(
+          item =>
+            item.month === currentMonth &&
+            item.type === "expense"
+        )
+        .reduce(
+          (sum,item) =>
+            sum + Number(item.amount),
+          0
+        );
+
+    homeBudget.innerHTML = `
+      Budget prévu :
+      <strong>${formatMoney(planned)}</strong><br>
+      Dépenses réelles :
+      <strong>${formatMoney(expenses)}</strong><br>
+      Solde réel :
+      <strong>${formatMoney(balance)}</strong>
+    `;
+
+  }
+
+  const studies =
+    getStudies();
+
+  const homeProgress =
+    document.getElementById(
+      "homeStudyProgress"
+    );
+
+  if (!studies.length) {
+
+    homeProgress.textContent =
+      "Aucune matière enregistrée.";
+
+  } else {
+
+    const averageStudy =
+      studies.reduce(
+        (sum,item) =>
+          sum +
+          (
+            Number(item.grade) /
+            Number(item.target || 20)
+          ) *
+          100,
+        0
+      ) /
+      studies.length;
+
+    homeProgress.innerHTML = `
+      Progression moyenne :
+      <strong>${averageStudy.toFixed(0)}%</strong>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:${Math.min(100,averageStudy)}%"
+        ></div>
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   ÉVÉNEMENTS
+   ========================================================= */
+
+document
+  .getElementById("languageSelect")
+  .addEventListener(
+    "change",
+    event =>
+      changeLanguage(
+        event.target.value
+      )
+  );
+
+document
+  .getElementById("countrySelect")
+  .addEventListener(
+    "change",
+    event => {
+
+      const country =
+        event.target.value;
+
+      document.getElementById(
+        "bacCountry"
+      ).value = country;
+
+      document.getElementById(
+        "profileCountry"
+      ).value = country;
+
+      loadSeries();
+
+      updateHome();
+
+    }
+  );
+
+document
+  .getElementById("bacCountry")
+  .addEventListener(
+    "change",
+    event => {
+
+      const country =
+        event.target.value;
+
+      document.getElementById(
+        "countrySelect"
+      ).value = country;
+
+      document.getElementById(
+        "profileCountry"
+      ).value = country;
+
+      loadSeries();
+
+    }
+  );
+
+document
+  .getElementById("bacSeries")
+  .addEventListener(
+    "change",
+    () => loadSubjects()
+  );
+
+document
+  .getElementById("budgetMonth")
+  .addEventListener(
+    "change",
+    () => {
+
+      loadBudgetForm();
+      renderBudget();
+
+    }
+  );
+
+document
+  .getElementById("accountingMonth")
+  .addEventListener(
+    "change",
+    () => {
+
+      renderAccounting();
+      renderBudget();
+
+    }
+  );
+
+
+/* =========================================================
+   INITIALISATION
+   ========================================================= */
+
+async function initApp() {
+
+  const today =
+    new Date();
+
+  const month =
+    today
+      .toISOString()
+      .slice(0,7);
+
+  const date =
+    today
+      .toISOString()
+      .slice(0,10);
+
+  document.getElementById(
+    "budgetMonth"
+  ).value =
+    month;
+
+  document.getElementById(
+    "accountingMonth"
+  ).value =
+    month;
+
+  document.getElementById(
+    "accountingDate"
+  ).value =
+    date;
+
+  document.getElementById(
+    "planningDate"
+  ).value =
+    date;
+
+  document.getElementById(
+    "languageSelect"
+  ).value =
+    currentLanguage;
+
+  renderCountrySelects();
+
+  document.getElementById(
+    "countrySelect"
+  ).value = "CG";
+
+  document.getElementById(
+    "bacCountry"
+  ).value = "CG";
+
+  document.getElementById(
+    "profileCountry"
+  ).value = "CG";
+
+  renderFields();
+
+  loadSeries();
+
+  loadProfile();
+
+  loadBudgetForm();
+
+  renderBudget();
+
+  renderStudies();
+
+  renderPlanning();
+
+  renderAccounting();
+
+  await initCourses();
+
+  changeLanguage(
+    currentLanguage
+  );
+
+  updateHome();
+
+}
+
+initApp();
+
+
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
+
+if (
+  "serviceWorker" in navigator
+) {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .catch(
+          error =>
+            console.log(
+              "Service Worker non disponible :",
+              error
+            )
+        );
+
+    }
+  );
+
+}
+</script>
+
+</body>
+</html>
